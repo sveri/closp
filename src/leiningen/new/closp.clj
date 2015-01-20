@@ -25,7 +25,8 @@
       (apply (partial ->files data)
             (concat
               [[".gitignore" (*render* "gitignore")]
-               [(str "src/{{san-ns}}/session.clj") (*render* "gitignore")]
+               ["project.clj" (*render* "project.clj")]
+               [(str "src/{{san-path}}/session.clj") (*render* "gitignore")]
                ;["project.clj"                                              (*render* "project.clj")]
                ;["Procfile"                                                 (*render* "Procfile")]
                ;["README.md"                                                (*render* "README.md")]
@@ -49,19 +50,16 @@
               )))
     )
 
-(defmulti handle-args keyword)
-
-(defn format-features [features]
-  (apply str (interpose ", " features)))
-
 (defn closp
   "Create a new Luminus project"
   [name & args]
   (let [{:keys [options arguments errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
-        san-ns (string/replace (:namespace options) #"\." "/")
+        ns (:namespace options)
+        san-path (string/replace ns #"\." "/")
         data {:name      name
               :sanitized (sanitize name)
-              :san-ns    san-ns
+              :san-path    san-path
+              :ns     ns
               :year      (year)}]
     ;; Handle help and error conditions
     (cond
