@@ -26,32 +26,19 @@
             (concat
               [[".gitignore" (*render* "gitignore")]
                ["project.clj" (*render* "project.clj")]
-               [(str "src/{{san-path}}/session.clj") (*render* "gitignore")]
-               ;["project.clj"                                              (*render* "project.clj")]
-               ;["Procfile"                                                 (*render* "Procfile")]
-               ;["README.md"                                                (*render* "README.md")]
-               ;;; core namespaces
-               ;["src/{{sanitized}}/session.clj"                            (*render* "session.clj")]
-               ;["src/{{sanitized}}/handler.clj"                            (*render* "handler.clj")]
-               ;["src/{{sanitized}}/middleware.clj"                         (*render* "middleware.clj")]
-               ;["src/{{sanitized}}/repl.clj"                               (*render* "repl.clj")]
-               ;["src/{{sanitized}}/util.clj"                               (*render* "util.clj")]
-               ;["src/{{sanitized}}/routes/home.clj"                        (*render* "home.clj")]
-               ;["src/{{sanitized}}/layout.clj"                             (*render* "layout.clj")]
-               ;;; public resources, example URL: /css/screen.css
-               ;
-               ;["resources/public/css/screen.css"                          (*render* "screen.css")]
-               ;["resources/public/md/docs.md"                              (*render* "docs.md")]
-               ;"resources/public/js"
-               ;"resources/public/img"
-               ;;; tests
-               ;["test/{{sanitized}}/test/handler.clj" (*render* "handler_test.clj")]
+               [(str "src/clj/{{san-path}}/dev.clj") (*render* "clj/dev.clj")]
+               [(str "src/clj/{{san-path}}/server.clj") (*render* "clj/server.clj")]
+               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
+               [(str "src/cljx/{{san-path}}/core.cljx") (*render* "cljx/core.cljx")]
+               [(str "resources/templates/index.html") (*render* "resources/templates/index.html")]
+               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
+               [(str "env/prod/cljs/{{sanitized}}/prod.cljs") (*render* "env/prod/cljs/prod.cljs")]
                ]
               )))
     )
 
 (defn closp
-  "Create a new Luminus project"
+  "Create a new CLOSP project"
   [name & args]
   (let [{:keys [options arguments errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
         ns (:namespace options)

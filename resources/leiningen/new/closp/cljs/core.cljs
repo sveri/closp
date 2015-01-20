@@ -1,4 +1,4 @@
-(ns chest-template.core
+(ns {{ns}}.core
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]))
 

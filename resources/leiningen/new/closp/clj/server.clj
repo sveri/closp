@@ -1,6 +1,6 @@
-(ns chest-template.server
+(ns {{ns}}.server
   (:require [clojure.java.io :as io]
-            [chest-template.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
+            [{{ns}}.dev :refer [is-dev? inject-devmode-html browser-repl start-figwheel]]
             [compojure.core :refer [GET defroutes]]
             [compojure.route :refer [resources]]
             [compojure.handler :refer [site]]
@@ -10,7 +10,7 @@
             [org.httpkit.server :refer [run-server]]))
 
 (deftemplate page
-  (io/resource "index.html") [] [:body] (if is-dev? inject-devmode-html identity))
+  (io/resource "templates/index.html") [] [:body] (if is-dev? inject-devmode-html identity))
 
 (defroutes routes
   (resources "/")

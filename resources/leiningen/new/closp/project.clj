@@ -67,4 +67,5 @@
                                             {:source-paths ["env/prod/cljs"]
                                              :compiler
                                              {:optimizations :advanced
-                                              :pretty-print false}}}}}})
+                                              :pretty-print false}}}}}}
+  :init-ns {{ns}}.server)
