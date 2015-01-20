@@ -7,5 +7,6 @@
                  [leinjacker "0.2.0"]
                  [leiningen-core "2.5.1"]
                  [leiningen "2.5.1"]
-                 ]
+                 [org.clojure/tools.cli "0.3.1"]]
+  :test-paths ["test/clj"]
   :eval-in-leiningen true)
