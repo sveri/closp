@@ -1,8 +1,5 @@
 (ns {{ns}}.handler
   (:require [compojure.core :refer [defroutes]]
-            [{{ns}}.routes.home :refer [home-routes]]
-            [{{ns}}.middleware :refer [load-middleware]]
-            [{{ns}}.session :as session]
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
             [ring.middleware.defaults :refer [site-defaults]]
@@ -11,11 +8,20 @@
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
             [environ.core :refer [env]]
-            [cronj.core :as cronj]))
+            [cronj.core :as cronj]
+            [{{ns}}.routes.home :refer [home-routes]]
+            [{{ns}}.middleware :refer [load-middleware]]
+            [{{ns}}.session :as session]
+            [{{ns}}.dev :refer [start-figwheel browser-repl]]))
 
 (defroutes base-routes
   (route/resources "/")
   (route/not-found "Not Found"))
+
+(defn init-dev-env []
+  (parser/cache-off!)
+  (start-figwheel)
+  (browser-repl))
 
 (defn init
   "init will be called once when
@@ -35,7 +41,7 @@
     [:shared-appender-config :rotor]
     {:path "{{sanitized}}.log" :max-size (* 512 1024) :backlog 10})
 
-  (if (env :dev) (parser/cache-off!))
+  (if (env :dev) (init-dev-env))
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
   (timbre/info "\n-=[ {{name}} started successfully"
