@@ -9,6 +9,8 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2371" :scope "provided"]
                  [ring "1.3.1"]
+                 [lib-noir "0.9.5"]
+                 [ring-server "0.3.1"]
                  [compojure "1.2.0"]
                  [enlive "1.1.5"]
                  [om "0.7.3"]
@@ -17,7 +19,12 @@
                  [com.cemerick/piggieback "0.1.3"]
                  [weasel "0.4.0-SNAPSHOT"]
                  [leiningen "2.5.0"]
-                 [http-kit "2.1.19"]]
+                 [http-kit "2.1.19"]
+                 [selmer "0.7.9"]
+                 [prone "0.8.0"]
+                 [im.chit/cronj "1.4.3"]
+                 [com.taoensso/timbre "3.3.1"]
+                 [noir-exception "0.2.3"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]]
@@ -35,11 +42,14 @@
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
-  :profiles {:dev {:repl-options {:init-ns {{ns}}.server
+  :profiles {:dev {:repl-options {:init-ns {{ns}}.repl
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl
                                                      cljx.repl-middleware/wrap-cljx]}
 
-                   :plugins [[lein-figwheel "0.1.4-SNAPSHOT"]
+                   :plugins [[lein-ring "0.9.0"]
+                             [lein-environ "1.0.0"]
+                             [lein-ancient "0.5.5"]
+                             [lein-figwheel "0.1.4-SNAPSHOT"]
                              [com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]]
 
                    :figwheel {:http-server-root "public"
@@ -49,6 +59,13 @@
                    :env {:is-dev true}
 
                    :hooks [cljx.hooks]
+
+                   :dependencies [[ring-mock "0.1.5"]
+                                  [ring/ring-devel "1.3.2"]
+                                  [pjstadig/humane-test-output "0.6.0"]]
+                   
+                   :injections [(require 'pjstadig.humane-test-output)
+                                (pjstadig.humane-test-output/activate!)]
 
                    :cljx {:builds [{:source-paths ["src/cljx"]
                                     :output-path "target/generated/clj"
@@ -67,5 +84,4 @@
                                             {:source-paths ["env/prod/cljs"]
                                              :compiler
                                              {:optimizations :advanced
-                                              :pretty-print false}}}}}}
-  :init-ns {{ns}}.server)
+                                              :pretty-print false}}}}}})
