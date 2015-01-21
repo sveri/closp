@@ -1,4 +1,4 @@
-(ns {{ns}}.core)
+(ns {{ns}}.cljx-core)
 
 (defn foo-cljx [x]
   "I don't do a whole lot."

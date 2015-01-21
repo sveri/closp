@@ -1,15 +1,15 @@
 (ns {{ns}}.core
-  (:require [om.core :as om :include-macros true]
-            [om.dom :as dom :include-macros true]))
+  (:require [reagent.core :as reagent :refer [atom]]
+            [{{ns}}.helper :as h]))
 
 (defonce app-state (atom {:text "Hello Chestnut!"}))
 
+(defn child [name]
+      [:p "Hi, I am " name])
+
+(defn childcaller []
+      [child "Foo Bar"])
+
+
 (defn main []
-  (om/root
-    (fn [app owner]
-      (reify
-        om/IRender
-        (render [_]
-          (dom/h1 nil (:text app)))))
-    app-state
-    {:target (. js/document (getElementById "app"))}))
+      (reagent/render-component (fn [] [childcaller]) (h/get-elem "app")))

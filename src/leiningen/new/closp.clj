@@ -27,7 +27,6 @@
               [[".gitignore" (*render* "gitignore")]
                ["project.clj" (*render* "project.clj")]
                [(str "src/clj/{{san-path}}/dev.clj") (*render* "clj/dev.clj")]
-               [(str "src/clj/{{san-path}}/server.clj") (*render* "clj/server.clj")]
                [(str "src/clj/{{san-path}}/handler.clj") (*render* "clj/handler.clj")]
                [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
                [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
@@ -36,9 +35,12 @@
                [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
                [(str "src/clj/{{san-path}}/util.clj") (*render* "clj/util.clj")]
                [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
-               [(str "src/cljx/{{san-path}}/core.cljx") (*render* "cljx/core.cljx")]
+               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
                [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
                [(str "env/prod/cljs/{{sanitized}}/prod.cljs") (*render* "env/prod/cljs/prod.cljs")]
+
+               [(str "src/cljx/{{san-path}}/clj-core.cljx") (*render* "cljx/clj-core.cljx")]
+               
                [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
 
                [(str "resources/templates/index.html") (*render* "resources/templates/index.html")]
@@ -47,6 +49,8 @@
                [(str "resources/templates/menu.html") (*render* "resources/templates/menu.html")]
                [(str "resources/templates/profile.html") (*render* "resources/templates/profile.html")]
                [(str "resources/templates/registration.html") (*render* "resources/templates/registration.html")]
+
+               [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
                ]
               )))
     )
