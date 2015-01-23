@@ -18,17 +18,17 @@
   (route/resources "/")
   (route/not-found "Not Found"))
 
-(defn init-dev-env []
+(defn init-dev-env [cljs?]
   (parser/cache-off!)
-  (start-figwheel)
-  (browser-repl))
+  (when cljs? (start-figwheel)
+              (browser-repl)))
 
 (defn init
   "init will be called once when
    app is deployed as a servlet on
    an app server such as Tomcat
    put any initialization code here"
-  []
+  [cljs]
   (timbre/set-config!
     [:appenders :rotor]
     {:min-level :info
@@ -41,7 +41,7 @@
     [:shared-appender-config :rotor]
     {:path "{{sanitized}}.log" :max-size (* 512 1024) :backlog 10})
 
-  (if (env :dev) (init-dev-env))
+  (if (env :dev) (init-dev-env cljs))
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
   (timbre/info "\n-=[ {{name}} started successfully"

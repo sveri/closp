@@ -48,12 +48,24 @@
                
 
                [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
-               [(str "resources/templates/app.html") (*render* "resources/templates/app.html")]
                [(str "resources/templates/menu.html") (*render* "resources/templates/menu.html")]
                [(str "resources/templates/profile.html") (*render* "resources/templates/profile.html")]
                [(str "resources/templates/registration.html") (*render* "resources/templates/registration.html")]
+               [(str "resources/templates/home/agb.html") (*render* "resources/templates/home/agb.html")]
+               [(str "resources/templates/home/contact.html") (*render* "resources/templates/home/contact.html")]
+               [(str "resources/templates/home/cookies.html") (*render* "resources/templates/home/cookies.html")]
+               [(str "resources/templates/home/index.html") (*render* "resources/templates/home/index.html")]
+               [(str "resources/templates/home/tos.html") (*render* "resources/templates/tos.html")]
+               [(str "resources/templates/user/admin.html") (*render* "resources/templates/user/admin.html")]
+               [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
 
                [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
+               [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
+
+               [(str "resources/public/img/browser_carousel_small.jpg") (*render* "resources/public/img/browser_carousel_small.jpg")]
+               [(str "resources/public/img/channel_carousel_small.jpg") (*render* "resources/public/img/channel_carousel_small.jpg")]
+               [(str "resources/public/img/loading.jpg") (*render* "resources/public/img/loading.jpg")]
+               [(str "resources/public/img/template_carousel_small.jpg") (*render* "resources/public/img/template_carousel_small.jpg")]
                ]
               )))
     )

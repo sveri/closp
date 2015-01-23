@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+
+<div id="admin">
+
+    <style>
+        DIV.table {
+            display:table;
+        }
+        .tr {
+            display:table-row;
+        }
+        SPAN.td {
+            padding: 10px;
+            display:table-cell;
+        }
+
+        .padding {
+            padding-left: 10px;
+        }
+    </style>
+
+    <div id="add-user-div"></div>
+
+    <hr />
+
+    <form class="form-inline padding" role="form" action="/user/admin">
+        <div class="form-group">
+            <label class="sr-only" for="username-filter">Username</label>
+            <input type="text" class="form-control" id="username-filter" name="filter" placeholder="Enter Username">
+        </div>
+        <button type="submit" class="btn btn-default">Filter Users</button>
+    </form>
+
+    <br />
+
+    <div class="table" field="table">
+        <div class="tr" field="table-header-row">
+            <b><span class="td" field="header-entry">Username</span></b>
+        </div>
+
+        <form field="user-row" class="tr" method="post" action="/user/update">
+            <input name="__anti-forgery-token" type="hidden"/>
+            <input type="hidden" field="username-hidden" name="username" />
+            <span field="username" class="td"></span>
+            <span field="role" class="td">
+                <select field="role-select" name="role">
+                    <option field="role_option"></option>
+                </select>
+            </span>
+            <span field="active" class="td"><input type="checkbox" name="active" /></span>
+            <span field="submit" class="td"><input type="submit" value="Update User" class="btn btn-primary"/></span>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

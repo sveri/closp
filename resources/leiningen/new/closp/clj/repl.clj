@@ -24,7 +24,7 @@
     (reset! server
             (serve (get-handler)
                    {:port         port
-                    :init         init
+                    :init         (partial init true)
                     :auto-reload? true
                     :destroy      destroy
                     :join?        false}))
