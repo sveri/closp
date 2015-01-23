@@ -51,11 +51,11 @@
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl
                                                      cljx.repl-middleware/wrap-cljx]}
 
-                   :plugins [[lein-ring "0.9.0"]
+                   :plugins [[com.keminglabs/cljx "0.5.0"]
+                             [lein-ring "0.9.0"]
                              [lein-environ "1.0.0"]
                              [lein-ancient "0.5.5"]
-                             [lein-figwheel "0.1.4-SNAPSHOT"]
-                             [com.keminglabs/cljx "0.4.0" :exclusions [org.clojure/clojure]]]
+                             [lein-figwheel "0.1.4-SNAPSHOT"]]
 
                    :figwheel {:http-server-root "public"
                               :port 3449

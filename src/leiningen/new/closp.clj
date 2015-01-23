@@ -4,7 +4,8 @@
             [leinjacker.utils :refer [lein-generation]]
             [leiningen.new.cli-options :as opt-helper]
             [clojure.tools.cli :as t-cli]
-            [clojure.string :as string])
+            [clojure.string :as string]
+            [clojure.java.io :as io])
   (:import (java.io File)))
 
 (declare ^{:dynamic true} *name*)
@@ -21,6 +22,7 @@
     ;(reset! features (-> feature-params dailycred-params site-params db-required-features))
 
     (println "Generating new CLOSP project named" (str name "..."))
+    (println (.getPath (File. ".")))
 
       (apply (partial ->files data)
             (concat
@@ -36,6 +38,7 @@
                [(str "src/clj/{{san-path}}/util.clj") (*render* "clj/util.clj")]
                
                [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
+               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
 
                [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
                
@@ -55,17 +58,22 @@
                [(str "resources/templates/home/contact.html") (*render* "resources/templates/home/contact.html")]
                [(str "resources/templates/home/cookies.html") (*render* "resources/templates/home/cookies.html")]
                [(str "resources/templates/home/index.html") (*render* "resources/templates/home/index.html")]
-               [(str "resources/templates/home/tos.html") (*render* "resources/templates/tos.html")]
+               [(str "resources/templates/home/tos.html") (*render* "resources/templates/home/tos.html")]
                [(str "resources/templates/user/admin.html") (*render* "resources/templates/user/admin.html")]
                [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
 
                [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
                [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
 
-               [(str "resources/public/img/browser_carousel_small.jpg") (*render* "resources/public/img/browser_carousel_small.jpg")]
-               [(str "resources/public/img/channel_carousel_small.jpg") (*render* "resources/public/img/channel_carousel_small.jpg")]
-               [(str "resources/public/img/loading.jpg") (*render* "resources/public/img/loading.jpg")]
-               [(str "resources/public/img/template_carousel_small.jpg") (*render* "resources/public/img/template_carousel_small.jpg")]
+               ;"resources/public/img/browser_carousel_small.jpg"
+               ;"resources/public/img/"
+               ;"resources/public/img/"
+               ;"resources/public/img/"
+
+               ["resources/public/img/browser_carousel_small.jpg" (io/resource "loading.gif")]
+               ;[(str "resources/public/img/channel_carousel_small.jpg") (*render* "resources/public/img/channel_carousel_small.jpg")]
+               ;[(str "resources/public/img/loading.jpg") (*render* "resources/public/img/loading.jpg")]
+               ;[(str "resources/public/img/template_carousel_small.jpg") (*render* "resources/public/img/template_carousel_small.jpg")]
                ]
               )))
     )

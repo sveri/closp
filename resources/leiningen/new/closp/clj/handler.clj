@@ -10,6 +10,7 @@
             [environ.core :refer [env]]
             [cronj.core :as cronj]
             [{{ns}}.routes.home :refer [home-routes]]
+            [{{ns}}.routes.user :refer [user-routes]]
             [{{ns}}.middleware :refer [load-middleware]]
             [{{ns}}.session :as session]
             [{{ns}}.dev :refer [start-figwheel browser-repl]]))
@@ -69,7 +70,7 @@
 
 (def app (app-handler
            ;; add your application routes here
-           [home-routes base-routes]
+           [home-routes user-routes base-routes]
            ;; add custom middleware here
            :middleware (load-middleware)
            :ring-defaults (mk-defaults false)
