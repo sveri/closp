@@ -34,6 +34,11 @@
                [(str "src/clj/{{san-path}}/repl.clj") (*render* "clj/repl.clj")]
                [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
                [(str "src/clj/{{san-path}}/util.clj") (*render* "clj/util.clj")]
+               
+               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
+
+               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
+               
                [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
                [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
                [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
@@ -41,9 +46,7 @@
 
                [(str "src/cljx/{{san-path}}/clj-core.cljx") (*render* "cljx/clj-core.cljx")]
                
-               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
 
-               [(str "resources/templates/index.html") (*render* "resources/templates/index.html")]
                [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
                [(str "resources/templates/app.html") (*render* "resources/templates/app.html")]
                [(str "resources/templates/menu.html") (*render* "resources/templates/menu.html")]

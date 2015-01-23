@@ -21,13 +21,15 @@
                  [environ "1.0.0"]
                  [com.cemerick/piggieback "0.1.3"]
                  [weasel "0.4.0-SNAPSHOT"]
-                 ;[leiningen "2.5.0"]
+                 [leiningen "2.5.0"]
                  [http-kit "2.1.19"]
                  [selmer "0.7.9"]
                  [prone "0.8.0"]
                  [im.chit/cronj "1.4.3"]
                  [com.taoensso/timbre "3.3.1"]
-                 [noir-exception "0.2.3"]]
+                 [noir-exception "0.2.3"]
+
+                 [buddy/buddy-auth "0.3.0-SNAPSHOT"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]]
@@ -59,7 +61,7 @@
                               :port 3449
                               :css-dirs ["resources/public/css"]}
 
-                   :env {:is-dev true}
+                   :env {:dev true}
 
                    :hooks [cljx.hooks]
 
