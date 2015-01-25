@@ -16,6 +16,7 @@
 
 
 (defn generate-project [name feature-params data]
+  ;(io/copy (io/reader (io/resource "leiningen/new/closp/img/loading.gif")) (io/file "./loading.gif"))
   (binding [*name* name
             *render* #((renderer "closp") % data)]
     (reset! features (-> feature-params))
@@ -65,12 +66,13 @@
                [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
                [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
 
+               ["resources/public/img/loading.gif" (render "resources/public/img/loading.gif")]
+
                ;"resources/public/img/browser_carousel_small.jpg"
                ;"resources/public/img/"
                ;"resources/public/img/"
                ;"resources/public/img/"
 
-               ["resources/public/img/browser_carousel_small.jpg" (io/resource "loading.gif")]
                ;[(str "resources/public/img/channel_carousel_small.jpg") (*render* "resources/public/img/channel_carousel_small.jpg")]
                ;[(str "resources/public/img/loading.jpg") (*render* "resources/public/img/loading.jpg")]
                ;[(str "resources/public/img/template_carousel_small.jpg") (*render* "resources/public/img/template_carousel_small.jpg")]
