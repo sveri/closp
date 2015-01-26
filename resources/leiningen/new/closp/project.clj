@@ -47,9 +47,10 @@
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
+  :prep-tasks [["cljx" "once"]]
+
   :profiles {:dev {:repl-options {:init-ns {{ns}}.repl
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl
-                                                     cljx.repl-middleware/wrap-cljx]}
+                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                    :plugins [[com.keminglabs/cljx "0.5.0"]
                              [lein-ring "0.9.0"]
@@ -62,8 +63,6 @@
                               :css-dirs ["resources/public/css"]}
 
                    :env {:dev true}
-
-                   :hooks [cljx.hooks]
 
                    :dependencies [[ring-mock "0.1.5"]
                                   [ring/ring-devel "1.3.2"]
@@ -81,8 +80,7 @@
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}}
 
-             :uberjar {:hooks [cljx.hooks leiningen.cljsbuild]
-                       :env {:production true}
+             :uberjar {:env {:production true}
                        :omit-source true
                        :aot :all
                        :cljsbuild {:builds {:app

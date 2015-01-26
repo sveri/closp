@@ -1,4 +1,4 @@
-(ns {{ns}}.user
+(ns {{ns}}.routes.user
   (:require [compojure.core :refer :all]
             [buddy.auth :refer [authenticated? throw-unauthorized]]
             [{{ns}}.layout :as layout]))

@@ -72,11 +72,14 @@
               [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
 
               [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
-              [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]]))
+              [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
+              "target/generated/cljs"
+              "target/generated/clj"
+              ]))
 
 
     (mapv #(apply unpack (:sanitized data) %)
-          [["loading.gif" "resources/public/img/loading.gif"]])))
+          [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]])))
 
 (defn closp
   "Create a new CLOSP project"
