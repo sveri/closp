@@ -29,10 +29,18 @@
                  [com.taoensso/timbre "3.3.1"]
                  [noir-exception "0.2.3"]
 
-                 [buddy/buddy-auth "0.3.0-SNAPSHOT"]]
+                 [buddy/buddy-auth "0.3.0-SNAPSHOT"]
+
+                 [com.h2database/h2 "1.4.182"]
+                 [ragtime/ragtime.sql.files "0.3.8"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
-            [lein-environ "1.0.0"]]
+            [lein-environ "1.0.0"]
+            [ragtime/ragtime.lein "0.3.8"]]
+
+  ;database migrations
+  :ragtime {:migrations ragtime.sql.files/migrations
+            :database "jdbc:h2:~/closp2"}
 
   :min-lein-version "2.5.0"
 
@@ -47,9 +55,10 @@
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
-  :prep-tasks [["cljx" "once"]]
+  
 
-  :profiles {:dev {:repl-options {:init-ns {{ns}}.repl
+  :profiles {:dev {:prep-tasks [["cljx" "once"]]
+                   :repl-options {:init-ns {{ns}}.repl
                                   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                    :plugins [[com.keminglabs/cljx "0.5.0"]
@@ -80,7 +89,8 @@
 
                    :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}}
 
-             :uberjar {:env {:production true}
+             :uberjar {:prep-tasks [["cljx" "once"]]
+                       :env {:production true}
                        :omit-source true
                        :aot :all
                        :cljsbuild {:builds {:app

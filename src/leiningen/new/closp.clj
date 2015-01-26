@@ -73,6 +73,10 @@
 
               [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
               [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
+
+              [(str "migrations/2015-011-26-add-users-table.down.sql") (*render* "migrations/2015-011-26-add-users-table.down.sql")]
+              [(str "migrations/2015-011-26-add-users-table.up.sql") (*render* "migrations/2015-011-26-add-users-table.up.sql")]
+              
               "target/generated/cljs"
               "target/generated/clj"
               ]))
