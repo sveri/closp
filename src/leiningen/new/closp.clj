@@ -14,71 +14,69 @@
 
 (def render (renderer "closp"))
 
+(def proj-dir (io/file (System/getProperty "leiningen.original.pwd")))
+(defn unpack
+  [name-proj name-in name-out]
+  (let [p (string/join "/" ["leiningen" "new" "closp" name-in])
+        i (io/resource p)
+        o (io/file proj-dir name-proj name-out)
+        _ (io/make-parents o)
+        is (io/input-stream i)
+        os (io/output-stream o)]
+    (io/copy is os)
+    (.flush os)))
 
 (defn generate-project [name feature-params data]
-  ;(io/copy (io/reader (io/resource "leiningen/new/closp/img/loading.gif")) (io/file "./loading.gif"))
   (binding [*name* name
             *render* #((renderer "closp") % data)]
     (reset! features (-> feature-params))
-    ;(reset! features (-> feature-params dailycred-params site-params db-required-features))
 
     (println "Generating new CLOSP project named" (str name "..."))
-    (println (.getPath (File. ".")))
 
-      (apply (partial ->files data)
-            (concat
-              [[".gitignore" (*render* "gitignore")]
-               ["project.clj" (*render* "project.clj")]
-               [(str "src/clj/{{san-path}}/dev.clj") (*render* "clj/dev.clj")]
-               [(str "src/clj/{{san-path}}/handler.clj") (*render* "clj/handler.clj")]
-               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
-               [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
-               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
-               [(str "src/clj/{{san-path}}/repl.clj") (*render* "clj/repl.clj")]
-               [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
-               [(str "src/clj/{{san-path}}/util.clj") (*render* "clj/util.clj")]
-               
-               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
-               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
+    (apply (partial ->files data)
+           (concat
+             [[".gitignore" (*render* "gitignore")]
+              ["project.clj" (*render* "project.clj")]
+              [(str "src/clj/{{san-path}}/dev.clj") (*render* "clj/dev.clj")]
+              [(str "src/clj/{{san-path}}/handler.clj") (*render* "clj/handler.clj")]
+              [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
+              [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
+              [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
+              [(str "src/clj/{{san-path}}/repl.clj") (*render* "clj/repl.clj")]
+              [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
+              [(str "src/clj/{{san-path}}/util.clj") (*render* "clj/util.clj")]
 
-               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
-               
-               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
-               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
-               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
-               [(str "env/prod/cljs/{{sanitized}}/prod.cljs") (*render* "env/prod/cljs/prod.cljs")]
+              [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
+              [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
 
-               [(str "src/cljx/{{san-path}}/clj-core.cljx") (*render* "cljx/clj-core.cljx")]
-               
+              [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
 
-               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
-               [(str "resources/templates/menu.html") (*render* "resources/templates/menu.html")]
-               [(str "resources/templates/profile.html") (*render* "resources/templates/profile.html")]
-               [(str "resources/templates/registration.html") (*render* "resources/templates/registration.html")]
-               [(str "resources/templates/home/agb.html") (*render* "resources/templates/home/agb.html")]
-               [(str "resources/templates/home/contact.html") (*render* "resources/templates/home/contact.html")]
-               [(str "resources/templates/home/cookies.html") (*render* "resources/templates/home/cookies.html")]
-               [(str "resources/templates/home/index.html") (*render* "resources/templates/home/index.html")]
-               [(str "resources/templates/home/tos.html") (*render* "resources/templates/home/tos.html")]
-               [(str "resources/templates/user/admin.html") (*render* "resources/templates/user/admin.html")]
-               [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
+              [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
+              [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
+              [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
+              [(str "env/prod/cljs/{{sanitized}}/prod.cljs") (*render* "env/prod/cljs/prod.cljs")]
 
-               [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
-               [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
+              [(str "src/cljx/{{san-path}}/clj-core.cljx") (*render* "cljx/clj-core.cljx")]
 
-               ["resources/public/img/loading.gif" (render "resources/public/img/loading.gif")]
 
-               ;"resources/public/img/browser_carousel_small.jpg"
-               ;"resources/public/img/"
-               ;"resources/public/img/"
-               ;"resources/public/img/"
+              [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
+              [(str "resources/templates/menu.html") (*render* "resources/templates/menu.html")]
+              [(str "resources/templates/profile.html") (*render* "resources/templates/profile.html")]
+              [(str "resources/templates/registration.html") (*render* "resources/templates/registration.html")]
+              [(str "resources/templates/home/agb.html") (*render* "resources/templates/home/agb.html")]
+              [(str "resources/templates/home/contact.html") (*render* "resources/templates/home/contact.html")]
+              [(str "resources/templates/home/cookies.html") (*render* "resources/templates/home/cookies.html")]
+              [(str "resources/templates/home/index.html") (*render* "resources/templates/home/index.html")]
+              [(str "resources/templates/home/tos.html") (*render* "resources/templates/home/tos.html")]
+              [(str "resources/templates/user/admin.html") (*render* "resources/templates/user/admin.html")]
+              [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
 
-               ;[(str "resources/public/img/channel_carousel_small.jpg") (*render* "resources/public/img/channel_carousel_small.jpg")]
-               ;[(str "resources/public/img/loading.jpg") (*render* "resources/public/img/loading.jpg")]
-               ;[(str "resources/public/img/template_carousel_small.jpg") (*render* "resources/public/img/template_carousel_small.jpg")]
-               ]
-              )))
-    )
+              [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
+              [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]]))
+
+
+    (mapv #(apply unpack (:sanitized data) %)
+          [["loading.gif" "resources/public/img/loading.gif"]])))
 
 (defn closp
   "Create a new CLOSP project"
@@ -88,8 +86,8 @@
         san-path (string/replace ns #"\." "/")
         data {:name      name
               :sanitized (sanitize name)
-              :san-path    san-path
-              :ns     ns
+              :san-path  san-path
+              :ns        ns
               :year      (year)}]
     ;; Handle help and error conditions
     (cond
@@ -104,9 +102,9 @@
 
       (:help options) (opt-helper/exit 0 (opt-helper/usage summary))
       ;(not= (count arguments) 1) (exit 1 (usage summary))
-      
+
       errors (opt-helper/exit 1 (opt-helper/error-msg errors))
-      
+
       :else (generate-project name args data))
     )
   )
