@@ -31,6 +31,13 @@
 
                  [buddy/buddy-auth "0.3.0-SNAPSHOT"]
 
+                 [log4j "1.2.15" :exclusions [javax.mail/mail
+                                              javax.jms/jms
+                                              com.sun.jdmk/jmxtools
+                                              com.sun.jmx/jmxri]]
+
+                 [org.clojure/java.jdbc "0.3.6"]
+                 [korma "0.4.0"]
                  [com.h2database/h2 "1.4.182"]
                  [ragtime/ragtime.sql.files "0.3.8"]]
 

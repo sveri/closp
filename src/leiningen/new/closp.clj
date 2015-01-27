@@ -50,6 +50,7 @@
               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
 
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
+              [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
 
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
@@ -70,6 +71,7 @@
               [(str "resources/templates/home/tos.html") (*render* "resources/templates/home/tos.html")]
               [(str "resources/templates/user/admin.html") (*render* "resources/templates/user/admin.html")]
               [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
+              [(str "resources/templates/user/signup.html") (*render* "resources/templates/user/signup.html")]
 
               [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
               [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
