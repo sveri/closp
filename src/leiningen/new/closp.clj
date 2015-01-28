@@ -38,6 +38,7 @@
              [[".gitignore" (*render* "gitignore")]
               ["project.clj" (*render* "project.clj")]
               [(str "src/clj/{{san-path}}/dev.clj") (*render* "clj/dev.clj")]
+              [(str "src/clj/{{san-path}}/globals.clj") (*render* "clj/globals.clj")]
               [(str "src/clj/{{san-path}}/handler.clj") (*render* "clj/handler.clj")]
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
               [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
@@ -80,8 +81,7 @@
               [(str "migrations/2015-011-26-add-users-table.up.sql") (*render* "migrations/2015-011-26-add-users-table.up.sql")]
               
               "target/generated/cljs"
-              "target/generated/clj"
-              ]))
+              "target/generated/clj"]))
 
 
     (mapv #(apply unpack (:sanitized data) %)

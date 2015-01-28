@@ -7,6 +7,7 @@ CREATE TABLE "users"
  "last_login" TIME,
  "is_active" BOOLEAN,
  "pass" VARCHAR(100),
+ "activationid" VARCHAR(100),
  PRIMARY KEY ("id"));
  
 INSERT INTO "users" ("first_name", "last_name", "email", "admin", "is_active", "pass") VALUES
