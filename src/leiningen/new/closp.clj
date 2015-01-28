@@ -70,7 +70,10 @@
               [(str "resources/templates/home/cookies.html") (*render* "resources/templates/home/cookies.html")]
               [(str "resources/templates/home/index.html") (*render* "resources/templates/home/index.html")]
               [(str "resources/templates/home/tos.html") (*render* "resources/templates/home/tos.html")]
+              [(str "resources/templates/user/account-activated.html") (*render* "resources/templates/user/account-activated.html")]
+              [(str "resources/templates/user/account-created.html") (*render* "resources/templates/user/account-created.html")]
               [(str "resources/templates/user/admin.html") (*render* "resources/templates/user/admin.html")]
+              [(str "resources/templates/user/changepassword.html") (*render* "resources/templates/user/changepassword.html")]
               [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
               [(str "resources/templates/user/signup.html") (*render* "resources/templates/user/signup.html")]
 
