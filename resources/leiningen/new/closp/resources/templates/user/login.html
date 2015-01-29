@@ -8,6 +8,9 @@
 
             <form class="form-horizontal" role="form" action="/user/login" method="POST">
                 <input name="__anti-forgery-token" type="hidden"/>
+                {% if nexturl %}
+                    <input name="nexturl" type="hidden" value="{{nexturl}}"/>
+                {% endif %}
 
                 {% if error %}
                     <div id="error" class="alert alert-danger">{{error}}</div>

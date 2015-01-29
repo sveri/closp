@@ -17,8 +17,8 @@
    wrap-exceptions])
 
 (def production-middleware
-  [#(wrap-authorization % auth-backend)
-   #(wrap-authentication % auth-backend)
+  [#(wrap-access-rules % {:rules auth/rules })
+   #(wrap-authorization % auth/auth-backend)
    #(wrap-internal-error % :log (fn [e] (timbre/error e)))])
 
 (defn load-middleware []

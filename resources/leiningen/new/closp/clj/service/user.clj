@@ -1,6 +1,7 @@
 (ns {{ns}}.service.user
   (:require [postal.core :refer [send-message]]
     [taoensso.timbre :as timbre]
+    [noir.session :as sess]
     [{{ns}}.globals :as glob]))
 
 
@@ -35,3 +36,5 @@
                                                                              glob/activation-mail-body activationid)})
         (timbre/info "sent activation email to: " email))
     (catch Exception e (timbre/error "Could not send email!\n" e))))
+
+(defn get-logged-in-username [] (when-let [id (sess/get :identity)] (name id)))

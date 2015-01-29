@@ -1,18 +1,27 @@
 <div field="menu">
     {% if identity %}
 
-    <div id="logout" class="navbar-right">
+    <ul class="nav navbar-nav" id="header-menu-wrapper">
+        <li field="link-list"><a href="/admin/users">Menu 1</a></li>
+    </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="/user/logout">Logout</a></li>
+    <div id="logout" class="navbar-right">
+        <ul class="navbar-right nav navbar-nav">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    {{identity}}
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/user/changepassword">Change Password</a></li>
+                    <li><a href="/user/logout">Logout</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 
     {% else %}
 
-    <ul class="nav navbar-nav" id="header-menu-wrapper">
-        <li field="link-list"><a href="/menuone">Menu 1</a></li>
-    </ul>
     <div class="navbar-collapse collapse">
 
         <form class="navbar-form navbar-right" role="form" action="/user/login" method="POST">
