@@ -1,28 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block content %}
 
 <div id="admin">
 
     <style>
         DIV.table {
-            display:table;
+        display:table;
         }
         .tr {
-            display:table-row;
+        display:table-row;
         }
         SPAN.td {
-            padding: 10px;
-            display:table-cell;
+        padding: 10px;
+        display:table-cell;
         }
 
         .padding {
-            padding-left: 10px;
+        padding-left: 10px;
         }
     </style>
 
@@ -45,21 +39,25 @@
             <b><span class="td" field="header-entry">Username</span></b>
         </div>
 
+        {% for user in users %}
         <form field="user-row" class="tr" method="post" action="/user/update">
-            <input name="__anti-forgery-token" type="hidden"/>
-            <input type="hidden" field="username-hidden" name="username" />
-            <span field="username" class="td"></span>
-            <span field="role" class="td">
-                <select field="role-select" name="role">
-                    <option field="role_option"></option>
-                </select>
-            </span>
-            <span field="active" class="td"><input type="checkbox" name="active" /></span>
-            <span field="submit" class="td"><input type="submit" value="Update User" class="btn btn-primary"/></span>
+            <!--<input name="__anti-forgery-token" type="hidden"/>-->
+            <!--<input type="hidden" field="username-hidden" name="username" />-->
+            <span field="username" class="td">{{user.email}}</span>
+                <span field="role" class="td">
+                    <select field="role-select" name="role">
+                        {% for role in roles %}
+                        <option value="{{role}}" {% ifequal role user.role %} selected {% endifequal %}
+                                {% if user.role|empty? %} selected {% endif %}>{{role}}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+                <span field="active" class="td">
+                    <input type="checkbox" name="active" {% if user.is_active %} checked {% endif %}></span>
+            <span field="submit" class="td"><input type="submit" value="Update User" class="btn btn-primary"></span>
         </form>
+        {% endfor %}
     </div>
-
 </div>
 
-</body>
-</html>
+{% endblock %}

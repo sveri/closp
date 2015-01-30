@@ -9,6 +9,8 @@
     [{{ns}}.db.core :as db]
     [{{ns}}.service.user :as uservice]))
 
+(def ^:const available-roles ["admin" "none"])
+
 (defn vali-password? [pass confirm & [form-current-pass current-pass]]
   (vali/rule (vali/min-length? pass 5)
              [:pass "Password must be at least 5 characters."])
@@ -24,12 +26,12 @@
   (vali/rule (vali/is-email? email)
              [:id "A valid email is required."])
   (vali/rule (not (db/username-exists? email))
-             [:id "This username exists in the database. Please choose another one."])
+             [:id "This username already exists. Choose another."])
   (vali-password? pass confirm)
   (not (vali/errors? :id :pass :confirm)))
 
 (defn admin-page []
-  (layout/render "user/admin.html"))
+  (layout/render "user/admin.html" {:users (db/get-all-users) :roles available-roles}))
 
 (defn login-page [& [content]]
   (layout/render "user/login.html" content))
@@ -56,8 +58,8 @@
 
 (defn login [request]
   (let [username (get-in request [:form-params "username"])
-        password (get-in request [:form-params "password"] "")
-        nexturl (get-in request [:form-params "nexturl"] "")]
+        password (get-in request [:form-params "password"])
+        nexturl (get-in request [:form-params "nexturl"])]
     (if-let [user (db/get-user-by-email username)]
       (try
         (cond
@@ -103,3 +105,4 @@
            (POST "/user/signup" [email password confirm] (add-user email password confirm true))
            (GET "/user/changepassword" [] (changepassword-page))
            (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm)))
+
