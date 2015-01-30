@@ -29,7 +29,8 @@
                  [com.taoensso/timbre "3.3.1"]
                  [noir-exception "0.2.3"]
 
-                 [buddy/buddy-auth "0.3.0-SNAPSHOT"]
+                 [buddy/buddy-auth "0.3.0"]
+                 [buddy/buddy-hashers "0.3.0"]
 
                  [log4j "1.2.15" :exclusions [javax.mail/mail
                                               javax.jms/jms
@@ -39,7 +40,11 @@
                  [org.clojure/java.jdbc "0.3.6"]
                  [korma "0.4.0"]
                  [com.h2database/h2 "1.4.182"]
-                 [ragtime/ragtime.sql.files "0.3.8"]]
+                 [ragtime/ragtime.sql.files "0.3.8"]
+
+                 [com.draines/postal "1.11.1"]
+
+                 [de.sveri/clojure-commons "0.1.5"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]
@@ -47,7 +52,7 @@
 
   ;database migrations
   :ragtime {:migrations ragtime.sql.files/migrations
-            :database "jdbc:h2:~/closp2"}
+            :database "jdbc:h2:./db/korma.db"}
 
   :min-lein-version "2.5.0"
 

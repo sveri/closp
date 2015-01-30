@@ -46,6 +46,8 @@
               [(str "src/clj/{{san-path}}/repl.clj") (*render* "clj/repl.clj")]
               [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
               [(str "src/clj/{{san-path}}/util.clj") (*render* "clj/util.clj")]
+              
+              [(str "src/clj/{{san-path}}/db/core.clj") (*render* "clj/db/core.clj")]
 
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
@@ -62,33 +64,35 @@
 
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
-              [(str "resources/templates/menu.html") (*render* "resources/templates/menu.html")]
-              [(str "resources/templates/profile.html") (*render* "resources/templates/profile.html")]
-              [(str "resources/templates/registration.html") (*render* "resources/templates/registration.html")]
-              [(str "resources/templates/home/agb.html") (*render* "resources/templates/home/agb.html")]
-              [(str "resources/templates/home/contact.html") (*render* "resources/templates/home/contact.html")]
-              [(str "resources/templates/home/cookies.html") (*render* "resources/templates/home/cookies.html")]
-              [(str "resources/templates/home/index.html") (*render* "resources/templates/home/index.html")]
-              [(str "resources/templates/home/tos.html") (*render* "resources/templates/home/tos.html")]
-              [(str "resources/templates/user/account-activated.html") (*render* "resources/templates/user/account-activated.html")]
-              [(str "resources/templates/user/account-created.html") (*render* "resources/templates/user/account-created.html")]
-              [(str "resources/templates/user/admin.html") (*render* "resources/templates/user/admin.html")]
-              [(str "resources/templates/user/changepassword.html") (*render* "resources/templates/user/changepassword.html")]
-              [(str "resources/templates/user/login.html") (*render* "resources/templates/user/login.html")]
-              [(str "resources/templates/user/signup.html") (*render* "resources/templates/user/signup.html")]
-
-              [(str "resources/public/css/screen.css") (*render* "resources/public/css/screen.css")]
-              [(str "resources/public/css/home.css") (*render* "resources/public/css/home.css")]
-
-              [(str "migrations/2015-011-26-add-users-table.down.sql") (*render* "migrations/2015-011-26-add-users-table.down.sql")]
-              [(str "migrations/2015-011-26-add-users-table.up.sql") (*render* "migrations/2015-011-26-add-users-table.up.sql")]
               
               "target/generated/cljs"
               "target/generated/clj"]))
 
 
     (mapv #(apply unpack (:sanitized data) %)
-          [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]])))
+          [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
+           ["resources/templates/menu.html" "resources/templates/menu.html"]
+           ["resources/templates/profile.html" "resources/templates/profile.html"]
+           ["resources/templates/registration.html" "resources/templates/registration.html"]
+           ["resources/templates/home/agb.html" "resources/templates/home/agb.html"]
+           ["resources/templates/home/contact.html" "resources/templates/home/contact.html"]
+           ["resources/templates/home/cookies.html" "resources/templates/home/cookies.html"]
+           ["resources/templates/home/index.html" "resources/templates/home/index.html"]
+           ["resources/templates/home/tos.html" "resources/templates/home/tos.html"]
+           ["resources/templates/user/account-activated.html" "resources/templates/user/account-activated.html"]
+           ["resources/templates/user/account-created.html" "resources/templates/user/account-created.html"]
+           ["resources/templates/user/admin.html" "resources/templates/user/admin.html"]
+           ["resources/templates/user/changepassword.html" "resources/templates/user/changepassword.html"]
+           ["resources/templates/user/login.html" "resources/templates/user/login.html"]
+           ["resources/templates/user/signup.html" "resources/templates/user/signup.html"]
+
+           ["resources/closp.edn" "resources/closp.edn"]
+
+           ["resources/public/css/screen.css" "resources/public/css/screen.css"]
+           ["resources/public/css/home.css" "resources/public/css/home.css"]
+
+           ["migrations/2015-011-26-add-users-table.down.sql" "migrations/2015-011-26-add-users-table.down.sql"]
+           ["migrations/2015-011-26-add-users-table.up.sql" "migrations/2015-011-26-add-users-table.up.sql"]])))
 
 (defn closp
   "Create a new CLOSP project"

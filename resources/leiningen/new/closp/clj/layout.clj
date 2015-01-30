@@ -3,7 +3,8 @@
             [clojure.string :as s]
             [ring.util.response :refer [content-type response]]
             [compojure.response :refer [Renderable]]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [noir.session :as sess]))
 
 (parser/set-resource-path!  (clojure.java.io/resource "templates"))
 
@@ -22,7 +23,7 @@
                (try (.getContextPath context)
                     (catch IllegalArgumentException _ context)))
              :identity
-             (session/get :identity))
+             (sess/get :identity))
            (parser/render-file (str template))
            response)
       "text/html; charset=utf-8")))

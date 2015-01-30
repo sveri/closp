@@ -5,7 +5,9 @@
     [prone.middleware :refer [wrap-exceptions]]
     [noir-exception.core :refer [wrap-internal-error]]
     [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
-    [{{ns}}.service.auth :refer [auth-backend]]))
+    [buddy.auth.accessrules :refer [wrap-access-rules]]
+    [{{ns}}.service.auth :refer [auth-backend]]
+    [{{ns}}.service.auth :as auth]))
 
 (defn log-request [handler]
   (fn [req]
