@@ -7,23 +7,23 @@
   :source-paths ["src/clj" "src/cljs" "target/generated/clj" "target/generated/cljx"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2371" :scope "provided"]
+                 [org.clojure/clojurescript "0.0-2740" :scope "provided"]
 
                  [org.clojure/core.cache "0.6.4"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
-                 
-                 [ring "1.3.1"]
+
+                 [ring "1.3.2"]
                  [lib-noir "0.9.5"]
-                 [ring-server "0.3.1"]
-                 [compojure "1.2.0"]
+                 [ring-server "0.4.0"]
+                 [compojure "1.3.1"]
                  [reagent "0.4.3"]
                  [figwheel "0.1.4-SNAPSHOT"]
                  [environ "1.0.0"]
-                 [com.cemerick/piggieback "0.1.3"]
-                 [weasel "0.4.0-SNAPSHOT"]
-                 [leiningen "2.5.0"]
+                 [com.cemerick/piggieback "0.1.5"]
+                 [weasel "0.5.0"]
+                 [leiningen "2.5.1"]
                  [http-kit "2.1.19"]
-                 [selmer "0.7.9"]
+                 [selmer "0.8.0"]
                  [prone "0.8.0"]
                  [im.chit/cronj "1.4.3"]
                  [com.taoensso/timbre "3.3.1"]
@@ -32,19 +32,19 @@
                  [buddy/buddy-auth "0.3.0"]
                  [buddy/buddy-hashers "0.3.0"]
 
-                 [log4j "1.2.15" :exclusions [javax.mail/mail
+                 [log4j "1.2.17" :exclusions [javax.mail/mail
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]
 
                  [org.clojure/java.jdbc "0.3.6"]
                  [korma "0.4.0"]
-                 [com.h2database/h2 "1.4.182"]
+                 [com.h2database/h2 "1.4.185"]
                  [ragtime/ragtime.sql.files "0.3.8"]
 
-                 [com.draines/postal "1.11.1"]
+                 [com.draines/postal "1.11.3"]
 
-                 [de.sveri/clojure-commons "0.1.5"]]
+                 [de.sveri/clojure-commons "0.1.9"]]
 
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-environ "1.0.0"]
