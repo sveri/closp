@@ -59,24 +59,22 @@
   :uberjar-name "{{name}}.jar"
 
   :cljsbuild
-  {:builds {
-            ;{:source-paths ["src/cljs" "env/dev/cljs"]
-            ;;{:source-paths ["src/cljs" target/classes" "env/dev/cljs"]
-            ;      :compiler {:main "closp5.dev"
-            ;                 :asset-path "js/out"
-            ;                 :output-to "resources/public/js/app.js"
-            ;                 :output-dir "resources/public/js/out"
-            ;                 :source-map "resources/public/js/out.js.map"
-            ;                 :optimizations :none
-            ;                 :cache-analysis true
-            ;                 :pretty-print true}}
+  {:builds {:dev {:source-paths ["src/cljs" "target/generated/cljs" "env/dev/cljs"]
+                  :compiler     {:main           "{{name}}.dev"
+                                 :asset-path     "/js/out"
+                                 :output-to      "resources/public/js/app.js"
+                                 :output-dir     "resources/public/js/out"
+                                 :source-map     "resources/public/js/out.js.map"
+                                 :optimizations  :none
+                                 :cache-analysis true
+                                 :pretty-print   true}}
             :adv {:source-paths ["src/cljs" "target/generated/cljs"]
-                  :compiler {:main "{{ns}}.core"
-                             :output-to "resources/public/js/app.js"
-                             :output-dir "resources/public/js/out"
-                             :source-map "resources/public/js/out.js.map"
-                             :optimizations :advanced
-                             :pretty-print false}}}}
+                  :compiler     {:main          "{{ns}}.core"
+                                 :output-to     "resources/public/js/app.js"
+                                 :output-dir    "resources/public/js/out-adv"
+                                 :source-map    "resources/public/js/out.js.map"
+                                 :optimizations :advanced
+                                 :pretty-print  false}}}}
 
 
   :prep-tasks [["cljx" "once"] "javac" "compile"]           ;also not sure
@@ -108,11 +106,7 @@
                                       [pjstadig/humane-test-output "0.6.0"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
-                                      (pjstadig.humane-test-output/activate!)]
-
-                       :cljsbuild    {:builds {:adv {:source-paths ["env/dev/cljs"]
-                                                     :compiler     {:main       "{{name}}.dev"
-                                                                    :asset-path "/js/out"}}}}}
+                                      (pjstadig.humane-test-output/activate!)]}
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :env         {:production true}

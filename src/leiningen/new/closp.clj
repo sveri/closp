@@ -58,13 +58,13 @@
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
-              [(str "env/prod/cljs/{{sanitized}}/prod.cljs") (*render* "env/prod/cljs/prod.cljs")]
 
               [(str "src/cljx/{{san-path}}/clj-core.cljx") (*render* "cljx/clj-core.cljx")]
 
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
-              
+              [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
+
               "target/generated/cljs"
               "target/generated/clj"]))
 
