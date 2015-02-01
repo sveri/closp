@@ -59,7 +59,7 @@
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 
-              [(str "src/cljx/{{san-path}}/clj-core.cljx") (*render* "cljx/clj-core.cljx")]
+              [(str "src/cljx/{{san-path}}/cljcore.cljx") (*render* "cljx/cljcore.cljx")]
 
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]

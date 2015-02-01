@@ -3,7 +3,8 @@
     [{{ns}}.handler :refer [app]]
     [ring.middleware.reload :as reload]
     [org.httpkit.server :as http-kit]
-    [taoensso.timbre :as timbre])
+    [taoensso.timbre :as timbre]
+    [{{ns}}.cljxcore :as cljx])
   (:gen-class))
 
 ;contains function that can be used to stop http-kit server
@@ -29,4 +30,5 @@
 (defn -main [& args]
   (let [port (parse-port args)]
     (start-server port args)
+    (cljx/foo-cljx "hello from cljx")
     (timbre/info "server started on port:" port)))
