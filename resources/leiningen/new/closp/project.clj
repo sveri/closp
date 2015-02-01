@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :source-paths ["src/clj" "src/cljs" "target/generated/clj" "target/generated/cljx"]
+  :source-paths ["src/clj" "src/cljs" "target/generated/clj" "target/generated/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2740" :scope "provided"]
@@ -58,55 +58,69 @@
 
   :uberjar-name "{{name}}.jar"
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "target/generated/cljs"]
-                             :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "resources/public/js/out"
-                                        :source-map    "resources/public/js/out.js.map"
-                                        :preamble      ["react/react.min.js"]
-                                        :externs       ["react/externs/react.js"]
-                                        :optimizations :none
-                                        :pretty-print  true}}}}
+  :cljsbuild
+  {:builds {
+            ;{:source-paths ["src/cljs" "env/dev/cljs"]
+            ;;{:source-paths ["src/cljs" target/classes" "env/dev/cljs"]
+            ;      :compiler {:main "closp5.dev"
+            ;                 :asset-path "js/out"
+            ;                 :output-to "resources/public/js/app.js"
+            ;                 :output-dir "resources/public/js/out"
+            ;                 :source-map "resources/public/js/out.js.map"
+            ;                 :optimizations :none
+            ;                 :cache-analysis true
+            ;                 :pretty-print true}}
+            :adv {:source-paths ["src/cljs" "target/generated/cljs"]
+                  :compiler {:main "{{ns}}.core"
+                             :output-to "resources/public/js/app.js"
+                             :output-dir "resources/public/js/out"
+                             :source-map "resources/public/js/out.js.map"
+                             :optimizations :advanced
+                             :pretty-print false}}}}
 
-  
 
-  :profiles {:dev {:prep-tasks [["cljx" "once"]]
-                   :repl-options {:init-ns {{ns}}.repl
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+  :prep-tasks [["cljx" "once"] "javac" "compile"]           ;also not sure
 
-                   :plugins [[com.keminglabs/cljx "0.5.0"]
-                             [lein-ring "0.9.0"]
-                             [lein-environ "1.0.0"]
-                             [lein-ancient "0.5.5"]
-                             [lein-figwheel "0.1.4-SNAPSHOT"]]
+  :cljx {:builds [{:source-paths ["src/cljx"]
+                   :output-path  "target/generated/clj"
+                   :rules        :clj}
+                  {:source-paths ["src/cljx"]
+                   :output-path  "target/generated/cljs"
+                   :rules        :cljs}]}
 
-                   :figwheel {:http-server-root "public"
-                              :port 3449
-                              :css-dirs ["resources/public/css"]}
+  :profiles {:dev     {:repl-options {:init-ns          {{ns}}.repl
+                                      :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-                   :env {:dev true}
+                       :plugins      [[com.keminglabs/cljx "0.5.0"]
+                                      [lein-ring "0.9.0"]
+                                      [lein-environ "1.0.0"]
+                                      [lein-ancient "0.5.5"]
+                                      [lein-figwheel "0.1.4-SNAPSHOT"]]
 
-                   :dependencies [[ring-mock "0.1.5"]
-                                  [ring/ring-devel "1.3.2"]
-                                  [pjstadig/humane-test-output "0.6.0"]]
-                   
-                   :injections [(require 'pjstadig.humane-test-output)
-                                (pjstadig.humane-test-output/activate!)]
+                       :figwheel     {:http-server-root "public"
+                                      :port             3449
+                                      :css-dirs         ["resources/public/css"]}
 
-                   :cljx {:builds [{:source-paths ["src/cljx"]
-                                    :output-path "target/generated/clj"
-                                    :rules :clj}
-                                   {:source-paths ["src/cljx"]
-                                    :output-path "target/generated/cljs"
-                                    :rules :cljs}]}
+                       :env          {:dev true}
 
-                   :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]}}}}
+                       :dependencies [[ring-mock "0.1.5"]
+                                      [ring/ring-devel "1.3.2"]
+                                      [pjstadig/humane-test-output "0.6.0"]]
 
-             :uberjar {:prep-tasks [["cljx" "once"]]
-                       :env {:production true}
+                       :injections   [(require 'pjstadig.humane-test-output)
+                                      (pjstadig.humane-test-output/activate!)]
+
+                       :cljsbuild    {:builds {:adv {:source-paths ["env/dev/cljs"]
+                                                     :compiler     {:main       "{{name}}.dev"
+                                                                    :asset-path "/js/out"}}}}}
+
+             :uberjar {:auto-clean false                    ; not sure about this one
+                       :env         {:production true}
                        :omit-source true
-                       :aot :all
-                       :cljsbuild {:builds {:app
-                                            {:source-paths ["env/prod/cljs"]
-                                             :compiler
-                                             {:optimizations :advanced
-                                              :pretty-print false}}}}}})
+                       :aot         :all
+                       :cljsbuild {:builds {:adv {:compiler {:optimizations :advanced
+                                                             :pretty-print false}}}}}}
+
+  :main {{ns}}.core
+
+  :aliases {"rel-jar" ["do" "clean," "cljx" "once," "cljsbuild" "clean," "cljsbuild" "once" "adv," "uberjar"]})
