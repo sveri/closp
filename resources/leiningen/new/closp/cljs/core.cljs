@@ -12,6 +12,6 @@
       [child "Foo Bar"])
 
 
-(defn main []
+(defn ^:export main []
       (cljx/foo-cljx "hello from js")
       (reagent/render-component (fn [] [childcaller]) (h/get-elem "app")))
