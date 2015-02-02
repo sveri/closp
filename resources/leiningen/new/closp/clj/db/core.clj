@@ -1,8 +1,9 @@
 (ns {{ns}}.db.core
   (:require [korma.core :refer :all]
-            [korma.db :refer [defdb h2]]))
+            [korma.db :refer [defdb h2]]
+            [{{ns}}.globals :as glob]))
 
-(def db-spec {:connection-uri "jdbc:h2:./db/korma.db"})
+(def db-spec {:connection-uri glob/jdbc-url})
 
 (defdb db db-spec)
 
