@@ -22,8 +22,8 @@
                ;; .getContextPath might not exist
                (try (.getContextPath context)
                     (catch IllegalArgumentException _ context)))
-             :identity
-             (sess/get :identity))
+             :identity (sess/get :identity)
+             :role (sess/get :role))
            (parser/render-file (str template))
            response)
       "text/html; charset=utf-8")))

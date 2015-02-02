@@ -3,7 +3,9 @@
 
     <ul class="nav navbar-nav" id="header-menu-wrapper">
         <li field="link-list"><a href="/example">Example Page</a></li>
+        {% ifequal "admin" role %}
         <li field="link-list"><a href="/admin/users">Users</a></li>
+        {% endifequal %}
     </ul>
 
     <div id="logout" class="navbar-right">
