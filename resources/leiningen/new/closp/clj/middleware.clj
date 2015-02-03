@@ -7,7 +7,7 @@
     [buddy.auth.accessrules :refer [wrap-access-rules]]
     [{{ns}}.service.auth :refer [auth-backend]]
     [{{ns}}.service.auth :as auth]
-    [de.sv.cl.globals :as glob]))
+    [{{ns}}.globals :as glob]))
 
 (defn log-request [handler]
   (fn [req]
