@@ -30,8 +30,8 @@
   (vali-password? pass confirm)
   (not (vali/errors? :id :pass :confirm)))
 
-(defn admin-page []
-  (layout/render "user/admin.html" {:users (db/get-all-users) :roles available-roles}))
+(defn admin-page [& [filter]]
+  (layout/render "user/admin.html" {:users (db/get-all-users filter) :roles available-roles}))
 
 (defn login-page [& [content]]
   (layout/render "user/login.html" content))
@@ -95,7 +95,7 @@
         (changepassword-page {:pass-error pass-error :confirm-error confirm-error :old-error old-error})))))
 
 (defroutes user-routes
-           (GET "/admin/users" [] (admin-page))
+           (GET "/admin/users" [filter] (admin-page filter))
            (GET "/user/login" [next] (login-page {:nexturl next}))
            (POST "/user/login" req (login req))
            (GET "/user/logout" [] (logout))

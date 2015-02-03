@@ -9,8 +9,8 @@
 
 (defentity users)
 
-(defn get-all-users []
-  (select users))
+(defn get-all-users [ & [where-email-like]]
+  (select users (where {:email [like (str "%" where-email-like "%")]})))
 
 (defn get-user-by-email [email] (first (select users (where {:email email}) (limit 1))))
 (defn get-user-by-act-id [id] (first (select users (where {:activationid id}) (limit 1))))
