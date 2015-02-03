@@ -3,7 +3,6 @@
             [clojure.string :as s]
             [ring.util.response :refer [content-type response]]
             [compojure.response :refer [Renderable]]
-            [environ.core :refer [env]]
             [noir.session :as sess]))
 
 (parser/set-resource-path!  (clojure.java.io/resource "templates"))
@@ -14,7 +13,6 @@
     (content-type
       (->> (assoc params
              (keyword (s/replace template #".html" "-selected")) "active"
-             :dev (env :dev)
              :servlet-context
              (if-let [context (:servlet-context request)]
                ;; If we're not inside a serlvet environment (for

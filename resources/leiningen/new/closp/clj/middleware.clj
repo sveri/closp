@@ -1,13 +1,13 @@
 (ns {{ns}}.middleware
   (:require [taoensso.timbre :as timbre]
-    [environ.core :refer [env]]
     [selmer.middleware :refer [wrap-error-page]]
     [prone.middleware :refer [wrap-exceptions]]
     [noir-exception.core :refer [wrap-internal-error]]
     [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
     [buddy.auth.accessrules :refer [wrap-access-rules]]
     [{{ns}}.service.auth :refer [auth-backend]]
-    [{{ns}}.service.auth :as auth]))
+    [{{ns}}.service.auth :as auth]
+    [de.sv.cl.globals :as glob]))
 
 (defn log-request [handler]
   (fn [req]
@@ -25,4 +25,4 @@
 
 (defn load-middleware []
   (concat production-middleware
-          (when (env :dev) development-middleware)))
+          (when (= glob/env :dev) development-middleware)))

@@ -3,7 +3,7 @@
             [korma.db :refer [defdb h2]]
             [{{ns}}.globals :as glob]))
 
-(def db-spec {:connection-uri glob/jdbc-url})
+(def db-spec glob/jdbc-url)
 
 (defdb db db-spec)
 

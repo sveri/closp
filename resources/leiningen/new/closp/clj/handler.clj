@@ -7,13 +7,13 @@
             [taoensso.timbre :as timbre]
             [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
-            [environ.core :refer [env]]
             [cronj.core :as cronj]
             [{{ns}}.routes.home :refer [home-routes]]
             [{{ns}}.routes.user :refer [user-routes]]
             [{{ns}}.middleware :refer [load-middleware]]
             [{{ns}}.session :as session]
-            [{{ns}}.dev :refer [start-figwheel browser-repl]]))
+            [{{ns}}.dev :refer [start-figwheel browser-repl]]
+            [{{ns}}.globals :as glob]))
 
 (defroutes base-routes
   (route/resources "/")
@@ -42,11 +42,11 @@
     [:shared-appender-config :rotor]
     {:path "{{sanitized}}.log" :max-size (* 512 1024) :backlog 10})
 
-  (if (env :dev) (init-dev-env cljs))
+  (if (= glob/env :dev) (init-dev-env cljs))
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
   (timbre/info "\n-=[ {{name}} started successfully"
-               (when (env :dev) "using the development profile") "]=-"))
+               (when (= glob/env :dev) "using the development profile") "]=-"))
 
 (defn destroy
   "destroy will be called when your application

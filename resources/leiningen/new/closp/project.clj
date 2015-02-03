@@ -44,10 +44,10 @@
 
                  [com.draines/postal "1.11.3"]
 
-                 [de.sveri/clojure-commons "0.1.9"]]
+                 [jarohen/nomad "0.7.0"]]
 
-  :plugins [[lein-cljsbuild "1.0.3"]
-            [lein-environ "1.0.0"]
+  :plugins [[com.keminglabs/cljx "0.5.0"]
+            [lein-cljsbuild "1.0.3"]
             [ragtime/ragtime.lein "0.3.8"]]
 
   ;database migrations
@@ -89,17 +89,12 @@
   :profiles {:dev     {:repl-options {:init-ns          {{ns}}.repl
                                       :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
-                       :plugins      [[com.keminglabs/cljx "0.5.0"]
-                                      [lein-ring "0.9.0"]
-                                      [lein-environ "1.0.0"]
-                                      [lein-ancient "0.5.5"]
+                       :plugins      [[lein-ring "0.9.0"]
                                       [lein-figwheel "0.1.4-SNAPSHOT"]]
 
                        :figwheel     {:http-server-root "public"
                                       :port             3449
                                       :css-dirs         ["resources/public/css"]}
-
-                       :env          {:dev true}
 
                        :dependencies [[ring-mock "0.1.5"]
                                       [ring/ring-devel "1.3.2"]
@@ -109,7 +104,6 @@
                                       (pjstadig.humane-test-output/activate!)]}
 
              :uberjar {:auto-clean false                    ; not sure about this one
-                       :env         {:production true}
                        :omit-source true
                        :aot         :all
                        :cljsbuild {:builds {:adv {:compiler {:optimizations :advanced

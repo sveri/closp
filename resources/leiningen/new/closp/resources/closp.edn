@@ -9,4 +9,4 @@ Your Team"
  :activation-placeholder  "{{activationlink}}"
  :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
  :jdbc-url                "jdbc:h2:./db/korma.db"
- }
+ :env                     :dev}

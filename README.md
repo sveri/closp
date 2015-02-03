@@ -11,6 +11,9 @@ Until the first version in clojars appears follow this:
 3. Run `lein new closp _projectname_ -n _your.ns.here_` in a different folder
 4. Run `lein ragtime migrate` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
+5. Run `lein cljx once` to compile the cljx files
+6. Run `lein repl` and the `(start-server)` to run the application in dev mode. This will also compile the clojurescript.
+7. Run `lein rel-jar` to generate a runnable jar file.
 
 
 
@@ -19,7 +22,10 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Ragtime for database migrations
 * Selmer as templating solution
 * http-kit as a server
-* cljx support OOTB
+* cljx support
+* Figwheel with clojurescript live reloading
+* Reloading support for templates and clojure code
+* Configuration with nomad
 * User management with login/logout/registration with email activation (provided by postal) (WIP)
 * Authentication provided by buddy (WIP)
 * reagent and datascript on frontend side (WIP)
