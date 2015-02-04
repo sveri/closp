@@ -30,6 +30,14 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Authentication provided by buddy (WIP)
 * reagent and datascript on frontend side (WIP)
 
+## FAQ
+### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.
+
+This will happen only in dev mode for every page where you did not explicitly register your clojurescript with.
+Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change the call to `(core/main)` how you
+need it for the page you are working on right now.
+ 
+
 ## License
 
 Copyright © 2015 FIXME

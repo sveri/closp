@@ -23,6 +23,9 @@
 (defn set-user-active [activationid & [active]]
   (update users (set-fields {:is_active (or active true)}) (where {:activationid activationid})))
 
+(defn update-user [email fields]
+  (update users (set-fields fields) (where {:email email})))
+
 ;(defn is-active? [email]
 ;  (get (get-user-by-email email) :is_active false))
 

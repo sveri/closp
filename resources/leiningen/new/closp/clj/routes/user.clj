@@ -11,6 +11,9 @@
 
 (def ^:const available-roles ["admin" "none"])
 
+(defn merge-flash-message [ret-map message type]
+  (merge ret-map {:flash-message message :flash-alert-type type}))
+
 (defn vali-password? [pass confirm & [form-current-pass current-pass]]
   (vali/rule (vali/min-length? pass 5)
              [:pass "Password must be at least 5 characters."])
@@ -71,38 +74,45 @@
                            (login-page {:error "Some error occured."})))
       (login-page {:error "Please provide a correct username."}))))
 
-(defn add-user [email password confirm sendmail?]
+(defn add-user [email password confirm sendmail? succ-cb-page error-cb-page]
   (if (valid-register? email password confirm)
     (let [activationid (uservice/generate-activation-id)
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
       (when sendmail? (uservice/send-activation-email email activationid))
-      (account-created-page))
+      (succ-cb-page (merge-flash-message {} (str "User added.") "alert-success")))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)]
-      (signup-page {:email-error email-error :pass-error pass-error :confirm-error confirm-error :email email}))))
-
+      (error-cb-page {:email-error email-error :pass-error pass-error :confirm-error confirm-error :email email}))))
 (defn changepassword [oldpassword password confirm]
   (let [user (db/get-user-by-email (uservice/get-logged-in-username))]
     (vali-password? password confirm oldpassword (:pass user))
     (if (not (vali/errors? :oldpass :pass :confirm))
       (do (db/change-password (:email user) (hashers/encrypt password))
-          (changepassword-page {:success "Password changed successfully."}))
+          (changepassword-page (merge-flash-message {} (str "Password changed.") "alert-success")))
       (let [old-error (vali/on-error :oldpass first)
             pass-error (vali/on-error :pass first)
             confirm-error (vali/on-error :confirm first)]
         (changepassword-page {:pass-error pass-error :confirm-error confirm-error :old-error old-error})))))
 
+(defn update-user [username role active]
+  (let [role (if (= "none" role) "" role)
+        act (= "on" active)]
+    (db/update-user username {:role role :is_active act}))
+  (admin-page (merge-flash-message {} (str "User " username " updated successfully.") "alert-success")))
+
 (defroutes user-routes
-           (GET "/admin/users" [filter] (admin-page filter))
+           (GET "/admin/users" [filter] (admin-page {:filter filter}))
            (GET "/user/login" [next] (login-page {:nexturl next}))
            (POST "/user/login" req (login req))
            (GET "/user/logout" [] (logout))
            (GET "/user/signup" [] (signup-page))
            (GET "/user/accountcreated" [] (account-created-page))
            (GET "/user/activate/:id" [id] (activate-account id))
-           (POST "/user/signup" [email password confirm] (add-user email password confirm true))
+           (POST "/user/signup" [email password confirm] (add-user email password confirm true account-created-page signup-page))
            (GET "/user/changepassword" [] (changepassword-page))
-           (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm)))
+           (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm))
+           (POST "/admin/user/update" [username role active] (update-user username role active))
+           (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page admin-page)))
 
