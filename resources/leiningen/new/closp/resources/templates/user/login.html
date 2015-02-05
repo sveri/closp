@@ -7,7 +7,7 @@
         <div class="col-md-6">
 
             <form class="form-horizontal" role="form" action="/user/login" method="POST">
-                <input name="__anti-forgery-token" type="hidden"/>
+                <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
                 {% if nexturl %}
                     <input name="nexturl" type="hidden" value="{{nexturl}}"/>
                 {% endif %}

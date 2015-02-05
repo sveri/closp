@@ -73,7 +73,6 @@
           [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
            ["resources/templates/menu.html" "resources/templates/menu.html"]
            ["resources/templates/profile.html" "resources/templates/profile.html"]
-           ["resources/templates/registration.html" "resources/templates/registration.html"]
            ["resources/templates/home/agb.html" "resources/templates/home/agb.html"]
            ["resources/templates/home/contact.html" "resources/templates/home/contact.html"]
            ["resources/templates/home/cookies.html" "resources/templates/home/cookies.html"]

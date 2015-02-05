@@ -40,7 +40,7 @@
 (defn login-page [& [content]]
   (layout/render "user/login.html" content))
 
-(defn account-created-page []
+(defn account-created-page [& [_]]
   (layout/render "user/account-created.html"))
 
 (defn account-activated-page []

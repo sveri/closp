@@ -15,6 +15,7 @@
                  [ring "1.3.2"]
                  [lib-noir "0.9.5"]
                  [ring-server "0.4.0"]
+                 [ring/ring-anti-forgery "1.0.0"]
                  [compojure "1.3.1"]
                  [reagent "0.4.3"]
                  [figwheel "0.1.4-SNAPSHOT"]

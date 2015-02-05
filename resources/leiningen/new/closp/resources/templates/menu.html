@@ -28,7 +28,7 @@
     <div class="navbar-collapse collapse">
 
         <form class="navbar-form navbar-right" role="form" action="/user/login" method="POST">
-
+            <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
             <div class="form-group">
                 <input type="text" placeholder="Email" name="username" class="form-control">
