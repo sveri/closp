@@ -33,8 +33,9 @@
   (vali-password? pass confirm)
   (not (vali/errors? :id :pass :confirm)))
 
-(defn admin-page [& [filter]]
-  (layout/render "user/admin.html" {:users (db/get-all-users filter) :roles available-roles}))
+(defn admin-page [params]
+  (layout/render "user/admin.html" (merge {:users (db/get-all-users (get params :filter)) :roles available-roles}
+                                          params)))
 
 (defn login-page [& [content]]
   (layout/render "user/login.html" content))
