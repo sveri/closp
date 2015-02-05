@@ -5,6 +5,7 @@
     [noir-exception.core :refer [wrap-internal-error]]
     [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
     [buddy.auth.accessrules :refer [wrap-access-rules]]
+    [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
     [{{ns}}.service.auth :refer [auth-backend]]
     [{{ns}}.service.auth :as auth]
     [{{ns}}.globals :as glob]))
@@ -21,7 +22,9 @@
 (def production-middleware
   [#(wrap-access-rules % {:rules auth/rules })
    #(wrap-authorization % auth/auth-backend)
-   #(wrap-internal-error % :log (fn [e] (timbre/error e)))])
+   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+   wrap-anti-forgery
+   wrap-trimmings])
 
 (defn load-middleware []
   (concat production-middleware

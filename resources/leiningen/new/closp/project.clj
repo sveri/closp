@@ -45,7 +45,9 @@
 
                  [com.draines/postal "1.11.3"]
 
-                 [jarohen/nomad "0.7.0"]]
+                 [jarohen/nomad "0.7.0"]
+
+                 [de.sveri/clojure-commons "0.1.9"]]
 
   :plugins [[com.keminglabs/cljx "0.5.0"]
             [lein-cljsbuild "1.0.3"]
