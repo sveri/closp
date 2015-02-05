@@ -2,6 +2,7 @@
   (:require [selmer.parser :as parser]
             [clojure.string :as s]
             [ring.util.response :refer [content-type response]]
+            [ring.middleware.anti-forgery :as af]
             [compojure.response :refer [Renderable]]
             [noir.session :as sess]))
 

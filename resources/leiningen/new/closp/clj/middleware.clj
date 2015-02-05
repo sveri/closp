@@ -5,6 +5,7 @@
     [noir-exception.core :refer [wrap-internal-error]]
     [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
     [buddy.auth.accessrules :refer [wrap-access-rules]]
+    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
     [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
     [{{ns}}.service.auth :refer [auth-backend]]
     [{{ns}}.service.auth :as auth]
