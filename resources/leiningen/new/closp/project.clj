@@ -47,7 +47,9 @@
 
                  [jarohen/nomad "0.7.0"]
 
-                 [de.sveri/clojure-commons "0.1.9"]]
+                 [de.sveri/clojure-commons "0.1.9"]
+
+                 [clojure-miniprofiler "0.2.8"]]
 
   :plugins [[com.keminglabs/cljx "0.5.0"]
             [lein-cljsbuild "1.0.3"]

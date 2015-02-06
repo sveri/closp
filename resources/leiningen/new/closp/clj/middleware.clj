@@ -7,9 +7,12 @@
     [buddy.auth.accessrules :refer [wrap-access-rules]]
     [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
     [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
+    [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
     [{{ns}}.service.auth :refer [auth-backend]]
     [{{ns}}.service.auth :as auth]
     [{{ns}}.globals :as glob]))
+
+(defonce in-memory-store-instance (in-memory-store))
 
 (defn log-request [handler]
   (fn [req]
@@ -18,7 +21,8 @@
 
 (def development-middleware
   [wrap-error-page
-   wrap-exceptions])
+   wrap-exceptions
+   #(wrap-miniprofiler % {:store in-memory-store-instance})])
 
 (def production-middleware
   [#(wrap-access-rules % {:rules auth/rules })

@@ -5,6 +5,7 @@
     [noir.session :as sess]
     [noir.validation :as vali]
     [taoensso.timbre :as timb]
+    [clojure-miniprofiler :as cjmp]
     [{{ns}}.layout :as layout]
     [{{ns}}.db.core :as db]
     [{{ns}}.service.user :as uservice]))
