@@ -29,7 +29,8 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * User management with login/logout/registration with email activation (provided by postal) (WIP)
 * Authentication provided by buddy (WIP)
 * reagent and datascript on frontend side (WIP)
-* Ring Antiforgery middlewar (https://github.com/weavejester/ring-anti-forgery)
+* Ring Antiforgery middleware (https://github.com/weavejester/ring-anti-forgery)
+* Clojure miniprofiler example (https://github.com/yeller/clojure-miniprofiler)
 
 ## FAQ
 ### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.
