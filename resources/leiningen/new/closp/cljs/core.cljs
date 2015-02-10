@@ -3,8 +3,6 @@
             [{{ns}}.helper :as h]
             [{{ns}}.cljxcore :as cljx]))
 
-(defonce app-state (atom {:text "Hello Chestnut!"}))
-
 (defn child [name]
       [:p "Hi, I am " name])
 

@@ -9,8 +9,7 @@
     [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
     [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
     [{{ns}}.service.auth :refer [auth-backend]]
-    [{{ns}}.service.auth :as auth]
-    [{{ns}}.globals :as glob]))
+    [{{ns}}.service.auth :as auth]))
 
 (defonce in-memory-store-instance (in-memory-store))
 
@@ -31,6 +30,7 @@
    wrap-anti-forgery
    wrap-trimmings])
 
-(defn load-middleware []
+(defn load-middleware [config]
   (concat production-middleware
-          (when (= glob/env :dev) development-middleware)))
+          (when (= (:env config) :dev) development-middleware)))
+

@@ -49,7 +49,9 @@
 
                  [de.sveri/clojure-commons "0.1.9"]
 
-                 [clojure-miniprofiler "0.2.8"]]
+                 [clojure-miniprofiler "0.2.8"]
+
+                 [org.danielsz/system "0.1.4"]]
 
   :plugins [[com.keminglabs/cljx "0.5.0"]
             [lein-cljsbuild "1.0.3"]
@@ -91,7 +93,7 @@
                    :output-path  "target/generated/cljs"
                    :rules        :cljs}]}
 
-  :profiles {:dev     {:repl-options {:init-ns          {{ns}}.repl
+  :profiles {:dev     {:repl-options {:init-ns          {{ns}}.user
                                       :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                        :plugins      [[lein-ring "0.9.0"]

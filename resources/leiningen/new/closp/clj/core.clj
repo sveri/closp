@@ -1,34 +1,18 @@
 (ns {{ns}}.core
-  (:require
-    [{{ns}}.handler :refer [app]]
-    [ring.middleware.reload :as reload]
-    [org.httpkit.server :as http-kit]
-    [taoensso.timbre :as timbre]
-    [{{ns}}.cljxcore :as cljx])
+  (:require [taoensso.timbre :as timbre]
+            [reloaded.repl :refer [go]]
+            [{{ns}}.cljxcore :as cljx]
+            [{{ns}}.components.components :refer [prod-system]])
   (:gen-class))
-
-;contains function that can be used to stop http-kit server
-(defonce server
-  (atom nil))
-
-(defn dev? [args] (some #{"-dev"} args))
 
 (defn parse-port [args]
   (if-let [port (->> args (remove #{"-dev"}) first)]
     (Integer/parseInt port)
     3000))
 
-(defn- start-server [port args]
-  (reset! server
-          (http-kit/run-server
-           (if (dev? args) (reload/wrap-reload app) app)
-           {:port port})))
-
-(defn- stop-server []
-  (@server))
-
 (defn -main [& args]
   (let [port (parse-port args)]
-    (start-server port args)
+    (reloaded.repl/set-init! prod-system)
+    (go)
     (cljx/foo-cljx "hello from cljx")
     (timbre/info "server started on port:" port)))

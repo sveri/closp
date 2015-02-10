@@ -1,11 +1,6 @@
-(ns {{ns}}.db.core
+(ns {{ns}}.db.users
   (:require [korma.core :refer :all]
-            [korma.db :refer [defdb h2]]
-            [{{ns}}.globals :as glob]))
-
-(def db-spec glob/jdbc-url)
-
-(defdb db db-spec)
+            [korma.db :refer [h2]]))
 
 (defentity users)
 

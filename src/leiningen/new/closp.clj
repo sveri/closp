@@ -37,17 +37,20 @@
            (concat
              [[".gitignore" (*render* "gitignore")]
               ["project.clj" (*render* "project.clj")]
-              [(str "src/clj/{{san-path}}/dev.clj") (*render* "clj/dev.clj")]
-              [(str "src/clj/{{san-path}}/globals.clj") (*render* "clj/globals.clj")]
-              [(str "src/clj/{{san-path}}/handler.clj") (*render* "clj/handler.clj")]
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
+              [(str "src/clj/{{san-path}}/dev.clj") (*render* "clj/dev.clj")]
               [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
-              [(str "src/clj/{{san-path}}/repl.clj") (*render* "clj/repl.clj")]
               [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
-              [(str "src/clj/{{san-path}}/util.clj") (*render* "clj/util.clj")]
-              
-              [(str "src/clj/{{san-path}}/db/core.clj") (*render* "clj/db/core.clj")]
+              [(str "src/clj/{{san-path}}/user.clj") (*render* "clj/user.clj")]
+
+              [(str "src/clj/{{san-path}}/components/components.clj") (*render* "clj/components/components.clj")]
+              [(str "src/clj/{{san-path}}/components/config.clj") (*render* "clj/components/config.clj")]
+              [(str "src/clj/{{san-path}}/components/db.clj") (*render* "clj/components/db.clj")]
+              [(str "src/clj/{{san-path}}/components/handler.clj") (*render* "clj/components/handler.clj")]
+              [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
+
+              [(str "src/clj/{{san-path}}/db/users.clj") (*render* "clj/db/users.clj")]
 
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]

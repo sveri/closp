@@ -7,7 +7,7 @@
     [taoensso.timbre :as timb]
     [clojure-miniprofiler :as cjmp]
     [{{ns}}.layout :as layout]
-    [{{ns}}.db.core :as db]
+    [{{ns}}.db.users :as db]
     [{{ns}}.service.user :as uservice]))
 
 (def ^:const available-roles ["admin" "none"])
@@ -76,17 +76,18 @@
                            (login-page {:error "Some error occured."})))
       (login-page {:error "Please provide a correct username."}))))
 
-(defn add-user [email password confirm sendmail? succ-cb-page error-cb-page]
+(defn add-user [email password confirm sendmail? succ-cb-page error-cb-page config]
   (if (valid-register? email password confirm)
     (let [activationid (uservice/generate-activation-id)
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
-      (when sendmail? (uservice/send-activation-email email activationid))
+      (when sendmail? (uservice/send-activation-email email activationid config))
       (succ-cb-page (merge-flash-message {} (str "User added.") "alert-success")))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)]
       (error-cb-page {:email-error email-error :pass-error pass-error :confirm-error confirm-error :email email}))))
+
 (defn changepassword [oldpassword password confirm]
   (let [user (db/get-user-by-email (uservice/get-logged-in-username))]
     (vali-password? password confirm oldpassword (:pass user))
@@ -104,17 +105,20 @@
     (db/update-user username {:role role :is_active act}))
   (admin-page (merge-flash-message {} (str "User " username " updated successfully.") "alert-success")))
 
-(defroutes user-routes
-           (GET "/admin/users" [filter] (admin-page {:filter filter}))
-           (GET "/user/login" [next] (login-page {:nexturl next}))
-           (POST "/user/login" req (login req))
-           (GET "/user/logout" [] (logout))
-           (GET "/user/signup" [] (signup-page))
-           (GET "/user/accountcreated" [] (account-created-page))
-           (GET "/user/activate/:id" [id] (activate-account id))
-           (POST "/user/signup" [email password confirm] (add-user email password confirm true account-created-page signup-page))
-           (GET "/user/changepassword" [] (changepassword-page))
-           (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm))
-           (POST "/admin/user/update" [username role active] (update-user username role active))
-           (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page admin-page)))
+(defn user-routes [config]
+  (routes
+    (GET "/admin/users" [filter] (admin-page {:filter filter}))
+    (GET "/user/login" [next] (login-page {:nexturl next}))
+    (POST "/user/login" req (login req))
+    (GET "/user/logout" [] (logout))
+    (GET "/user/signup" [] (signup-page))
+    (GET "/user/accountcreated" [] (account-created-page))
+    (GET "/user/activate/:id" [id] (activate-account id))
+    (POST "/user/signup" [email password confirm] (add-user email password confirm true account-created-page
+                                                            signup-page config))
+    (GET "/user/changepassword" [] (changepassword-page))
+    (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm))
+    (POST "/admin/user/update" [username role active] (update-user username role active))
+    (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page
+                                                               admin-page config))))
 
