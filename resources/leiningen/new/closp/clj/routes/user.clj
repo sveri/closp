@@ -8,9 +8,8 @@
     [clojure-miniprofiler :as cjmp]
     [{{ns}}.layout :as layout]
     [{{ns}}.db.users :as db]
-    [{{ns}}.service.user :as uservice]))
-
-(def ^:const available-roles ["admin" "none"])
+    [{{ns}}.service.user :as uservice]
+    [{{ns}}.service.auth :as auth]))
 
 (defn merge-flash-message [ret-map message type]
   (merge ret-map {:flash-message message :flash-alert-type type}))
@@ -36,7 +35,7 @@
 
 (defn admin-page [params]
   (let [users (cjmp/trace "all users" (db/get-all-users (get params :filter)))]
-    (layout/render "user/admin.html" (merge {:users users :roles available-roles}
+    (layout/render "user/admin.html" (merge {:users users :roles auth/available-roles}
                                             params))))
 
 (defn login-page [& [content]]

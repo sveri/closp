@@ -2,11 +2,19 @@
 
 A Leiningen template for a full featured web framework.
   
-See it live at: http://sveri.de:3124
+See it live at: http://sveri.de:3124  
+Username: admin@localhost.de  
+Password: admin  
+
+## Goals
+* Provide a full stack to get started with
+* Provide generated code which can be changed easily
+* Provide an opiniated predefined set of libraries
+* 
 
 ## Usage
 
-1. Run `lein new closp _projectname_ -n _your.ns.here_` in a different folder
+1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
 2. Run `lein ragtime migrate` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
 3. Run `lein cljx once` to compile the cljx files
@@ -23,9 +31,9 @@ This will also compile the clojurescript.
 * Figwheel with clojurescript live reloading
 * Reloading support for templates and clojure code
 * Configuration with nomad
-* User management with login/logout/registration with email activation (provided by postal) (WIP)
-* Authentication provided by buddy (WIP)
-* reagent and datascript on frontend side (WIP)
+* User management with login/logout/registration with email activation (provided by postal)
+* Authentication provided by buddy
+* reagent and datascript on frontend side
 * Ring Antiforgery middleware (https://github.com/weavejester/ring-anti-forgery)
 * Clojure miniprofiler example (https://github.com/yeller/clojure-miniprofiler)
 * Componentized application (https://github.com/danielsz/system)
@@ -34,6 +42,23 @@ This will also compile the clojurescript.
 ## Docker
 
 There is a dockerfile attached which will fetch the latest version and run an example project.
+
+## Configuration
+
+There is a closp.edn file in the resources f
+
+## Authentication and Authorization
+
+We use the buddy (<https://github.com/funcool/buddy>) library for this.  
+Configuration is done in _ns.service.auth_  
+There is a concept of roles, _admin_ and _none_ are alreaded provided, you can add more in the auth namespace.
+Or, create a database storage for this.  
+Next you can find a _rules_ def in the _auth_ namespace which defines the access rules for every available link. For
+more information please look at the buddy documentation.
+
+## Database Layer
+
+Closp uses jdbc to connect to a database (<https://github.com/clojure/java.jdbc>). This is 
 
 ## FAQ
 ### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.

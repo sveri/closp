@@ -5,6 +5,8 @@
             [noir.session :as sess]
             [{{ns}}.layout :as layout]))
 
+(def ^:const available-roles ["admin" "none"])
+
 (defn admin-access [r] (= "admin" (sess/get :role)))
 (defn unauthorized-access [_] true)
 (defn loggedin-access [r] (some? (sess/get :identity)))
@@ -22,12 +24,8 @@
 
 (defn unauthorized-handler
   [request _]
-  (cond
-    (authenticated? request)
-    (layout/render "app.html" {:status 403})
-    :else
-    (let [current-url (:uri request)]
-      (redirect (format "/user/login?next=%s" current-url)))))
+  (let [current-url (:uri request)]
+    (redirect (format "/user/login?next=%s" current-url))))
 
 (def auth-backend
   (session-backend {:unauthorized-handler unauthorized-handler}))
