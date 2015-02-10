@@ -2,8 +2,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [datascript :as d]
             [cljs-uuid-utils :as uuid]
-            [{{ns}}.helper :as h]
-            [{{ns}}.cljxcore :as cljx]))
+            [{{ns}}.helper :as h]))
 
 (defn bind
       ([conn q]
@@ -109,5 +108,4 @@
 
 
 (defn ^:export main []
-      (cljx/foo-cljx "hello from js")
       (reagent/render-component (fn [] [uber]) (h/get-elem "app")))

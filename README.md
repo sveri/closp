@@ -1,21 +1,18 @@
 # closp
 
-A Leiningen template for a full featured web framework (whatever that means)
+A Leiningen template for a full featured web framework.
+  
+See it live at: http://sveri.de:3124
 
 ## Usage
 
-Until the first version in clojars appears follow this:
-
-1. Clone this project
-2. Run `lein install` in the project folder
-3. Run `lein new closp _projectname_ -n _your.ns.here_` in a different folder
-4. Run `lein ragtime migrate` in the newly created project (This will add an admin user with username: 
+1. Run `lein new closp _projectname_ -n _your.ns.here_` in a different folder
+2. Run `lein ragtime migrate` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
-5. Run `lein cljx once` to compile the cljx files
-6. Run `lein repl` and the `(start-server)` to run the application in dev mode. This will also compile the clojurescript.
-7. Run `lein rel-jar` to generate a runnable jar file.
-
-
+3. Run `lein cljx once` to compile the cljx files
+4. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode. 
+This will also compile the clojurescript.
+5. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
 * H2 database on filesystem as a default
@@ -33,6 +30,10 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Clojure miniprofiler example (https://github.com/yeller/clojure-miniprofiler)
 * Componentized application (https://github.com/danielsz/system)
 * Datascript with reagent example taken from https://gist.github.com/allgress/11348685
+
+## Docker
+
+There is a dockerfile attached which will fetch the latest version and run an example project.
 
 ## FAQ
 ### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.
