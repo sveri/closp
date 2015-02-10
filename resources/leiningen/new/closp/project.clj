@@ -51,7 +51,10 @@
 
                  [clojure-miniprofiler "0.2.8"]
 
-                 [org.danielsz/system "0.1.4"]]
+                 [org.danielsz/system "0.1.4"]
+
+                 [datascript "0.9.0"]
+                 [org.clojars.franks42/cljs-uuid-utils "0.1.3"]]
 
   :plugins [[com.keminglabs/cljx "0.5.0"]
             [lein-cljsbuild "1.0.3"]

@@ -1,4 +1,4 @@
-(defproject closp/lein-template "0.1.0"
+(defproject closp/lein-template "0.1.1"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -9,4 +9,6 @@
                  [leiningen "2.5.1"]
                  [org.clojure/tools.cli "0.3.1"]]
   :test-paths ["test/clj"]
-  :eval-in-leiningen true)
+  :eval-in-leiningen true
+  :deploy-repositories [["clojars-self" {:url           "https://clojars.org/repo"
+                                         :sign-releases false}]])

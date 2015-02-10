@@ -33,7 +33,7 @@
     (do (send-mail-by-type {:prot (:mail-type config) :data (get-default-mail-map (:mail-from config) email
                                                                                   (:activation-mail-subject  config)
                                                                                   (:activation-mail-body config)
-                                                                                  activationid config)})
+                                                                                  activationid config)} config)
         (timbre/info "sent activation email to: " email))
     (catch Exception e (timbre/error "Could not send email!\n" e))))
 
