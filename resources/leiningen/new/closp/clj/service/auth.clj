@@ -7,9 +7,9 @@
 
 (def ^:const available-roles ["admin" "none"])
 
-(defn admin-access [r] (= "admin" (sess/get :role)))
+(defn admin-access [_] (= "admin" (sess/get :role)))
 (defn unauthorized-access [_] true)
-(defn loggedin-access [r] (some? (sess/get :identity)))
+(defn loggedin-access [_] (some? (sess/get :identity)))
 
 (def rules [{:pattern #"^/admin.*"
              :handler admin-access}
