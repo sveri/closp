@@ -46,6 +46,7 @@ This will also compile the clojurescript.
 * Clojure miniprofiler example
 * Componentized application
 * Datascript with reagent example
+* Booststrap css styles
 
 ## Docker
 
