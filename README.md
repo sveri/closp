@@ -2,15 +2,23 @@
 
 A Leiningen template for a full featured web framework.
   
-See it live at: http://sveri.de:3124  
+See it live at: <http://sveri.de:3124>
 Username: admin@localhost.de  
 Password: admin  
+
+## Rationale
+
+Starting sideprojects in web development for fun I find myself repeating the same patterns over and over again.
+While luminus <http://www.luminusweb.net/> and chestnut <https://github.com/plexus/chestnut> provide a great start
+they miss some features for me that I do again and again (authentication / signup processes / ...).  
+So I pulled together the libraries I use to provide a general and opinionated starting point with at least trouble
+as possible (at least that's the goal).
 
 ## Goals
 * Provide a full stack to get started with
 * Provide generated code which can be changed easily
 * Provide an opiniated predefined set of libraries
-* 
+* Easily start side projects
 
 ## Usage
 
@@ -34,10 +42,10 @@ This will also compile the clojurescript.
 * User management with login/logout/registration with email activation (provided by postal)
 * Authentication provided by buddy
 * reagent and datascript on frontend side
-* Ring Antiforgery middleware (https://github.com/weavejester/ring-anti-forgery)
-* Clojure miniprofiler example (https://github.com/yeller/clojure-miniprofiler)
-* Componentized application (https://github.com/danielsz/system)
-* Datascript with reagent example taken from https://gist.github.com/allgress/11348685
+* Ring Antiforgery middleware
+* Clojure miniprofiler example
+* Componentized application
+* Datascript with reagent example
 
 ## Docker
 
@@ -45,7 +53,22 @@ There is a dockerfile attached which will fetch the latest version and run an ex
 
 ## Configuration
 
-There is a closp.edn file in the resources f
+There is a closp.edn file in the resources folder  which shoud be adapted accordingly.  
+I am not sure yet how to pass in runtime configuration. The current approach is for development only.  
+Closp uses nomad <https://github.com/james-henderson/nomad> so using one of the descriped approaches there should be 
+sufficient.  
+There is also a configuration component where one coud add one for production environment.
+
+## Database
+
+Closp per default is configured to connect to a file H2 database.  
+Additionally we added support for ragtime <https://github.com/weavejester/ragtime/> to handle migration of sql scripts.
+To get started run `lein ragtime migrate` in the project folder. This is enough to get running.  
+Changing the jdbc url in the *closp.edn* file will switch to another database.  
+The connection is handled by jdbc <https://github.com/clojure/java.jdbc> so everything that jdbc supports is supported 
+by closp out of the box.  
+Closp comes with korma <https://github.com/korma/Korma> for an abstraction layer over jdbc. See `db\users.clj` for
+how it is used.
 
 ## Authentication and Authorization
 
@@ -55,10 +78,73 @@ There is a concept of roles, _admin_ and _none_ are alreaded provided, you can a
 Or, create a database storage for this.  
 Next you can find a _rules_ def in the _auth_ namespace which defines the access rules for every available link. For
 more information please look at the buddy documentation.
+  
+## Templating
 
-## Database Layer
+Closp ships with selmer <https://github.com/yogthos/Selmer> (django inspired) templating solution.
 
-Closp uses jdbc to connect to a database (<https://github.com/clojure/java.jdbc>). This is 
+## Signup
+
+There is a signup workflow implemented that sends out an email after regristration with a link to activate the account.
+Until the account is activated the user won't be able to login.
+
+## Admin user interface
+
+Closp ships with an administrator interface (/admin/users) to activate / deactivate users and set roles accordingly.
+There is also an option to add new users.
+
+## Reloading of clojure code and templates
+
+In dev mode changes the clojure code will be recompiled and reloaded on page refresh. The same is true for the templates.
+Theoretically this results development without server restarts.
+
+## CLJX support
+
+Closp will automatically compile cljx <https://github.com/lynaghk/cljx> files in the `cljx` folder and add them to 
+the clj / cljs classpath.
+
+## Clojurescripth with figwheel
+
+When running in dev mode cljs files will be auto compiled and sent to the browser via figwheel 
+<https://github.com/bhauman/lein-figwheel>
+
+## Email system
+
+Closp uses postal <https://github.com/drewr/postal> for sending authentication links. This can be configured in closp.edn.
+
+## Components
+
+Closp comes with some predefined components <https://github.com/danielsz/system>  
+
+* Handler component
+* Configuration component
+* Database component
+* Webserver component
+
+To restart the components just hit `(reset)` in the running repl.
+
+## Reagent and Datascript
+
+Closp includes a reagent <https://github.com/reagent-project/reagent> and datascript 
+<https://github.com/tonsky/datascript> example taken from <https://gist.github.com/allgress/11348685> to get started
+with frontend development.
+
+## Production
+
+There is a leiningen task defined in the _project.clj_
+
+## Minor features.
+
+* Miniprofiler <https://github.com/yeller/clojure-miniprofiler> example in `routes\user.clj -> admin-page function`. 
+The profiler is enabled in development only
+* Ring antiforgery <https://github.com/weavejester/ring-anti-forgery> is enabled per default for every shipped form.
+* Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
+files.
+
+## Planned features
+
+* CRUD plugin to generate frontend to database CRUD for entities
+* Whatever seems useful in the future.
 
 ## FAQ
 ### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.
@@ -70,7 +156,7 @@ need it for the page you are working on right now.
 
 ## License
 
-Copyright © 2015 FIXME
+Copyright © 2015 Sven Richter
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
