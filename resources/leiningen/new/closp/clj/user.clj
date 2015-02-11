@@ -3,8 +3,6 @@
             [{{ns}}.dev :refer [start-figwheel]]
             [{{ns}}.components.components :refer [dev-system]]))
 
-
-
 (defn start-dev-system []
   (start-figwheel)
   (go))

@@ -17,10 +17,8 @@
              :handler loggedin-access}
             {:pattern #"^/user.*"
              :handler unauthorized-access}
-            {:pattern #"^/$"
-             :handler unauthorized-access}
-            {:pattern #"^/.*"
-             :handler loggedin-access}])
+            {:pattern #"^/"
+             :handler unauthorized-access}])
 
 (defn unauthorized-handler
   [request _]
