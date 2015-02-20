@@ -67,6 +67,8 @@
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
               [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
+              
+              ["README.md" (*render* "README.md")]
 
               "target/generated/cljs"
               "target/generated/clj"]))

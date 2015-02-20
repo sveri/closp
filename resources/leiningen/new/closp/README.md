@@ -1,34 +1,18 @@
-# closp
+# {{name}}
 
-A Leiningen template for a full featured web framework.
-  
-See it live at: <http://sveri.de:3124>
+Your new project at <http://localhost:3000>
+
 Username: admin@localhost.de  
 Password: admin  
 
-## Rationale
-
-Starting sideprojects in web development for fun I find myself repeating the same patterns over and over again.
-While luminus <http://www.luminusweb.net/> and chestnut <https://github.com/plexus/chestnut> provide a great start
-they miss some features for me that I do again and again (authentication / signup processes / ...).  
-So I pulled together the libraries I use to provide a general and opinionated starting point with at least trouble
-as possible (at least that's the goal).
-
-## Goals
-* Provide a full stack to get started with
-* Provide generated code which can be changed easily
-* Provide an opiniated predefined set of libraries
-* Easily start side projects
-
 ## Usage
 
-1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
-2. Run `lein ragtime migrate` in the newly created project (This will add an admin user with username: 
+1. Run `lein ragtime migrate` in the newly created project (This will add an admin user with username:
 _admin@localhost.de_ and password: _admin_ to a new database)
-3. Run `lein cljx once` to compile the cljx files
-4. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode. 
+2. Run `lein cljx once` to compile the cljx files
+3. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode.
 This will also compile the clojurescript.
-5. Run `lein rel-jar` to generate a runnable jar file.
+4. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
 * H2 database on filesystem as a default
@@ -40,7 +24,6 @@ This will also compile the clojurescript.
 * Reloading support for templates and clojure code
 * Configuration with nomad
 * User management with login/logout/registration with email activation (provided by postal)
-* Recaptcha support for signup form
 * Authentication provided by buddy
 * reagent and datascript on frontend side
 * Ring Antiforgery middleware
@@ -88,7 +71,7 @@ Closp ships with selmer <https://github.com/yogthos/Selmer> (django inspired) te
 ## Signup
 
 There is a signup workflow implemented that sends out an email after regristration with a link to activate the account.
-Until the account is activated the user won't be able to login.
+Until the account is activated the user won't be able to login. 
 
 ## Recaptcha
 
@@ -160,13 +143,6 @@ files.
 This will happen only in dev mode for every page where you did not explicitly register your clojurescript with.
 Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change the call to `(core/main)` how you
 need it for the page you are working on right now.
-
-## Changes
-### 0.1.4
- 
-* Adding recaptcha for signup form
-* Adding generated README
-
  
 
 ## License

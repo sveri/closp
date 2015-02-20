@@ -42,6 +42,15 @@
                 </div>
 
                 <div class="form-group">
+                    {% if captcha-error %}
+                    <div class="alert alert-danger">{{captcha-error}}</div>
+                    {% endif %}
+                    <script type="text/javascript"
+                            src="http://www.google.com/recaptcha/api/challenge?k=your-public-recaptcha-key">
+                    </script>
+                </div>
+
+                <div class="form-group">
                     <input class="btn btn-primary" tabindex="4" type="submit" value="Create Account">
                 </div>
             </form>

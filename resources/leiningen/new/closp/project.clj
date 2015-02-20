@@ -54,7 +54,9 @@
                  [org.danielsz/system "0.1.4"]
 
                  [datascript "0.9.0"]
-                 [org.clojars.franks42/cljs-uuid-utils "0.1.3"]]
+                 [org.clojars.franks42/cljs-uuid-utils "0.1.3"]
+
+                 [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
 
   :plugins [[com.keminglabs/cljx "0.5.0"]
             [lein-cljsbuild "1.0.3"]
