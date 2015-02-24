@@ -16,3 +16,4 @@ pom.xml.asc
 /resources/public/js/gen
 profiles.clj
 Procfile
+/db
