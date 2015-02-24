@@ -1,5 +1,5 @@
 (ns {{ns}}.routes.home
-  (:require [compojure.core :refer [defroutes]]
+  (:require [compojure.core :refer [defroutes GET]]
             [{{ns}}.layout :as layout]))
 
 (defn home-page []

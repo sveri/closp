@@ -1,5 +1,5 @@
 (ns {{ns}}.routes.user
-  (:require [compojure.core :refer [routes]]
+  (:require [compojure.core :refer [routes GET POST]]
     [buddy.hashers :as hashers]
     [ring.util.response :as resp]
     [noir.session :as sess]
