@@ -1,6 +1,7 @@
 (ns {{ns}}.db.users
   (:require [korma.core :refer :all]
-            [korma.db :refer [h2]]))
+            [korma.db :refer [h2]])
+  (:import (java.util UUID)))
 
 (defentity users)
 
@@ -14,16 +15,14 @@
 (defn username-exists? [email] (some? (get-user-by-email email)))
 
 (defn create-user [email pw_crypted activationid & [is-active?]]
-  (insert users (values {:email email :pass pw_crypted :activationid activationid :is_active (or is-active? false)})))
+  (insert users (values {:email email :pass pw_crypted :activationid activationid :is_active (or is-active? false)
+                         :uuid  (str (UUID/randomUUID))})))
 
 (defn set-user-active [activationid & [active]]
   (update users (set-fields {:is_active (or active true)}) (where {:activationid activationid})))
 
-(defn update-user [email fields]
-  (update users (set-fields fields) (where {:email email})))
-
-;(defn is-active? [email]
-;  (get (get-user-by-email email) :is_active false))
+(defn update-user [uuid fields]
+  (update users (set-fields fields) (where {:uuid uuid})))
 
 (defn change-password [email pw]
   (update users (set-fields {:pass pw}) (where {:email email})))

@@ -166,6 +166,7 @@ need it for the page you are working on right now.
 ### 0.1.5
 
 * Adding flash div in base html for flash support
+* Exposing uuid in admin view instead of database id
 
 ### 0.1.4
  
