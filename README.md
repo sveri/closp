@@ -148,6 +148,7 @@ The profiler is enabled in development only
 * Ring antiforgery <https://github.com/weavejester/ring-anti-forgery> is enabled per default for every shipped form.
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
+* Support for flash messages with global flash div
 
 ## Planned features
 
@@ -162,6 +163,10 @@ Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change
 need it for the page you are working on right now.
 
 ## Changes
+### 0.1.5
+
+* Adding flash div in base html for flash support
+
 ### 0.1.4
  
 * Adding recaptcha for signup form

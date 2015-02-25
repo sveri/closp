@@ -89,7 +89,7 @@
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
       (when sendmail? (uservice/send-activation-email email activationid config))
-      (succ-cb-page (layout/merge-flash-message {} (str "User added.") "alert-success")))
+      (succ-cb-page (layout/flash-result (str "User added.") "alert-success")))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)
@@ -102,7 +102,7 @@
     (vali-password? password confirm oldpassword (:pass user))
     (if (not (vali/errors? :oldpass :pass :confirm))
       (do (db/change-password (:email user) (hashers/encrypt password))
-          (changepassword-page (layout/merge-flash-message {} (str "Password changed.") "alert-success")))
+          (changepassword-page (layout/flash-result (str "Password changed.") "alert-success")))
       (let [old-error (vali/on-error :oldpass first)
             pass-error (vali/on-error :pass first)
             confirm-error (vali/on-error :confirm first)]
@@ -112,7 +112,7 @@
   (let [role (if (= "none" role) "" role)
         act (= "on" active)]
     (db/update-user username {:role role :is_active act}))
-  (admin-page (layout/merge-flash-message {} (str "User " username " updated successfully.") "alert-success")))
+  (admin-page (layout/flash-result (str "User " username " updated successfully.") "alert-success")))
 
 (defn user-routes [config]
   (routes

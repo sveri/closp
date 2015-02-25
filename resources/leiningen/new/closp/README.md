@@ -120,6 +120,10 @@ Closp includes a reagent <https://github.com/reagent-project/reagent> and datasc
 <https://github.com/tonsky/datascript> example taken from <https://gist.github.com/allgress/11348685> to get started
 with frontend development.
 
+## Support for flash messages with global flash div
+To use it call (layout/flash-result "success message" "alert-success") and on the next page load
+a div will appear with the success message on top of the page.
+
 ## Production
 
 There is a leiningen task defined in the _project.clj_ to generate an uberjar. Just execute `lein uberjar`.

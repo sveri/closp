@@ -6,8 +6,14 @@
             [compojure.response :refer [Renderable]]
             [noir.session :as sess]))
 
-(defn merge-flash-message [ret-map message type]
-  (merge ret-map {:flash-message message :flash-alert-type type}))
+(defn merge-flash-messages
+  "Expects a map containing keys and a values which will be put into the sessions flash"
+  [messages]
+  (doseq [m messages]
+    (sess/flash-put! (key m) (val m))))
+
+(defn flash-result [message div-class]
+  (merge-flash-messages {:flash-message message :flash-alert-type div-class}))
 
 (parser/set-resource-path!  (clojure.java.io/resource "templates"))
 
