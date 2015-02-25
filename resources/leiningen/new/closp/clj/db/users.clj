@@ -9,6 +9,7 @@
 
 (defn get-user-by-email [email] (first (select users (where {:email email}) (limit 1))))
 (defn get-user-by-act-id [id] (first (select users (where {:activationid id}) (limit 1))))
+(defn get-user-by-uuid [uuid] (first (select users (where {:uuid uuid}) (limit 1))))
 
 (defn username-exists? [email] (some? (get-user-by-email email)))
 

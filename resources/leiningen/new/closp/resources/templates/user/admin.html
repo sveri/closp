@@ -81,7 +81,7 @@
         {% for user in users %}
         <form field="user-row" class="tr" method="post" action="/admin/user/update">
             <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
-            <input type="hidden" field="username-hidden" name="username" value="{{user.email}}"/>
+            <input type="hidden" field="username-hidden" name="user-uuid" value="{{user.uuid}}"/>
             <span field="username" class="td">{{user.email}}</span>
                 <span field="role" class="td">
                     <select field="role-select" name="role">

@@ -108,11 +108,12 @@
             confirm-error (vali/on-error :confirm first)]
         (changepassword-page {:pass-error pass-error :confirm-error confirm-error :old-error old-error})))))
 
-(defn update-user [username role active]
+(defn update-user [user-uuid role active]
   (let [role (if (= "none" role) "" role)
         act (= "on" active)]
-    (db/update-user username {:role role :is_active act}))
-  (admin-page (layout/flash-result (str "User " username " updated successfully.") "alert-success")))
+    (db/update-user user-uuid {:role role :is_active act}))
+  (let [user (db/get-user-by-uuid user-uuid)]
+    (admin-page (layout/flash-result (str "User " (:email user) " updated successfully.") "alert-success"))))
 
 (defn user-routes [config]
   (routes
@@ -128,7 +129,7 @@
                     recaptcha_response_field recaptcha_challenge_field))
     (GET "/user/changepassword" [] (changepassword-page))
     (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm))
-    (POST "/admin/user/update" [username role active] (update-user username role active))
+    (POST "/admin/user/update" [user-uuid role active] (update-user user-uuid role active))
     (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page
                                                                admin-page config))))
 
