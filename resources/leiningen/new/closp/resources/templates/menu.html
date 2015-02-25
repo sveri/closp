@@ -1,5 +1,4 @@
 <div field="menu">
-    {% if identity %}
 
     <ul class="nav navbar-nav" id="header-menu-wrapper">
         <li field="link-list"><a href="/example">Example Page</a></li>
@@ -7,6 +6,8 @@
         <li field="link-list"><a href="/admin/users">Users</a></li>
         {% endifequal %}
     </ul>
+    
+    {% if identity %}
 
     <div id="logout" class="navbar-right">
         <ul class="navbar-right nav navbar-nav">

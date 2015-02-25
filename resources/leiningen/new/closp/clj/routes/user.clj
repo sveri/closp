@@ -17,9 +17,6 @@
     (.setPrivateKey reCaptcha "private-recaptcha-key")
     (.checkAnswer reCaptcha "yourdomain.com", recaptcha_challenge_field, recaptcha_response_field)))
 
-(defn merge-flash-message [ret-map message type]
-  (merge ret-map {:flash-message message :flash-alert-type type}))
-
 (defn vali-password? [pass confirm & [form-current-pass current-pass]]
   (vali/rule (vali/min-length? pass 5)
              [:pass "Password must be at least 5 characters."])
@@ -92,7 +89,7 @@
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
       (when sendmail? (uservice/send-activation-email email activationid config))
-      (succ-cb-page (merge-flash-message {} (str "User added.") "alert-success")))
+      (succ-cb-page (layout/merge-flash-message {} (str "User added.") "alert-success")))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)
@@ -105,7 +102,7 @@
     (vali-password? password confirm oldpassword (:pass user))
     (if (not (vali/errors? :oldpass :pass :confirm))
       (do (db/change-password (:email user) (hashers/encrypt password))
-          (changepassword-page (merge-flash-message {} (str "Password changed.") "alert-success")))
+          (changepassword-page (layout/merge-flash-message {} (str "Password changed.") "alert-success")))
       (let [old-error (vali/on-error :oldpass first)
             pass-error (vali/on-error :pass first)
             confirm-error (vali/on-error :confirm first)]
@@ -115,7 +112,7 @@
   (let [role (if (= "none" role) "" role)
         act (= "on" active)]
     (db/update-user username {:role role :is_active act}))
-  (admin-page (merge-flash-message {} (str "User " username " updated successfully.") "alert-success")))
+  (admin-page (layout/merge-flash-message {} (str "User " username " updated successfully.") "alert-success")))
 
 (defn user-routes [config]
   (routes

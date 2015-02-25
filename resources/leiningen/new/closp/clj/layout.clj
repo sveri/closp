@@ -6,6 +6,9 @@
             [compojure.response :refer [Renderable]]
             [noir.session :as sess]))
 
+(defn merge-flash-message [ret-map message type]
+  (merge ret-map {:flash-message message :flash-alert-type type}))
+
 (parser/set-resource-path!  (clojure.java.io/resource "templates"))
 
 (deftype RenderableTemplate [template params]
