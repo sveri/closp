@@ -41,7 +41,7 @@
                  [org.clojure/java.jdbc "0.3.6"]
                  [korma "0.4.0"]
                  [com.h2database/h2 "1.4.185"]
-                 [ragtime/ragtime.sql.files "0.3.8"]
+                 [joplin.core "0.2.9"]
 
                  [com.draines/postal "1.11.3"]
 
@@ -63,8 +63,7 @@
             [ragtime/ragtime.lein "0.3.8"]]
 
   ;database migrations
-  :ragtime {:migrations ragtime.sql.files/migrations
-            :database "jdbc:h2:./db/korma.db"}
+  :joplin {:migrators {:sql-mig "joplin/migrators/sql"}}
 
   :min-lein-version "2.5.0"
 
@@ -102,7 +101,8 @@
                                       :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                        :plugins      [[lein-ring "0.9.0"]
-                                      [lein-figwheel "0.1.4-SNAPSHOT"]]
+                                      [lein-figwheel "0.1.4-SNAPSHOT"]
+                                      [joplin.lein "0.2.9"]]
 
                        :figwheel     {:http-server-root "public"
                                       :port             3449
@@ -113,7 +113,10 @@
                                       [pjstadig/humane-test-output "0.6.0"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
-                                      (pjstadig.humane-test-output/activate!)]}
+                                      (pjstadig.humane-test-output/activate!)]
+
+                       :joplin {:databases {:sql-dev {:type :sql, :url "jdbc:h2:./db/korma.db"}}
+                                :environments {:sql-dev-env [{:db :sql-dev, :migrator :sql-mig}]}}}
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :omit-source true

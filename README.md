@@ -23,7 +23,7 @@ as possible (at least that's the goal).
 ## Usage
 
 1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
-2. Run `lein ragtime migrate` in the newly created project (This will add an admin user with username: 
+2. Run `lein joplin migrate sql-dev-env` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
 3. Run `lein cljx once` to compile the cljx files
 4. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode. 
@@ -32,7 +32,7 @@ This will also compile the clojurescript.
 
 ## Features
 * H2 database on filesystem as a default
-* Ragtime for database migrations
+* Joplin for database migrations
 * Selmer as templating solution
 * http-kit as a server
 * cljx support
@@ -64,9 +64,10 @@ There is also a configuration component where one coud add one for production en
 ## Database
 
 Closp per default is configured to connect to a file H2 database.  
-Additionally we added support for ragtime <https://github.com/weavejester/ragtime/> to handle migration of sql scripts.
-To get started run `lein ragtime migrate` in the project folder. This is enough to get running.  
-Changing the jdbc url in the *closp.edn* file will switch to another database.  
+Additionally I added support for joplin <https://github.com/juxt/joplin> to handle migration of sql scripts.
+To get started run `lein joplin migrate sql-dev-env` in the project folder. This is enough to get running.
+Changing the jdbc url in the *closp.edn* file will switch to another database. But keep in mind you will have to 
+run the migration step again and change the jdbc url in the project.clj too.  
 The connection is handled by jdbc <https://github.com/clojure/java.jdbc> so everything that jdbc supports is supported 
 by closp out of the box.  
 Closp comes with korma <https://github.com/korma/Korma> for an abstraction layer over jdbc. See `db\users.clj` for
@@ -163,6 +164,10 @@ Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change
 need it for the page you are working on right now.
 
 ## Changes
+### 0.1.6
+
+* Switching from ragtime to joplin (which uses ragtime internally)
+
 ### 0.1.5
 
 * Adding flash div in base html for flash support

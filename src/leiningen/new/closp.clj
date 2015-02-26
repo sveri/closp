@@ -95,8 +95,8 @@
            ["resources/public/css/screen.css" "resources/public/css/screen.css"]
            ["resources/public/css/home.css" "resources/public/css/home.css"]
 
-           ["migrations/2015-011-26-add-users-table.down.sql" "migrations/2015-011-26-add-users-table.down.sql"]
-           ["migrations/2015-011-26-add-users-table.up.sql" "migrations/2015-011-26-add-users-table.up.sql"]])))
+           ["migrations/2015-011-26-add-users-table.down.sql" "resources/migrators/sql/2015-011-26-add-users-table.down.sql"]
+           ["migrations/2015-011-26-add-users-table.up.sql" "resources/migrators/sql/2015-011-26-add-users-table.up.sql"]])))
 
 (defn closp
   "Create a new CLOSP project"
