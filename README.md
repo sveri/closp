@@ -2,7 +2,7 @@
 
 A Leiningen template for a full featured web framework.
   
-See it live at: <http://sveri.de:3124>
+See it live at: <http://sveri.de:3124>  
 Username: admin@localhost.de  
 Password: admin  
 
