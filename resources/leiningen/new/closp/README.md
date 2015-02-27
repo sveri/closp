@@ -144,7 +144,7 @@ There is a leiningen task defined in the _project.clj_ to generate an uberjar. J
 ## Minor features.
 
 * Miniprofiler <https://github.com/yeller/clojure-miniprofiler> example in `routes\user.clj -> admin-page function`. 
-The profiler is enabled in development only
+The profiler is enabled in development only 
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
 
