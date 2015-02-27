@@ -174,6 +174,19 @@ This will happen only in dev mode for every page where you did not explicitly re
 Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change the call to `(core/main)` how you
 need it for the page you are working on right now.
 
+### I get this error in the javascript console: WebSocket connection to 'ws://localhost:9001/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
+
+This happens because per default the browser-repl is not loaded. If you load like in:
+<https://github.com/plexus/chestnut/blob/master/src/leiningen/new/chestnut/env/dev/cljs/chestnut/main.cljs> this error
+will go away, however. After starting your dev system you will switch into the cljs repl and not be able anymore
+to restart your components with `(restart)`. So this is a tradeoff one has to make.  
+I decided to turn the browser-repl off because the clojurescript reloading still works in this setup. You only get this
+error.
+
+### When I change a route definition, the change is not applied after a page reload
+
+You have to reset the system, by calling `({{ns}}.user/reset)` in the repl.
+
 ## Changes
 ### 0.1.6
 
