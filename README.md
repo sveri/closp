@@ -132,6 +132,18 @@ Closp comes with some predefined components <https://github.com/danielsz/system>
 
 To restart the components just hit `(reset)` in the running repl.
 
+## Ring antiforgery 
+
+<https://github.com/weavejester/ring-anti-forgery> is enabled per default for every shipped form.
+If you use ajax post / put / ... calls you need to provide a :X-CSRF-Token in the header. With cljs-ajax for example
+it would look like this:  
+
+    (ajax/ajax-request
+        {:uri             url
+         :method          method
+         :params          content
+         :headers         {:X-CSRF-Token (get-value "glob_anti_forgery")}})
+
 ## Reagent and Datascript
 
 Closp includes a reagent <https://github.com/reagent-project/reagent> and datascript 
@@ -146,7 +158,6 @@ There is a leiningen task defined in the _project.clj_ to generate an uberjar. J
 
 * Miniprofiler <https://github.com/yeller/clojure-miniprofiler> example in `routes\user.clj -> admin-page function`. 
 The profiler is enabled in development only
-* Ring antiforgery <https://github.com/weavejester/ring-anti-forgery> is enabled per default for every shipped form.
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
 * Support for flash messages with global flash div
