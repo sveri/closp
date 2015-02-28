@@ -188,6 +188,10 @@ error.
 You have to reset the system, by calling `({{ns}}.user/reset)` in the repl.
 
 ## Changes
+### 0.1.7
+
+* Changing _users_ table to _user_
+
 ### 0.1.6
 
 * Switching from ragtime to joplin (which uses ragtime internally)
