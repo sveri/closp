@@ -140,6 +140,9 @@ a div will appear with the success message on top of the page.
 ## Production
 
 There is a leiningen task defined in the _project.clj_ to generate an uberjar. Just execute `lein uberjar`.
+By default this will include your closp.edn config file in the build from resources folder. You should at least change
+the :env entry to :prod or something else than :dev.
+There are several ways to setup a more separated dev / staging / prod environment. Please lookup nomad for that.
 
 ## Minor features.
 
