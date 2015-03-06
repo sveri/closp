@@ -12,7 +12,7 @@ WORKDIR /closp_showcase
 
 RUN lein rel-jar
 
-RUN lein ragtime migrate
+RUN lein joplin migrate sql-dev-env
 
 EXPOSE 3000
 
