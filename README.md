@@ -168,6 +168,7 @@ files.
 ## Planned features
 
 * CRUD plugin to generate frontend to database CRUD for entities
+* adding reframe example
 * Whatever seems useful in the future.
 
 ## FAQ
