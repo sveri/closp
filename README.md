@@ -191,6 +191,13 @@ error.
 
 You have to reset the system, by calling `({{ns}}.user/reset)` in the repl.
 
+### I included prismatic/schema and on repl start I get an compile error
+
+The error looks like this:  
+`#<CompilerException java.lang.RuntimeException: No such var: sm/protocol, compiling:(plumbing/fnk/schema.clj:22:13)>`  
+The problem is that ring-transit imports `schema/plumbing` which interfers with schema. Please look here for a quick solution
+and explanation: <https://github.com/Prismatic/schema/issues/194
+
 ## Changes
 ### 0.1.7
 
