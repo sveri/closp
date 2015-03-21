@@ -55,11 +55,14 @@ There is a dockerfile attached which will fetch the latest version and run an ex
 
 ## Configuration
 
-There is a closp.edn file in the resources folder  which shoud be adapted accordingly.  
-I am not sure yet how to pass in runtime configuration. The current approach is for development only.  
-Closp uses nomad <https://github.com/james-henderson/nomad> so using one of the descriped approaches there should be 
-sufficient.  
-There is also a configuration component where one coud add one for production environment.
+There is a closp.edn file in the resources folder  which should be adapted accordingly.  
+Closp uses nomad <https://github.com/james-henderson/nomad>, so you can configure everything as you can do with nomad.  
+When you start your project from the repl it will load the default `closp.edn` from `resources` folder, which fits
+for development.  
+For a different config in another environment you can pass in a file path via system environment setting like so:
+`java -jar -Dclosp-config-path=C:\\path\\to\\iwf-prod.edn closp.jar`.  
+Please think of changing the :env key in the config to :prod instead of :dev when changing to a different
+environment.
 
 ## Database
 
@@ -195,6 +198,7 @@ You have to reset the system, by calling `({{ns}}.user/reset)` in the repl.
 ### 0.1.7
 
 * Changing _users_ table to _user_
+* Adding option to pass in a config via system environment
 
 ### 0.1.6
 

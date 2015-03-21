@@ -3,10 +3,15 @@
             [nomad :refer [read-config]]
             [clojure.java.io :as io]))
 
+(defn prod-conf-or-dev []
+  (if-let [config-path (System/getProperty "closp-config-path")]
+    (read-config (io/file config-path))
+    (read-config (io/resource "closp.edn"))))
+
 (defrecord Config []
   component/Lifecycle
   (start [component]
-    (let [closp-config (read-config (io/resource "closp.edn"))]
+    (let [closp-config (prod-conf-or-dev)]
       (assoc component :config {:hostname (:hostname closp-config)
                                 :mail-from (:mail-from closp-config)
                                 :mail-type (:mail-type closp-config)
