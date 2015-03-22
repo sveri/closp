@@ -29,11 +29,13 @@
      :body    body-subst}))
 
 (defn send-activation-email [email activationid config]
-  (try(send-mail-by-type {:prot (:mail-type config) :data (get-default-mail-map (:mail-from config) email
-                                                                                  (:activation-mail-subject  config)
-                                                                                  (:activation-mail-body config)
-                                                                                  activationid config)} config)
-        (timbre/info "sent activation email to: " email))
-    (catch Exception e (timbre/error e "Could not send email!\n")))
+  (try
+    (send-mail-by-type {:prot (:mail-type config) :data (get-default-mail-map (:mail-from config) email
+                                                                              (:activation-mail-subject config)
+                                                                              (:activation-mail-body config)
+                                                                              activationid config)} config)
+    (timbre/info "sent activation email to: " email)
+    true
+    (catch Exception e (timbre/error e "Could not send email!\n"))))
 
 (defn get-logged-in-username [] (when-let [id (sess/get :identity)] (name id)))

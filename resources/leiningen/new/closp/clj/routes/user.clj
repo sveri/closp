@@ -89,7 +89,7 @@
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
       (if (when sendmail? (uservice/send-activation-email email activationid config))
-        (succ-cb-page (layout/flash-result (str "User added.") "alert-success"))
+        (succ-cb-page)
         (error-cb-page {:email-error "Something went wrong sending the email, please contact us."})))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
