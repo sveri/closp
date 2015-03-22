@@ -1,9 +1,11 @@
 <div field="menu">
 
     <ul class="nav navbar-nav" id="header-menu-wrapper">
-        <li field="link-list"><a href="/example">Example Page</a></li>
+        <li field="link-list" {% ifequal page "home/example.html" %} class="active"{%endifequal%}>
+            <a href="/example">Example Page</a></li>
         {% ifequal "admin" role %}
-        <li field="link-list"><a href="/admin/users">Users</a></li>
+        <li field="link-list"  {% ifequal page "user/admin.html" %} class="active"{%endifequal%}>
+            <a href="/admin/users">Users</a></li>
         {% endifequal %}
     </ul>
     

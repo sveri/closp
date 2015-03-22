@@ -32,7 +32,8 @@
                     (catch IllegalArgumentException _ context)))
              :identity (sess/get :identity)
              :role (sess/get :role)
-             :af-token af/*anti-forgery-token*)
+             :af-token af/*anti-forgery-token*
+             :page template)
            (parser/render-file (str template))
            response)
       "text/html; charset=utf-8")))

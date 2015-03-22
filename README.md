@@ -202,6 +202,11 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+### 0.1.8
+
+* Displaying error message on user registration when mailserver is not working.
+* Adding active link for top menu
+
 ### 0.1.7
 
 * Changing _users_ table to _user_
