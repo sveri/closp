@@ -88,9 +88,11 @@
     (let [activationid (uservice/generate-activation-id)
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
-      (if (when sendmail? (uservice/send-activation-email email activationid config))
-        (succ-cb-page)
-        (error-cb-page {:email-error "Something went wrong sending the email, please contact us."})))
+      (if sendmail?
+        (if (uservice/send-activation-email email activationid config)
+          (succ-cb-page)
+          (error-cb-page {:email-error "Something went wrong sending the email, please contact us."}))
+        (succ-cb-page (layout/flash-result (str "User added.") "alert-success"))))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)
