@@ -167,6 +167,7 @@ The profiler is enabled in development only
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
 * Support for flash messages with global flash div
+* Self registration can be turned on or off in the closp.edn file in the resources folder.
 
 ## Planned features
 
@@ -202,6 +203,10 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+### 0.1.9
+
+* Self registration is now optional
+
 ### 0.1.8
 
 * Displaying error message on user registration when mailserver is not working.

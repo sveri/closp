@@ -40,7 +40,10 @@
                 <input type="password" placeholder="Password" name="password" class="form-control">
             </div>
             <button type="submit" class="btn btn-primary">Sign in</button>
-            <a href="/user/signup" class="btn btn-success">Sign Up</a>
+
+            {% if registration-allowed? %}
+                <a href="/user/signup" class="btn btn-success">Sign Up</a>
+            {% endif %}
         </form>
     </div>
     {% endif %}

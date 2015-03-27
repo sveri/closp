@@ -8,7 +8,7 @@
             [compojure.route :as route]
             [com.stuartsierra.component :as comp]
             [{{ns}}.routes.home :refer [home-routes]]
-            [{{ns}}.routes.user :refer [user-routes]]
+            [{{ns}}.routes.user :refer [user-routes registration-routes]]
             [{{ns}}.middleware :refer [load-middleware]]))
 
 (defroutes base-routes
@@ -30,7 +30,8 @@
 (defn get-handler [config]
   (-> (app-handler
         ;; add your application routes here
-        [home-routes (user-routes config) base-routes]
+        (into [] (concat (when (:self-registration config) [(registration-routes config)])
+                         [home-routes (group-routes config) (file-routes config) (user-routes config) base-routes]))
         ;; add custom middleware here
         :middleware (load-middleware config)
         :ring-defaults (mk-defaults false)

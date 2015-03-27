@@ -33,7 +33,8 @@
              :identity (sess/get :identity)
              :role (sess/get :role)
              :af-token af/*anti-forgery-token*
-             :page template)
+             :page template
+             :registration-allowed? (sess/get :registration-allowed?))
            (parser/render-file (str template))
            response)
       "text/html; charset=utf-8")))

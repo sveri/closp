@@ -20,7 +20,8 @@
                                 :activation-placeholder (:activation-placeholder closp-config)
                                 :smtp-data (:smtp-data closp-config) ; passed directly to postmap like {:host "postfix"}
                                 :jdbc-url (:jdbc-url closp-config)
-                                :env (:env closp-config)})))
+                                :env (:env closp-config)
+                                :registration-allowed? (:registration-allowed? closp-config)})))
   (stop [component]
     (assoc component :config nil)))
 

@@ -66,7 +66,7 @@
   (layout/render "user/changepassword.html" msgmap))
 
 (defn logout [] (sess/clear!) (resp/redirect "/"))
-
+(if-let)
 (defn login [request]
   (let [username (get-in request [:form-params "username"])
         password (get-in request [:form-params "password"])
@@ -120,19 +120,22 @@
 
 (defn user-routes [config]
   (routes
-    (GET "/admin/users" [filter] (admin-page {:filter filter}))
     (GET "/user/login" [next] (login-page {:nexturl next}))
     (POST "/user/login" req (login req))
     (GET "/user/logout" [] (logout))
-    (GET "/user/signup" [] (signup-page))
+    (GET "/user/changepassword" [] (changepassword-page))
+    (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm))
+    (POST "/admin/user/update" [user-uuid role active] (update-user user-uuid role active))
+    (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page
+                                                               admin-page config))
+    (GET "/admin/api/users" [] (users-json))
+    (GET "/admin/users" [filter] (admin-page {:filter filter}))))
+
+(defn registration-routes [config]
+  (routes
     (GET "/user/accountcreated" [] (account-created-page))
     (GET "/user/activate/:id" [id] (activate-account id))
     (POST "/user/signup" [email password confirm recaptcha_response_field recaptcha_challenge_field]
           (add-user email password confirm true account-created-page signup-page config
                     recaptcha_response_field recaptcha_challenge_field))
-    (GET "/user/changepassword" [] (changepassword-page))
-    (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm))
-    (POST "/admin/user/update" [user-uuid role active] (update-user user-uuid role active))
-    (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page
-                                                               admin-page config))))
-
+    (GET "/user/signup" [] (signup-page))))
