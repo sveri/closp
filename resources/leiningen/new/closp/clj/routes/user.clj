@@ -66,7 +66,7 @@
   (layout/render "user/changepassword.html" msgmap))
 
 (defn logout [] (sess/clear!) (resp/redirect "/"))
-(if-let)
+
 (defn login [request]
   (let [username (get-in request [:form-params "username"])
         password (get-in request [:form-params "password"])
@@ -128,7 +128,6 @@
     (POST "/admin/user/update" [user-uuid role active] (update-user user-uuid role active))
     (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page
                                                                admin-page config))
-    (GET "/admin/api/users" [] (users-json))
     (GET "/admin/users" [filter] (admin-page {:filter filter}))))
 
 (defn registration-routes [config]

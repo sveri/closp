@@ -31,7 +31,7 @@
   (-> (app-handler
         ;; add your application routes here
         (into [] (concat (when (:self-registration config) [(registration-routes config)])
-                         [home-routes (group-routes config) (file-routes config) (user-routes config) base-routes]))
+                         [home-routes (user-routes config) base-routes]))
         ;; add custom middleware here
         :middleware (load-middleware config)
         :ring-defaults (mk-defaults false)

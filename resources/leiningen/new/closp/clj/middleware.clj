@@ -6,6 +6,7 @@
     [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
     [buddy.auth.accessrules :refer [wrap-access-rules]]
     [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+    [noir.session :as sess]
     [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
     [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
     [{{ns}}.service.auth :refer [auth-backend]]
@@ -23,17 +24,12 @@
     (sess/put! :registration-allowed? (:registration-allowed? config))
     (handler req)))
 
-(defn production-middleware [config]
-  [#(add-req-properties % config)
-   #(wrap-access-rules % {:rules auth/rules })
-   #(wrap-authorization % auth/auth-backend)
-   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
-   #(wrap-transit-response % {:encoding :json, :opts {}})
-   #(wrap-transit-body % {:keywords? true :encoding :json})
-   wrap-anti-forgery
-   wrap-trimmings])
+(def development-middleware
+  [wrap-error-page
+   wrap-exceptions
+   #(wrap-miniprofiler % {:store in-memory-store-instance})])
 
-(def production-middleware
+(defn production-middleware [config]
   [#(add-req-properties % config)
    #(wrap-access-rules % {:rules auth/rules })
    #(wrap-authorization % auth/auth-backend)
@@ -44,4 +40,31 @@
 (defn load-middleware [config]
   (concat (production-middleware config)
           (when (= (:env config) :dev) development-middleware)))
+
+;(defn add-req-properties [handler config]
+;  (fn [req]
+;    (sess/put! :registration-allowed? (:registration-allowed? config))
+;    (handler req)))
+;
+;(defn production-middleware [config]
+;  [#(add-req-properties % config)
+;   #(wrap-access-rules % {:rules auth/rules })
+;   #(wrap-authorization % auth/auth-backend)
+;   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+;   #(wrap-transit-response % {:encoding :json, :opts {}})
+;   #(wrap-transit-body % {:keywords? true :encoding :json})
+;   wrap-anti-forgery
+;   wrap-trimmings])
+;
+;(def production-middleware
+;  [#(add-req-properties % config)
+;   #(wrap-access-rules % {:rules auth/rules })
+;   #(wrap-authorization % auth/auth-backend)
+;   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+;   wrap-anti-forgery
+;   wrap-trimmings])
+;
+;(defn load-middleware [config]
+;  (concat (production-middleware config)
+;          (when (= (:env config) :dev) development-middleware)))
 

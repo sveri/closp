@@ -203,6 +203,10 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+### 0.1.9.1
+
+# Fixing minor errors
+
 ### 0.1.9
 
 * Self registration is now optional
