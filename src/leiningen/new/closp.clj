@@ -89,6 +89,7 @@
            ["resources/templates/user/changepassword.html" "resources/templates/user/changepassword.html"]
            ["resources/templates/user/login.html" "resources/templates/user/login.html"]
            ["resources/templates/user/signup.html" "resources/templates/user/signup.html"]
+           ["resources/templates/user/reallydelete.html" "resources/templates/user/reallydelete.html"]
 
            ["resources/closp.edn" "resources/closp.edn"]
 

@@ -1,5 +1,5 @@
 (ns {{ns}}.db.users
-  (:require [korma.core :refer [select where insert values update set-fields defentity limit]]
+  (:require [korma.core :refer [select where insert delete values update set-fields defentity limit]]
             [korma.db :refer [h2]])
   (:import (java.util UUID)))
 
@@ -21,8 +21,6 @@
 (defn set-user-active [activationid & [active]]
   (update user (set-fields {:is_active (or active true)}) (where {:activationid activationid})))
 
-(defn update-user [uuid fields]
-  (update user (set-fields fields) (where {:uuid uuid})))
-
-(defn change-password [email pw]
-  (update user (set-fields {:pass pw}) (where {:email email})))
+(defn update-user [uuid fields] (update user (set-fields fields) (where {:uuid uuid})))
+(defn delete-user [uuid] (delete user (where {:uuid uuid})))
+(defn change-password [email pw] (update user (set-fields {:pass pw}) (where {:email email})))

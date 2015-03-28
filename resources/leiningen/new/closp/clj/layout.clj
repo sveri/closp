@@ -34,7 +34,9 @@
              :role (sess/get :role)
              :af-token af/*anti-forgery-token*
              :page template
-             :registration-allowed? (sess/get :registration-allowed?))
+             :registration-allowed? (sess/get :registration-allowed?)
+             :flash-message (sess/flash-get :flash-message)
+             :flash-alert-type (sess/flash-get :flash-alert-type))
            (parser/render-file (str template))
            response)
       "text/html; charset=utf-8")))

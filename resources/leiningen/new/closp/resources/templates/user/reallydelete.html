@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form field="user-row" class="tr" method="post" action="/admin/user/delete">
+    <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+    <input type="hidden" field="username-hidden" name="user-uuid" value="{{uuid}}"/>
+    <p><b>Do yo really want to delete User: {{username}}</b></p>
+    <span field="submit" class="td"><input type="submit" name="delete_cancel" value="Cancel" class="btn btn-primary"></span>
+    <span field="submit" class="td"><input type="submit" name="delete_cancel" value="Delete" class="btn btn-danger"></span>
+</form>
+
+{% endblock %}

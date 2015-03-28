@@ -82,17 +82,20 @@
                            (login-page {:error "Some error occured."})))
       (login-page {:error "Please provide a correct username."}))))
 
+(defn send-reg-mail [sendmail? email activationid config succ-cb-page error-cb-page]
+  (if sendmail?
+    (if (uservice/send-activation-email email activationid config)
+      (succ-cb-page)
+      (error-cb-page {:email-error "Something went wrong sending the email, please contact us."}))
+    (succ-cb-page (layout/flash-result (str "User added.") "alert-success"))))
+
 (defn add-user [email password confirm sendmail? succ-cb-page error-cb-page config
                 & [recaptcha_response_field recaptcha_challenge_field]]
   (if (valid-register? email password confirm recaptcha_response_field recaptcha_challenge_field)
     (let [activationid (uservice/generate-activation-id)
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
-      (if sendmail?
-        (if (uservice/send-activation-email email activationid config)
-          (succ-cb-page)
-          (error-cb-page {:email-error "Something went wrong sending the email, please contact us."}))
-        (succ-cb-page (layout/flash-result (str "User added.") "alert-success"))))
+      (send-reg-mail sendmail? email activationid config succ-cb-page error-cb-page))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)
@@ -111,12 +114,27 @@
             confirm-error (vali/on-error :confirm first)]
         (changepassword-page {:pass-error pass-error :confirm-error confirm-error :old-error old-error})))))
 
-(defn update-user [user-uuid role active]
+(defn really-delete-page [uuid]
+  (layout/render "user/reallydelete.html" {:uuid uuid :username (:email (db/get-user-by-uuid uuid))}))
+
+(defn really-delete [uuid delete_cancel]
+  (if (= delete_cancel "Cancel")
+    (do (layout/flash-result (str "Deletion canceled.") "alert-warning")
+        (resp/redirect "/admin/users"))
+    (do (db/delete-user uuid)
+        (layout/flash-result (str "User deleted successfully.") "alert-success")
+        (resp/redirect "/admin/users"))))
+
+(defmulti update-user (fn [update_delete _ _ _] update_delete))
+(defmethod update-user "Update" [_ user-uuid role active]
   (let [role (if (= "none" role) "" role)
         act (= "on" active)]
     (db/update-user user-uuid {:role role :is_active act}))
   (let [user (db/get-user-by-uuid user-uuid)]
     (admin-page (layout/flash-result (str "User " (:email user) " updated successfully.") "alert-success"))))
+
+(defmethod update-user "Delete" [_ user-uuid _ _]
+  (really-delete-page user-uuid))
 
 (defn user-routes [config]
   (routes
@@ -125,7 +143,8 @@
     (GET "/user/logout" [] (logout))
     (GET "/user/changepassword" [] (changepassword-page))
     (POST "/user/changepassword" [oldpassword password confirm] (changepassword oldpassword password confirm))
-    (POST "/admin/user/update" [user-uuid role active] (update-user user-uuid role active))
+    (POST "/admin/user/update" [user-uuid role active update_delete] (update-user update_delete user-uuid role active))
+    (POST "/admin/user/delete" [user-uuid delete_cancel] (really-delete user-uuid delete_cancel))
     (POST "/admin/user/add" [email password confirm] (add-user email password confirm false admin-page
                                                                admin-page config))
     (GET "/admin/users" [filter] (admin-page {:filter filter}))))

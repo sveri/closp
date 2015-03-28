@@ -203,9 +203,15 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+### 0.1.10
+
+* User can be deleted now
+* Fixing defect with flash messsage
+* Minor refactoring
+
 ### 0.1.9.1
 
-# Fixing minor errors
+* Fixing minor errors
 
 ### 0.1.9
 

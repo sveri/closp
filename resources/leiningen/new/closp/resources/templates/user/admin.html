@@ -83,17 +83,18 @@
             <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
             <input type="hidden" field="username-hidden" name="user-uuid" value="{{user.uuid}}"/>
             <span field="username" class="td">{{user.email}}</span>
-                <span field="role" class="td">
-                    <select field="role-select" name="role">
-                        {% for role in roles %}
-                        <option value="{{role}}" {% ifequal role user.role %} selected {% endifequal %}
-                                {% if user.role|empty? %} selected {% endif %}>{{role}}</option>
-                        {% endfor %}
-                    </select>
-                </span>
-                <span field="active" class="td">
-                    <input type="checkbox" name="active" {% if user.is_active %} checked {% endif %}></span>
-            <span field="submit" class="td"><input type="submit" value="Update User" class="btn btn-primary"></span>
+            <span field="role" class="td">
+                <select field="role-select" name="role">
+                    {% for role in roles %}
+                    <option value="{{role}}" {% ifequal role user.role %} selected {% endifequal %}
+                            {% if user.role|empty? %} selected {% endif %}>{{role}}</option>
+                    {% endfor %}
+                </select>
+            </span>
+            <span field="active" class="td">
+                <input type="checkbox" name="active" {% if user.is_active %} checked {% endif %}></span>
+            <span field="submit" class="td"><input type="submit" name="update_delete" value="Update" class="btn btn-primary"></span>
+            <span field="submit" class="td"><input type="submit" name="update_delete" value="Delete" class="btn btn-danger"></span>
         </form>
         {% endfor %}
     </div>
