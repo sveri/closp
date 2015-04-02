@@ -9,17 +9,12 @@
    ["-h" "--help"]])
 
 (defn usage [options-summary]
-  (->> ["This is my program. There are many like it, but this one is mine."
+  (->> ["This is closp. A leiningen template to generate a base for web development in clj / cljs"
         ""
-        "Usage: program-name [options] action"
+        "Usage: lein new closp [options]"
         ""
         "Options:"
         options-summary
-        ""
-        "Actions:"
-        "  start    Start a new server"
-        "  stop     Stop an existing server"
-        "  status   Print a server's status"
         ""
         "Please refer to the manual page for more information."]
        (string/join \newline)))
