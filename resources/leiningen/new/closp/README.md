@@ -15,6 +15,7 @@ This will also compile the clojurescript.
 4. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
+* closp-crud integration
 * H2 database on filesystem as a default
 * Joplin for database migrations
 * Selmer as templating solution
@@ -46,6 +47,11 @@ For a different config in another environment you can pass in a file path via sy
 `java -jar -Dclosp-config-path=C:\\path\\to\\iwf-prod.edn closp.jar`.
 Please think of changing the :env key in the config to :prod instead of :dev when changing to a different
 environment.
+
+## closp-crud
+
+This is a module that generates html, routing and sql files for a given table definition. For more
+information please look here: <https://github.com/sveri/closp>.
 
 ## Database
 

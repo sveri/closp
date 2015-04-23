@@ -31,6 +31,7 @@ This will also compile the clojurescript.
 5. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
+* closp-crud integration
 * H2 database on filesystem as a default
 * Joplin for database migrations
 * Selmer as templating solution
@@ -63,6 +64,11 @@ For a different config in another environment you can pass in a file path via sy
 `java -jar -Dclosp-config-path=C:\\path\\to\\iwf-prod.edn closp.jar`.  
 Please think of changing the :env key in the config to :prod instead of :dev when changing to a different
 environment.
+
+## closp-crud
+
+This is a module that generates html, routing and sql files for a given table definition. For more
+information please look here: <https://github.com/sveri/closp>.
 
 ## Database
 
@@ -203,6 +209,12 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+
+### 0.1.11
+
+* Upgrading Figwheel to 0.2.6
+* Integrating closp-crud
+
 ### 0.1.10
 
 * User can be deleted now

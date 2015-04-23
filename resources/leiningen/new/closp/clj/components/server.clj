@@ -12,7 +12,7 @@
   "destroy will be called when your application
    shuts down, put any clean up code here"
   []
-  (timbre/info "closp14 is shutting down...")
+  (timbre/info "{{name}} is shutting down...")
   (cronj/shutdown! session/cleanup-job)
   (timbre/info "shutdown complete!"))
 
@@ -32,12 +32,12 @@
 
   (timbre/set-config!
     [:shared-appender-config :rotor]
-    {:path "closp14.log" :max-size (* 512 1024) :backlog 10})
+    {:path "{{name}}" :max-size (* 512 1024) :backlog 10})
 
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
-  (timbre/info "\n-=[ closp14 started successfully"
+  (timbre/info "\n-=[ {{name}} started successfully"
                (when (= (:env config) :dev) "using the development profile") "]=-"))
 
 (defrecord WebServer [handler config]

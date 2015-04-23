@@ -7,7 +7,7 @@
   :source-paths ["src/clj" "src/cljs" "target/generated/clj" "target/generated/cljs"]
 
   :dependencies [[org.clojure/clojure "1.6.0"]
-                 [org.clojure/clojurescript "0.0-2740" :scope "provided"]
+                 [org.clojure/clojurescript "0.0-3211"]
 
                  [org.clojure/core.cache "0.6.4"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
@@ -18,7 +18,7 @@
                  [ring/ring-anti-forgery "1.0.0"]
                  [compojure "1.3.1"]
                  [reagent "0.4.3"]
-                 [figwheel "0.1.4-SNAPSHOT"]
+                 [figwheel "0.2.6"]
                  [environ "1.0.0"]
                  [com.cemerick/piggieback "0.1.5"]
                  [weasel "0.5.0"]
@@ -59,11 +59,20 @@
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
 
   :plugins [[com.keminglabs/cljx "0.5.0"]
+            [de.sveri/closp-crud "0.1.0"]
             [lein-cljsbuild "1.0.3"]
             [ragtime/ragtime.lein "0.3.8"]]
 
   ;database migrations
   :joplin {:migrators {:sql-mig "joplin/migrators/sql"}}
+
+  :closp-crud {:jdbc-url "jdbc:h2:mem:test_mem"
+               :migrations-output-path "./resources/migrators/sql"
+               :clj-src "src/clj"
+               :ns-db "{{ns}}.db"
+               :ns-routes "{{ns}}.routes"
+               :ns-layout "{{ns}}.layout"
+               :templates "resources/templates"}
 
   :min-lein-version "2.5.0"
 
@@ -101,7 +110,7 @@
                                       :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
 
                        :plugins      [[lein-ring "0.9.0"]
-                                      [lein-figwheel "0.1.4-SNAPSHOT"]
+                                      [lein-figwheel "0.2.6"]
                                       [joplin.lein "0.2.9"]]
 
                        :figwheel     {:http-server-root "public"
