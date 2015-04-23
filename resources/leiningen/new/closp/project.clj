@@ -114,7 +114,7 @@
                                       [joplin.lein "0.2.9"]]
 
                        :figwheel     {:http-server-root "public"
-                                      :port             3449
+                                      :server-port      3449
                                       :css-dirs         ["resources/public/css"]}
 
                        :dependencies [[ring-mock "0.1.5"]
