@@ -23,9 +23,6 @@
         _ (io/make-parents o)
         is (io/input-stream i)
         os (io/output-stream o)]
-    ;(println "i" i)
-    ;(println "o: " o)
-    (println "name-proj: " name-proj)
     (io/copy is os)
     (.flush os)))
 
