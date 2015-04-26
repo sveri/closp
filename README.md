@@ -210,6 +210,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.12
+
+* Bugfix [#3](/../../issues/3)
+
 ### 0.1.11
 
 * Upgrading Figwheel to 0.2.6

@@ -23,6 +23,9 @@
         _ (io/make-parents o)
         is (io/input-stream i)
         os (io/output-stream o)]
+    ;(println "i" i)
+    ;(println "o: " o)
+    (println "name-proj: " name-proj)
     (io/copy is os)
     (.flush os)))
 
@@ -32,6 +35,7 @@
     (reset! features (-> feature-params))
 
     (println "Generating new CLOSP project named" (str name "..."))
+    (clojure.pprint/pprint data)
 
     (apply (partial ->files data)
            (concat
@@ -74,7 +78,7 @@
               "target/generated/clj"]))
 
 
-    (mapv #(apply unpack (:sanitized data) %)
+    (mapv #(apply unpack (:name data) %)
           [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
            ["resources/templates/menu.html" "resources/templates/menu.html"]
            ["resources/templates/profile.html" "resources/templates/profile.html"]
