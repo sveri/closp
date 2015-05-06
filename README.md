@@ -124,7 +124,7 @@ the clj / cljs classpath.
 ## Clojurescripth with figwheel
 
 When running in dev mode cljs files will be auto compiled and sent to the browser via figwheel 
-<https://github.com/bhauman/lein-figwheel>
+<https://github.com/bhauman/lein-figwheel>.
 
 ## Email system
 
