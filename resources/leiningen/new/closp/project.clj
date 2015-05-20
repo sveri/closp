@@ -59,7 +59,7 @@
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
 
   :plugins [[com.keminglabs/cljx "0.5.0"]
-            [de.sveri/closp-crud "0.1.0"]
+            [de.sveri/closp-crud "0.1.1"]
             [lein-cljsbuild "1.0.3"]
             [ragtime/ragtime.lein "0.3.8"]]
 

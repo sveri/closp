@@ -210,6 +210,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.13
+
+* Version closp-crud -> 0.1.1
+
 ### 0.1.12
 
 * Bugfix [#3](/../../issues/3)
