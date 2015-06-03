@@ -32,7 +32,6 @@
     (reset! features (-> feature-params))
 
     (println "Generating new CLOSP project named" (str name "..."))
-    (clojure.pprint/pprint data)
 
     (apply (partial ->files data)
            (concat
@@ -63,7 +62,7 @@
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 
-              [(str "src/cljx/{{san-path}}/cljxcore.cljx") (*render* "cljx/cljxcore.cljx")]
+              [(str "src/cljc/{{san-path}}/cljccore.cljc") (*render* "cljc/cljccore.cljc")]
 
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]

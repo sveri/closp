@@ -9,10 +9,9 @@ Password: admin
 
 1. Run `lein joplin migrate sql-dev-env` in the newly created project (This will add an admin user with username:
 _admin@localhost.de_ and password: _admin_ to a new database)
-2. Run `lein cljx once` to compile the cljx files
-3. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode.
+2. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode.
 This will also compile the clojurescript.
-4. Run `lein rel-jar` to generate a runnable jar file.
+3. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
 * closp-crud integration
@@ -20,7 +19,7 @@ This will also compile the clojurescript.
 * Joplin for database migrations
 * Selmer as templating solution
 * http-kit as a server
-* cljx support
+* cljc support
 * Figwheel with clojurescript live reloading
 * Reloading support for templates and clojure code
 * Configuration with nomad
@@ -98,11 +97,6 @@ There is also an option to add new users.
 
 In dev mode changes the clojure code will be recompiled and reloaded on page refresh. The same is true for the templates.
 Theoretically this results development without server restarts.
-
-## CLJX support
-
-Closp will automatically compile cljx <https://github.com/lynaghk/cljx> files in the `cljx` folder and add them to 
-the clj / cljs classpath.
 
 ## Clojurescripth with figwheel
 

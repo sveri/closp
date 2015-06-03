@@ -25,10 +25,9 @@ as possible (at least that's the goal).
 1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
 2. Run `lein joplin migrate sql-dev-env` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
-3. Run `lein cljx once` to compile the cljx files
-4. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode. 
+3. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode. 
 This will also compile the clojurescript.
-5. Run `lein rel-jar` to generate a runnable jar file.
+4. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
 * closp-crud integration
@@ -36,7 +35,7 @@ This will also compile the clojurescript.
 * Joplin for database migrations
 * Selmer as templating solution
 * http-kit as a server
-* cljx support
+* cljc support
 * Figwheel with clojurescript live reloading
 * Reloading support for templates and clojure code
 * Configuration with nomad
@@ -115,11 +114,6 @@ There is also an option to add new users.
 
 In dev mode changes the clojure code will be recompiled and reloaded on page refresh. The same is true for the templates.
 Theoretically this results development without server restarts.
-
-## CLJX support
-
-Closp will automatically compile cljx <https://github.com/lynaghk/cljx> files in the `cljx` folder and add them to 
-the clj / cljs classpath.
 
 ## Clojurescripth with figwheel
 
@@ -209,6 +203,14 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+
+### 0.1.14
+
+* Removing weasel dependency
+* Removing cljx support
+* Introducing clojure-1.7.0-RC1 with support for cljc
+* Several version updates
+* Minimal CLJC example
 
 ### 0.1.13
 
