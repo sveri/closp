@@ -70,15 +70,18 @@
                :ns-layout "{{ns}}.layout"
                :templates "resources/templates"}
 
+
   :min-lein-version "2.5.0"
 
   ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
   ;:hooks [leiningen.cljsbuild]
 
+  :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
+
   :cljsbuild
   {:builds {:dev {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
                   :figwheel {:css-dirs ["resources/public/css"]             ;; watch and update CSS
-                             :on-jsload "{{ns}}/main"}
+                             :on-jsload "{{name}}.dev/main  "}
                   :compiler     {:main           "{{name}}.dev"
                                  :asset-path     "/js/compiled/out"
                                  :output-to      "resources/public/js/compiled/app.js"
@@ -119,4 +122,4 @@
 
   :uberjar-name "{{name}}.jar"
 
-  :aliases {"rel-jar" ["do" "cljsbuild" "once" "adv," "uberjar"]})
+  :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]})
