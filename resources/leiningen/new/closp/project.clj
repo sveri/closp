@@ -18,7 +18,6 @@
                  [ring/ring-anti-forgery "1.0.0"]
                  [compojure "1.3.4"]
                  [reagent "0.5.0"]
-                 [figwheel "0.3.3"]
                  [environ "1.0.0"]
                  [leiningen "2.5.1"]
                  [http-kit "2.1.19"]
@@ -57,7 +56,7 @@
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
 
   :plugins [[de.sveri/closp-crud "0.1.1"]
-            [lein-cljsbuild "1.0.3"]
+            [lein-cljsbuild "1.0.5"]
             [ragtime/ragtime.lein "0.3.8"]]
 
   ;database migrations
@@ -73,40 +72,36 @@
 
   :min-lein-version "2.5.0"
 
-  :uberjar-name "{{name}}.jar"
+  ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
+  ;:hooks [leiningen.cljsbuild]
 
   :cljsbuild
   {:builds {:dev {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
+                  :figwheel {:css-dirs ["resources/public/css"]             ;; watch and update CSS
+                             :on-jsload "{{ns}}/main"}
                   :compiler     {:main           "{{name}}.dev"
-                                 :asset-path     "/js/out"
-                                 :output-to      "resources/public/js/app.js"
-                                 :output-dir     "resources/public/js/out"
-                                 :source-map     "resources/public/js/out.js.map"
+                                 :asset-path     "/js/compiled/out"
+                                 :output-to      "resources/public/js/compiled/app.js"
+                                 :output-dir     "resources/public/js/compiled/out"
+                                 :source-map     "resources/public/js/compiled/out.js.map"
                                  :optimizations  :none
                                  :cache-analysis true
-                                 :pretty-print   true}}
+                                 :pretty-print   true
+                                 :source-map-timestamp true}}
             :adv {:source-paths ["src/cljs" "src/cljc"]
-                  :compiler     {:main          "{{ns}}.core"
-                                 :output-to     "resources/public/js/app.js"
-                                 :output-dir    "resources/public/js/out-adv"
-                                 :source-map    "resources/public/js/out.js.map"
+                  :compiler     {:output-to     "resources/public/js/compiled/app.js"
+                                 ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
+                                 ;:jar           true
                                  :optimizations :advanced
                                  :pretty-print  false}}}}
 
-  :profiles {:dev     {:repl-options {:init-ns          {{ns}}.user
-                                      :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+  :profiles {:dev     {:repl-options {:init-ns          {{ns}}.user}
 
                        :plugins      [[lein-ring "0.9.0"]
-                                      [lein-figwheel "0.2.6"]
+                                      [lein-figwheel "0.3.3"]
                                       [joplin.lein "0.2.9"]]
 
-                       :figwheel     {:http-server-root "public"
-                                      :server-port      3449
-                                      :css-dirs         ["resources/public/css"]}
-
                        :dependencies [[ring-mock "0.1.5"]
-                                      [com.cemerick/piggieback "0.2.1"]
-                                      [org.clojure/tools.nrepl "0.2.10"]
                                       [ring/ring-devel "1.3.2"]
                                       [pjstadig/humane-test-output "0.6.0"]]
 
@@ -118,10 +113,10 @@
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :omit-source true
-                       :aot         :all
-                       :cljsbuild {:builds {:adv {:compiler {:optimizations :advanced
-                                                             :pretty-print false}}}}}}
+                       :aot         :all}}
 
   :main {{ns}}.core
 
-  :aliases {"rel-jar" ["do" "clean," "cljsbuild" "clean," "cljsbuild" "once" "adv," "uberjar"]})
+  :uberjar-name "{{name}}.jar"
+
+  :aliases {"rel-jar" ["do" "cljsbuild" "once" "adv," "uberjar"]})

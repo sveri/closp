@@ -25,8 +25,7 @@ as possible (at least that's the goal).
 1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
 2. Run `lein joplin migrate sql-dev-env` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
-3. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode. 
-This will also compile the clojurescript.
+3. Run `lein figwheel` to start figwheel and compile the clojurescript.
 4. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
@@ -118,7 +117,9 @@ Theoretically this results development without server restarts.
 ## Clojurescripth with figwheel
 
 When running in dev mode cljs files will be auto compiled and sent to the browser via figwheel 
-<https://github.com/bhauman/lein-figwheel>.
+<https://github.com/bhauman/lein-figwheel>.  
+If you want to autoload a different cljs function you have to adapt dev.cljs and the project.clj file at 
+[:cljsbuild :dev :figwheel].
 
 ## Email system
 
@@ -203,6 +204,11 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+
+### 0.1.15
+
+* Removing piggyback and nrepl dependency
+* Changes on how to use fighweel
 
 ### 0.1.14
 

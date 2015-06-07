@@ -10,8 +10,8 @@ Password: admin
 1. Run `lein joplin migrate sql-dev-env` in the newly created project (This will add an admin user with username:
 _admin@localhost.de_ and password: _admin_ to a new database)
 2. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode.
-This will also compile the clojurescript.
-3. Run `lein rel-jar` to generate a runnable jar file.
+3. Run `lein figwheel` to start figwheel and compile the clojurescript.
+4. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
 * closp-crud integration
@@ -101,7 +101,9 @@ Theoretically this results development without server restarts.
 ## Clojurescripth with figwheel
 
 When running in dev mode cljs files will be auto compiled and sent to the browser via figwheel 
-<https://github.com/bhauman/lein-figwheel>
+<https://github.com/bhauman/lein-figwheel>.  
+If you want to autoload a different cljs function you have to adapt dev.cljs and the project.clj file at 
+[:cljsbuild :dev :figwheel].
 
 ## Email system
 
