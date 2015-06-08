@@ -210,6 +210,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.16
+
+* Adding back reset bugfix
+
 ### 0.1.15
 
 * Removing piggyback and nrepl dependency
