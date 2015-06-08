@@ -177,6 +177,11 @@ files.
 * Whatever seems useful in the future.
 
 ## FAQ
+
+### Could not find template closp on the classpath.
+
+This occurs when you run `lein new closp ...` with an older leiningen version. Please upgrade to the latest one.
+
 ### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.
 
 This will happen only in dev mode for every page where you did not explicitly register your clojurescript with.
