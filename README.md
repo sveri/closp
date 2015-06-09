@@ -1,10 +1,22 @@
 # closp
 
-A Leiningen template for a full featured web framework.
-  
-See it live at: <http://sveri.de:3124>  
-Username: admin@localhost.de  
-Password: admin  
+A Leiningen template combining luminus, chestnut plus some goodies.
+
+## Goals
+* Provide a full stack to get started with
+* Provide generated code which can be changed easily
+* Provide an opiniated predefined set of libraries
+* Easily start side projects
+
+## Differences to luminus
+
+* [https://github.com/danielsz/system] (System) integration from the start - wrapper on top of sierras components
+* User management with login/logout/registration and email activation (provided by postal)
+* Conditional Reader support
+* [https://github.com/sveri/closp](closp-crud) integration
+* Live reloading for both clojurescript and clojure out of the box.
+* Clojure miniprofiler enabled.
+* Recaptcha for Signup
 
 ## Rationale
 
@@ -13,12 +25,6 @@ While luminus <http://www.luminusweb.net/> and chestnut <https://github.com/plex
 they miss some features for me that I do again and again (authentication / signup processes / ...).  
 So I pulled together the libraries I use to provide a general and opinionated starting point with at least trouble
 as possible (at least that's the goal).
-
-## Goals
-* Provide a full stack to get started with
-* Provide generated code which can be changed easily
-* Provide an opiniated predefined set of libraries
-* Easily start side projects
 
 ## Usage
 
@@ -38,7 +44,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Figwheel with clojurescript live reloading
 * Reloading support for templates and clojure code
 * Configuration with nomad
-* User management with login/logout/registration with email activation (provided by postal)
+* User management with login/logout/registration and email activation (provided by postal)
 * Recaptcha support for signup form
 * Authentication provided by buddy
 * reagent and datascript on frontend side
@@ -47,6 +53,13 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Componentized application
 * Datascript with reagent example
 * Booststrap css styles
+  
+
+## Showcase
+
+See it live at: <http://sveri.de:3124>  
+Username: admin@localhost.de  
+Password: admin  
 
 ## Docker
 
