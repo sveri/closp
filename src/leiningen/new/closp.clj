@@ -95,6 +95,8 @@
            ["resources/public/css/screen.css" "resources/public/css/screen.css"]
            ["resources/public/css/home.css" "resources/public/css/home.css"]
 
+           ["env/dev/user.edn" "env/dev/user.edn"]
+
            ["migrations/2015-011-26-add-user-table.down.sql" "resources/migrators/sql/2015-011-26-add-user-table.down.sql"]
            ["migrations/2015-011-26-add-user-table.up.sql" "resources/migrators/sql/2015-011-26-add-user-table.up.sql"]])))
 

@@ -1,0 +1,10 @@
+{:name    "user"
+ :columns [[:id :int :null false :pk true :autoinc true]
+           [:first_name [:varchar 30]]
+           [:last_name [:varchar 30]]
+           [:role [:varchar 30]]
+           [:email [:varchar 30] :null false :unique true]
+           [:last_login :time]
+           [:is_active :boolean :null false :default false]
+           [:pass [:varchar 200]]
+           [:activationid [:varchar 100] :unique true]]}
