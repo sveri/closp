@@ -92,8 +92,14 @@
 
            ["resources/closp.edn" "resources/closp.edn"]
 
+           ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
+           ["resources/public/css/bootstrap-theme.min.css" "resources/public/css/bootstrap-theme.min.css"]
            ["resources/public/css/screen.css" "resources/public/css/screen.css"]
            ["resources/public/css/home.css" "resources/public/css/home.css"]
+
+           ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
+           ["resources/public/js/jquery-2.0.3.min.js" "resources/public/js/jquery-2.0.3.min.js"]
+           ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
 
            ["env/dev/user.edn" "env/dev/user.edn"]
 

@@ -11,4 +11,7 @@ Your Team"
  :jdbc-url                "jdbc:h2:./db/korma.db"
  :env                     :dev
  ; set this to true to enable self registration
- :registration-allowed?   false }
+ :registration-allowed?   false
+ :captcha-public-key      "your public captcha key"
+ :private-recaptcha-key   "your private captcha key"
+ :recaptcha-domain        "yourdomain"}

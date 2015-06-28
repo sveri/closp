@@ -84,9 +84,10 @@ Until the account is activated the user won't be able to login.
 
 ## Recaptcha
 
-The signup form is protected by recaptcha. To make it work:
-* add your public key to signup.html
-* Add your private key and domain to routes/user.clj#connectReCaptch
+The signup form is protected by recaptcha. To make it work open your closp.edn file and fill these values properly:
+* :captcha-public-key
+* :private-recaptcha-key
+* :recaptcha-domain
 
 ## Admin user interface
 

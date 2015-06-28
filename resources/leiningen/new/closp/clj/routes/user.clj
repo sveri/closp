@@ -12,10 +12,10 @@
     [{{ns}}.service.auth :as auth])
   (:import (net.tanesha.recaptcha ReCaptchaImpl)))
 
-(defn- connectReCaptch [recaptcha_response_field recaptcha_challenge_field]
+(defn- connectReCaptch [recaptcha_response_field recaptcha_challenge_field priv-recaptcha-key rec-domain]
   (let [reCaptcha (new ReCaptchaImpl)]
-    (.setPrivateKey reCaptcha "private-recaptcha-key")
-    (.checkAnswer reCaptcha "yourdomain.com", recaptcha_challenge_field, recaptcha_response_field)))
+    (.setPrivateKey reCaptcha priv-recaptcha-key)
+    (.checkAnswer reCaptcha rec-domain, recaptcha_challenge_field, recaptcha_response_field)))
 
 (defn vali-password? [pass confirm & [form-current-pass current-pass]]
   (vali/rule (vali/min-length? pass 5)
@@ -26,7 +26,8 @@
     (vali/rule (hashers/check form-current-pass current-pass)
                [:oldpass "Current password was incorrect."])))
 
-(defn valid-register? [email pass confirm & [recaptcha_response_field recaptcha_challenge_field]]
+(defn valid-register? [email pass confirm & [recaptcha_response_field recaptcha_challenge_field
+                                             priv-recaptcha-key rec-domain]]
   (vali/rule (vali/has-value? email)
              [:id "An email address is required."])
   (vali/rule (vali/is-email? email)
@@ -34,7 +35,8 @@
   (vali/rule (not (db/username-exists? email))
              [:id "This username already exists. Choose another."])
   (when recaptcha_challenge_field
-    (vali/rule (.isValid (connectReCaptch recaptcha_response_field recaptcha_challenge_field))
+    (vali/rule (.isValid (connectReCaptch recaptcha_response_field recaptcha_challenge_field
+                                          priv-recaptcha-key rec-domain))
                [:captcha "Please provide the correct captcha input."]))
   (vali-password? pass confirm)
   (not (vali/errors? :id :pass :confirm :captcha)))
@@ -53,14 +55,14 @@
 (defn account-activated-page []
   (layout/render "user/account-activated.html"))
 
-(defn signup-page [& [errormap]]
-  (layout/render "user/signup.html" errormap))
+(defn signup-page [{:keys [captcha-public-key]} & [errormap]]
+  (layout/render "user/signup.html" (merge {:captcha-public-key captcha-public-key} errormap)))
 
-(defn activate-account [id]
+(defn activate-account [config id]
   (if (db/get-user-by-act-id id)
     (do (db/set-user-active id)
         (account-activated-page))
-    (signup-page {:email-error "Please provide a correct activation id."})))
+    (signup-page config {:email-error "Please provide a correct activation id."})))
 
 (defn changepassword-page [& [msgmap]]
   (layout/render "user/changepassword.html" msgmap))
@@ -90,18 +92,19 @@
     (succ-cb-page (layout/flash-result (str "User added.") "alert-success"))))
 
 (defn add-user [email password confirm sendmail? succ-cb-page error-cb-page config
-                & [recaptcha_response_field recaptcha_challenge_field]]
-  (if (valid-register? email password confirm recaptcha_response_field recaptcha_challenge_field)
+                & [recaptcha_response_field recaptcha_challenge_field priv-recaptcha-key rec-domain]]
+  (if (valid-register? email password confirm recaptcha_response_field recaptcha_challenge_field
+                       priv-recaptcha-key rec-domain)
     (let [activationid (uservice/generate-activation-id)
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
-      (send-reg-mail sendmail? email activationid config succ-cb-page error-cb-page))
+      (send-reg-mail sendmail? email activationid config (partial succ-cb-page config) error-cb-page))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)
           captcha-error (vali/on-error :captcha first)]
-      (error-cb-page {:email-error email-error :pass-error pass-error :confirm-error confirm-error :email email
-                      :captcha-error captcha-error}))))
+      (error-cb-page config {:email-error email-error :pass-error pass-error :confirm-error confirm-error :email email
+                             :captcha-error captcha-error}))))
 
 (defn changepassword [oldpassword password confirm]
   (let [user (db/get-user-by-email (uservice/get-logged-in-username))]
@@ -152,8 +155,9 @@
 (defn registration-routes [config]
   (routes
     (GET "/user/accountcreated" [] (account-created-page))
-    (GET "/user/activate/:id" [id] (activate-account id))
+    (GET "/user/activate/:id" [id] (activate-account config id))
     (POST "/user/signup" [email password confirm recaptcha_response_field recaptcha_challenge_field]
           (add-user email password confirm true account-created-page signup-page config
-                    recaptcha_response_field recaptcha_challenge_field))
-    (GET "/user/signup" [] (signup-page))))
+                    recaptcha_response_field recaptcha_challenge_field (:private-recaptcha-key config)
+                    (:recaptcha-domain config)))
+    (GET "/user/signup" [] (signup-page config))))

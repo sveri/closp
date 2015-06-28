@@ -29,7 +29,7 @@
 
 (defn get-handler [config]
   (-> (app-handler
-        (into [] (concat (when (:self-registration config) [(registration-routes config)])
+        (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
                          ;; add your application routes here
                          [home-routes (user-routes config) base-routes]))
         ;; add custom middleware here

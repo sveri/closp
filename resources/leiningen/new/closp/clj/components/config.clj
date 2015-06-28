@@ -21,7 +21,10 @@
                                 :smtp-data (:smtp-data closp-config) ; passed directly to postmap like {:host "postfix"}
                                 :jdbc-url (:jdbc-url closp-config)
                                 :env (:env closp-config)
-                                :registration-allowed? (:registration-allowed? closp-config)})))
+                                :registration-allowed? (:registration-allowed? closp-config)
+                                :private-recaptcha-key (:private-recaptcha-key closp-config)
+                                :recaptcha-domain (:recaptcha-domain closp-config)
+                                :captcha-public-key (:captcha-public-key closp-config)})))
   (stop [component]
     (assoc component :config nil)))
 

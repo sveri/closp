@@ -113,9 +113,11 @@ Until the account is activated the user won't be able to login.
 
 ## Recaptcha
 
-The signup form is protected by recaptcha. To make it work:
-* add your public key to signup.html
-* Add your private key and domain to routes/user.clj#connectReCaptch
+The signup form is protected by recaptcha. To make it work open your closp.edn file and fill these values properly:
+* :captcha-public-key
+* :private-recaptcha-key
+* :recaptcha-domain
+
 
 ## Admin user interface
 
@@ -222,6 +224,14 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
+
+### 0.1.7
+
+* Bugfix regarding self registration
+* Added closp-crud definition file for user (not used yet, just provided for reference)
+* Recaptcha configuration now available in closp.edn, no need to edit the source anymore
+* Adding bootstrap 3.3.5
+* Providing react.js (0.12.1) and jquery (2.0.3) as local files instead of cdn provided (FIX #6)
 
 ### 0.1.16
 
