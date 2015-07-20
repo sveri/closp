@@ -225,6 +225,14 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+
+### 0.1.8
+
+* bugfix for smtp configuration when using sendmail
+* Upgrade closp-crud to 0.1.2
+* provide user sqls for h2 and sqlite
+* sqlite as default DB
+
 ### 0.1.7
 
 * Bugfix regarding self registration

@@ -103,8 +103,10 @@
 
            ["env/dev/user.edn" "env/dev/user.edn"]
 
-           ["migrations/2015-011-26-add-user-table.down.sql" "resources/migrators/sql/2015-011-26-add-user-table.down.sql"]
-           ["migrations/2015-011-26-add-user-table.up.sql" "resources/migrators/sql/2015-011-26-add-user-table.up.sql"]])))
+           ["migrators/h2/user-20150720T132915Z.down.sql" "resources/migrators/sql/h2/user-20150720T132915Z.down.sql"]
+           ["migrators/h2/user-20150720T132915Z.up.sql" "resources/migrators/sql/h2/user-20150720T132915Z.up.sql"]
+           ["migrators/sqlite/user-20150720T083449Z.down.sql" "resources/migrators/sql/sqlite/user-20150720T083449Z.down.sql"]
+           ["migrators/sqlite/user-20150720T132915Z.up.sql" "resources/migrators/sql/sqlite/user-20150720T083449Z.up.sql"]])))
 
 (defn closp
   "Create a new CLOSP project"

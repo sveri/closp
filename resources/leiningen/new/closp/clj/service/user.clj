@@ -10,7 +10,10 @@
   (timbre/trace "trying to send mail to" (:data m))
   (send-message (:smtp-data config) (:data m)))
 
-(defmethod send-mail-by-type :sendmail [m _] (send-message {:host "localhost"} (:data m)))
+(defmethod send-mail-by-type :sendmail [m config]
+  (send-message
+    {:host (get-in config [:smtp-data :host] "localhost")}
+    (:data m)))
 
 (defn generate-activation-id []
   (str (java.util.UUID/randomUUID)))

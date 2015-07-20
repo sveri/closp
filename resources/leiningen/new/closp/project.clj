@@ -55,15 +55,16 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
 
-  :plugins [[de.sveri/closp-crud "0.1.1"]
+  :plugins [[de.sveri/closp-crud "0.1.2"]
             [lein-cljsbuild "1.0.5"]
             [ragtime/ragtime.lein "0.3.8"]]
 
   ;database migrations
-  :joplin {:migrators {:sql-mig "joplin/migrators/sql"}}
+  :joplin {:migrators {:sqlite-mig "resources/migrators/sqlite"
+                       :h2-mig "resources/migrators/h2"}}
 
-  :closp-crud {:jdbc-url "jdbc:h2:mem:test_mem"
-               :migrations-output-path "./resources/migrators/sql"
+  :closp-crud {:jdbc-url "jdbc:sqlite:./db/closp1.sqlite"
+               :migrations-output-path "./resources/migrators/sqlite"
                :clj-src "src/clj"
                :ns-db "{{ns}}.db"
                :ns-routes "{{ns}}.routes"
@@ -111,8 +112,10 @@
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]
 
-                       :joplin {:databases {:sql-dev {:type :sql, :url "jdbc:h2:./db/korma.db"}}
-                                :environments {:sql-dev-env [{:db :sql-dev, :migrator :sql-mig}]}}}
+                       :joplin {:databases {:sqlite-dev {:type :sql, :url "jdbc:sqlite:./db/closp1.sqlite"}
+                                            :h2-dev {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
+                                :environments {:sqlite-dev-env [{:db :sqlite-dev, :migrator :sqlite-mig}]
+                                               :h2-dev-env [{:db :h2-dev, :migrator :h2-mig}]}}}}
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :omit-source true
