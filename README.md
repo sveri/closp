@@ -225,6 +225,9 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.9
+
+* Fixing broken 0.1.8 release
 
 ### 0.1.8
 
