@@ -1,1 +1,1 @@
-DROP TABLE userrc
+DROP TABLE user

@@ -38,6 +38,7 @@
                  [org.clojure/java.jdbc "0.3.7"]
                  [korma "0.4.1"]
                  [com.h2database/h2 "1.4.187"]
+                 [org.xerial/sqlite-jdbc "3.8.7"]
                  [joplin.core "0.2.9"]
 
                  [com.draines/postal "1.11.3"]

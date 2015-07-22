@@ -15,16 +15,22 @@
 (def render (renderer "closp"))
 
 (def proj-dir (io/file (System/getProperty "leiningen.original.pwd")))
+
 (defn unpack
   [name-proj name-in name-out]
-  (let [p (string/join "/" ["leiningen" "new" "closp" name-in])
-        i (io/resource p)
-        o (io/file proj-dir name-proj name-out)
-        _ (io/make-parents o)
-        is (io/input-stream i)
-        os (io/output-stream o)]
-    (io/copy is os)
-    (.flush os)))
+  (try
+    (let [p (string/join "/" ["leiningen" "new" "closp" name-in])
+         i (io/resource p)
+         o (io/file proj-dir name-proj name-out)
+         _ (io/make-parents o)
+         is (io/input-stream i)
+         os (io/output-stream o)]
+     (io/copy is os)
+     (.flush os))
+    (catch Exception e (println "tried unpacking in: " name-in " to out: " name-out " with error: " e))))
+
+(defn create-db-dir [proj-name]
+  (io/make-parents (io/file proj-dir proj-name "db" ".keep")))
 
 (defn generate-project [name feature-params data]
   (binding [*name* name
@@ -103,10 +109,14 @@
 
            ["env/dev/user.edn" "env/dev/user.edn"]
 
-           ["migrators/h2/user-20150720T132915Z.down.sql" "resources/migrators/sql/h2/user-20150720T132915Z.down.sql"]
-           ["migrators/h2/user-20150720T132915Z.up.sql" "resources/migrators/sql/h2/user-20150720T132915Z.up.sql"]
-           ["migrators/sqlite/user-20150720T083449Z.down.sql" "resources/migrators/sql/sqlite/user-20150720T083449Z.down.sql"]
-           ["migrators/sqlite/user-20150720T132915Z.up.sql" "resources/migrators/sql/sqlite/user-20150720T083449Z.up.sql"]])))
+           ["migrators/h2/user-20150720T132915Z.down.sql" "resources/migrators/h2/user-20150720T132915Z.down.sql"]
+           ["migrators/h2/user-20150720T132915Z.up.sql" "resources/migrators/h2/user-20150720T132915Z.up.sql"]
+           ["migrators/sqlite/user-20150720T083449Z.down.sql" "resources/migrators/sqlite/user-20150720T083449Z.down.sql"]
+           ["migrators/sqlite/user-20150720T083449Z.up.sql" "resources/migrators/sqlite/user-20150720T083449Z.up.sql"]
+
+           ["migrators/sqlite/user-20150720T083449Z.up.sql" "resources/migrators/sqlite/user-20150720T083449Z.up.sql"]])
+
+    (create-db-dir (:name data))))
 
 (defn closp
   "Create a new CLOSP project"
@@ -131,7 +141,6 @@
       (println "Could not create project because a directory named" name "already exists!")
 
       (:help options) (opt-helper/exit 0 (opt-helper/usage summary))
-      ;(not= (count arguments) 1) (exit 1 (usage summary))
 
       errors (opt-helper/exit 1 (opt-helper/error-msg errors))
 

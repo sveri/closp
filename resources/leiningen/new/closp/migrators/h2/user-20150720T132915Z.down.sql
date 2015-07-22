@@ -1,1 +1,1 @@
-DROP TABLE userh2
+DROP TABLE user
