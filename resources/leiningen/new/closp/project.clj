@@ -55,7 +55,7 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
 
-  :plugins [[de.sveri/closp-crud "0.1.2"]
+  :plugins [[de.sveri/closp-crud "0.1.3"]
             [lein-cljsbuild "1.0.5"]
             [ragtime/ragtime.lein "0.3.8"]]
 
@@ -115,7 +115,7 @@
                        :joplin {:databases {:sqlite-dev {:type :sql, :url "jdbc:sqlite:./db/closp1.sqlite"}
                                             :h2-dev {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
                                 :environments {:sqlite-dev-env [{:db :sqlite-dev, :migrator :sqlite-mig}]
-                                               :h2-dev-env [{:db :h2-dev, :migrator :h2-mig}]}}}}
+                                               :h2-dev-env [{:db :h2-dev, :migrator :h2-mig}]}}}
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :omit-source true

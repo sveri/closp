@@ -7,7 +7,7 @@ Password: admin
 
 ## Usage
 
-1. Run `lein joplin migrate sql-dev-env` in the newly created project (This will add an admin user with username:
+1. Run `lein joplin migrate sqlite-dev-env` in the newly created project (This will add an admin user with username:
 _admin@localhost.de_ and password: _admin_ to a new database)
 2. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode.
 3. Run `lein figwheel` to start figwheel and compile the clojurescript.

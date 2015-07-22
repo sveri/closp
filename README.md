@@ -29,7 +29,7 @@ as possible (at least that's the goal).
 ## Usage
 
 1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
-2. Run `lein joplin migrate sql-dev-env` in the newly created project (This will add an admin user with username: 
+2. Run `lein joplin migrate sqlite-dev-env` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
 3. Run `lein figwheel` to start figwheel and compile the clojurescript.
 4. Run `lein rel-jar` to generate a runnable jar file.
@@ -229,7 +229,7 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 ### 0.1.8
 
 * bugfix for smtp configuration when using sendmail
-* Upgrade closp-crud to 0.1.2
+* Upgrade closp-crud to 0.1.3
 * provide user sqls for h2 and sqlite
 * sqlite as default DB
 
