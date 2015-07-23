@@ -122,6 +122,8 @@
                        :omit-source true
                        :aot         :all}}
 
+  :test-paths ["test/clj"]
+
   :main {{ns}}.core
 
   :uberjar-name "{{name}}.jar"
