@@ -7,7 +7,7 @@
     [taoensso.timbre :as timb]
     [clojure-miniprofiler :as cjmp]
     [{{ns}}.layout :as layout]
-    [{{ns}}.db.users :as db]
+    [{{ns}}.db.user :as db]
     [{{ns}}.service.user :as uservice]
     [{{ns}}.service.auth :as auth])
   (:import (net.tanesha.recaptcha ReCaptchaImpl)))

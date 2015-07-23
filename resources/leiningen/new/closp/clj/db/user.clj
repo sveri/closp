@@ -1,4 +1,4 @@
-(ns {{ns}}.db.users
+(ns {{ns}}.db.user
   (:require [korma.core :refer [select where insert delete values update set-fields defentity limit]]
             [korma.db :refer [h2]])
   (:import (java.util UUID)))

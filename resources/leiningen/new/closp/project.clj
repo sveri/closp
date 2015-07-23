@@ -39,7 +39,7 @@
                  [korma "0.4.2"]
                  [com.h2database/h2 "1.4.187"]
                  [org.xerial/sqlite-jdbc "3.8.10.1"]
-                 [joplin.core "0.2.9"]
+                 [joplin.core "0.2.11"]
 
                  [com.draines/postal "1.11.3"]
 
@@ -57,8 +57,7 @@
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
 
   :plugins [[de.sveri/closp-crud "0.1.3"]
-            [lein-cljsbuild "1.0.5"]
-            [ragtime/ragtime.lein "0.3.8"]]
+            [lein-cljsbuild "1.0.5"]]
 
   ;database migrations
   :joplin {:migrators {:sqlite-mig "resources/migrators/sqlite"
@@ -104,7 +103,7 @@
 
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-figwheel "0.3.3"]
-                                      [joplin.lein "0.2.9"]]
+                                      [joplin.lein "0.2.11"]]
 
                        :dependencies [[ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]

@@ -227,6 +227,8 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ### 0.1.10
 
+* switching db.users to db.user
+* Adding example database test
 * Updating dependencies
 
     [ring "1.4.0"]  
