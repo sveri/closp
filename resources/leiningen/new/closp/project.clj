@@ -39,7 +39,6 @@
                  [korma "0.4.2"]
                  [com.h2database/h2 "1.4.187"]
                  [org.xerial/sqlite-jdbc "3.8.10.1"]
-                 [joplin.core "0.2.11"]
 
                  [com.draines/postal "1.11.3"]
 
@@ -107,7 +106,9 @@
 
                        :dependencies [[ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]
-                                      [pjstadig/humane-test-output "0.7.0"]]
+                                      [pjstadig/humane-test-output "0.7.0"]
+                                      [joplin.core "0.2.11"]
+                                      [joplin.jdbc "0.2.11"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]
