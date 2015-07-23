@@ -75,7 +75,7 @@
               
               ["README.md" (*render* "README.md")]
 
-              [(str "test/clj/db/{{san-path}}/user_test.cljs") (*render* "test/clj/db/user_test.cljs")]
+              [(str "test/clj/db/{{san-path}}/user_test.clj") (*render* "test/clj/db/user_test.clj")]
 
               ]))
 
