@@ -22,6 +22,7 @@
 (defn add-req-properties [handler config]
   (fn [req]
     (sess/put! :registration-allowed? (:registration-allowed? config))
+    (sess/put! :captcha-enabled? (:captcha-enabled? config))
     (handler req)))
 
 (def development-middleware
@@ -40,31 +41,3 @@
 (defn load-middleware [config]
   (concat (production-middleware config)
           (when (= (:env config) :dev) development-middleware)))
-
-;(defn add-req-properties [handler config]
-;  (fn [req]
-;    (sess/put! :registration-allowed? (:registration-allowed? config))
-;    (handler req)))
-;
-;(defn production-middleware [config]
-;  [#(add-req-properties % config)
-;   #(wrap-access-rules % {:rules auth/rules })
-;   #(wrap-authorization % auth/auth-backend)
-;   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
-;   #(wrap-transit-response % {:encoding :json, :opts {}})
-;   #(wrap-transit-body % {:keywords? true :encoding :json})
-;   wrap-anti-forgery
-;   wrap-trimmings])
-;
-;(def production-middleware
-;  [#(add-req-properties % config)
-;   #(wrap-access-rules % {:rules auth/rules })
-;   #(wrap-authorization % auth/auth-backend)
-;   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
-;   wrap-anti-forgery
-;   wrap-trimmings])
-;
-;(defn load-middleware [config]
-;  (concat (production-middleware config)
-;          (when (= (:env config) :dev) development-middleware)))
-

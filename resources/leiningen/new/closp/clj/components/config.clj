@@ -21,6 +21,7 @@
                               :jdbc-url (:jdbc-url config)
                               :env (:env config)
                               :registration-allowed? (:registration-allowed? config)
+                              :captcha-enabled? (:captcha-enabled? config)
                               :private-recaptcha-key (:private-recaptcha-key config)
                               :recaptcha-domain (:recaptcha-domain config)
                               :captcha-public-key (:captcha-public-key config)

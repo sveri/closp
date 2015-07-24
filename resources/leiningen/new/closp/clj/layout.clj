@@ -35,6 +35,7 @@
              :af-token af/*anti-forgery-token*
              :page template
              :registration-allowed? (sess/get :registration-allowed?)
+             :captcha-enabled? (sess/get :captcha-enabled?)
              :flash-message (sess/flash-get :flash-message)
              :flash-alert-type (sess/flash-get :flash-alert-type))
            (parser/render-file (str template))

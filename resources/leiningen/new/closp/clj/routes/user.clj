@@ -26,15 +26,16 @@
     (vali/rule (hashers/check form-current-pass current-pass)
                [:oldpass "Current password was incorrect."])))
 
-(defn valid-register? [email pass confirm & [recaptcha_response_field recaptcha_challenge_field
-                                             priv-recaptcha-key rec-domain]]
+(defn valid-register? [email pass confirm captcha-allowed?
+                       & [recaptcha_response_field recaptcha_challenge_field
+                          priv-recaptcha-key rec-domain]]
   (vali/rule (vali/has-value? email)
              [:id "An email address is required."])
   (vali/rule (vali/is-email? email)
              [:id "A valid email is required."])
   (vali/rule (not (db/username-exists? email))
              [:id "This username already exists. Choose another."])
-  (when recaptcha_challenge_field
+  (when (and captcha-allowed? recaptcha_challenge_field)
     (vali/rule (.isValid (connectReCaptch recaptcha_response_field recaptcha_challenge_field
                                           priv-recaptcha-key rec-domain))
                [:captcha "Please provide the correct captcha input."]))
@@ -93,7 +94,8 @@
 
 (defn add-user [email password confirm sendmail? succ-cb-page error-cb-page config
                 & [recaptcha_response_field recaptcha_challenge_field priv-recaptcha-key rec-domain]]
-  (if (valid-register? email password confirm recaptcha_response_field recaptcha_challenge_field
+  (if (valid-register? email password confirm (:captcha-allowed? config)
+                       recaptcha_response_field recaptcha_challenge_field
                        priv-recaptcha-key rec-domain)
     (let [activationid (uservice/generate-activation-id)
           pw_crypted (hashers/encrypt password)]

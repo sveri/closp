@@ -23,6 +23,7 @@ Your Team"
    :jdbc-url                "jdbc:sqlite:./db/closp1.sqlite"
    :env                     :dev
    :registration-allowed?   true
+   :captcha-enabled?        false
    :captcha-public-key      "your public captcha key"
    :private-recaptcha-key   "your private captcha key"
    :recaptcha-domain        "yourdomain"

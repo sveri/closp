@@ -9,9 +9,10 @@ Your Team"
  :activation-placeholder  "{{activationlink}}"
  :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
  :jdbc-url                "jdbc:sqlite:./db/closp1.sqlite"
- :env                     :dev
+ :env                     :dev                              ; set this to :prod for production mode
  ; set this to true to enable self registration
  :registration-allowed?   false
+ :captcha-enabled?        false
  :captcha-public-key      "your public captcha key"
  :private-recaptcha-key   "your private captcha key"
  :recaptcha-domain        "yourdomain"
