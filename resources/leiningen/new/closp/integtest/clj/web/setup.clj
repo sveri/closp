@@ -46,7 +46,7 @@ Your Team"
   (w/quit))
 
 (defn start-server []
-  (reloaded.repl/set-init! prod-system)
+  (reloaded.repl/set-init! test-system)
   (go))
 
 (defn stop-server []
