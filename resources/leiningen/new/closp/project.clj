@@ -104,7 +104,11 @@
                                       [lein-figwheel "0.3.3"]
                                       [joplin.lein "0.2.11"]]
 
-                       :dependencies [[ring-mock "0.1.5"]
+                       :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
+                                      [clj-webdriver "0.6.1"
+                                       :exclusions [org.seleniumhq.selenium/selenium-server]]
+                                      [org.seleniumhq.selenium/selenium-server "2.46.0"]
+                                      [ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]
                                       [pjstadig/humane-test-output "0.7.0"]
                                       [joplin.core "0.2.11"]
@@ -122,10 +126,16 @@
                        :omit-source true
                        :aot         :all}}
 
-  :test-paths ["test/clj"]
+  :test-paths ["test/clj" "integtest/clj"]
+
+  :test-selectors {:unit (complement :integration)
+                   :integration :integration
+                   :all (constantly true)}
 
   :main {{ns}}.core
 
   :uberjar-name "{{name}}.jar"
 
-  :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]})
+  :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]
+            "unit" ["do" "test" ":unit"]
+            "integ" ["do" "test" ":integration"]})

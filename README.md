@@ -225,10 +225,12 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
-### 0.1.10
+### 0.1.20
 
 * switching db.users to db.user
 * Adding example database test
+* Integrating clj webdriver and adding example test
+* Adding alias for unit and integtest
 * Updating dependencies
 
     [ring "1.4.0"]  
@@ -245,18 +247,18 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 
 
-### 0.1.9
+### 0.1.19
 
 * Fixing broken 0.1.8 release
 
-### 0.1.8
+### 0.1.18
 
 * bugfix for smtp configuration when using sendmail
 * Upgrade closp-crud to 0.1.3
 * provide user sqls for h2 and sqlite
 * sqlite as default DB
 
-### 0.1.7
+### 0.1.17
 
 * Bugfix regarding self registration
 * Added closp-crud definition file for user (not used yet, just provided for reference)
