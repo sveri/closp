@@ -65,7 +65,7 @@
   component/Lifecycle
   (start [component]
     (let [handler (:handler handler)
-          server (run-server handler {:port (:port config)})]
+          server (run-server handler {:port (get-in config [:config :port] 3000)})]
       (assoc component :server server)))
   (stop [component]
     (let [server (:server component)]
