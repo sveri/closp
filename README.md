@@ -1,4 +1,6 @@
-# closp
+# closp 
+
+![Build Status](http://sveri.de:8082/buildStatus/icon?job=closp)
 
 A Leiningen template combining luminus, chestnut plus some goodies.
 
