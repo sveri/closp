@@ -1,4 +1,4 @@
-(ns {{ns}} .web.signup
+(ns {{ns}}.web.signup
   (:require [clojure.test :refer :all]
             [reloaded.repl :refer [go stop]]
             [{{ns}}.components.components :refer [prod-system]]
