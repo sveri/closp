@@ -8,7 +8,7 @@ Best Regards,
 Your Team"
  :activation-placeholder  "{{activationlink}}"
  :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
- :jdbc-url                "jdbc:sqlite:./db/closp1.sqlite"
+ :jdbc-url                "jdbc:sqlite:./db/{{name}}.sqlite"
  :env                     :dev                              ; set this to :prod for production mode
  ; set this to true to enable self registration
  :registration-allowed?   false
