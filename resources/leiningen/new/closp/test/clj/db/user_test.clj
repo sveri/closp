@@ -5,7 +5,7 @@
     [joplin.core :as j]
     [joplin.jdbc.database]))
 
-(def db-uri "jdbc:sqlite:./db/closp1-test.sqlite")
+(def db-uri "jdbc:sqlite:./db/{{name}}-test.sqlite")
 (def migrators "resources/migrators/sqlite")
 
 (k/defdb temp-db db-uri)

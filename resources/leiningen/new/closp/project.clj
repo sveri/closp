@@ -62,7 +62,7 @@
   :joplin {:migrators {:sqlite-mig "resources/migrators/sqlite"
                        :h2-mig "resources/migrators/h2"}}
 
-  :closp-crud {:jdbc-url "jdbc:sqlite:./db/closp1.sqlite"
+  :closp-crud {:jdbc-url "jdbc:sqlite:./db/{{name}}.sqlite"
                :migrations-output-path "./resources/migrators/sqlite"
                :clj-src "src/clj"
                :ns-db "{{ns}}.db"
@@ -127,7 +127,7 @@
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]
 
-                       :joplin {:databases {:sqlite-dev {:type :sql, :url "jdbc:sqlite:./db/closp1.sqlite"}
+                       :joplin {:databases {:sqlite-dev {:type :sql, :url "jdbc:sqlite:./db/{{name}}.sqlite"}
                                             :h2-dev {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
                                 :environments {:sqlite-dev-env [{:db :sqlite-dev, :migrator :sqlite-mig}]
                                                :h2-dev-env [{:db :h2-dev, :migrator :h2-mig}]}}}
