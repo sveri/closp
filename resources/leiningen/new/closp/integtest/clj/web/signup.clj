@@ -1,29 +1,22 @@
 (ns {{ns}}.web.signup
   (:require [clojure.test :refer :all]
-            [reloaded.repl :refer [go stop]]
-            [{{ns}}.components.components :refer [prod-system]]
-            [clj-webdriver.taxi :refer :all]))
+            [clj-webdriver.taxi :refer :all]
+            [{{ns}}.web.setup :as s]))
 
 
-(def test-base-url (str "http://localhost:3000/"))
+(defn server-setup [f]
+  (s/start-server)
+  (f)
+  (s/stop-server))
 
-(defn start-browser []
-  (set-driver! {:browser :htmlunit}))
+(defn browser-setup [f]
+  (s/start-browser :htmlunit)
+  (f)
+  (s/stop-browser))
 
-(defn stop-browser []
-  (quit))
-
-(defn start-server []
-  (reloaded.repl/set-init! prod-system)
-  (go))
-
-(defn stop-server []
-  (stop))
+(use-fixtures :each browser-setup)
+(use-fixtures :once server-setup)
 
 (deftest ^:integration homepage-greeting
-  (start-server)
-  (start-browser)
-  (to test-base-url)
-  (is (.contains (text "body") "Foo!"))
-  (stop-browser)
-  (stop-server))
+  (to s/test-base-url)
+  (is (.contains (text "body") "Foo!")))
