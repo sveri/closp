@@ -8,25 +8,24 @@
     (read-config (io/file config-path))
     (read-config (io/resource "closp.edn"))))
 
-(defrecord Config []
+(defrecord Config [config]
   component/Lifecycle
   (start [component]
-    (let [closp-config (prod-conf-or-dev)]
-      (assoc component :config {:hostname (:hostname closp-config)
-                                :mail-from (:mail-from closp-config)
-                                :mail-type (:mail-type closp-config)
-                                :activation-mail-subject (:activation-mail-subject closp-config)
-                                :activation-mail-body (:activation-mail-body closp-config)
-                                :activation-placeholder (:activation-placeholder closp-config)
-                                :smtp-data (:smtp-data closp-config) ; passed directly to postmap like {:host "postfix"}
-                                :jdbc-url (:jdbc-url closp-config)
-                                :env (:env closp-config)
-                                :registration-allowed? (:registration-allowed? closp-config)
-                                :private-recaptcha-key (:private-recaptcha-key closp-config)
-                                :recaptcha-domain (:recaptcha-domain closp-config)
-                                :captcha-public-key (:captcha-public-key closp-config)})))
+    (assoc component :config {:hostname (:hostname config)
+                              :mail-from (:mail-from config)
+                              :mail-type (:mail-type config)
+                              :activation-mail-subject (:activation-mail-subject config)
+                              :activation-mail-body (:activation-mail-body config)
+                              :activation-placeholder (:activation-placeholder config)
+                              :smtp-data (:smtp-data config) ; passed directly to postmap like {:host "postfix"}
+                              :jdbc-url (:jdbc-url config)
+                              :env (:env config)
+                              :registration-allowed? (:registration-allowed? config)
+                              :private-recaptcha-key (:private-recaptcha-key config)
+                              :recaptcha-domain (:recaptcha-domain config)
+                              :captcha-public-key (:captcha-public-key config)}))
   (stop [component]
     (assoc component :config nil)))
 
-(defn new-config []
-  (->Config ))
+(defn new-config [config]
+  (->Config config))
