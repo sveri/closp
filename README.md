@@ -55,6 +55,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Componentized application
 * Datascript with reagent example
 * Booststrap css styles
+* Example for clj-webdriver tests
   
 
 ## Showcase
@@ -177,6 +178,15 @@ There is a leiningen task defined in the _project.clj_ to generate an uberjar. J
 By default this will include your closp.edn config file in the build from resources folder. You should at least change
 the :env entry to :prod or something else than :dev.  
 There are several ways to setup a more separated dev / staging / prod environment. Please lookup nomad for that.
+
+## CLJ-Webdriver
+
+Closp comes with some examples on how to use clj webdriver in your projects for integration tests. They reside in
+`integtest\clj`.  
+
+Currently the support is some kind of tricky regarding support of latest firefox versions. Please look in the 
+`profiles->dev->ddependencies` section of the `project.clj` file for some comments on this matter. It is possible to use
+both, the htmlunitdriver and an older firefox version or only a newer firefox version.
 
 ## Minor features.
 
