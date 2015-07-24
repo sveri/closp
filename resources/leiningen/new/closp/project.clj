@@ -24,7 +24,7 @@
                  [selmer "0.8.5"]
                  [prone "0.8.2"]
                  [im.chit/cronj "1.4.3"]
-                 [com.taoensso/timbre "4.0.2"]
+                 [com.taoensso/timbre "3.2.1"]
                  [noir-exception "0.2.5"]
 
                  [buddy/buddy-auth "0.6.0"]

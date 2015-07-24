@@ -238,7 +238,6 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
     [ring "1.4.0"]  
     [compojure "1.4.0"]  
     [selmer "0.8.5"]    
-    [com.taoensso/timbre "4.0.2"]  
     [buddy/buddy-auth "0.6.0"]  
     [buddy/buddy-hashers "0.6.0"]  
     [korma "0.4.2"]   
