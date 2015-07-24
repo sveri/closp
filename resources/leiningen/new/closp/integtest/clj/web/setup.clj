@@ -22,7 +22,6 @@ Your Team"
    :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
    :jdbc-url                "jdbc:sqlite:./db/closp1.sqlite"
    :env                     :dev
-   ; set this to true to enable self registration
    :registration-allowed?   true
    :captcha-public-key      "your public captcha key"
    :private-recaptcha-key   "your private captcha key"
