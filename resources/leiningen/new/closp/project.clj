@@ -70,7 +70,6 @@
                :ns-layout "{{ns}}.layout"
                :templates "resources/templates"}
 
-
   :min-lein-version "2.5.0"
 
   ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
