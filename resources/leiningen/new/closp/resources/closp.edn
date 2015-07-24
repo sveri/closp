@@ -14,4 +14,5 @@ Your Team"
  :registration-allowed?   false
  :captcha-public-key      "your public captcha key"
  :private-recaptcha-key   "your private captcha key"
- :recaptcha-domain        "yourdomain"}
+ :recaptcha-domain        "yourdomain"
+ :port                    3000}

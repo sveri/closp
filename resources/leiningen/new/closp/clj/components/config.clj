@@ -23,7 +23,8 @@
                               :registration-allowed? (:registration-allowed? config)
                               :private-recaptcha-key (:private-recaptcha-key config)
                               :recaptcha-domain (:recaptcha-domain config)
-                              :captcha-public-key (:captcha-public-key config)}))
+                              :captcha-public-key (:captcha-public-key config)
+                              :port (:port config)}))
   (stop [component]
     (assoc component :config nil)))
 

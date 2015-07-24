@@ -46,7 +46,7 @@
     (let [handler (:handler handler)
           config (:config config)
           server (serve handler
-                        {:port         3000
+                        {:port         (:port config)
                          :init         (partial init config)
                          :auto-reload? true
                          :destroy      destroy
@@ -65,7 +65,7 @@
   component/Lifecycle
   (start [component]
     (let [handler (:handler handler)
-          server (run-server handler {:port 3000})]
+          server (run-server handler {:port (:port config)})]
       (assoc component :server server)))
   (stop [component]
     (let [server (:server component)]
