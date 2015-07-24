@@ -6,7 +6,8 @@
             [{{ns}}.components.server :refer [new-web-server new-web-server-prod]]
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
-            [{{ns}}.components.db :refer [new-db]]))
+            [{{ns}}.components.db :refer [new-db]]
+            [joplin.core :as j]))
 
 (def db-uri "jdbc:sqlite:./db/{{name}}-integ-test.sqlite")
 (def migrators "resources/migrators/sqlite")
