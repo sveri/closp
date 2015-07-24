@@ -20,3 +20,10 @@
 (deftest ^:integration homepage-greeting
   (to s/test-base-url)
   (is (.contains (text "body") "Foo!")))
+
+(deftest ^:integration signup
+  (to (str s/test-base-url "user/signup"))
+  (quick-fill-submit {"#email" "foo" }
+                     ;{"a#signup-btn" click}
+                     {"#email" submit})
+  (is (.contains (text "body") "A valid email is required")))

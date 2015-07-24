@@ -8,6 +8,9 @@
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]))
 
+(def db-uri "jdbc:sqlite:./db/{{name}}-integ-test.sqlite")
+(def migrators "resources/migrators/sqlite")
+
 ; custom config for configuration
 (def test-config
   {:hostname                "http://localhost/"
@@ -20,7 +23,7 @@ Best Regards,
 Your Team"
    :activation-placeholder  "{{activationlink}}"
    :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
-   :jdbc-url                "jdbc:sqlite:./db/closp1.sqlite"
+   :jdbc-url                "jdbc:sqlite:./db/{{name}}.sqlite"
    :env                     :dev
    :registration-allowed?   true
    :captcha-enabled?        false
@@ -46,8 +49,26 @@ Your Team"
   (w/quit))
 
 (defn start-server []
+  (j/migrate-db
+    {:db       {:type :sql,
+                :url  db-uri}
+     :migrator migrators})
   (reloaded.repl/set-init! test-system)
   (go))
 
 (defn stop-server []
-  (stop))
+  (stop)
+  (j/rollback-db
+    {:db       {:type :sql,
+                :url  db-uri}
+     :migrator migrators}))
+
+(defn server-setup [f]
+  (start-server)
+  (f)
+  (stop-server))
+
+(defn browser-setup [f]
+  (start-browser :firefox)
+  (f)
+  (stop-browser))
