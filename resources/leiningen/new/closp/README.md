@@ -32,6 +32,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Datascript with reagent example
 * Booststrap css styles
 * Example for clj-webdriver tests
+* Internationalization using tower
 
 ## Docker
 
@@ -150,6 +151,12 @@ There is a leiningen task defined in the _project.clj_ to generate an uberjar. J
 By default this will include your closp.edn config file in the build from resources folder. You should at least change
 the :env entry to :prod or something else than :dev.
 There are several ways to setup a more separated dev / staging / prod environment. Please lookup nomad for that.
+
+## Internationalization
+
+Closp uses <https://github.com/ptaoussanis/tower> for internationalization. It is configured as a component in 
+ `your.ns.components.locale`. You have to add additional strings / translations there to use them in your web 
+  application. For examples look at `your.ns.routes.user`.
 
 ## CLJ-Webdriver
 

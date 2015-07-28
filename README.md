@@ -56,6 +56,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Datascript with reagent example
 * Booststrap css styles
 * Example for clj-webdriver tests
+* Internationalization support with tower
   
 
 ## Showcase
@@ -187,6 +188,12 @@ Closp comes with some examples on how to use clj webdriver in your projects for 
 Currently the support is some kind of tricky regarding support of latest firefox versions. Please look in the 
 `profiles->dev->ddependencies` section of the `project.clj` file for some comments on this matter. It is possible to use
 both, the htmlunitdriver and an older firefox version or only a newer firefox version.
+
+## Internationalization
+
+Closp uses <https://github.com/ptaoussanis/tower> for internationalization. It is configured as a component in 
+ `your.ns.components.locale`. You have to add additional strings / translations there to use them in your web 
+  application. For examples look at `your.ns.routes.user`.
 
 ## Minor features.
 
