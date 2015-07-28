@@ -20,13 +20,13 @@
   [name-proj name-in name-out]
   (try
     (let [p (string/join "/" ["leiningen" "new" "closp" name-in])
-         i (io/resource p)
-         o (io/file proj-dir name-proj name-out)
-         _ (io/make-parents o)
-         is (io/input-stream i)
-         os (io/output-stream o)]
-     (io/copy is os)
-     (.flush os))
+          i (io/resource p)
+          o (io/file proj-dir name-proj name-out)
+          _ (io/make-parents o)
+          is (io/input-stream i)
+          os (io/output-stream o)]
+      (io/copy is os)
+      (.flush os))
     (catch Exception e (println "tried unpacking in: " name-in " to out: " name-out " with error: " e))))
 
 (defn create-db-dir [proj-name]
@@ -72,13 +72,15 @@
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
               [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
-              
+
               ["README.md" (*render* "README.md")]
 
               [(str "test/clj/{{san-path}}/db/user_test.clj") (*render* "test/clj/db/user_test.clj")]
 
               [(str "integtest/clj/{{san-path}}/web/setup.clj") (*render* "integtest/clj/web/setup.clj")]
               [(str "integtest/clj/{{san-path}}/web/signup.clj") (*render* "integtest/clj/web/signup.clj")]
+
+              ["resources/closp.edn" (*render* "resources/closp.edn")]
               ]))
 
 
@@ -98,8 +100,6 @@
            ["resources/templates/user/login.html" "resources/templates/user/login.html"]
            ["resources/templates/user/signup.html" "resources/templates/user/signup.html"]
            ["resources/templates/user/reallydelete.html" "resources/templates/user/reallydelete.html"]
-
-           ["resources/closp.edn" "resources/closp.edn"]
 
            ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
            ["resources/public/css/bootstrap-theme.min.css" "resources/public/css/bootstrap-theme.min.css"]
@@ -127,11 +127,12 @@
   (let [{:keys [options arguments errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
         ns (:namespace options)
         san-path (string/replace ns #"\." "/")
-        data {:name      name
-              :sanitized (sanitize name)
-              :san-path  san-path
-              :ns        ns
-              :year      (year)}]
+        data {:name           name
+              :sanitized      (sanitize name)
+              :san-path       san-path
+              :ns             ns
+              :year           (year)
+              :activationlink "{{activationlink}}"}]
     ;; Handle help and error conditions
     (cond
       (< (lein-generation) 2)

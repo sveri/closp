@@ -1,15 +1,15 @@
 (ns {{ns}}.routes.user
   (:require [compojure.core :refer [routes GET POST]]
-    [buddy.hashers :as hashers]
-    [ring.util.response :as resp]
-    [noir.session :as sess]
-    [noir.validation :as vali]
-    [taoensso.timbre :as timb]
-    [clojure-miniprofiler :as cjmp]
-    [{{ns}}.layout :as layout]
-    [{{ns}}.db.user :as db]
-    [{{ns}}.service.user :as uservice]
-    [{{ns}}.service.auth :as auth])
+            [buddy.hashers :as hashers]
+            [ring.util.response :as resp]
+            [noir.session :as sess]
+            [noir.validation :as vali]
+            [taoensso.timbre :as timb]
+            [clojure-miniprofiler :as cjmp]
+            [{{ns}}.layout :as layout]
+            [{{ns}}.db.user :as db]
+            [{{ns}}.service.user :as uservice]
+            [{{ns}}.service.auth :as auth])
   (:import (net.tanesha.recaptcha ReCaptchaImpl)))
 
 (defn- connectReCaptch [recaptcha_response_field recaptcha_challenge_field priv-recaptcha-key rec-domain]

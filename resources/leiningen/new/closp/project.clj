@@ -53,7 +53,9 @@
                  [datascript "0.11.6"]
                  [org.clojars.franks42/cljs-uuid-utils "0.1.3"]
 
-                 [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]]
+                 [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
+
+                 [com.taoensso/tower "3.0.2"]]
 
   :plugins [[de.sveri/closp-crud "0.1.3"]
             [lein-cljsbuild "1.0.5"]]

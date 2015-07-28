@@ -1,16 +1,16 @@
 (ns {{ns}}.middleware
   (:require [taoensso.timbre :as timbre]
-    [selmer.middleware :refer [wrap-error-page]]
-    [prone.middleware :refer [wrap-exceptions]]
-    [noir-exception.core :refer [wrap-internal-error]]
-    [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
-    [buddy.auth.accessrules :refer [wrap-access-rules]]
-    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-    [noir.session :as sess]
-    [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
-    [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
-    [{{ns}}.service.auth :refer [auth-backend]]
-    [{{ns}}.service.auth :as auth]))
+            [selmer.middleware :refer [wrap-error-page]]
+            [prone.middleware :refer [wrap-exceptions]]
+            [noir-exception.core :refer [wrap-internal-error]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+            [buddy.auth.accessrules :refer [wrap-access-rules]]
+            [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+            [noir.session :as sess]
+            [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
+            [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
+            [{{ns}}.service.auth :refer [auth-backend]]
+            [{{ns}}.service.auth :as auth]))
 
 (defonce in-memory-store-instance (in-memory-store))
 
