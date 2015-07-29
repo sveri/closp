@@ -7,7 +7,8 @@
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
-            [joplin.core :as j]))
+            [joplin.core :as j]
+            [foo.bar.components.locale :as l]))
 
 (def db-uri "jdbc:sqlite:./db/{{name}}-integ-test.sqlite")
 (def migrators "resources/migrators/sqlite")
@@ -36,9 +37,10 @@ Your Team"
 
 (defn test-system []
   (component/system-map
+    :locale (l/new-locale)
     :config (c/new-config test-config)
     :db (component/using (new-db) [:config])
-    :handler (component/using (new-handler) [:config])
+    :handler (component/using (new-handler) [:config :locale])
     :web (component/using (new-web-server) [:handler :config])))
 
 (def test-base-url (str "http://localhost:3001/"))
