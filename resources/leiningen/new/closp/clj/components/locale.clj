@@ -2,13 +2,10 @@
   (:require [com.stuartsierra.component :as component]))
 
 (def tconfig
-  {:fallback-locale :en-US
+  {:fallback-locale :en
    :dictionary
-                    {:en-US   {:user {:email_invalid "Invalid email address."
-                                      :content "Time to start building your site."}
-                               :missing  "<Missing translation: [%1$s %2$s %3$s]>"}
-                     :fr-FR {:page {:title "Voici un titre"
-                                    :content "Il est temps de commencer votre site."}}
+                    {:en   {:user {:email_invalid "Invalid email address."
+                                      :content "Time to start building your site."}}
                      }})
 
 (defrecord Locale []
