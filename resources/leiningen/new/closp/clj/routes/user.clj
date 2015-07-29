@@ -9,7 +9,8 @@
             [{{ns}}.layout :as layout]
             [{{ns}}.db.user :as db]
             [{{ns}}.service.user :as uservice]
-            [{{ns}}.service.auth :as auth])
+            [{{ns}}.service.auth :as auth]
+            [taoensso.tower :refer [t]])
   (:import (net.tanesha.recaptcha ReCaptchaImpl)))
 
 (defn- connectReCaptch [recaptcha_response_field recaptcha_challenge_field priv-recaptcha-key rec-domain]
