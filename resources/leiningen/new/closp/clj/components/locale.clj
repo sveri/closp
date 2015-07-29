@@ -3,9 +3,13 @@
 
 (def tconfig
   {:fallback-locale :en
-   :dictionary
-                    {:en   {:user {:email_invalid "Invalid email address."
-                                      :content "Time to start building your site."}}
+   :dictionary      {:en
+                     {:user
+                      {:email_invalid   "A valid email is required."
+                       :pass_min_length "Password must be at least 5 characters."
+                       :pass_match "Entered passwords do not match."
+                       :wrong_cur_pass "Current password was incorrect."
+                       :username_exists "This username already exists. Choose another."}}
                      }})
 
 (defrecord Locale []

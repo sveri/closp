@@ -24,6 +24,5 @@
 (deftest ^:integration signup
   (to (str s/test-base-url "user/signup"))
   (quick-fill-submit {"#email" "foo" }
-                     ;{"a#signup-btn" click}
                      {"#email" submit})
-  (is (.contains (text "body") "A valid email is required")))
+  (is (.contains (text "body") (s/t :en :user/email_invalid))))

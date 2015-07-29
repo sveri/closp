@@ -1,14 +1,15 @@
 (ns {{ns}}.web.setup
-  (:require [{{ns}}.components.components :refer [prod-system]]
-            [reloaded.repl :refer [go stop]]
+  (:require [reloaded.repl :refer [go stop]]
             [clj-webdriver.taxi :as w]
             [com.stuartsierra.component :as component]
+            [joplin.core :as j]
+            [taoensso.tower :as tower]
             [{{ns}}.components.server :refer [new-web-server new-web-server-prod]]
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
-            [joplin.core :as j]
-            [foo.bar.components.locale :as l]))
+            [{{ns}}.components.components :refer [prod-system]]
+            [{{ns}}.components.locale :as l]))
 
 (def db-uri "jdbc:sqlite:./db/{{name}}-integ-test.sqlite")
 (def migrators "resources/migrators/sqlite")
@@ -75,3 +76,7 @@ Your Team"
   (start-browser :htmlunit)
   (f)
   (stop-browser))
+
+;; locale stuff
+
+(def t (tower/make-t l/tconfig))
