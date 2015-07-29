@@ -21,8 +21,30 @@
   (to s/test-base-url)
   (is (.contains (text "body") "Foo!")))
 
-(deftest ^:integration signup
+(deftest ^:integration wrong_email
   (to (str s/test-base-url "user/signup"))
-  (quick-fill-submit {"#email" "foo" }
+  (quick-fill-submit {"#email" "foo"}
                      {"#email" submit})
   (is (.contains (text "body") (s/t :en :user/email_invalid))))
+
+(deftest ^:integration username_exists
+  (to (str s/test-base-url "user/signup"))
+  (quick-fill-submit {"#email" "admin@localhost.de"}
+                     {"#email" submit})
+  (is (.contains (text "body") (s/t :en :user/username_exists))))
+
+(deftest ^:integration passwords_dont_match
+  (to (str s/test-base-url "user/signup"))
+  (quick-fill-submit {"#email" "foo@bar.de"}
+                     {"#password" "123456"}
+                     {"#configrm" "23456"}
+                     {"#email" submit})
+  (is (.contains (text "body") (s/t :en :user/pass_match))))
+
+(deftest ^:integration passwords_min_length
+  (to (str s/test-base-url "user/signup"))
+  (quick-fill-submit {"#email" "foo@bar.de"}
+                     {"#password" "156"}
+                     {"#configrm" "23"}
+                     {"#email" submit})
+  (is (.contains (text "body") (s/t :en :user/pass_min_length))))
