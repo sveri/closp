@@ -203,10 +203,10 @@ The profiler is enabled in development only
 files.
 * Support for flash messages with global flash div
 * Self registration can be turned on or off in the closp.edn file in the resources folder.
+* Test2junit plugin to create parseable test results.
 
 ## Planned features
 
-* CRUD plugin to generate frontend to database CRUD for entities
 * adding reframe example
 * Whatever seems useful in the future.
 
@@ -246,6 +246,7 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ### 0.1.20
 
+* Adding for test2junit
 * switching db.users to db.user
 * Adding example database test
 * Integrating clj webdriver and adding example test

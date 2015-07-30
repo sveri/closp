@@ -103,7 +103,8 @@
 
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-figwheel "0.3.3"]
-                                      [joplin.lein "0.2.11"]]
+                                      [joplin.lein "0.2.11"]
+                                      [test2junit "1.1.1"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
 

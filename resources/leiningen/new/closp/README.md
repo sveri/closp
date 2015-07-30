@@ -174,6 +174,7 @@ The profiler is enabled in development only
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
 * Self registration can be turned on or off in the closp.edn file in the resources folder.
+* Test2junit plugin to create parseable test results.
 
 ## Planned features
 
