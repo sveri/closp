@@ -1,11 +1,14 @@
 {% extends "base.html" %}
+
+{% block title %}{{account_activated_title}}{% endblock %}
+
 {% block content %}
 
 <div class="container-fluid text-center" id="account-activated">
     <script type="text/javascript">
-        setTimeout(function() {window.location.href = "/";}, 3000);
+        setTimeout(function() {window.location.href = "/";}, 5000);
     </script>
-    <p>Account activated, you can login now. Redirecting to <a href="/">/</a> in three seconds...</p>
+    <p>{{account_activated}}</p>
 </div>
 
 {% endblock %}

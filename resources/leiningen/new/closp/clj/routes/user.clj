@@ -51,11 +51,14 @@
 (defn login-page [& [content]]
   (layout/render "user/login.html" content))
 
-(defn account-created-page [& [_]]
-  (layout/render "user/account-created.html"))
+(defn account-created-page [locale tconfig]
+  (layout/render "user/account-created.html" {:account_created_title (t locale tconfig :user/account_created_title)
+                                              :account_created (t locale tconfig :user/account_created)}))
 
-(defn account-activated-page []
-  (layout/render "user/account-activated.html"))
+(defn account-activated-page [locale tconfig]
+  (layout/render "user/account-activated.html"
+                 {:account_activated_title (t locale tconfig :user/account_activated_title)
+                  :account_activated (t locale tconfig :user/account_activated)}))
 
 (defn signup-page [{:keys [captcha-public-key]} & [errormap]]
   (layout/render "user/signup.html" (merge {:captcha-public-key captcha-public-key} errormap)))
@@ -63,7 +66,7 @@
 (defn activate-account [config id locale tconfig]
   (if (db/get-user-by-act-id id)
     (do (db/set-user-active id)
-        (account-activated-page))
+        (account-activated-page locale tconfig))
     (signup-page config {:email-error (t locale tconfig :user/activationid_wrong)})))
 
 (defn changepassword-page [& [msgmap]]
@@ -90,7 +93,7 @@
 (defn send-reg-mail [sendmail? email activationid config succ-cb-page error-cb-page locale tconfig]
   (if sendmail?
     (if (uservice/send-activation-email email activationid config)
-      (succ-cb-page)
+      (succ-cb-page locale tconfig)
       (error-cb-page {:email-error (t locale tconfig :user/email_failed)}))
     (succ-cb-page (layout/flash-result (t locale tconfig :user/user_added) "alert-success"))))
 
@@ -102,7 +105,7 @@
     (let [activationid (uservice/generate-activation-id)
           pw_crypted (hashers/encrypt password)]
       (db/create-user email pw_crypted activationid)
-      (send-reg-mail sendmail? email activationid config (partial succ-cb-page config) error-cb-page locale tconfig))
+      (send-reg-mail sendmail? email activationid config succ-cb-page error-cb-page locale tconfig))
     (let [email-error (vali/on-error :id first)
           pass-error (vali/on-error :pass first)
           confirm-error (vali/on-error :confirm first)
@@ -161,7 +164,7 @@
 
 (defn registration-routes [config]
   (routes
-    (GET "/user/accountcreated" [] (account-created-page))
+    (GET "/user/accountcreated" req (account-created-page (:locale req) (:tconfig req)))
     (GET "/user/activate/:id" [id :as req] (activate-account config id (:locale req) (:tconfig req)))
     (POST "/user/signup" [email password confirm recaptcha_response_field recaptcha_challenge_field :as req]
           (add-user email password confirm true account-created-page signup-page config (:locale req) (:tconfig req)

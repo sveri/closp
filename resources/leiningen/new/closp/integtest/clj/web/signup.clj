@@ -1,7 +1,8 @@
 (ns {{ns}}.web.signup
   (:require [clojure.test :refer :all]
             [clj-webdriver.taxi :refer :all]
-            [{{ns}}.web.setup :as s]))
+            [{{ns}}.web.setup :as s]
+            [{{ns}}.db.user :as db]))
 
 
 (defn server-setup [f]
@@ -16,6 +17,13 @@
 
 (use-fixtures :each browser-setup)
 (use-fixtures :once server-setup)
+
+(defn signup-valid-user []
+  (to (str s/test-base-url "user/signup"))
+  (quick-fill-submit {"#email" "foo@bar.de"}
+                     {"#password" "bbbbbb"}
+                     {"#confirm" "bbbbbb"}
+                     {"#email" submit}))
 
 (deftest ^:integration homepage-greeting
   (to s/test-base-url)
@@ -45,6 +53,18 @@
   (to (str s/test-base-url "user/signup"))
   (quick-fill-submit {"#email" "foo@bar.de"}
                      {"#password" "156"}
-                     {"#configrm" "23"}
+                     {"#confirm" "23"}
                      {"#email" submit})
   (is (.contains (text "body") (s/t :en :user/pass_min_length))))
+
+(deftest ^:integration account_created
+  (signup-valid-user)
+  (is (.contains (text "body  ") (s/t :en :user/account_created))))
+
+(deftest ^:integration account_validated
+  (signup-valid-user)
+  (->> (db/get-user-by-email "foo@bar.de")
+       :activationid
+       (str s/test-base-url "user/activate/")
+       to)
+  (is (.contains (text "body  ") (s/t :en :user/account_activated))))
