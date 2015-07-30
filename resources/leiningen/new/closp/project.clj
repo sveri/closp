@@ -144,6 +144,8 @@
                    :integration :integration
                    :all (constantly true)}
 
+  :test2junit-output-dir "test-results"
+
   :main {{ns}}.core
 
   :uberjar-name "{{name}}.jar"
