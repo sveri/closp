@@ -15,6 +15,8 @@
     {:host (get-in config [:smtp-data :host] "localhost")}
     (:data m)))
 
+(defmethod send-mail-by-type :test [_ _] true)
+
 (defn generate-activation-id []
   (str (java.util.UUID/randomUUID)))
 

@@ -18,7 +18,7 @@
 (def test-config
   {:hostname                "http://localhost/"
    :mail-from               "info@localhost.de"
-   :mail-type               :sendmail
+   :mail-type               :test
    :activation-mail-subject "Please activate your account."
    :activation-mail-body    "Please click on this link to activate your account: {{activationlink}}
 Best Regards,
