@@ -26,7 +26,7 @@ Best Regards,
 Your Team"
    :activation-placeholder  "{{activationlink}}"
    :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
-   :jdbc-url                "jdbc:sqlite:./db/{{name}}.sqlite"
+   :jdbc-url                db-uri
    :env                     :dev
    :registration-allowed?   true
    :captcha-enabled?        false
@@ -47,35 +47,25 @@ Your Team"
 (def test-base-url (str "http://localhost:3001/"))
 
 (defn start-browser [browser]
-  (w/set-driver! {:browser browser}))
-
-(defn stop-browser []
-  (w/quit))
-
-(defn start-server []
   (j/migrate-db
     {:db       {:type :sql,
                 :url  db-uri}
      :migrator migrators})
+  (w/set-driver! {:browser browser}))
+
+(defn stop-browser []
+  (j/rollback-db
+    {:db       {:type :sql,
+                :url  db-uri}
+     :migrator migrators})
+  (w/quit))
+
+(defn start-server []
   (reloaded.repl/set-init! test-system)
   (go))
 
 (defn stop-server []
-  (stop)
-  (j/rollback-db
-    {:db       {:type :sql,
-                :url  db-uri}
-     :migrator migrators}))
-
-(defn server-setup [f]
-  (start-server)
-  (f)
-  (stop-server))
-
-(defn browser-setup [f]
-  (start-browser :htmlunit)
-  (f)
-  (stop-browser))
+  (stop))
 
 ;; locale stuff
 
