@@ -74,7 +74,7 @@
 
 (defn logout [] (sess/clear!) (resp/redirect "/"))
 
-(defn login [{:keys [locale tconfig :as request]}]
+(defn login [{:keys [locale tconfig] :as request}]
   (let [username (get-in request [:form-params "username"])
         password (get-in request [:form-params "password"])
         nexturl (get-in request [:form-params "nexturl"])]
