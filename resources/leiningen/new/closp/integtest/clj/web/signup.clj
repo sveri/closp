@@ -4,19 +4,8 @@
             [{{ns}}.web.setup :as s]
             [{{ns}}.db.user :as db]))
 
-
-(defn server-setup [f]
-  (s/start-server)
-  (f)
-  (s/stop-server))
-
-(defn browser-setup [f]
-  (s/start-browser :htmlunit)
-  (f)
-  (s/stop-browser))
-
-(use-fixtures :each browser-setup)
-(use-fixtures :once server-setup)
+(use-fixtures :each s/browser-setup)
+(use-fixtures :once s/server-setup)
 
 (defn signup-valid-user []
   (to (str s/test-base-url "user/signup"))

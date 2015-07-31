@@ -67,6 +67,16 @@ Your Team"
 (defn stop-server []
   (stop))
 
+(defn server-setup [f]
+  (start-server)
+  (f)
+  (stop-server))
+
+(defn browser-setup [f]
+  (start-browser :htmlunit)
+  (f)
+  (stop-browser))
+
 ;; locale stuff
 
 (def t (tower/make-t l/tconfig))
