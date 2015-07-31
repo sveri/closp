@@ -43,9 +43,10 @@
   (vali-password? pass confirm locale tconfig)
   (not (vali/errors? :id :pass :confirm :captcha)))
 
-(defn admin-page [params]
+(defn admin-page [params locale tconfig]
   (let [users (cjmp/trace "all users" (db/get-all-users (get params :filter)))]
-    (layout/render "user/admin.html" (merge {:users users :roles auth/available-roles}
+    (layout/render "user/admin.html" (merge {:users       users :roles auth/available-roles
+                                             :admin_title (t locale tconfig :admin/title)}
                                             params))))
 
 (defn login-page [& [content]]
@@ -53,12 +54,12 @@
 
 (defn account-created-page [locale tconfig]
   (layout/render "user/account-created.html" {:account_created_title (t locale tconfig :user/account_created_title)
-                                              :account_created (t locale tconfig :user/account_created)}))
+                                              :account_created       (t locale tconfig :user/account_created)}))
 
 (defn account-activated-page [locale tconfig]
   (layout/render "user/account-activated.html"
                  {:account_activated_title (t locale tconfig :user/account_activated_title)
-                  :account_activated (t locale tconfig :user/account_activated)}))
+                  :account_activated       (t locale tconfig :user/account_activated)}))
 
 (defn signup-page [{:keys [captcha-public-key]} & [errormap]]
   (layout/render "user/signup.html" (merge {:captcha-public-key captcha-public-key} errormap)))
@@ -90,29 +91,6 @@
                            (login-page {:error (t locale tconfig :generic/some_error)})))
       (login-page {:error (t locale tconfig :user/username_wrong)}))))
 
-(defn send-reg-mail [sendmail? email activationid config succ-cb-page error-cb-page locale tconfig]
-  (if sendmail?
-    (if (uservice/send-activation-email email activationid config)
-      (succ-cb-page locale tconfig)
-      (error-cb-page {:email-error (t locale tconfig :user/email_failed)}))
-    (succ-cb-page (layout/flash-result (t locale tconfig :user/user_added) "alert-success"))))
-
-(defn add-user [email password confirm sendmail? succ-cb-page error-cb-page config locale tconfig
-                & [recaptcha_response_field recaptcha_challenge_field priv-recaptcha-key rec-domain]]
-  (if (valid-register? email password confirm (:captcha-allowed? config) locale tconfig
-                       recaptcha_response_field recaptcha_challenge_field
-                       priv-recaptcha-key rec-domain)
-    (let [activationid (uservice/generate-activation-id)
-          pw_crypted (hashers/encrypt password)]
-      (db/create-user email pw_crypted activationid)
-      (send-reg-mail sendmail? email activationid config succ-cb-page error-cb-page locale tconfig))
-    (let [email-error (vali/on-error :id first)
-          pass-error (vali/on-error :pass first)
-          confirm-error (vali/on-error :confirm first)
-          captcha-error (vali/on-error :captcha first)]
-      (error-cb-page config {:email-error   email-error :pass-error pass-error :confirm-error confirm-error :email email
-                             :captcha-error captcha-error}))))
-
 (defn changepassword [oldpassword password confirm locale tconfig]
   (let [user (db/get-user-by-email (uservice/get-logged-in-username))]
     (vali-password? password confirm locale tconfig oldpassword (:pass user))
@@ -141,10 +119,40 @@
         act (= "on" active)]
     (db/update-user user-uuid {:role role :is_active act}))
   (let [user (db/get-user-by-uuid user-uuid)]
-    (admin-page (layout/flash-result (t locale tconfig :user/updated (:email user)) "alert-success"))))
+    (admin-page (layout/flash-result (t locale tconfig :user/updated (:email user)) "alert-success") locale tconfig)))
 
 (defmethod update-user "Delete" [_ user-uuid _ _ _ _]
   (really-delete-page user-uuid))
+
+(defn send-reg-mail [email activationid config locale tconfig]
+  (if (uservice/send-activation-email email activationid config)
+    (account-created-page locale tconfig)
+    (signup-page {:email-error (t locale tconfig :user/email_failed)})))
+
+(defn- user-form-errors [email]
+  {:email-error   (vali/on-error :id first) :pass-error (vali/on-error :pass first)
+   :confirm-error (vali/on-error :confirm first) :email email
+   :captcha-error (vali/on-error :captcha first)})
+
+(defn- create-new-user! [email password & [activationid]]
+  (db/create-user email (hashers/encrypt password) (or activationid (uservice/generate-activation-id))))
+
+(defn admin-add-user [email password confirm config locale tconfig]
+  (if (valid-register? email password confirm (:captcha-allowed? config) locale tconfig)
+    (do (create-new-user! email password)
+        (layout/flash-result (t locale tconfig :user/user_added) "alert-success")
+        (admin-page {} locale tconfig))
+    (admin-page (user-form-errors email) locale tconfig)))
+
+(defn signup-user [email password confirm {:keys [recaptcha-domain private-recaptcha-key] :as config} locale tconfig
+                   response_field challenge_field]
+  (if (valid-register? email password confirm (:captcha-allowed? config) locale tconfig
+                       response_field challenge_field
+                       private-recaptcha-key recaptcha-domain)
+    (let [activationid (uservice/generate-activation-id)]
+      (create-new-user! email password)
+      (send-reg-mail email activationid config locale tconfig))
+    (signup-page config (user-form-errors email))))
 
 (defn user-routes [config]
   (routes
@@ -159,15 +167,14 @@
     (POST "/admin/user/delete" [user-uuid delete_cancel :as req]
           (really-delete user-uuid delete_cancel (:locale req) (:tconfig req)))
     (POST "/admin/user/add" [email password confirm :as req]
-          (add-user email password confirm false admin-page admin-page config (:locale req) (:tconfig req)))
-    (GET "/admin/users" [filter] (admin-page {:filter filter}))))
+          (admin-add-user email password confirm config (:locale req) (:tconfig req)))
+    (GET "/admin/users" [filter :as req] (admin-page {:filter filter} (:locale req) (:tconfig req)))))
 
 (defn registration-routes [config]
   (routes
     (GET "/user/accountcreated" req (account-created-page (:locale req) (:tconfig req)))
     (GET "/user/activate/:id" [id :as req] (activate-account config id (:locale req) (:tconfig req)))
     (POST "/user/signup" [email password confirm recaptcha_response_field recaptcha_challenge_field :as req]
-          (add-user email password confirm true account-created-page signup-page config (:locale req) (:tconfig req)
-                    recaptcha_response_field recaptcha_challenge_field (:private-recaptcha-key config)
-                    (:recaptcha-domain config)))
+          (signup-user email password confirm config (:locale req) (:tconfig req)
+                       recaptcha_response_field recaptcha_challenge_field))
     (GET "/user/signup" [] (signup-page config))))
