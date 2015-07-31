@@ -128,12 +128,14 @@
   (let [{:keys [options arguments errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
         ns (:namespace options)
         san-path (string/replace ns #"\." "/")
-        data {:name           name
-              :sanitized      (sanitize name)
-              :san-path       san-path
-              :ns             ns
-              :year           (year)
-              :activationlink "{{activationlink}}"}]
+        data {:name             name
+              :sanitized        (sanitize name)
+              :san-path         san-path
+              :ns               ns
+              :year             (year)
+              :activationlink   "{{activationlink}}"
+              :flash-alert-type "{{flash-alert-type}}"
+              :flash-message    "{{flash-message}}"}]
     ;; Handle help and error conditions
     (cond
       (< (lein-generation) 2)
