@@ -80,6 +80,8 @@
 
               [(str "integtest/clj/{{san-path}}/web/setup.clj") (*render* "integtest/clj/web/setup.clj")]
               [(str "integtest/clj/{{san-path}}/web/signup.clj") (*render* "integtest/clj/web/signup.clj")]
+              [(str "integtest/clj/{{san-path}}/web/user.clj") (*render* "integtest/clj/web/user.clj")]
+              [(str "integtest/clj/{{san-path}}/web/admin.clj") (*render* "integtest/clj/web/admin.clj")]
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
               ]))

@@ -246,6 +246,7 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ### 0.1.20
 
+* Fix #7 and #8
 * Adding for test2junit
 * switching db.users to db.user
 * Adding example database test

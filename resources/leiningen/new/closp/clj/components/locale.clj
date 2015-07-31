@@ -28,6 +28,9 @@
                        :signup_title            "Signup"
                        :account_created_title   "Account Created"
                        :account_activated_title "Account Activated"
+                       }
+                      :admin
+                      {:title "User Overview"
                        }}}})
 
 (defrecord Locale []
