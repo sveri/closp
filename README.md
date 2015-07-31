@@ -246,11 +246,12 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ### 0.1.20
 
+* Users in admin view are ordered by username
 * Fix #7 and #8
 * Adding for test2junit
 * switching db.users to db.user
 * Adding example database test
-* Integrating clj webdriver and adding example test
+* Integrating clj webdriver and adding several tests for admin and user interface
 * Adding alias for unit and integtest
 * Updating dependencies
 
