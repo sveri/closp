@@ -142,6 +142,8 @@
 
   :test-selectors {:unit (complement :integration)
                    :integration :integration
+                   :cur :cur                                ; one more selector for, give it freely to run only
+                                                            ; the ones you need currently
                    :all (constantly true)}
 
   :test2junit-output-dir "test-results"
