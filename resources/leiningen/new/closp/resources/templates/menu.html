@@ -4,9 +4,19 @@
         <li field="link-list" {% ifequal page "home/example.html" %} class="active"{%endifequal%}>
             <a href="/example">Example Page</a></li>
         {% ifequal "admin" role %}
-        <li field="link-list"  {% ifequal page "user/admin.html" %} class="active"{%endifequal%}>
-            <a href="/admin/users">Users</a></li>
-        {% endifequal %}
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                Admin
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li field="link-list"  {% ifequal page "user/admin.html" %} class="active"{%endifequal%}>
+                    <a href="/admin/users">Users</a></li>
+                <li field="link-list"  {% ifequal page "cc/index.html" %} class="active"{%endifequal%}>
+                    <a href="/admin/cc">CRUD</a></li>
+            </ul>
+    </li>
+    {% endifequal %}
     </ul>
     
     {% if identity %}

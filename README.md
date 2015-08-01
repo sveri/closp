@@ -244,6 +244,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.2.0
+
+
+
 ### 0.1.20
 
 * Users in admin view are ordered by username
@@ -265,7 +269,6 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
     [datascript "0.11.6"]  
     [ring/ring-devel "1.4.0"]  
     [pjstadig/humane-test-output "0.7.0"]  
-
 
 
 ### 0.1.19
