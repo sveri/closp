@@ -244,6 +244,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.21
+
+* Bugfix in test namespace
+
 ### 0.1.20
 
 * Users in admin view are ordered by username
