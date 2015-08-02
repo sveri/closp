@@ -1,7 +1,7 @@
 (ns {{ns}}.web.admin
   (:require [clojure.test :refer :all]
             [clj-webdriver.taxi :refer :all]
-            [foo.bar.web.setup :as s]))
+            [{{ns}}.web.setup :as s]))
 
 (use-fixtures :each s/browser-setup)
 (use-fixtures :once s/server-setup)
