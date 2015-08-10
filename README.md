@@ -15,7 +15,7 @@ A Leiningen template combining luminus, chestnut plus some goodies.
 * [System] (https://github.com/danielsz/system) integration from the start - wrapper on top of sierras components
 * User management with login/logout/registration and email activation (provided by postal)
 * Conditional Reader support
-* [closp-crud](https://github.com/sveri/closp) integration
+* [closp-crud](https://github.com/sveri/closp-crud) integration
 * Live reloading for both clojurescript and clojure out of the box.
 * Clojure miniprofiler enabled.
 * Recaptcha for Signup
