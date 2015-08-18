@@ -1,16 +1,17 @@
 (ns {{ns}}.middleware
   (:require [taoensso.timbre :as timbre]
-    [selmer.middleware :refer [wrap-error-page]]
-    [prone.middleware :refer [wrap-exceptions]]
-    [noir-exception.core :refer [wrap-internal-error]]
-    [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
-    [buddy.auth.accessrules :refer [wrap-access-rules]]
-    [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-    [noir.session :as sess]
-    [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
-    [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
-    [{{ns}}.service.auth :refer [auth-backend]]
-    [{{ns}}.service.auth :as auth]))
+            [selmer.middleware :refer [wrap-error-page]]
+            [prone.middleware :refer [wrap-exceptions]]
+            [noir-exception.core :refer [wrap-internal-error]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+            [buddy.auth.accessrules :refer [wrap-access-rules]]
+            [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
+            [noir.session :as sess]
+            [taoensso.tower.ring :refer [wrap-tower]]
+            [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
+            [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
+            [{{ns}}.service.auth :refer [auth-backend]]
+            [{{ns}}.service.auth :as auth]))
 
 (defonce in-memory-store-instance (in-memory-store))
 
@@ -30,14 +31,15 @@
    wrap-exceptions
    #(wrap-miniprofiler % {:store in-memory-store-instance})])
 
-(defn production-middleware [config]
+(defn production-middleware [config tconfig]
   [#(add-req-properties % config)
    #(wrap-access-rules % {:rules auth/rules })
    #(wrap-authorization % auth/auth-backend)
    #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+   #(wrap-tower % tconfig)
    wrap-anti-forgery
    wrap-trimmings])
 
-(defn load-middleware [config]
-  (concat (production-middleware config)
+(defn load-middleware [config tconfig]
+  (concat (production-middleware config tconfig)
           (when (= (:env config) :dev) development-middleware)))

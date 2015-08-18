@@ -15,7 +15,7 @@ A Leiningen template combining luminus, chestnut plus some goodies.
 * [System] (https://github.com/danielsz/system) integration from the start - wrapper on top of sierras components
 * User management with login/logout/registration and email activation (provided by postal)
 * Conditional Reader support
-* [closp-crud](https://github.com/sveri/closp) integration
+* [closp-crud](https://github.com/sveri/closp-crud) integration
 * Live reloading for both clojurescript and clojure out of the box.
 * Clojure miniprofiler enabled.
 * Recaptcha for Signup
@@ -56,6 +56,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Datascript with reagent example
 * Booststrap css styles
 * Example for clj-webdriver tests
+* Internationalization support with tower
   
 
 ## Showcase
@@ -188,6 +189,12 @@ Currently the support is some kind of tricky regarding support of latest firefox
 `profiles->dev->ddependencies` section of the `project.clj` file for some comments on this matter. It is possible to use
 both, the htmlunitdriver and an older firefox version or only a newer firefox version.
 
+## Internationalization
+
+Closp uses <https://github.com/ptaoussanis/tower> for internationalization. It is configured as a component in 
+ `your.ns.components.locale`. You have to add additional strings / translations there to use them in your web 
+  application. For examples look at `your.ns.routes.user`.
+
 ## Minor features.
 
 * Miniprofiler <https://github.com/yeller/clojure-miniprofiler> example in `routes\user.clj -> admin-page function`. 
@@ -196,10 +203,10 @@ The profiler is enabled in development only
 files.
 * Support for flash messages with global flash div
 * Self registration can be turned on or off in the closp.edn file in the resources folder.
+* Test2junit plugin to create parseable test results.
 
 ## Planned features
 
-* CRUD plugin to generate frontend to database CRUD for entities
 * adding reframe example
 * Whatever seems useful in the future.
 
@@ -239,14 +246,16 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ### 0.1.21
 
-* Updating joplin to 0.2.17 (Fix joplin #68 and therefore make it work with leining 2.5.2)
-* Starting to add core.typed annotations
+* Bugfix in test namespace
 
 ### 0.1.20
 
+* Users in admin view are ordered by username
+* Fix #7 and #8
+* Adding for test2junit
 * switching db.users to db.user
 * Adding example database test
-* Integrating clj webdriver and adding example test
+* Integrating clj webdriver and adding several tests for admin and user interface
 * Adding alias for unit and integtest
 * Updating dependencies
 

@@ -1,12 +1,13 @@
 (ns {{ns}}.db.user
-  (:require [korma.core :refer [select where insert delete values update set-fields defentity limit]]
+  (:require [korma.core :refer [select where insert delete values update set-fields defentity limit order]]
             [korma.db :refer [h2]])
   (:import (java.util UUID)))
 
 (defentity user)
 
 (defn get-all-users [ & [where-email-like]]
-  (select user (where {:email [like (str "%" where-email-like "%")]})))
+  (select user (where {:email [like (str "%" where-email-like "%")]})
+          (order :email :asc)))
 
 (defn get-user-by-email [email] (first (select user (where {:email email}) (limit 1))))
 (defn get-user-by-act-id [id] (first (select user (where {:activationid id}) (limit 1))))

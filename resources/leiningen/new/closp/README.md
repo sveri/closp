@@ -32,6 +32,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Datascript with reagent example
 * Booststrap css styles
 * Example for clj-webdriver tests
+* Internationalization using tower
 
 ## Docker
 
@@ -151,6 +152,12 @@ By default this will include your closp.edn config file in the build from resour
 the :env entry to :prod or something else than :dev.
 There are several ways to setup a more separated dev / staging / prod environment. Please lookup nomad for that.
 
+## Internationalization
+
+Closp uses <https://github.com/ptaoussanis/tower> for internationalization. It is configured as a component in 
+ `your.ns.components.locale`. You have to add additional strings / translations there to use them in your web 
+  application. For examples look at `your.ns.routes.user`.
+
 ## CLJ-Webdriver
 
 Closp comes with some examples on how to use clj webdriver in your projects for integration tests. They reside in
@@ -167,6 +174,7 @@ The profiler is enabled in development only
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
 * Self registration can be turned on or off in the closp.edn file in the resources folder.
+* Test2junit plugin to create parseable test results.
 
 ## Planned features
 

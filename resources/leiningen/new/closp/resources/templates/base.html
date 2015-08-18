@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Welcome to {{name}}</title>
+    <title>{% block title %}Welcome to {{name}}{% endblock %}</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     {% style "/css/screen.css" %}
