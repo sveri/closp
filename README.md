@@ -237,6 +237,11 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.21
+
+* Updating joplin to 0.2.17 (Fix joplin #68 and therefore make it work with leining 2.5.2)
+* Starting to add core.typed annotations
+
 ### 0.1.20
 
 * switching db.users to db.user
