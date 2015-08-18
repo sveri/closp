@@ -2,8 +2,8 @@
   (:require [postal.core :refer [send-message]]
             [taoensso.timbre :as timbre]
             [noir.session :as sess]
-            [clojure.core.typed :as t]))
-
+            [clojure.core.typed :as t]
+            [de.sveri.mct.types :as ty]))
 
 (defmulti send-mail-by-type (fn [m _] (get m :prot)))
 
@@ -44,9 +44,13 @@
     true
     (catch Exception e (timbre/error e "Could not send email!\n"))))
 
-(t/ann ^:no-check get-logged-in-username [-> String])
-(defn get-logged-in-username
-  "Needs a logged in user to retrieve the user name, otherwise returns empty String"
+(t/ann ^:no-check get-logged-in-user [-> ty/user])
+(defn get-logged-in-user
+  "Needs a logged in user to retrieve the user name and role, otherwise returns empty string map"
   []
-  (try (sess/get :identity)
-       (catch Exception e "")))
+  (try {:email (sess/get :identity "")
+        :role (sess/get :role "")}
+       (catch Exception _ {:email "" :role ""})))
+
+(t/ann ^:no-check get-logged-in-username [-> String])
+(defn get-logged-in-username [] (:email (get-logged-in-user)))

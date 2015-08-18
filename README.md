@@ -244,6 +244,11 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.22
+
+* Updating joplin to 0.2.17 because of a defect interfering with leiningen 2.5.2
+* Introducing core.typed
+
 ### 0.1.21
 
 * Bugfix in test namespace
