@@ -3,7 +3,7 @@
             [taoensso.timbre :as timbre]
             [noir.session :as sess]
             [clojure.core.typed :as t]
-            [de.sveri.mct.types :as ty]))
+            [{{ns}}.types :as ty]))
 
 (defmulti send-mail-by-type (fn [m _] (get m :prot)))
 
