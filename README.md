@@ -15,7 +15,7 @@ A Leiningen template combining luminus, chestnut plus some goodies.
 * [System] (https://github.com/danielsz/system) integration from the start - wrapper on top of sierras components
 * User management with login/logout/registration and email activation (provided by postal)
 * Conditional Reader support
-* [closp-crud](https://github.com/sveri/closp) integration
+* [closp-crud](https://github.com/sveri/closp-crud) integration
 * Live reloading for both clojurescript and clojure out of the box.
 * Clojure miniprofiler enabled.
 * Recaptcha for Signup
@@ -244,9 +244,14 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
-### 0.2.0
+### 0.1.22
 
+* Updating joplin to 0.2.17 because of a defect interfering with leiningen 2.5.2
+* Introducing core.typed
 
+### 0.1.21
+
+* Bugfix in test namespace
 
 ### 0.1.20
 
@@ -269,6 +274,7 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
     [datascript "0.11.6"]  
     [ring/ring-devel "1.4.0"]  
     [pjstadig/humane-test-output "0.7.0"]  
+
 
 
 ### 0.1.19

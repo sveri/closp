@@ -55,7 +55,9 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
-                 [com.taoensso/tower "3.0.2"]]
+                 [com.taoensso/tower "3.0.2"]
+
+                 [org.clojure/core.typed "0.3.11"]]
 
   :plugins [[de.sveri/closp-crud "0.1.3"]
             [lein-cljsbuild "1.0.5"]]
@@ -103,7 +105,7 @@
 
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-figwheel "0.3.3"]
-                                      [joplin.lein "0.2.11"]
+                                      [joplin.lein "0.2.17"]
                                       [test2junit "1.1.1"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
@@ -123,8 +125,8 @@
                                       [ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]
                                       [pjstadig/humane-test-output "0.7.0"]
-                                      [joplin.core "0.2.11"]
-                                      [joplin.jdbc "0.2.11"]]
+                                      [joplin.core "0.2.17"]
+                                      [joplin.jdbc "0.2.17"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]
