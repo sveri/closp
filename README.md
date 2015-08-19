@@ -4,6 +4,8 @@
 
 A Leiningen template combining luminus, chestnut plus some goodies.
 
+Mailing List: [Clojureverse](http://clojureverse.org/c/closp )
+
 ## Goals
 * Provide a full stack to get started with
 * Provide generated code which can be changed easily
