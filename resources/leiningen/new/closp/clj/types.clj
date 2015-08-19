@@ -1,4 +1,4 @@
-(ns {{ns}}.mct.types
+(ns {{ns}}.types
   (:require [clojure.core.typed :refer [HVec defalias HMap Num]])
   (:import (clojure.lang APersistentMap)))
 
