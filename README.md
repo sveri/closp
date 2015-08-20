@@ -4,7 +4,7 @@
 
 A Leiningen template combining luminus, chestnut plus some goodies.
 
-Mailing List: ![Clojureverse](https://img.shields.io/badge/clojureverse-org-green.svg)(http://clojureverse.org/c/closp)
+Mailing List: [![Clojureverse](https://img.shields.io/badge/clojureverse-org-green.svg)](http://clojureverse.org/c/closp)
 
 ## Goals
 * Provide a full stack to get started with
