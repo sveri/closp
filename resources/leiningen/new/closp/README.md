@@ -182,6 +182,13 @@ files.
 * Whatever seems useful in the future.
 
 ## FAQ
+
+### Could not find environment ':sqlite-dev-env'
+
+Leiningen 2.5.2 introduced a change which broke existing joplin versions. You have to update your joplin dependencies
+to at least 0.2.17 to make it work with leiningen 2.5.2
+
+
 ### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.
 
 This will happen only in dev mode for every page where you did not explicitly register your clojurescript with.

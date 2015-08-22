@@ -214,6 +214,12 @@ files.
 
 ## FAQ
 
+### Could not find environment ':sqlite-dev-env'
+
+Leiningen 2.5.2 introduced a change which broke existing joplin versions. You have to update your joplin dependencies
+to at least 0.2.17 to make it work with leiningen 2.5.2
+
+
 ### Could not find template closp on the classpath.
 
 This occurs when you run `lein new closp ...` with an older leiningen version. Please upgrade to the latest one.
