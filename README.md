@@ -252,6 +252,12 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.23
+
+* Preparing for closp-crud webui
+* Updating reagent to 0.5.1
+* Adding cljs-ajax 0.3.14
+
 ### 0.1.22
 
 * Updating joplin to 0.2.17 because of a defect interfering with leiningen 2.5.2

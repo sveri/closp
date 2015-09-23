@@ -25,7 +25,8 @@
                               :private-recaptcha-key (:private-recaptcha-key config)
                               :recaptcha-domain (:recaptcha-domain config)
                               :captcha-public-key (:captcha-public-key config)
-                              :port (:port config)}))
+                              :port (:port config)
+                              :closp-definitions (:closp-definitions config)}))
   (stop [component]
     (assoc component :config nil)))
 

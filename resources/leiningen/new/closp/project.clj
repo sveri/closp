@@ -17,7 +17,7 @@
                  [ring-server "0.4.0"]
                  [ring/ring-anti-forgery "1.0.0"]
                  [compojure "1.4.0"]
-                 [reagent "0.5.0"]
+                 [reagent "0.5.1"]
                  [environ "1.0.0"]
                  [leiningen "2.5.1"]
                  [http-kit "2.1.19"]
@@ -51,6 +51,7 @@
                  [org.danielsz/system "0.1.8"]
 
                  [datascript "0.11.6"]
+                 [cljs-ajax "0.3.14"]
                  [org.clojars.franks42/cljs-uuid-utils "0.1.3"]
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]

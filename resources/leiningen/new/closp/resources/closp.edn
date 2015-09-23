@@ -16,4 +16,5 @@ Your Team"
  :captcha-public-key      "your public captcha key"
  :private-recaptcha-key   "your private captcha key"
  :recaptcha-domain        "yourdomain"
- :port                    3000}
+ :port                    3000
+ :closp-definitions       "env/dev"}
