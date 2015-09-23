@@ -10,6 +10,7 @@
             [taoensso.tower.ring :refer [wrap-tower]]
             [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
             [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
+            [ring.middleware.transit :refer [wrap-transit-response]]
             [{{ns}}.service.auth :refer [auth-backend]]
             [{{ns}}.service.auth :as auth]))
 
@@ -37,6 +38,7 @@
    #(wrap-authorization % auth/auth-backend)
    #(wrap-internal-error % :log (fn [e] (timbre/error e)))
    #(wrap-tower % tconfig)
+   #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
    wrap-trimmings])
 

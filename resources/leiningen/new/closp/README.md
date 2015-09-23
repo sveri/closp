@@ -134,6 +134,12 @@ it would look like this:
          :method          method
          :params          content
          :headers         {:X-CSRF-Token (get-value "glob_anti_forgery")}})
+         
+## Transit and cljs-ajax
+
+There is an example on how to use cljs-ajax for doing ajax requests to the server. The request will use transit as
+a transport format. You can find that at the uri: `"/ajax/page/init"` and in the `ajax.cljs` file.  
+You need to run `lein figwheel` at least once to compile the clojurescript.
 
 ## Reagent and Datascript
 

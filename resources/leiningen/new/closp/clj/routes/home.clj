@@ -17,9 +17,17 @@
 (defn example-page []
   (layout/render "home/example.html"))
 
+(defn ajax-page []
+  (layout/render "home/ajax-example.html"))
+
+(defn ajax-initial-data []
+  (response {:ok "fooo" :loaded true}))
+
 (defroutes home-routes
            (GET "/contact" [] (contact-page))
            (GET "/tos" [] (tos-page))
            (GET "/cookies" [] (cookies-page))
            (GET "/" [] (home-page))
-           (GET "/example" [] (example-page)))
+           (GET "/example" [] (example-page))
+           (GET "/ajax/page" [] (ajax-page))
+           (GET "/ajax/page/init" [] (ajax-initial-data)))
