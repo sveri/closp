@@ -76,6 +76,7 @@
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
               [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
+              [(str "resources/templates/home/ajax-example.html") (*render* "resources/templates/home/ajax-example.html")]
 
               ["README.md" (*render* "README.md")]
 
@@ -99,6 +100,7 @@
            ["resources/templates/home/cookies.html" "resources/templates/home/cookies.html"]
            ["resources/templates/home/index.html" "resources/templates/home/index.html"]
            ["resources/templates/home/tos.html" "resources/templates/home/tos.html"]
+
            ["resources/templates/user/account-activated.html" "resources/templates/user/account-activated.html"]
            ["resources/templates/user/account-created.html" "resources/templates/user/account-created.html"]
            ["resources/templates/user/admin.html" "resources/templates/user/admin.html"]

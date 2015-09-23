@@ -1,6 +1,6 @@
 (ns {{ns}}.ajax
    (:require [reagent.core :as reagent :refer [atom]]
-             [foo.bar.helper :as h]
+             [{{ns}}.helper :as h]
              [ajax.core :refer [GET]]))
 
 (def state (atom {}))
@@ -19,5 +19,5 @@
 
 (defn ^:export main []
   (init-state)
-  (reagent/render-component (fn [] [entry-point]) (h/get-elem "cc-main")))
+  (reagent/render-component (fn [] [entry-point]) (h/get-elem "app")))
 
