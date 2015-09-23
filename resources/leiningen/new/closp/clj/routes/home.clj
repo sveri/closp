@@ -1,6 +1,7 @@
 (ns {{ns}}.routes.home
   (:require [compojure.core :refer [defroutes GET]]
-            [{{ns}}.layout :as layout]))
+            [{{ns}}.layout :as layout]
+            [ring.util.response :refer [response]]))
 
 (defn home-page []
   (layout/render "home/index.html"))
