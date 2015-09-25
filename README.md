@@ -2,6 +2,8 @@
 
 ![Build Status](http://sveri.de:8082/buildStatus/icon?job=closp)
 
+[![Join the chat at https://gitter.im/sveri/closp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sveri/closp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 A Leiningen template combining luminus, chestnut plus some goodies.
 
 Mailing List: [![Clojureverse](https://rawgit.com/clojureverse/clojureverse-assets/master/clojureverse-org-green.svg)](http://clojureverse.org/c/closp)
