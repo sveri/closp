@@ -69,6 +69,9 @@
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "src/cljs/{{san-path}}/ajax.cljs") (*render* "cljs/ajax.cljs")]
+
+              [(str "src/cljs/{{san-path}}/cc/core.cljs") (*render* "cljs/cc/core.cljs")]
+
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 
               [(str "src/cljc/{{san-path}}/cljccore.cljc") (*render* "cljc/cljccore.cljc")]
@@ -77,6 +80,7 @@
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
               [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
               [(str "resources/templates/home/ajax-example.html") (*render* "resources/templates/home/ajax-example.html")]
+              [(str "resources/templates/cc/index.html") (*render* "resources/templates/cc/index.html")]
 
               ["README.md" (*render* "README.md")]
 
@@ -118,7 +122,7 @@
            ["resources/public/js/jquery-2.0.3.min.js" "resources/public/js/jquery-2.0.3.min.js"]
            ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
 
-           ["env/dev/user.edn" "env/dev/user.edn"]
+           ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]
 
            ["migrators/h2/user-20150720T132915Z.down.sql" "resources/migrators/h2/user-20150720T132915Z.down.sql"]
            ["migrators/h2/user-20150720T132915Z.up.sql" "resources/migrators/h2/user-20150720T132915Z.up.sql"]
