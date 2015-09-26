@@ -1,6 +1,6 @@
 (ns {{ns}}.routes.cc
   (:require [compojure.core :refer [routes GET POST]]
-            [foo.bar.layout :as layout]
+            [{{ns}}.layout :as layout]
             [ring.util.response :refer [response]]))
 
 (defn cc-page []
