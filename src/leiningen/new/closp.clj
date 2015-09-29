@@ -65,6 +65,7 @@
 
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
+              [(str "src/clj/{{san-path}}/service/cc.clj") (*render* "clj/service/cc.clj")]
 
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
