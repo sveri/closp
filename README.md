@@ -263,6 +263,11 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.24
+
+* Namespace fixes
+* Fixes with test setup
+
 ### 0.1.23
 
 * Preparing for closp-crud webui

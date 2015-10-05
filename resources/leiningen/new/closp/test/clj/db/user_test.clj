@@ -8,18 +8,15 @@
 (def db-uri "jdbc:sqlite:./db/{{name}}-test.sqlite")
 (def migrators "resources/migrators/sqlite")
 
-(k/defdb temp-db db-uri)
-
-; This fixture is intended to perform setup/teardown for each individual test in the namespace. Note that it assumes the :once fixture will handle creating/destroying the DB, while we only create/drop tables within the DB.
+; This fixture is intended to perform setup/teardown for each individual test in the namespace.
+; Note that it assumes the :once fixture will handle creating/destroying the DB,
+; while we only create/drop tables within the DB.
 (defn db-setup [f]
   (do
-    (j/rollback-db
+    (k/defdb temp-db db-uri)
+    (j/reset-db
       {:db {:type :sql,
             :url db-uri}
-       :migrator migrators})
-    (j/migrate-db
-      {:db       {:type :sql,
-                  :url  db-uri}
        :migrator migrators}))
   (f))
 
