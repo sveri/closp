@@ -2,7 +2,8 @@
   (:require [compojure.core :refer [routes GET POST]]
             [{{ns}}.layout :as layout]
             [{{ns}}.service.cc :as serv-cc]
-            [ring.util.response :refer [response]]))
+            [ring.util.response :refer [response]])
+  (:import (java.io File)))
 
 (defn cc-page []
   (layout/render "cc/index.html"))
