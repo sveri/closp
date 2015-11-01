@@ -7,13 +7,12 @@ pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port
-/resources/public/js
 /out
 /.repl
 .idea
 *.iml
 **/out/*
-/resources/public/js/compiled/gen
+/resources/public/js/compiled
 profiles.clj
 Procfile
 /db

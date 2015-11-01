@@ -263,6 +263,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.25
+
+* adapt .gitignore to include _js_ folder
+
 ### 0.1.24
 
 * Namespace fixes
