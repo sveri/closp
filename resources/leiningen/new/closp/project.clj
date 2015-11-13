@@ -61,7 +61,7 @@
 
                  [org.clojure/core.typed "0.3.11"]]
 
-  :plugins [[de.sveri/closp-crud "0.1.3"]
+  :plugins [[de.sveri/closp-crud "0.1.4"]
             [lein-cljsbuild "1.0.5"]]
 
   ;database migrations
