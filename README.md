@@ -265,7 +265,7 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ### 0.1.25
 
-* Updating closp-crud to 0.1.4
+* adapt .gitignore to include _js_ folder
 
 ### 0.1.24
 
