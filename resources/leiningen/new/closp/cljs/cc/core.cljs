@@ -5,8 +5,8 @@
             [{{ns}}.helper :as h]
             [{{ns}}.closp-schema :as schem]))
 
-(def default-column (s/validate schem/default-cljs-column
-                                {:name "" :type "Varchar" :length 100 :nullable false :id 1}))
+(def default-column
+  (s/validate schem/default-cljs-column {:name "" :type "varchar" :length 100 :nullable false :id 1}))
 
 (def new-entity-definition
   (s/validate schem/new-entity-definition
@@ -43,52 +43,56 @@
         [:label label-name]
         form-field]])
 
-(defn foo [e]
-      (-> e .-target .-checked))
+(s/defn update-new-entity-column :- nil
+        [id :- s/Num key :- s/Keyword val :- (s/->Either [s/Num s/Str s/Bool])]
+        (reset! state
+                (spec/transform [:new-entity :columns spec/ALL #(= (:id %) id)]
+                                #(assoc % key val)
+                                @state)))
 
 (defn ->field-description [column-id]
-      (let [field (first (filter #(= column-id (:id %)) (get-in @state [:new-entity :columns])))
-            field-idx (.indexOf (to-array (get-in @state [:new-entity :columns])) field)]
-           (println "idx: " field-idx)
+      (let [field (first (filter #(= column-id (:id %)) (get-in @state [:new-entity :columns])))]
            [:div
             [:div.row
              [:div.col-md-4
               (wrap-with-form
                 "Field Name"
                 [:input.form-control
-                 {:on-change   #(swap! state assoc-in [:new-entity :columns column-id :name] (-> % .-target .-value))
+                 {:on-change   #(update-new-entity-column column-id :name (-> % .-target .-value))
                   :placeholder "Field Name" :value (:name field)}])]
              [:div.col-md-4
               [:div.row
                [:div.col-md-8
                 (wrap-with-form "Field Type"
                                 [:select.form-control
-                                 {:on-change #(swap! state assoc-in [:new-entity :columns column-id :type] (-> % .-target .-value))
-                                  :value     (get-in @state [:new-entity :columns column-id :type])}
-                                 [:option {:value "Varchar"} "Varchar"]
-                                 [:option {:value "Tex"} "Text"]
-                                 [:option {:value "Boolean"} "Boolean"]])]
-               (when (= "Varchar" (:type field))
-                     [:div.col-md-4 (wrap-with-form "Length"
-                                                    [:input.form-control {:value (:length field)
-                                                                          :on-change #(println "changed")}])])]]
+                                 {:on-change #(update-new-entity-column column-id :type (-> % .-target .-value))
+                                  :value     (:type field)}
+                                 [:option {:value "varchar"} "Varchar"]
+                                 [:option {:value "text"} "Text"]
+                                 [:option {:value "boolean"} "Boolean"]])]
+               (when (= "varchar" (:type field))
+                     [:div.col-md-4
+                      (wrap-with-form "Length"
+                                      [:input.form-control
+                                       {:value     (:length field)
+                                        :on-change #(update-new-entity-column column-id :length
+                                                                              (js/parseInt (-> % .-target .-value)))}])])]]
              [:div.col-md-4
               (wrap-with-form "Nullable"
                               [:input.form-control
-                               {:type     "checkbox"
-                                :checked  (get-in @state [:new-entity :columns column-id :nullable])
-                                :on-click #(let [cols (get-in @state [:new-entity :columns])
-                                                 updated-cols (update cols field-idx assoc :nullable (-> % .-target .-checked))]
-                                                (swap! state assoc-in [:new-entity :columns] updated-cols))}])]]]))
+                               {:type      "checkbox"
+                                :checked   (:nullable field)
+                                :on-change #(update-new-entity-column column-id :nullable (-> % .-target .-checked))}])]]]))
 
 (defn middle-panel []
       (let [fields-count (get-in @state [:new-entity :cur-id])]
            [:div
             (wrap-with-form "Entity Name"
-                            [:input.form-control {:placeholder "Entity Name"
-                                                  :on-change   #(swap! state assoc-in [:new-entity :name]
-                                                                       (-> % .-target .-value))
-                                                  :value       (get-in @state [:new-entity :name])}])
+                            [:input.form-control
+                             {:placeholder "Entity Name"
+                              :required    true
+                              :on-change   #(swap! state assoc-in [:new-entity :name] (-> % .-target .-value))
+                              :value       (get-in @state [:new-entity :name])}])
             [:hr]
             (for [field-nr (range 1 (+ 1 fields-count))]
                  ^{:key field-nr}
@@ -106,8 +110,8 @@
                      {:params        (:new-entity @state)
 
                       :headers       {:X-CSRF-Token (h/get-value "__anti-forgery-token")}
-                      :handler       (println "succ: " %)
-                      :error-handler (println "some error occured: " %)})} "Save"]]))
+                      :handler       (fn [e] (println "succ: "))
+                      :error-handler (fn [e] (println "some error occured: " e))})} "Save"]]))
 
 (defn page []
       (if (initialized?)
@@ -117,8 +121,9 @@
         [:div "Loading"]))
 
 (defn init-state []
-      (GET "/admin/cc/entities" {:handler       #(swap! state assoc :ex-entities (:ex-entities %))
-                                 :error-handler #(println "some error occured: " %)}))
+      (GET "/admin/cc/entities"
+           {:handler       #(swap! state assoc :ex-entities (:ex-entities %))
+            :error-handler #(println "some error occured: " %)}))
 
 (defn ^:export main []
       (init-state)
