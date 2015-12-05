@@ -1,5 +1,8 @@
 (ns {{name}}.dev
-  (:require [{{ns}}.core :as core]))
+  (:require [schema.core :as s]
+            [{{ns}}.core :as core]))
+
+(s/set-fn-validation! true)
 
 (enable-console-print!)
 
