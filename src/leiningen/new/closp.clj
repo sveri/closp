@@ -76,6 +76,7 @@
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 
               [(str "src/cljc/{{san-path}}/cljccore.cljc") (*render* "cljc/cljccore.cljc")]
+              [(str "src/cljc/{{san-path}}/closp_schema.cljc") (*render* "cljc/closp_schema.cljc")]
 
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]

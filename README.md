@@ -267,6 +267,9 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 * adapt .gitignore to include _js_ folder
 * Updating closp-crud to 0.1.4
+* Updating cljs to "1.7.170"
+* Updating figwheel to "0.5.0-2"
+* still working on cc - alpha status
 
 ### 0.1.24
 

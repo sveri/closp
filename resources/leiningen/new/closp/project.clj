@@ -7,7 +7,7 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [org.clojure/clojurescript "0.0-3308"]
+                 [org.clojure/clojurescript "1.7.170"]
 
                  [org.clojure/core.cache "0.6.4"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
@@ -106,7 +106,7 @@
   :profiles {:dev     {:repl-options {:init-ns          {{ns}}.user}
 
                        :plugins      [[lein-ring "0.9.0"]
-                                      [lein-figwheel "0.3.3"]
+                                      [lein-figwheel "0.5.0-2"]
                                       [joplin.lein "0.2.17"]
                                       [test2junit "1.1.1"]]
 
