@@ -86,16 +86,11 @@
   :cljsbuild
   {:builds {:dev {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
                   :figwheel {:css-dirs ["resources/public/css"]             ;; watch and update CSS
-                             :on-jsload "{{name}}.dev/main  "}
+                             :on-jsload "{{name}}.dev/main"}
                   :compiler     {:main           "{{name}}.dev"
                                  :asset-path     "/js/compiled/out"
                                  :output-to      "resources/public/js/compiled/app.js"
-                                 :output-dir     "resources/public/js/compiled/out"
-                                 :source-map     "resources/public/js/compiled/out.js.map"
-                                 :optimizations  :none
-                                 :cache-analysis true
-                                 :pretty-print   true
-                                 :source-map-timestamp true}}
+                                 :output-dir     "resources/public/js/compiled/out"}}
             :adv {:source-paths ["src/cljs" "src/cljc"]
                   :compiler     {:output-to     "resources/public/js/compiled/app.js"
                                  ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
