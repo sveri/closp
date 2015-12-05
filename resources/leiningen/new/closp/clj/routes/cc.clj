@@ -5,7 +5,6 @@
             [{{ns}}.layout :as layout]
             [{{ns}}.service.cc :as serv-cc]
             [{{ns}}.closp-schema :as st])
-
   (:import (java.io File)
     (java.util UUID)) )
 

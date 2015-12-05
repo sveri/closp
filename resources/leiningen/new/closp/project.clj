@@ -50,10 +50,10 @@
 
                  [org.danielsz/system "0.1.8"]
 
-                 [datascript "0.11.6"]
+                 [datascript "0.13.3"]
                  [cljs-ajax "0.3.14"]
                  [ring-transit "0.1.3"]
-                 [org.clojars.franks42/cljs-uuid-utils "0.1.3"]
+                 [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 

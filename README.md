@@ -269,6 +269,8 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 * Updating closp-crud to 0.1.4
 * Updating cljs to "1.7.170"
 * Updating figwheel to "0.5.0-2"
+* Updating cljs-uuid to [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
+* Updating datascript to [datascript "0.13.3"]
 * still working on cc - alpha status
 
 ### 0.1.24
