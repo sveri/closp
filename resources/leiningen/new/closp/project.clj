@@ -59,7 +59,9 @@
 
                  [com.taoensso/tower "3.0.2"]
 
-                 [org.clojure/core.typed "0.3.11"]]
+                 [org.clojure/core.typed "0.3.11"]
+                 [prismatic/plumbing "0.5.0"]
+                 [prismatic/schema "1.0.3"]]
 
   :plugins [[de.sveri/closp-crud "0.1.4"]
             [lein-cljsbuild "1.0.5"]]
