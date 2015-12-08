@@ -11,22 +11,7 @@
 (defrecord Config [config]
   component/Lifecycle
   (start [component]
-    (assoc component :config {:hostname (:hostname config)
-                              :mail-from (:mail-from config)
-                              :mail-type (:mail-type config)
-                              :activation-mail-subject (:activation-mail-subject config)
-                              :activation-mail-body (:activation-mail-body config)
-                              :activation-placeholder (:activation-placeholder config)
-                              :smtp-data (:smtp-data config) ; passed directly to postmap like {:host "postfix"}
-                              :jdbc-url (:jdbc-url config)
-                              :env (:env config)
-                              :registration-allowed? (:registration-allowed? config)
-                              :captcha-enabled? (:captcha-enabled? config)
-                              :private-recaptcha-key (:private-recaptcha-key config)
-                              :recaptcha-domain (:recaptcha-domain config)
-                              :captcha-public-key (:captcha-public-key config)
-                              :port (:port config)
-                              :closp-definitions (:closp-definitions config)}))
+    (assoc component :config config))
   (stop [component]
     (assoc component :config nil)))
 
