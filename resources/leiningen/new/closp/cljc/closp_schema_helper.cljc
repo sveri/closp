@@ -1,6 +1,4 @@
-(ns foo.bar.closp-schema-helper)
-
-
+(ns {{ns}}.closp-schema-helper)
 
 (defmulti get-type-of-column (fn [v] (seq? (second v))))
 (defmethod get-type-of-column true [_] :varchar)
