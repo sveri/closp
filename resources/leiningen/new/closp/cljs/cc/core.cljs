@@ -2,6 +2,7 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [ajax.core :refer [GET]]
             [schema.core :as s :include-macros true]
+            [com.rpl.specter :as spec]
             [{{ns}}.helper :as h]
             [{{ns}}.closp-schema :as schem]))
 
@@ -9,7 +10,7 @@
   (s/validate schem/default-cljs-column {:name "" :type "varchar" :length 100 :nullable false :id 1}))
 
 (def new-entity-definition
-  (s/validate schem/new-entity-definition
+  (s/validate schem/cljs-new-entity-definition
               {:cur-id  1 :name ""
                :columns [default-column]}))
 
@@ -84,6 +85,18 @@
                                 :checked   (:nullable field)
                                 :on-change #(update-new-entity-column column-id :nullable (-> % .-target .-checked))}])]]]))
 
+(defn post-new-entity [_]
+      (POST "/admin/cc/entities"
+            {:params        (:new-entity @state)
+
+             :headers       {:X-CSRF-Token (h/get-value "__anti-forgery-token")}
+             :handler       (fn [e] (println (:added-entity e))
+                                (println (:ex-entities @state))
+                                (swap! state update-in [:ex-entities] conj
+                                       (:added-entity e))
+                                )
+             :error-handler (fn [e] (println "some error occured: " e))}))
+
 (defn middle-panel []
       (let [fields-count (get-in @state [:new-entity :cur-id])]
            [:div
@@ -105,13 +118,7 @@
                                      (assoc default-column :id next-id)))}
              "Add Field"]
             [:button.btn.btn-primary.pull-right
-             {:on-click
-              #(POST "/admin/cc/entities"
-                     {:params        (:new-entity @state)
-
-                      :headers       {:X-CSRF-Token (h/get-value "__anti-forgery-token")}
-                      :handler       (fn [e] (println "succ: "))
-                      :error-handler (fn [e] (println "some error occured: " e))})} "Save"]]))
+             {:on-click post-new-entity} "Save"]]))
 
 (defn page []
       (if (initialized?)

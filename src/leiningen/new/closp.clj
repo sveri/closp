@@ -77,6 +77,7 @@
 
               [(str "src/cljc/{{san-path}}/cljccore.cljc") (*render* "cljc/cljccore.cljc")]
               [(str "src/cljc/{{san-path}}/closp_schema.cljc") (*render* "cljc/closp_schema.cljc")]
+              [(str "src/cljc/{{san-path}}/closp_schema_helper.cljc") (*render* "cljc/closp_schema_helper.cljc")]
 
 
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
