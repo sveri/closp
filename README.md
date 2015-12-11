@@ -263,6 +263,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.26
+* Updating lein-cljsbuild to 1.1.1
+* Bugfix in cljs ns
+
 ### 0.1.25
 
 * adapt .gitignore to include _js_ folder
@@ -271,7 +275,6 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 * Updating figwheel to "0.5.0-2"
 * Updating cljs-uuid to [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 * Updating datascript to [datascript "0.13.3"]
-* Updating lein-cljsbuild to 1.1.1
 * still working on cc - alpha status
 
 ### 0.1.24
