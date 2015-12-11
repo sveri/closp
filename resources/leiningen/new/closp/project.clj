@@ -66,7 +66,7 @@
                  [com.rpl/specter "0.8.0"]]
 
   :plugins [[de.sveri/closp-crud "0.1.4"]
-            [lein-cljsbuild "1.0.5"]]
+            [lein-cljsbuild "1.1.1"]]
 
   ;database migrations
   :joplin {:migrators {:sqlite-mig "resources/migrators/sqlite"

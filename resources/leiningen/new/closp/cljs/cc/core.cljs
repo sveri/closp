@@ -1,6 +1,6 @@
 (ns {{ns}}.cc.core
   (:require [reagent.core :as reagent :refer [atom]]
-            [ajax.core :refer [GET]]
+            [ajax.core :refer [GET POST]]
             [schema.core :as s :include-macros true]
             [com.rpl.specter :as spec]
             [{{ns}}.helper :as h]
