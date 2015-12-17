@@ -263,6 +263,10 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 ## Changes
 
+### 0.1.27
+
+* Updating timbre to [com.taoensso/timbre "4.1.4"]
+
 ### 0.1.26
 * Updating lein-cljsbuild to 1.1.1
 * Bugfix in cljs ns

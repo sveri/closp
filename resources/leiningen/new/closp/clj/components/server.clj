@@ -4,7 +4,6 @@
             [ring.server.standalone :refer [serve]]
             [org.httpkit.server :refer [run-server]]
             [cronj.core :as cronj]
-            [taoensso.timbre.appenders.rotor :as rotor]
             [selmer.parser :as parser]
             [{{ns}}.session :as session]))
 
@@ -22,18 +21,6 @@
    an app server such as Tomcat
    put any initialization code here"
   [config]
-  (timbre/set-config!
-    [:appenders :rotor]
-    {:min-level :info
-     :enabled? true
-     :async? false ; should be always false for rotor
-     :max-message-per-msecs nil
-     :fn rotor/appender-fn})
-
-  (timbre/set-config!
-    [:shared-appender-config :rotor]
-    {:path "{{name}}" :max-size (* 512 1024) :backlog 10})
-
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (cronj/start! session/cleanup-job)
