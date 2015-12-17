@@ -1,7 +1,6 @@
 (ns {{ns}}.components.server
   (:require [com.stuartsierra.component :as component]
             [taoensso.timbre :as timbre]
-            [ring.server.standalone :refer [serve]]
             [org.httpkit.server :refer [run-server]]
             [cronj.core :as cronj]
             [selmer.parser :as parser]
@@ -26,27 +25,6 @@
   (cronj/start! session/cleanup-job)
   (timbre/info "\n-=[ {{name}} started successfully"
                (when (= (:env config) :dev) "using the development profile") "]=-"))
-
-(defrecord WebServer [handler config]
-  component/Lifecycle
-  (start [component]
-    (let [handler (:handler handler)
-          config (:config config)
-          server (serve handler
-                        {:port         (:port config)
-                         :init         (partial init config)
-                         :auto-reload? true
-                         :destroy      destroy
-                         :join?        false
-                         :open-browser? false})]
-      (assoc component :server server)))
-  (stop [component]
-    (let [server (:server component)]
-      (when server (.stop server)))
-    component))
-
-(defn new-web-server []
-  (map->WebServer {}))
 
 (defrecord WebServerProd [handler config]
   component/Lifecycle

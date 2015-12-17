@@ -11,6 +11,7 @@
             [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
             [clojure-miniprofiler :refer [wrap-miniprofiler in-memory-store]]
             [ring.middleware.transit :refer [wrap-transit-response]]
+            [ring.middleware.reload :refer [wrap-reload]]
             [{{ns}}.service.auth :refer [auth-backend]]
             [{{ns}}.service.auth :as auth]))
 
@@ -30,6 +31,7 @@
 (def development-middleware
   [wrap-error-page
    wrap-exceptions
+   wrap-reload
    #(wrap-miniprofiler % {:store in-memory-store-instance})])
 
 (defn production-middleware [config tconfig]

@@ -4,7 +4,7 @@
             [com.stuartsierra.component :as component]
             [joplin.core :as j]
             [taoensso.tower :as tower]
-            [{{ns}}.components.server :refer [new-web-server new-web-server-prod]]
+            [{{ns}}.components.server :refer [new-web-server-prod]]
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
@@ -42,7 +42,7 @@ Your Team"
     :config (c/new-config test-config)
     :db (component/using (new-db) [:config])
     :handler (component/using (new-handler) [:config :locale])
-    :web (component/using (new-web-server) [:handler :config])))
+    :web (component/using (new-web-server-prod) [:handler :config])))
 
 (def test-base-url (str "http://localhost:3001/"))
 

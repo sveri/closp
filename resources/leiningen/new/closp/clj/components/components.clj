@@ -3,7 +3,7 @@
     [com.stuartsierra.component :as component]
     (system.components
       [repl-server :refer [new-repl-server]])
-    [{{ns}}.components.server :refer [new-web-server new-web-server-prod]]
+    [{{ns}}.components.server :refer [new-web-server-prod]]
     [{{ns}}.components.handler :refer [new-handler]]
     [{{ns}}.components.config :as c]
     [{{ns}}.components.db :refer [new-db]]
@@ -16,7 +16,7 @@
     :config (c/new-config (c/prod-conf-or-dev))
     :db (component/using (new-db) [:config])
     :handler (component/using (new-handler) [:config :locale])
-    :web (component/using (new-web-server) [:handler :config])))
+    :web (component/using (new-web-server-prod) [:handler :config])))
 
 
 (defn prod-system []
