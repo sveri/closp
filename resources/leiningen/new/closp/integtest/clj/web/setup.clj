@@ -2,6 +2,7 @@
   (:require [clj-webdriver.taxi :as w]
             [joplin.core :as j]
             [taoensso.tower :as tower]
+            [mount.core :as mount]
             [{{ns}}.components.config]
             [{{ns}}.components.locale :refer [get-tconfig]]))
 
