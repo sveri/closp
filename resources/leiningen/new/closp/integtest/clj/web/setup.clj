@@ -22,8 +22,7 @@ Your Team"
    :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
    :jdbc-url                db-uri
    :env                     :dev
-   :registration-allowed?   true
-   :captcha-enabled?        false
+   :registration-allowed?   true :captcha-enabled?        false
    :captcha-public-key      "your public captcha key"
    :private-recaptcha-key   "your private captcha key"
    :recaptcha-domain        "yourdomain"

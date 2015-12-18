@@ -1,6 +1,6 @@
 (ns {{ns}}.components.locale)
 
-(def tconfig
+(defn get-tconfig []
   {:tconfig
    {:fallback-locale :en
     :dictionary      {:en
