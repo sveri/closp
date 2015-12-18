@@ -267,6 +267,7 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 * Updating timbre to [com.taoensso/timbre "4.1.4"]
 * Removing ring-server for dev. Replace by http-kit with wrap-reload
+* Replacing system by mount
 
 ### 0.1.26
 * Updating lein-cljsbuild to 1.1.1

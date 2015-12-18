@@ -1,14 +1,11 @@
 (ns {{ns}}.components.db
-  (:require [com.stuartsierra.component :as component]
-            [korma.db :refer [defdb]]))
+  (:require [mount.core :refer [defstate]]
+            [korma.db :refer [defdb]]
+            [{{ns}}.components.config :refer [config]]))
 
-(defrecord Db [config]
-  component/Lifecycle
-  (start [component]
-    (let [db-url (get-in config [:config :jdbc-url])]
-      (defdb db db-url))
-    component)
-  (stop [component] component))
+(defn new-db [config]
+  (println "fooso" (korma/create-db (get-in config [:jdbc-url])))
+  (let [db (korma/create-db (get-in config [:jdbc-url]))]
+    (korma/default-connection db)))
 
-(defn new-db []
-  (map->Db {}))
+(defstate db :start (new-db config))

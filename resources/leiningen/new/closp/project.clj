@@ -47,7 +47,8 @@
 
                  [clojure-miniprofiler "0.4.0"]
 
-                 [org.danielsz/system "0.1.8"]
+                 [org.clojure/tools.namespace "0.2.11"]
+                 [mount "0.1.6"]
 
                  [datascript "0.13.3"]
                  [cljs-ajax "0.3.14"]

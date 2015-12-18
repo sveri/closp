@@ -1,10 +1,18 @@
 (ns {{ns}}.user
-  (:require [reloaded.repl :refer [go reset stop]]
+  (:require [clojure.tools.namespace.repl :as tn]
             [schema.core :as s]
-            [{{ns}}.components.components :refer [dev-system]]))
+            [mount.core :as mount]
+            [{{ns}}.components.server]
+            [{{ns}}.components.db]))
 
-(defn start-dev-system []
+(defn start []
   (s/set-fn-validation! true)
-  (go))
+  (mount/start))
 
-(reloaded.repl/set-init! dev-system)
+(defn stop []
+  (mount/suspend)
+  (mount/stop))
+
+(defn reset []
+  (stop)
+  (tn/refresh :after '{{ns}}.user/start))

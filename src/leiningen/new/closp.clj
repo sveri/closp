@@ -50,7 +50,6 @@
               [(str "src/clj/{{san-path}}/user.clj") (*render* "clj/user.clj")]
               [(str "src/clj/{{san-path}}/types.clj") (*render* "clj/types.clj")]
 
-              [(str "src/clj/{{san-path}}/components/components.clj") (*render* "clj/components/components.clj")]
               [(str "src/clj/{{san-path}}/components/config.clj") (*render* "clj/components/config.clj")]
               [(str "src/clj/{{san-path}}/components/db.clj") (*render* "clj/components/db.clj")]
               [(str "src/clj/{{san-path}}/components/handler.clj") (*render* "clj/components/handler.clj")]

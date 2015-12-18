@@ -1,15 +1,9 @@
 (ns {{ns}}.web.setup
-  (:require [reloaded.repl :refer [go stop]]
-            [clj-webdriver.taxi :as w]
-            [com.stuartsierra.component :as component]
+  (:require [clj-webdriver.taxi :as w]
             [joplin.core :as j]
             [taoensso.tower :as tower]
-            [{{ns}}.components.server :refer [new-web-server-prod]]
-            [{{ns}}.components.handler :refer [new-handler]]
-            [{{ns}}.components.config :as c]
-            [{{ns}}.components.db :refer [new-db]]
-            [{{ns}}.components.components :refer [prod-system]]
-            [{{ns}}.components.locale :as l]))
+            [{{ns}}.components.config]
+            [{{ns}}.components.locale :refer [get-tconfig]]))
 
 (def db-uri "jdbc:sqlite:./db/{{name}}-integ-test.sqlite")
 (def migrators "resources/migrators/sqlite")
@@ -36,13 +30,6 @@ Your Team"
    :port                    3001})
 
 
-(defn test-system []
-  (component/system-map
-    :locale (l/new-locale)
-    :config (c/new-config test-config)
-    :db (component/using (new-db) [:config])
-    :handler (component/using (new-handler) [:config :locale])
-    :web (component/using (new-web-server-prod) [:handler :config])))
 
 (def test-base-url (str "http://localhost:3001/"))
 
@@ -56,17 +43,11 @@ Your Team"
 (defn stop-browser []
   (w/quit))
 
-(defn start-server []
-  (reloaded.repl/set-init! test-system)
-  (go))
-
-(defn stop-server []
-  (stop))
-
 (defn server-setup [f]
-  (start-server)
+  (mount/start-with {#'{{ns}}.components.config/config
+                     #'{{ns}}.web.setup/test-config})
   (f)
-  (stop-server))
+  (mount/stop))
 
 (defn browser-setup [f]
   (start-browser :htmlunit)
@@ -75,4 +56,4 @@ Your Team"
 
 ;; locale stuff
 
-(def t (tower/make-t l/tconfig))
+(def t (tower/make-t (:tconfig (get-tconfig))))

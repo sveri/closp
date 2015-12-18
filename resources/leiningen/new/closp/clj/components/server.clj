@@ -1,9 +1,11 @@
 (ns {{ns}}.components.server
-  (:require [com.stuartsierra.component :as component]
-            [taoensso.timbre :as timbre]
+  (:require [taoensso.timbre :as timbre]
             [org.httpkit.server :refer [run-server]]
             [cronj.core :as cronj]
             [selmer.parser :as parser]
+            [mount.core :refer [defstate]]
+            [{{ns}}.components.config :refer [config]]
+            [{{ns}}.components.handler :refer [handler]]
             [{{ns}}.session :as session]))
 
 (defn destroy
@@ -26,16 +28,5 @@
   (timbre/info "\n-=[ {{name}} started successfully"
                (when (= (:env config) :dev) "using the development profile") "]=-"))
 
-(defrecord WebServerProd [handler config]
-  component/Lifecycle
-  (start [component]
-    (let [handler (:handler handler)
-          server (run-server handler {:port (get-in config [:config :port] 3000)})]
-      (assoc component :server server)))
-  (stop [component]
-    (let [server (:server component)]
-      (when server (server)))
-    component))
-
-(defn new-web-server-prod []
-  (map->WebServerProd {}))
+(defstate server :start (run-server handler {:port (get-in config [:config :port] 3000)})
+          :stop (server))
