@@ -1,10 +1,9 @@
 (ns {{ns}}.components.db
   (:require [mount.core :refer [defstate]]
-            [korma.db :refer [defdb]]
+            [korma.db :as korma]
             [{{ns}}.components.config :refer [config]]))
 
 (defn new-db [config]
-  (println "fooso" (korma/create-db (get-in config [:jdbc-url])))
   (let [db (korma/create-db (get-in config [:jdbc-url]))]
     (korma/default-connection db)))
 
