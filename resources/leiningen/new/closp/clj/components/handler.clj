@@ -49,4 +49,5 @@
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)))
 
-(defstate handler :start (get-handler config (get-tconfig)))
+(defstate handler :start (get-handler config (get-tconfig))
+          :stop :stopped)

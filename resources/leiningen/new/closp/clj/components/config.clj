@@ -8,4 +8,5 @@
     (read-config (io/file config-path))
     (read-config (io/resource "closp.edn"))))
 
-(defstate config :start (prod-conf-or-dev))
+(defstate config :start (prod-conf-or-dev)
+          :stop :stopped)

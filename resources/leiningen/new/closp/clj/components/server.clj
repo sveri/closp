@@ -6,7 +6,8 @@
             [mount.core :refer [defstate]]
             [{{ns}}.components.config :refer [config]]
             [{{ns}}.components.handler :refer [handler]]
-            [{{ns}}.session :as session]))
+            [{{ns}}.session :as session])
+  (:import (clojure.lang AFunction)))
 
 (defn destroy
   "destroy will be called when your application
@@ -29,4 +30,4 @@
                (when (= (:env config) :dev) "using the development profile") "]=-"))
 
 (defstate server :start (run-server handler {:port (get-in config [:config :port] 3000)})
-          :stop (server))
+          :stop (when (instance? AFunction server) (server)))
