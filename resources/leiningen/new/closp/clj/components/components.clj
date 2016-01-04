@@ -3,11 +3,11 @@
     [com.stuartsierra.component :as component]
     (system.components
       [repl-server :refer [new-repl-server]])
-    [foo.bar.components.server :refer [new-web-server]]
-    [foo.bar.components.handler :refer [new-handler]]
-    [foo.bar.components.config :as c]
-    [foo.bar.components.db :refer [new-db]]
-    [foo.bar.components.locale :as l]))
+    [{{ns}}.components.server :refer [new-web-server]]
+    [{{ns}}.components.handler :refer [new-handler]]
+    [{{ns}}.components.config :as c]
+    [{{ns}}.components.db :refer [new-db]]
+    [{{ns}}.components.locale :as l]))
 
 
 (defn dev-system []
