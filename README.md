@@ -42,7 +42,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 
 ## Features
 * closp-crud integration
-* H2 database on filesystem as a default
+* SQlite database on filesystem as a default
 * Joplin for database migrations
 * Selmer as templating solution
 * http-kit as a server
@@ -91,7 +91,7 @@ information please look here: <https://github.com/sveri/closp>.
 
 ## Database
 
-Closp per default is configured to connect to a file H2 database.  
+Closp per default is configured to connect to a file SQlite database.  
 Additionally I added support for joplin <https://github.com/juxt/joplin> to handle migration of sql scripts.
 To get started run `lein joplin migrate sql-dev-env` in the project folder. This is enough to get running.
 Changing the jdbc url in the *closp.edn* file will switch to another database. But keep in mind you will have to 
