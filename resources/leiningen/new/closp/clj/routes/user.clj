@@ -84,7 +84,8 @@
     (if-let [user (db/get-user-by-email username)]
       (try
         (cond
-          (or (= 0 (:is_active user)) (= false (:is_active user))) {:error (t locale tconfig :user/activate_account)}
+          (or (= 0 (:is_active user)) (= false (:is_active user))) (login-page
+                                                                     {:error (t locale tconfig :user/activate_account)})
           (= false (hashers/check password (get user :pass ""))) (login-page
                                                                    {:error (t locale tconfig :user/pass_correct)})
           :else (do (sess/put! :role (:role user)) (sess/put! :identity username)

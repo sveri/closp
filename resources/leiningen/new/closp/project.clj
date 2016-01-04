@@ -47,8 +47,7 @@
 
                  [clojure-miniprofiler "0.4.0"]
 
-                 [org.clojure/tools.namespace "0.2.11"]
-                 [mount "0.1.6"]
+                 [org.danielsz/system "0.1.8"]
 
                  [datascript "0.13.3"]
                  [cljs-ajax "0.3.14"]
@@ -111,16 +110,9 @@
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
 
-                                      ; use this for htmlunit or an older firefox version
-                                      [clj-webdriver "0.6.1"
-                                       :exclusions [org.seleniumhq.selenium/selenium-server]]
-
-                                      ; uncomment this to use current firefox version (does not work with htmlunit
-                                      ;[clj-webdriver "0.6.1"
-                                      ; :exclusions
-                                      ; [org.seleniumhq.selenium/selenium-server
-                                      ;  org.seleniumhq.selenium/selenium-java
-                                      ;  org.seleniumhq.selenium/selenium-remote-driver]]
+                                      [org.apache.httpcomponents/httpclient "4.5.1"]
+                                      [clj-webdriver "0.7.2"]
+                                      [org.seleniumhq.selenium/selenium-java "2.48.2"]
 
                                       [org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [ring-mock "0.1.5"]
