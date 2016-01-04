@@ -1,4 +1,4 @@
-(ns foo.bar.components.components
+(ns {{ns}}.components.components
   (:require
     [com.stuartsierra.component :as component]
     (system.components
