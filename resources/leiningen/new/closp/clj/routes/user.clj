@@ -27,7 +27,7 @@
     (vali/rule (hashers/check form-current-pass current-pass)
                [:oldpass (t locale tconfig :user/wrong_cur_pass)])))
 
-(defn valid-register? [email pass confirm captcha-allowed? locale tconfig
+(defn valid-register? [email pass confirm captcha-enabled? locale tconfig
                        & [recaptcha_response_field recaptcha_challenge_field
                           priv-recaptcha-key rec-domain]]
   (vali/rule (vali/has-value? email)
@@ -36,7 +36,7 @@
              [:id (t locale tconfig :user/email_invalid)])
   (vali/rule (not (db/username-exists? email))
              [:id (t locale tconfig :user/username_exists)])
-  (when (and captcha-allowed? recaptcha_challenge_field)
+  (when (and captcha-enabled? recaptcha_challenge_field)
     (vali/rule (.isValid (connectReCaptch recaptcha_response_field recaptcha_challenge_field
                                           priv-recaptcha-key rec-domain))
                [:captcha (t locale tconfig :user/captcha_wrong)]))
@@ -138,7 +138,7 @@
   (db/create-user email (hashers/encrypt password) (or activationid (uservice/generate-activation-id))))
 
 (defn admin-add-user [email password confirm config locale tconfig]
-  (if (valid-register? email password confirm (:captcha-allowed? config) locale tconfig)
+  (if (valid-register? email password confirm (:captcha-enabled? config) locale tconfig)
     (do (create-new-user! email password)
         (layout/flash-result (t locale tconfig :user/user_added) "alert-success")
         (admin-page {} locale tconfig))
@@ -146,7 +146,7 @@
 
 (defn signup-user [email password confirm {:keys [recaptcha-domain private-recaptcha-key] :as config} locale tconfig
                    response_field challenge_field]
-  (if (valid-register? email password confirm (:captcha-allowed? config) locale tconfig
+  (if (valid-register? email password confirm (:captcha-enabled? config) locale tconfig
                        response_field challenge_field
                        private-recaptcha-key recaptcha-domain)
     (let [activationid (uservice/generate-activation-id)]
