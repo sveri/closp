@@ -20,8 +20,10 @@
   (let [expected-type (get-type-of-column v)]
     (reduce (fn [valid? [key value]]
               (cond
-                (= :unique key) (and valid? (instance? Boolean value))
-                (= :null key) (and valid? (instance? Boolean value))
+                (= :unique key) (and valid? #?(:clj  (instance? Boolean value)
+                                               :cljs (= "boolean" (type value))))
+                (= :null key) (and valid? #?(:clj  (instance? Boolean value)
+                                             :cljs (= "boolean" (type value))))
                 (= :default key) (and valid? (is-correct-default-type expected-type value))
                 :else false))
             true (partition 2 (subvec v 2)))))
