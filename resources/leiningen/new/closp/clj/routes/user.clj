@@ -44,8 +44,9 @@
   (not (vali/errors? :id :pass :confirm :captcha)))
 
 (defn admin-page [params locale tconfig]
-  (let [users (cjmp/trace "all users" (db/get-all-users (get params :filter)))]
-    (layout/render "user/admin.html" (merge {:users       users :roles auth/available-roles
+  (let [users (cjmp/trace "all users" (db/get-all-users (get params :filter)))
+        users-cleaned (map #(assoc % :is_active (if (or (= (:is_active %) false) (= (:is_active %) 0)) false true)) users)]
+    (layout/render "user/admin.html" (merge {:users       users-cleaned :roles auth/available-roles
                                              :admin_title (t locale tconfig :admin/title)}
                                             params))))
 
@@ -82,7 +83,7 @@
     (if-let [user (db/get-user-by-email username)]
       (try
         (cond
-          (= false (:is_active user)) (login-page {:error :user/activate_account})
+          (or (= 0 (:is_active user)) (= false (:is_active user))) {:error (t locale tconfig :user/activate_account)}
           (= false (hashers/check password (get user :pass ""))) (login-page
                                                                    {:error (t locale tconfig :user/pass_correct)})
           :else (do (sess/put! :role (:role user)) (sess/put! :identity username)
