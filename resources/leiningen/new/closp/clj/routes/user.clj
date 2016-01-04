@@ -62,8 +62,9 @@
                  {:account_activated_title (t locale tconfig :user/account_activated_title)
                   :account_activated       (t locale tconfig :user/account_activated)}))
 
-(defn signup-page [{:keys [captcha-public-key]} & [errormap]]
-  (layout/render "user/signup.html" (merge {:captcha-public-key captcha-public-key} errormap)))
+(defn signup-page [{:keys [captcha-public-key captcha-enabled?]} & [errormap]]
+  (layout/render "user/signup.html" (merge {:captcha-public-key captcha-public-key
+                                            :captcha-enabled? captcha-enabled?} errormap)))
 
 (defn activate-account [config id locale tconfig]
   (if (db/get-user-by-act-id id)
