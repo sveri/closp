@@ -139,9 +139,9 @@
 
   :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]
             "unit" ["do" "test" ":unit"]
-            "integ" ["do" "test" ":integration"]}
+            "integ" ["do" "test" ":integration"]
 
             ; migration utilities
             "migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
             "rollback" ["run" "-m" "joplin.alias/rollback" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
-            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"])
+            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]})
