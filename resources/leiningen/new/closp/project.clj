@@ -62,14 +62,13 @@
                  [prismatic/plumbing "0.5.0"]
                  [prismatic/schema "1.0.3"]
 
-                 [com.rpl/specter "0.8.0"]]
+                 [com.rpl/specter "0.8.0"]
+
+                 [joplin.jdbc "0.3.6"]
+                 [joplin.core "0.3.6"]]
 
   :plugins [[de.sveri/closp-crud "0.1.4"]
             [lein-cljsbuild "1.1.1"]]
-
-  ;database migrations
-  :joplin {:migrators {:sqlite-mig "resources/migrators/sqlite"
-                       :h2-mig "resources/migrators/h2"}}
 
   :closp-crud {:jdbc-url "jdbc:sqlite:./db/{{name}}.sqlite"
                :migrations-output-path "./resources/migrators/sqlite"
@@ -105,7 +104,6 @@
 
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-figwheel "0.5.0-2"]
-                                      [joplin.lein "0.2.17"]
                                       [test2junit "1.1.1"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
@@ -116,17 +114,10 @@
 
                                       [ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]
-                                      [pjstadig/humane-test-output "0.7.0"]
-                                      [joplin.core "0.2.17"]
-                                      [joplin.jdbc "0.2.17"]]
+                                      [pjstadig/humane-test-output "0.7.0"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
-                                      (pjstadig.humane-test-output/activate!)]
-
-                       :joplin {:databases {:sqlite-dev {:type :sql, :url "jdbc:sqlite:./db/{{name}}.sqlite"}
-                                            :h2-dev {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
-                                :environments {:sqlite-dev-env [{:db :sqlite-dev, :migrator :sqlite-mig}]
-                                               :h2-dev-env [{:db :h2-dev, :migrator :h2-mig}]}}}
+                                      (pjstadig.humane-test-output/activate!)]}
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :omit-source true
@@ -148,4 +139,9 @@
 
   :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]
             "unit" ["do" "test" ":unit"]
-            "integ" ["do" "test" ":integration"]})
+            "integ" ["do" "test" ":integration"]}
+
+            ; migration utilities
+            "migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            "rollback" ["run" "-m" "joplin.alias/rollback" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"])

@@ -268,6 +268,7 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 * Updating timbre to [com.taoensso/timbre "4.1.4"]
 * Removing ring-server for dev. Replace by http-kit with wrap-reload
 * Updating clj-webdriver to 0.7.2
+* Updating joplin to 0.3.6 - *breaking changes*
 * Fix #16 #17 #18 #19
 
 ### 0.1.26

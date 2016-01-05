@@ -96,6 +96,7 @@
               [(str "integtest/clj/{{san-path}}/web/admin.clj") (*render* "integtest/clj/web/admin.clj")]
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
+              ["resources/joplin.edn" (*render* "resources/joplin.edn")]
               ]))
 
 

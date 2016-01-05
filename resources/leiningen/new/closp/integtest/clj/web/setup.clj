@@ -1,6 +1,7 @@
 (ns {{ns}}.web.setup
   (:require [clj-webdriver.taxi :as w]
-            [joplin.core :as j]
+            [joplin.alias :as a]
+            [joplin.repl :as r]
             [taoensso.tower :as tower]
             [com.stuartsierra.component :as component]
             [reloaded.repl :refer [go stop]]
@@ -11,8 +12,8 @@
             [{{ns}}.components.components :refer [prod-system]]
             [{{ns}}.components.locale :as l]))
 
-(def db-uri "jdbc:sqlite:./db/{{name}}-integ-test.sqlite")
-(def migrators "resources/migrators/sqlite")
+(def db-uri "jdbc:sqlite:./db/{{name}}-integtest.sqlite")
+(def jop-config (a/*load-config* "joplin.edn"))
 
 ; custom config for configuration
 (def test-config
@@ -47,17 +48,10 @@ Your Team"
 (def test-base-url (str "http://localhost:3001/"))
 
 (defn start-browser [browser]
-  (j/migrate-db
-    {:db       {:type :sql,
-                :url  db-uri}
-     :migrator migrators})
+  (r/reset jop-config :sqlite-integtest-env :sqlite-integtest)
   (w/set-driver! {:browser browser}))
 
 (defn stop-browser []
-  (j/rollback-db
-    {:db       {:type :sql,
-                :url  db-uri}
-     :migrator migrators})
   (w/quit))
 
 (defn start-server []
