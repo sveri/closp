@@ -35,7 +35,7 @@ as possible (at least that's the goal).
 ## Usage
 
 1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
-2. Run `lein joplin migrate sqlite-dev-env` in the newly created project (This will add an admin user with username: 
+2. Run `lein migrate` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
 3. Run `lein figwheel` to start figwheel and compile the clojurescript.
 4. Run `lein rel-jar` to generate a runnable jar file.
@@ -93,9 +93,9 @@ information please look here: <https://github.com/sveri/closp>.
 
 Closp per default is configured to connect to a file SQlite database.  
 Additionally I added support for joplin <https://github.com/juxt/joplin> to handle migration of sql scripts.
-To get started run `lein joplin migrate sql-dev-env` in the project folder. This is enough to get running.
+To get started run `lein migrate` in the project folder. This is enough to get running.
 Changing the jdbc url in the *closp.edn* file will switch to another database. But keep in mind you will have to 
-run the migration step again and change the jdbc url in the project.clj too.  
+run the migration step again and change the jdbc url in the `joplin.edn` too.  
 The connection is handled by jdbc <https://github.com/clojure/java.jdbc> so everything that jdbc supports is supported 
 by closp out of the box.  
 Closp comes with korma <https://github.com/korma/Korma> for an abstraction layer over jdbc. See `db\users.clj` for
@@ -195,11 +195,10 @@ There are several ways to setup a more separated dev / staging / prod environmen
 ## CLJ-Webdriver
 
 Closp comes with some examples on how to use clj webdriver in your projects for integration tests. They reside in
-`integtest\clj`.  
+`integtest\clj`.
 
-Currently the support is some kind of tricky regarding support of latest firefox versions. Please look in the 
-`profiles->dev->ddependencies` section of the `project.clj` file for some comments on this matter. It is possible to use
-both, the htmlunitdriver and an older firefox version or only a newer firefox version.
+Per default the tests are run with the :htlmunit driver, which is fast, but not that good on javascript. To change that,
+open: {{ns}}.web.setup and adapt the driver in `browser-setup` to `:firefor` or `:chrome`.
 
 ## Internationalization
 
@@ -220,15 +219,9 @@ files.
 ## Planned features
 
 * Currently working on a webui for closp crud
-* adding reframe example
 * Whatever seems useful in the future.
 
 ## FAQ
-
-### Could not find environment ':sqlite-dev-env'
-
-Leiningen 2.5.2 introduced a change which broke existing joplin versions. You have to update your joplin dependencies
-to at least 0.2.17 to make it work with leiningen 2.5.2
 
 
 ### Could not find template closp on the classpath.
@@ -240,15 +233,6 @@ This occurs when you run `lein new closp ...` with an older leiningen version. P
 This will happen only in dev mode for every page where you did not explicitly register your clojurescript with.
 Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change the call to `(core/main)` how you
 need it for the page you are working on right now.
-
-### I get this error in the javascript console: WebSocket connection to 'ws://localhost:9001/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-
-This happens because per default the browser-repl is not loaded. If you load like in:
-<https://github.com/plexus/chestnut/blob/master/src/leiningen/new/chestnut/env/dev/cljs/chestnut/main.cljs> this error
-will go away, however. After starting your dev system you will switch into the cljs repl and not be able anymore
-to restart your components with `(restart)`. So this is a tradeoff one has to make.  
-I decided to turn the browser-repl off because the clojurescript reloading still works in this setup. You only get this
-error.
 
 ### When I change a route definition, the change is not applied after a page reload
 
