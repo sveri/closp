@@ -71,7 +71,10 @@
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "src/cljs/{{san-path}}/ajax.cljs") (*render* "cljs/ajax.cljs")]
 
+              [(str "src/cljs/{{san-path}}/cc/common.cljs") (*render* "cljs/cc/common.cljs")]
               [(str "src/cljs/{{san-path}}/cc/core.cljs") (*render* "cljs/cc/core.cljs")]
+              [(str "src/cljs/{{san-path}}/cc/core_middlepanel.cljs") (*render* "cljs/cc/core_middlepanel.cljs")]
+              [(str "src/cljs/{{san-path}}/cc/left_panel.cljs") (*render* "cljs/cc/left_panel.cljs")]
 
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 

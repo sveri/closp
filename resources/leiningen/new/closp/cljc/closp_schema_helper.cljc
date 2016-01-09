@@ -1,6 +1,6 @@
 (ns {{ns}}.closp-schema-helper)
 
-(defmulti get-type-of-column (fn [v] (seq? (second v))))
+(defmulti get-type-of-column (fn [v] #?(:clj (seq? (second v)) :cljs (seqable? (second v)))))
 (defmethod get-type-of-column true [_] :varchar)
 (defmethod get-type-of-column :default [v] (second v))
 
@@ -21,9 +21,9 @@
     (reduce (fn [valid? [key value]]
               (cond
                 (= :unique key) (and valid? #?(:clj  (instance? Boolean value)
-                                               :cljs (= "boolean" (type value))))
+                                               :cljs (= js/Boolean (type value))))
                 (= :null key) (and valid? #?(:clj  (instance? Boolean value)
-                                             :cljs (= "boolean" (type value))))
+                                             :cljs (= js/Boolean (type value))))
                 (= :default key) (and valid? (is-correct-default-type expected-type value))
                 :else false))
             true (partition 2 (subvec v 2)))))
