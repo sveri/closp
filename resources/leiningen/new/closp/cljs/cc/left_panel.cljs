@@ -8,8 +8,6 @@
   (swap! state assoc :new-entity (first (filter #(= name (:name %)) (:ex-entities @state)))))
 
 (s/defn render-ex-entities [state entities :- schem/cc-entity-definitons]
-        (println (first entities))
-        (println (:columns (first entities)))
         [:div
          [:h3 "Existing Entities"]
          [:hr]
