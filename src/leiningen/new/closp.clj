@@ -65,7 +65,6 @@
 
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
-              [(str "src/clj/{{san-path}}/service/cc.clj") (*render* "clj/service/cc.clj")]
 
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
@@ -91,7 +90,6 @@
               ["README.md" (*render* "README.md")]
 
               [(str "test/clj/{{san-path}}/db/user_test.clj") (*render* "test/clj/db/user_test.clj")]
-              [(str "test/clj/{{san-path}}/service/cc_test.clj") (*render* "test/clj/service/cc_test.clj")]
 
               [(str "integtest/clj/{{san-path}}/web/setup.clj") (*render* "integtest/clj/web/setup.clj")]
               [(str "integtest/clj/{{san-path}}/web/signup.clj") (*render* "integtest/clj/web/signup.clj")]

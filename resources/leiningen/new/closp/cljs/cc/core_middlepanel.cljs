@@ -62,6 +62,8 @@
       (= "varchar" col-type) (spec-transform-column #(assoc % 1 [:varchar 100]) col-name)
       :else (spec-transform-column #(assoc % 1 (keyword col-type)) col-name))))
 
+(s/defn ->disabled? :- s/Bool [col-name] (= :empty-name col-name))
+
 (s/defn ->field-description :- nil
         [state column :- (s/conditional #(= :empty-name (first %)) schem/default-cljs-column
                                         :else schem/cc-table-column)]
@@ -82,7 +84,8 @@
                (wrap-with-form "Field Type"
                                [:select.form-control
                                 {:on-change #(change-column-type % column-name)
-                                 :value     field-type}
+                                 :value     field-type
+                                 :disabled (->disabled? column-name)}
                                 [:option {:value "varchar"} "Varchar"]
                                 [:option {:value "text"} "Text"]
                                 [:option {:value "boolean"} "Boolean"]])]
@@ -94,7 +97,7 @@
                                    :on-change (fn [e] (spec-transform-column
                                                         #(assoc % 1 [:varchar (js/parseInt (-> e .-target .-value))])
                                                         column-name))
-                                   }])])]]
+                                   :disabled (->disabled? column-name)}])])]]
             [:div.col-md-4
              (wrap-with-form "Nullable"
                              [:input.form-control
@@ -102,12 +105,8 @@
                                :checked   (last column)
                                :on-change (fn [e] (spec-transform-column
                                                     #(assoc % 3 (-> e .-target .-checked))
-                                                    column-name))}])]
-            ]])
-        ;)
-        )
-
-;(defn )
+                                                    column-name))
+                               :disabled (->disabled? column-name)}])]]]))
 
 (defn post-new-entity [_ state]
   (aj/POST "/admin/cc/entities"
@@ -119,25 +118,25 @@
                                     (:added-entity e)))
             :error-handler (fn [e] (println "some error occured: " e))}))
 
+(defn has-not-last-col-name? [state]
+  (->disabled? (first (last (get-in @state [:new-entity :columns])))))
+
 (defn middle-panel [state]
-  (let [fields-count (get-in @state [:new-entity :cur-id])]
-    [:div
-     (wrap-with-form "Entity Name"
-                     [:input.form-control
-                      {:placeholder "Entity Name"
-                       :required    true
-                       :on-change   #(swap! state assoc-in [:new-entity :name] (-> % .-target .-value))
-                       :value       (get-in @state [:new-entity :name])}])
-     [:hr]
-     (let [columns (get-in @state [:new-entity :columns])]
-       (for [field-nr (range 0 (count columns))]
-         ^{:key field-nr} [->field-description state (nth columns field-nr)]))
-     [:hr]
-     [:button.btn.btn-default
-      {:on-click #(let [next-id (+ 1 (get-in @state [:new-entity :cur-id]))]
-                   (swap! state assoc-in [:new-entity :cur-id] next-id)
-                   (swap! state update-in [:new-entity :columns] conj
-                          (assoc com/default-column :id next-id)))}
-      "Add Field"]
-     [:button.btn.btn-primary.pull-right
-      {:on-click (fn [e] (post-new-entity e state))} "Save"]]))
+  [:div
+   (wrap-with-form "Entity Name"
+                   [:input.form-control
+                    {:placeholder "Entity Name"
+                     :required    true
+                     :on-change   #(swap! state assoc-in [:new-entity :name] (-> % .-target .-value))
+                     :value       (get-in @state [:new-entity :name])}])
+   [:hr]
+   (let [columns (get-in @state [:new-entity :columns])]
+     (for [field-nr (range 0 (count columns))]
+       ^{:key field-nr} [->field-description state (nth columns field-nr)]))
+   [:hr]
+   [:button.btn.btn-default
+    {:on-click #(swap! state update-in [:new-entity :columns] conj com/default-column)
+     :disabled (has-not-last-col-name? state)} "Add Field"]
+   [:button.btn.btn-primary.pull-right
+    {:on-click #(post-new-entity % state)
+     :disabled (not (and (not (has-not-last-col-name? state)) (not-empty (get-in @state [:new-entity :name]))))} "Save"]])

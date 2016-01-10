@@ -4,6 +4,11 @@
 (defmethod get-type-of-column true [_] :varchar)
 (defmethod get-type-of-column :default [v] (second v))
 
+
+(defn boolean? [value]
+  #?(:clj  (instance? Boolean value)
+     :cljs (= js/Boolean (type value))))
+
 (defmulti is-correct-default-type (fn [expected-type _] expected-type))
 (defmethod is-correct-default-type :varchar [_ type]
   (string? type))
@@ -13,17 +18,17 @@
   (integer? type))
 (defmethod is-correct-default-type :time [_ type]
   (type))
+(defmethod is-correct-default-type :boolean [_ type]
+  (boolean? type))
 (defmethod is-correct-default-type :default [_ type]
   (string? type))
+
 
 (defn validate-options [v]
   (let [expected-type (get-type-of-column v)]
     (reduce (fn [valid? [key value]]
               (cond
-                (= :unique key) (and valid? #?(:clj  (instance? Boolean value)
-                                               :cljs (= js/Boolean (type value))))
-                (= :null key) (and valid? #?(:clj  (instance? Boolean value)
-                                             :cljs (= js/Boolean (type value))))
+                (contains? #{:unique :null :pk :autoinc} key) (and valid? (boolean? value))
                 (= :default key) (and valid? (is-correct-default-type expected-type value))
                 :else false))
             true (partition 2 (subvec v 2)))))
