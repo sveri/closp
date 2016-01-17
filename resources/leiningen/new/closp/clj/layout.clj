@@ -15,8 +15,6 @@
 (defn flash-result [message div-class]
   (merge-flash-messages {:flash-message message :flash-alert-type div-class}))
 
-(parser/set-resource-path!  (clojure.java.io/resource "templates"))
-
 (deftype RenderableTemplate [template params]
   Renderable
   (render [this request]
@@ -43,5 +41,5 @@
       "text/html; charset=utf-8")))
 
 (defn render [template & [params]]
-  (RenderableTemplate. template params))
+  (RenderableTemplate. (str "templates/" template) params))
 
