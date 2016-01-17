@@ -82,6 +82,7 @@
               [(str "src/cljc/{{san-path}}/closp_schema_helper.cljc") (*render* "cljc/closp_schema_helper.cljc")]
 
 
+              [(str "resources/templates/af-token.html") (*render* "resources/templates/af-token.html")]
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
               [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
               [(str "resources/templates/home/ajax-example.html") (*render* "resources/templates/home/ajax-example.html")]
@@ -97,6 +98,7 @@
               [(str "integtest/clj/{{san-path}}/web/admin.clj") (*render* "integtest/clj/web/admin.clj")]
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
+              ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]
               ["resources/joplin.edn" (*render* "resources/joplin.edn")]
               ]))
 

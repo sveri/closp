@@ -13,40 +13,6 @@
     [:label label-name]
     form-field]])
 
-;(defn ->field-description [column-id state]
-;  (let [field (first (filter #(= column-id (:id %)) (get-in @state [:new-entity :columns])))]
-;    [:div
-;     [:div.row
-;      [:div.col-md-4
-;       (wrap-with-form
-;         "Field Name"
-;         [:input.form-control
-;          {:on-change   #(update-new-entity-column column-id :name (-> % .-target .-value) state)
-;           :placeholder "Field Name" :value (:name field)}])]
-;      [:div.col-md-4
-;       [:div.row
-;        [:div.col-md-8
-;         (wrap-with-form "Field Type"
-;                         [:select.form-control
-;                          {:on-change #(update-new-entity-column column-id :type (-> % .-target .-value) state)
-;                           :value     (:type field)}
-;                          [:option {:value "varchar"} "Varchar"]
-;                          [:option {:value "text"} "Text"]
-;                          [:option {:value "boolean"} "Boolean"]])]
-;        (when (= "varchar" (:type field))
-;          [:div.col-md-4
-;           (wrap-with-form "Length"
-;                           [:input.form-control
-;                            {:value     (:length field)
-;                             :on-change #(update-new-entity-column column-id :length
-;                                                                   (js/parseInt (-> % .-target .-value)) state)}])])]]
-;      [:div.col-md-4
-;       (wrap-with-form "Nullable"
-;                       [:input.form-control
-;                        {:type      "checkbox"
-;                         :checked   (:nullable field)
-;                         :on-change #(update-new-entity-column column-id :nullable (-> % .-target .-checked) state)}])]]]))
-
 (defn spec-transform-column [new-f col-name]
   (swap! com/state assoc :new-entity
          (:new-entity (spec/transform [:new-entity :columns spec/ALL #(= (first %) col-name)]
@@ -118,11 +84,26 @@
                                     (:added-entity e)))
             :error-handler (fn [e] (println "some error occured: " e))}))
 
+(defn crudify-entity [state]
+  (aj/POST "/admin/cc/entities/crudify"
+           {:params        (:new-entity @state)
+            :headers       {:X-CSRF-Token (h/get-value "__anti-forgery-token")}
+            :handler       (fn [e] (println "succ"))
+            :error-handler (fn [e] (println "some error occured: " e))}))
+
 (defn has-not-last-col-name? [state]
   (->disabled? (first (last (get-in @state [:new-entity :columns])))))
 
+(defn save-enabled? [state]
+  (not (and (not (has-not-last-col-name? state)) (not-empty (get-in @state [:new-entity :name])))))
+
 (defn middle-panel [state]
   [:div
+   [:button.btn.btn-primary
+    {:on-click #(crudify-entity state)
+     :disabled (save-enabled? state)}
+    "Crudify"]
+   [:hr]
    (wrap-with-form "Entity Name"
                    [:input.form-control
                     {:placeholder "Entity Name"
@@ -139,4 +120,4 @@
      :disabled (has-not-last-col-name? state)} "Add Field"]
    [:button.btn.btn-primary.pull-right
     {:on-click #(post-new-entity % state)
-     :disabled (not (and (not (has-not-last-col-name? state)) (not-empty (get-in @state [:new-entity :name]))))} "Save"]])
+     :disabled (save-enabled? state)} "Save"]])

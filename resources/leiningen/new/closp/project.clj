@@ -65,12 +65,12 @@
                  [com.rpl/specter "0.8.0"]
 
                  [joplin.jdbc "0.3.6"]
-                 [joplin.core "0.3.6"]]
+                 [joplin.core "0.3.6"]
+                 [de.sveri/closp-crud "0.1.5"]]
 
-  :plugins [[de.sveri/closp-crud "0.1.4"]
-            [lein-cljsbuild "1.1.1"]]
+  :plugins [[lein-cljsbuild "1.1.1"]]
 
-  :closp-crud {:jdbc-url "jdbc:sqlite:./db/{{name}}.sqlite"
+  :closp-crud {:jdbc-url "jdbc:sqlite:./db/{{name}}.sqlcite"
                :migrations-output-path "./resources/migrators/sqlite"
                :clj-src "src/clj"
                :ns-db "{{ns}}.db"

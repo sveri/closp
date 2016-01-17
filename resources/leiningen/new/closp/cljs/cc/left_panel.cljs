@@ -1,8 +1,8 @@
 (ns {{ns}}.cc.left-panel
-  (:require [schema.core :as s]
-            [cljs.pprint :as pp]
-            [{{ns}} .closp-schema :as schem]
-            [{{ns}} .cc.common :as com]))
+  (:require [{{ns}}.cc.common :as com]
+            [schema.core :as s]
+            [{{ns}}.closp-schema :as schem]
+            [cljs.pprint :as pp]))
 
 (defn edit-entity [state name]
   (swap! state assoc :new-entity (first (filter #(= name (:name %)) (:ex-entities @state)))))
