@@ -70,14 +70,6 @@
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 
-  :closp-crud {:jdbc-url "jdbc:sqlite:./db/{{name}}.sqlcite"
-               :migrations-output-path "./resources/migrators/sqlite"
-               :clj-src "src/clj"
-               :ns-db "{{ns}}.db"
-               :ns-routes "{{ns}}.routes"
-               :ns-layout "{{ns}}.layout"
-               :templates "resources/templates"}
-
   :min-lein-version "2.5.0"
 
   ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
