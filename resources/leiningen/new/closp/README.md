@@ -194,7 +194,20 @@ files.
 * Currently working on a webui for closp crud
 * Whatever seems useful in the future.
 
+## Contributors  
+
+* Henrik Lundahl - https://github.com/henriklundahl
+
 ## FAQ
+
+### Running `lein figwheel` fails with `...No such var: ana/forms-seq*...`
+
+The complete error message is:
+ 
+    clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: No such var: ana/forms-seq*, compiling:(figwheel_sidecar/utils.clj:49:21)
+
+This issue is tracked in https://github.com/sveri/closp/issues/20. According to the reporter upgrading to leiningen 
+2.5.3 fixed it for him. If it does not for you, please reopen the issue.
 
 ### Could not find environment ':sqlite-dev-env'
 
