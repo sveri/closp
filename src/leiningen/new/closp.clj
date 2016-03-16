@@ -57,6 +57,7 @@
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
               [(str "src/clj/{{san-path}}/components/locale.clj") (*render* "clj/components/locale.clj")]
 
+              [(str "src/clj/{{san-path}}/db/entities.clj") (*render* "clj/db/entities.clj")]
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
 
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
