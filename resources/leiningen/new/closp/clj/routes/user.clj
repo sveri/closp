@@ -105,27 +105,27 @@
             confirm-error (vali/on-error :confirm first)]
         (changepassword-page {:pass-error pass-error :confirm-error confirm-error :old-error old-error})))))
 
-(defn really-delete-page [uuid]
-  (layout/render "user/reallydelete.html" {:uuid uuid :username (:email (db/get-user-by-uuid uuid))}))
+(defn really-delete-page [id]
+  (layout/render "user/reallydelete.html" {:id id :username (:email (db/get-user-by-id id))}))
+(defn really-delete [id delete_cancel locale tconfig]
 
-(defn really-delete [uuid delete_cancel locale tconfig]
   (if (= delete_cancel "Cancel")
     (do (layout/flash-result (t locale tconfig :generic/deletion_canceled) "alert-warning")
         (resp/redirect "/admin/users"))
-    (do (db/delete-user uuid)
+    (do (println "iaern" id) (db/delete-user id)
         (layout/flash-result (t locale tconfig :user/deleted) "alert-success")
         (resp/redirect "/admin/users"))))
 
 (defmulti update-user (fn [update_delete _ _ _ _ _] update_delete))
-(defmethod update-user "Update" [_ user-uuid role active locale tconfig]
+(defmethod update-user "Update" [_ user-id role active locale tconfig]
   (let [role (if (= "none" role) "" role)
         act (= "on" active)]
-    (db/update-user user-uuid {:role role :is_active act}))
-  (let [user (db/get-user-by-uuid user-uuid)]
+    (db/update-user user-id {:role role :is_active act}))
+  (let [user (db/get-user-by-id user-id)]
     (admin-page (layout/flash-result (t locale tconfig :user/updated (:email user)) "alert-success") locale tconfig)))
 
-(defmethod update-user "Delete" [_ user-uuid _ _ _ _]
-  (really-delete-page user-uuid))
+(defmethod update-user "Delete" [_ user-id _ _ _ _]
+  (really-delete-page user-id))
 
 (defn send-reg-mail [email activationid config locale tconfig]
   (if (uservice/send-activation-email email activationid config)
@@ -165,10 +165,10 @@
     (GET "/user/changepassword" [] (changepassword-page))
     (POST "/user/changepassword" [oldpassword password confirm :as req]
           (changepassword oldpassword password confirm (:locale req) (:tconfig req)))
-    (POST "/admin/user/update" [user-uuid role active update_delete :as req]
-          (update-user update_delete user-uuid role active (:locale req) (:tconfig req)))
-    (POST "/admin/user/delete" [user-uuid delete_cancel :as req]
-          (really-delete user-uuid delete_cancel (:locale req) (:tconfig req)))
+    (POST "/admin/user/update" [user-id role active update_delete :as req]
+          (update-user update_delete user-id role active (:locale req) (:tconfig req)))
+    (POST "/admin/user/delete" [user-id delete_cancel :as req]
+          (really-delete user-id delete_cancel (:locale req) (:tconfig req)))
     (POST "/admin/user/add" [email password confirm :as req]
           (admin-add-user email password confirm config (:locale req) (:tconfig req)))
     (GET "/admin/users" [filter :as req] (admin-page {:filter filter} (:locale req) (:tconfig req)))))

@@ -133,12 +133,10 @@
 
            ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]
 
-           ["migrators/h2/user-20150720T132915Z.down.sql" "resources/migrators/h2/user-20150720T132915Z.down.sql"]
-           ["migrators/h2/user-20150720T132915Z.up.sql" "resources/migrators/h2/user-20150720T132915Z.up.sql"]
-           ["migrators/sqlite/user-20150720T083449Z.down.sql" "resources/migrators/sqlite/user-20150720T083449Z.down.sql"]
-           ["migrators/sqlite/user-20150720T083449Z.up.sql" "resources/migrators/sqlite/user-20150720T083449Z.up.sql"]
-
-           ["migrators/sqlite/user-20150720T083449Z.up.sql" "resources/migrators/sqlite/user-20150720T083449Z.up.sql"]])
+           ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
+           ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]
+           ["migrators/sqlite/1-user.down.sql" "resources/migrators/sqlite/1-user.down.sql"]
+           ["migrators/sqlite/1-user.up.sql" "resources/migrators/sqlite/1-user.up.sql"]])
 
     (create-db-dir (:name data))))
 
