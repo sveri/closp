@@ -112,7 +112,7 @@
   (if (= delete_cancel "Cancel")
     (do (layout/flash-result (t locale tconfig :generic/deletion_canceled) "alert-warning")
         (resp/redirect "/admin/users"))
-    (do (println "iaern" id) (db/delete-user id)
+    (do (db/delete-user id)
         (layout/flash-result (t locale tconfig :user/deleted) "alert-success")
         (resp/redirect "/admin/users"))))
 

@@ -100,8 +100,8 @@
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
               ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]
-              ["resources/joplin.edn" (*render* "resources/joplin.edn")]
-              ]))
+              ["resources/joplin.edn" (*render* "resources/joplin.edn")]]))
+
 
 
     (mapv #(apply unpack (:name data) %)
@@ -143,7 +143,7 @@
 (defn closp
   "Create a new CLOSP project"
   [name & args]
-  (let [{:keys [options arguments errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
+  (let [{:keys [options _ errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
         ns (:namespace options)
         san-path (string/replace ns #"\." "/")
         data {:name             name
@@ -169,6 +169,4 @@
 
       errors (opt-helper/exit 1 (opt-helper/error-msg errors))
 
-      :else (generate-project name args data))
-    )
-  )
+      :else (generate-project name args data))))
