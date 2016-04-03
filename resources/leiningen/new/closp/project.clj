@@ -66,7 +66,7 @@
 
                  [joplin.jdbc "0.3.6"]
                  [joplin.core "0.3.6"]
-                 [de.sveri/closp-crud "0.1.5-Snapshot"]]
+                 [de.sveri/closp-crud "0.2.0"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 
