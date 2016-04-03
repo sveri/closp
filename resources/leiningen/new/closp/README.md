@@ -60,7 +60,15 @@ environment.
 ## closp-crud
 
 This is a module that generates html, routing and sql files for a given table definition. For more
-information please look here: <https://github.com/sveri/closp>.
+information please look here: <https://github.com/sveri/closp>.  
+Short Intro:  
+
+* Create a new definition in env/dev/entities/example.edn (Look at env/dev/entities/user.edn for an example)
+* Run lein run -m de.sveri.clospcrud.closp-crud/closp-crud -f env/dev/entities/example.edn
+* Run lein migrate to create the new database
+* Add the new routes handler to components.handler namespace
+* Reset the server
+* Browse to /example
 
 ## Database
 

@@ -3,9 +3,10 @@
 
 ### 0.1.28 - Breaking change 
 
-* **Breaking change** Up to now the templates path was set for selmer. This has changed. In the templates itself
+* **Breaking Change** Up to now the templates path was set for selmer. This has changed. In the templates itself
 you have to add the templates path like this: `{% extends "templates/base.html" %}`. In the clojure files it is set
 in the `layout/render` function. As long as you use this, your code can stay the same.
+* **Breaking Change** Switched to closp-crud `0.2.0` which uses ids now instead of UUIDs
 * More work on closp crud admin
 
 
