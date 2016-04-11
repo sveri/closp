@@ -1,6 +1,12 @@
 
 ## Changes
 
+### 0.2.0
+
+* **Breaking Change** The schema for closp-crud changed, for more see here: <https://github.com/sveri/closp-crud>
+* Updating clojure to 1.8.0
+* Updating closp-crud to 0.3.0
+
 ### 0.1.28 - Breaking change 
 
 * **Breaking Change** Up to now the templates path was set for selmer. This has changed. In the templates itself
