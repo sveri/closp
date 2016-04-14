@@ -8,6 +8,8 @@ A Leiningen template combining luminus, chestnut plus some goodies.
 
 Mailing List: [![Clojureverse](https://rawgit.com/clojureverse/clojureverse-assets/master/clojureverse-org-green.svg)](http://clojureverse.org/c/closp)
 
+![Intro Gif](intro.gif?raw=true "Intro")
+
 ## Goals
 * Provide a full stack to get started with
 * Provide generated code which can be changed easily
