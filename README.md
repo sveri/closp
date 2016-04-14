@@ -10,6 +10,8 @@ Mailing List: [![Clojureverse](https://rawgit.com/clojureverse/clojureverse-asse
 
 ![Intro Gif](intro.gif?raw=true "Intro")
 
+These five steps are all it takes to get up and running.
+
 ## Goals
 * Provide a full stack to get started with
 * Provide generated code which can be changed easily
