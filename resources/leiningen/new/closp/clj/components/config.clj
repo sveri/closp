@@ -12,8 +12,8 @@
   component/Lifecycle
   (start [component]
     (assoc component :config config))
-  (stop [component]
-    (assoc component :config nil)))
+  (stop [component] component))
+
 
 (defn new-config [config]
   (->Config config))

@@ -51,8 +51,8 @@
   comp/Lifecycle
   (start [comp]
     (assoc comp :handler (get-handler (:config config) locale)))
-  (stop [comp]
-    (assoc comp :handler nil)))
+  (stop [comp] comp))
+
 
 (defn new-handler []
   (map->Handler {}))
