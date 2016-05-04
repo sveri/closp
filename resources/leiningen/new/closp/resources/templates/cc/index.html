@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends "templates/base.html" %}
 
 {% block content %}
-<input id="__anti-forgery-token" name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+{% include "templates/af-token.html" %}
 <div id="app"></div><div id="app"></div>
 {% endblock %}
 

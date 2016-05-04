@@ -1,12 +1,12 @@
 (ns {{ns}}.core
   (:require [taoensso.timbre :as timbre]
             [reloaded.repl :refer [go]]
-            [mount.core :as mount]
             [{{ns}}.cljccore :as cljc]
-            [{{ns}}.components.server])
+            [{{ns}}.components.components :refer [prod-system]])
   (:gen-class))
 
 (defn -main [& args]
-  (mount/start)
+  (reloaded.repl/set-init! prod-system)
+  (go)
   (cljc/foo-cljc "hello from cljx")
   (timbre/info "server started."))

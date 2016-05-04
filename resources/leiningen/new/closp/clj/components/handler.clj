@@ -6,9 +6,7 @@
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.file :refer [wrap-file]]
             [compojure.route :as route]
-            [mount.core :refer [defstate]]
-            [{{ns}}.components.config :refer [config]]
-            [{{ns}}.components.locale :refer [get-tconfig]]
+            [com.stuartsierra.component :as comp]
             [{{ns}}.routes.home :refer [home-routes]]
             [{{ns}}.routes.cc :refer [cc-routes]]
             [{{ns}}.routes.user :refer [user-routes registration-routes]]
@@ -49,4 +47,12 @@
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)))
 
-(defstate handler :start (get-handler config (get-tconfig)))
+(defrecord Handler [config locale]
+  comp/Lifecycle
+  (start [comp]
+    (assoc comp :handler (get-handler (:config config) locale)))
+  (stop [comp]
+    (assoc comp :handler nil)))
+
+(defn new-handler []
+  (map->Handler {}))

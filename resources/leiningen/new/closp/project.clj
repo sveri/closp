@@ -6,7 +6,7 @@
 
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.7.170"]
 
                  [org.clojure/core.cache "0.6.4"]
@@ -47,8 +47,7 @@
 
                  [clojure-miniprofiler "0.4.0"]
 
-                 [org.clojure/tools.namespace "0.2.11"]
-                 [mount "0.1.6"]
+                 [org.danielsz/system "0.1.8"]
 
                  [datascript "0.13.3"]
                  [cljs-ajax "0.3.14"]
@@ -61,24 +60,15 @@
 
                  [org.clojure/core.typed "0.3.11"]
                  [prismatic/plumbing "0.5.0"]
-                 [prismatic/schema "1.0.3"]
+                 [prismatic/schema "1.0.5"]
 
-                 [com.rpl/specter "0.8.0"]]
+                 [com.rpl/specter "0.8.0"]
 
-  :plugins [[de.sveri/closp-crud "0.1.4"]
-            [lein-cljsbuild "1.1.1"]]
+                 [joplin.jdbc "0.3.6"]
+                 [joplin.core "0.3.6"]
+                 [de.sveri/closp-crud "0.3.0"]]
 
-  ;database migrations
-  :joplin {:migrators {:sqlite-mig "resources/migrators/sqlite"
-                       :h2-mig "resources/migrators/h2"}}
-
-  :closp-crud {:jdbc-url "jdbc:sqlite:./db/{{name}}.sqlite"
-               :migrations-output-path "./resources/migrators/sqlite"
-               :clj-src "src/clj"
-               :ns-db "{{ns}}.db"
-               :ns-routes "{{ns}}.routes"
-               :ns-layout "{{ns}}.layout"
-               :templates "resources/templates"}
+  :plugins [[lein-cljsbuild "1.1.1"]]
 
   :min-lein-version "2.5.0"
 
@@ -106,36 +96,20 @@
 
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-figwheel "0.5.0-2"]
-                                      [joplin.lein "0.2.17"]
                                       [test2junit "1.1.1"]]
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
 
-                                      ; use this for htmlunit or an older firefox version
-                                      [clj-webdriver "0.6.1"
-                                       :exclusions [org.seleniumhq.selenium/selenium-server]]
+                                      [org.apache.httpcomponents/httpclient "4.5.1"]
+                                      [clj-webdriver "0.7.2"]
+                                      [org.seleniumhq.selenium/selenium-java "2.48.2"]
 
-                                      ; uncomment this to use current firefox version (does not work with htmlunit
-                                      ;[clj-webdriver "0.6.1"
-                                      ; :exclusions
-                                      ; [org.seleniumhq.selenium/selenium-server
-                                      ;  org.seleniumhq.selenium/selenium-java
-                                      ;  org.seleniumhq.selenium/selenium-remote-driver]]
-
-                                      [org.seleniumhq.selenium/selenium-server "2.46.0"]
                                       [ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]
-                                      [pjstadig/humane-test-output "0.7.0"]
-                                      [joplin.core "0.2.17"]
-                                      [joplin.jdbc "0.2.17"]]
+                                      [pjstadig/humane-test-output "0.7.0"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
-                                      (pjstadig.humane-test-output/activate!)]
-
-                       :joplin {:databases {:sqlite-dev {:type :sql, :url "jdbc:sqlite:./db/{{name}}.sqlite"}
-                                            :h2-dev {:type :sql, :url "jdbc:h2:./db/korma.db;DATABASE_TO_UPPER=FALSE"}}
-                                :environments {:sqlite-dev-env [{:db :sqlite-dev, :migrator :sqlite-mig}]
-                                               :h2-dev-env [{:db :h2-dev, :migrator :h2-mig}]}}}
+                                      (pjstadig.humane-test-output/activate!)]}
 
              :uberjar {:auto-clean false                    ; not sure about this one
                        :omit-source true
@@ -157,4 +131,9 @@
 
   :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]
             "unit" ["do" "test" ":unit"]
-            "integ" ["do" "test" ":integration"]})
+            "integ" ["do" "test" ":integration"]
+
+            ; migration utilities
+            "migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            "rollback" ["run" "-m" "joplin.alias/rollback" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
+            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]})

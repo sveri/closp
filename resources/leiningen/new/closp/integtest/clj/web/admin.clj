@@ -70,6 +70,8 @@
   (sign-in)
   (let [uname "_foo@bar.de"]
     (->user uname)
+    (click (find-element {:tag :input :type "checkbox"}))
+    (click (find-element {:tag :input :type "submit" :value "Update"}))
     (to (str s/test-base-url "user/logout"))
     (sign-in uname "bbbbbb" "user/changepassword")
     (quick-fill-submit {"#oldpassword" "bbbbbb"}

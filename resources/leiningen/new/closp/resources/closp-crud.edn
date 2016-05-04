@@ -1,0 +1,8 @@
+{:jdbc-url               "jdbc:sqlite:./db/closp-crud-webinterface.sqlite"
+ :migrations-output-path "./resources/migrators/sqlite"
+ :clj-src                "src/clj"
+ :ns-db                  "{{ns}}.db"
+ :ns-db-entities         "{{ns}}.db.entities"
+ :ns-routes              "{{ns}}.routes"
+ :ns-layout              "{{ns}}.layout"
+ :templates              "resources/templates"}

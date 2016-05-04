@@ -7,15 +7,15 @@ Password: admin
 
 ## Usage
 
-1. Run `lein joplin migrate sqlite-dev-env` in the newly created project (This will add an admin user with username:
+1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
+2. Run `lein migrate` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
-2. Run `lein repl` and then `(start-dev-system)` to run the application in dev mode.
 3. Run `lein figwheel` to start figwheel and compile the clojurescript.
 4. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
 * closp-crud integration
-* H2 database on filesystem as a default
+* SQlite database on filesystem as a default
 * Joplin for database migrations
 * Selmer as templating solution
 * http-kit as a server
@@ -23,7 +23,8 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Figwheel with clojurescript live reloading
 * Reloading support for templates and clojure code
 * Configuration with nomad
-* User management with login/logout/registration with email activation (provided by postal)
+* User management with login/logout/registration and email activation (provided by postal)
+* Recaptcha support for signup form
 * Authentication provided by buddy
 * reagent and datascript on frontend side
 * Ring Antiforgery middleware
@@ -32,7 +33,14 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Datascript with reagent example
 * Booststrap css styles
 * Example for clj-webdriver tests
-* Internationalization using tower
+* Internationalization support with tower
+  
+
+## Showcase
+
+See it live at: <http://sveri.de:3124>  
+Username: admin@localhost.de  
+Password: admin  
 
 ## Docker
 
@@ -40,27 +48,35 @@ There is a dockerfile attached which will fetch the latest version and run an ex
 
 ## Configuration
 
-There is a closp.edn file in the resources folder  which should be adapted accordingly.
-Closp uses nomad <https://github.com/james-henderson/nomad>, so you can configure everything as you can do with nomad.
+There is a closp.edn file in the resources folder  which should be adapted accordingly.  
+Closp uses nomad <https://github.com/james-henderson/nomad>, so you can configure everything as you can do with nomad.  
 When you start your project from the repl it will load the default `closp.edn` from `resources` folder, which fits
-for development.
+for development.  
 For a different config in another environment you can pass in a file path via system environment setting like so:
-`java -jar -Dclosp-config-path=C:\\path\\to\\iwf-prod.edn closp.jar`.
+`java -jar -Dclosp-config-path=C:\\path\\to\\iwf-prod.edn closp.jar`.  
 Please think of changing the :env key in the config to :prod instead of :dev when changing to a different
 environment.
 
 ## closp-crud
 
 This is a module that generates html, routing and sql files for a given table definition. For more
-information please look here: <https://github.com/sveri/closp>.
+information please look here: <https://github.com/sveri/closp>.  
+Short Intro:  
+
+* Create a new definition in env/dev/entities/example.edn (Look at env/dev/entities/user.edn for an example)
+* Run lein run -m de.sveri.clospcrud.closp-crud/closp-crud -f env/dev/entities/example.edn
+* Run lein migrate to create the new database
+* Add the new routes handler to components.handler namespace
+* Reset the server
+* Browse to /example
 
 ## Database
 
-Closp per default is configured to connect to a file H2 database.  
+Closp per default is configured to connect to a file SQlite database.  
 Additionally I added support for joplin <https://github.com/juxt/joplin> to handle migration of sql scripts.
-To get started run `lein joplin migrate sql-dev-env` in the project folder. This is enough to get running.
-Changing the jdbc url in the *closp.edn* file will switch to another database. But keep in mind you will have to
-run the migration step again and change the jdbc url in the project.clj too.
+To get started run `lein migrate` in the project folder. This is enough to get running.
+Changing the jdbc url in the *closp.edn* file will switch to another database. But keep in mind you will have to 
+run the migration step again and change the jdbc url in the `joplin.edn` too.  
 The connection is handled by jdbc <https://github.com/clojure/java.jdbc> so everything that jdbc supports is supported 
 by closp out of the box.  
 Closp comes with korma <https://github.com/korma/Korma> for an abstraction layer over jdbc. See `db\users.clj` for
@@ -82,7 +98,7 @@ Closp ships with selmer <https://github.com/yogthos/Selmer> (django inspired) te
 ## Signup
 
 There is a signup workflow implemented that sends out an email after regristration with a link to activate the account.
-Until the account is activated the user won't be able to login. 
+Until the account is activated the user won't be able to login.
 
 ## Recaptcha
 
@@ -90,6 +106,7 @@ The signup form is protected by recaptcha. To make it work open your closp.edn f
 * :captcha-public-key
 * :private-recaptcha-key
 * :recaptcha-domain
+
 
 ## Admin user interface
 
@@ -123,11 +140,11 @@ Closp comes with some predefined components <https://github.com/danielsz/system>
 
 To restart the components just hit `(reset)` in the running repl.
 
-## Ring antiforgery
+## Ring antiforgery 
 
 <https://github.com/weavejester/ring-anti-forgery> is enabled per default for every shipped form.
 If you use ajax post / put / ... calls you need to provide a :X-CSRF-Token in the header. With cljs-ajax for example
-it would look like this:
+it would look like this:  
 
     (ajax/ajax-request
         {:uri             url
@@ -149,16 +166,20 @@ Closp includes a reagent <https://github.com/reagent-project/reagent> and datasc
 <https://github.com/tonsky/datascript> example taken from <https://gist.github.com/allgress/11348685> to get started
 with frontend development.
 
-## Support for flash messages with global flash div
-To use it call (layout/flash-result "success message" "alert-success") and on the next page load
-a div will appear with the success message on top of the page.
-
 ## Production
 
-There is a leiningen task defined in the _project.clj_ to generate an uberjar. Just execute `lein uberjar`.
+There is a leiningen task defined in the _project.clj_ to generate an uberjar. Just execute `lein uberjar`.  
 By default this will include your closp.edn config file in the build from resources folder. You should at least change
-the :env entry to :prod or something else than :dev.
+the :env entry to :prod or something else than :dev.  
 There are several ways to setup a more separated dev / staging / prod environment. Please lookup nomad for that.
+
+## CLJ-Webdriver
+
+Closp comes with some examples on how to use clj webdriver in your projects for integration tests. They reside in
+`integtest\clj`.
+
+Per default the tests are run with the :htlmunit driver, which is fast, but not that good on javascript. To change that,
+open: {{ns}}.web.setup and adapt the driver in `browser-setup` to `:firefor` or `:chrome`.
 
 ## Internationalization
 
@@ -166,30 +187,35 @@ Closp uses <https://github.com/ptaoussanis/tower> for internationalization. It i
  `your.ns.components.locale`. You have to add additional strings / translations there to use them in your web 
   application. For examples look at `your.ns.routes.user`.
 
-## CLJ-Webdriver
-
-Closp comes with some examples on how to use clj webdriver in your projects for integration tests. They reside in
-`integtest\clj`.  
-
-Currently the support is some kind of tricky regarding support of latest firefox versions. Please look in the 
-`profiles->dev->ddependencies` section of the `project.clj` file for some comments on this matter. It is possible to use
-both, the htmlunitdriver and an older firefox version or only a newer firefox version.
-
 ## Minor features.
 
 * Miniprofiler <https://github.com/yeller/clojure-miniprofiler> example in `routes\user.clj -> admin-page function`. 
-The profiler is enabled in development only 
+The profiler is enabled in development only
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
+* Support for flash messages with global flash div
 * Self registration can be turned on or off in the closp.edn file in the resources folder.
 * Test2junit plugin to create parseable test results.
 
 ## Planned features
 
-* CRUD plugin to generate frontend to database CRUD for entities
+* Currently working on a webui for closp crud
 * Whatever seems useful in the future.
 
+## Contributors  
+
+* Henrik Lundahl - https://github.com/henriklundahl
+
 ## FAQ
+
+### Running `lein figwheel` fails with `...No such var: ana/forms-seq*...`
+
+The complete error message is:
+ 
+    clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: No such var: ana/forms-seq*, compiling:(figwheel_sidecar/utils.clj:49:21)
+
+This issue is tracked in https://github.com/sveri/closp/issues/20. According to the reporter upgrading to leiningen 
+2.5.3 fixed it for him. If it does not for you, please reopen the issue.
 
 ### Could not find environment ':sqlite-dev-env'
 

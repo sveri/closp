@@ -50,12 +50,14 @@
               [(str "src/clj/{{san-path}}/user.clj") (*render* "clj/user.clj")]
               [(str "src/clj/{{san-path}}/types.clj") (*render* "clj/types.clj")]
 
+              [(str "src/clj/{{san-path}}/components/components.clj") (*render* "clj/components/components.clj")]
               [(str "src/clj/{{san-path}}/components/config.clj") (*render* "clj/components/config.clj")]
               [(str "src/clj/{{san-path}}/components/db.clj") (*render* "clj/components/db.clj")]
               [(str "src/clj/{{san-path}}/components/handler.clj") (*render* "clj/components/handler.clj")]
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
               [(str "src/clj/{{san-path}}/components/locale.clj") (*render* "clj/components/locale.clj")]
 
+              [(str "src/clj/{{san-path}}/db/entities.clj") (*render* "clj/db/entities.clj")]
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
 
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
@@ -64,13 +66,15 @@
 
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
-              [(str "src/clj/{{san-path}}/service/cc.clj") (*render* "clj/service/cc.clj")]
 
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "src/cljs/{{san-path}}/ajax.cljs") (*render* "cljs/ajax.cljs")]
 
+              [(str "src/cljs/{{san-path}}/cc/common.cljs") (*render* "cljs/cc/common.cljs")]
               [(str "src/cljs/{{san-path}}/cc/core.cljs") (*render* "cljs/cc/core.cljs")]
+              [(str "src/cljs/{{san-path}}/cc/core_middlepanel.cljs") (*render* "cljs/cc/core_middlepanel.cljs")]
+              [(str "src/cljs/{{san-path}}/cc/left_panel.cljs") (*render* "cljs/cc/left_panel.cljs")]
 
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 
@@ -79,6 +83,7 @@
               [(str "src/cljc/{{san-path}}/closp_schema_helper.cljc") (*render* "cljc/closp_schema_helper.cljc")]
 
 
+              [(str "resources/templates/af-token.html") (*render* "resources/templates/af-token.html")]
               [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
               [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
               [(str "resources/templates/home/ajax-example.html") (*render* "resources/templates/home/ajax-example.html")]
@@ -87,7 +92,6 @@
               ["README.md" (*render* "README.md")]
 
               [(str "test/clj/{{san-path}}/db/user_test.clj") (*render* "test/clj/db/user_test.clj")]
-              [(str "test/clj/{{san-path}}/service/cc_test.clj") (*render* "test/clj/service/cc_test.clj")]
 
               [(str "integtest/clj/{{san-path}}/web/setup.clj") (*render* "integtest/clj/web/setup.clj")]
               [(str "integtest/clj/{{san-path}}/web/signup.clj") (*render* "integtest/clj/web/signup.clj")]
@@ -95,7 +99,9 @@
               [(str "integtest/clj/{{san-path}}/web/admin.clj") (*render* "integtest/clj/web/admin.clj")]
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
-              ]))
+              ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]
+              ["resources/joplin.edn" (*render* "resources/joplin.edn")]]))
+
 
 
     (mapv #(apply unpack (:name data) %)
@@ -127,19 +133,17 @@
 
            ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]
 
-           ["migrators/h2/user-20150720T132915Z.down.sql" "resources/migrators/h2/user-20150720T132915Z.down.sql"]
-           ["migrators/h2/user-20150720T132915Z.up.sql" "resources/migrators/h2/user-20150720T132915Z.up.sql"]
-           ["migrators/sqlite/user-20150720T083449Z.down.sql" "resources/migrators/sqlite/user-20150720T083449Z.down.sql"]
-           ["migrators/sqlite/user-20150720T083449Z.up.sql" "resources/migrators/sqlite/user-20150720T083449Z.up.sql"]
-
-           ["migrators/sqlite/user-20150720T083449Z.up.sql" "resources/migrators/sqlite/user-20150720T083449Z.up.sql"]])
+           ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
+           ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]
+           ["migrators/sqlite/1-user.down.sql" "resources/migrators/sqlite/1-user.down.sql"]
+           ["migrators/sqlite/1-user.up.sql" "resources/migrators/sqlite/1-user.up.sql"]])
 
     (create-db-dir (:name data))))
 
 (defn closp
   "Create a new CLOSP project"
   [name & args]
-  (let [{:keys [options arguments errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
+  (let [{:keys [options _ errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
         ns (:namespace options)
         san-path (string/replace ns #"\." "/")
         data {:name             name
@@ -165,6 +169,4 @@
 
       errors (opt-helper/exit 1 (opt-helper/error-msg errors))
 
-      :else (generate-project name args data))
-    )
-  )
+      :else (generate-project name args data))))

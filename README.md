@@ -8,6 +8,13 @@ A Leiningen template combining luminus, chestnut plus some goodies.
 
 Mailing List: [![Clojureverse](https://rawgit.com/clojureverse/clojureverse-assets/master/clojureverse-org-green.svg)](http://clojureverse.org/c/closp)
 
+![Intro Gif](intro.gif?raw=true "Intro")
+
+These five steps are all it takes to get up and running.
+
+[Documentation with Tutorial](http://closp.net/)
+
+
 ## Goals
 * Provide a full stack to get started with
 * Provide generated code which can be changed easily
@@ -35,14 +42,14 @@ as possible (at least that's the goal).
 ## Usage
 
 1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
-2. Run `lein joplin migrate sqlite-dev-env` in the newly created project (This will add an admin user with username: 
+2. Run `lein migrate` in the newly created project (This will add an admin user with username: 
 _admin@localhost.de_ and password: _admin_ to a new database)
 3. Run `lein figwheel` to start figwheel and compile the clojurescript.
 4. Run `lein rel-jar` to generate a runnable jar file.
 
 ## Features
 * closp-crud integration
-* H2 database on filesystem as a default
+* SQlite database on filesystem as a default
 * Joplin for database migrations
 * Selmer as templating solution
 * http-kit as a server
@@ -87,15 +94,23 @@ environment.
 ## closp-crud
 
 This is a module that generates html, routing and sql files for a given table definition. For more
-information please look here: <https://github.com/sveri/closp>.
+information please look here: <https://github.com/sveri/closp>.  
+Short Intro:  
+
+* Create a new definition in env/dev/entities/example.edn (Look at env/dev/entities/user.edn for an example)
+* Run lein run -m de.sveri.clospcrud.closp-crud/closp-crud -f env/dev/entities/example.edn
+* Run lein migrate to create the new database
+* Add the new routes handler to components.handler namespace
+* Reset the server
+* Browse to /example
 
 ## Database
 
-Closp per default is configured to connect to a file H2 database.  
+Closp per default is configured to connect to a file SQlite database.  
 Additionally I added support for joplin <https://github.com/juxt/joplin> to handle migration of sql scripts.
-To get started run `lein joplin migrate sql-dev-env` in the project folder. This is enough to get running.
+To get started run `lein migrate` in the project folder. This is enough to get running.
 Changing the jdbc url in the *closp.edn* file will switch to another database. But keep in mind you will have to 
-run the migration step again and change the jdbc url in the project.clj too.  
+run the migration step again and change the jdbc url in the `joplin.edn` too.  
 The connection is handled by jdbc <https://github.com/clojure/java.jdbc> so everything that jdbc supports is supported 
 by closp out of the box.  
 Closp comes with korma <https://github.com/korma/Korma> for an abstraction layer over jdbc. See `db\users.clj` for
@@ -195,11 +210,10 @@ There are several ways to setup a more separated dev / staging / prod environmen
 ## CLJ-Webdriver
 
 Closp comes with some examples on how to use clj webdriver in your projects for integration tests. They reside in
-`integtest\clj`.  
+`integtest\clj`.
 
-Currently the support is some kind of tricky regarding support of latest firefox versions. Please look in the 
-`profiles->dev->ddependencies` section of the `project.clj` file for some comments on this matter. It is possible to use
-both, the htmlunitdriver and an older firefox version or only a newer firefox version.
+Per default the tests are run with the :htlmunit driver, which is fast, but not that good on javascript. To change that,
+open: {{ns}}.web.setup and adapt the driver in `browser-setup` to `:firefor` or `:chrome`.
 
 ## Internationalization
 
@@ -220,15 +234,22 @@ files.
 ## Planned features
 
 * Currently working on a webui for closp crud
-* adding reframe example
 * Whatever seems useful in the future.
+
+## Contributors  
+
+* Henrik Lundahl - https://github.com/henriklundahl
 
 ## FAQ
 
-### Could not find environment ':sqlite-dev-env'
+### Running `lein figwheel` fails with `...No such var: ana/forms-seq*...`
 
-Leiningen 2.5.2 introduced a change which broke existing joplin versions. You have to update your joplin dependencies
-to at least 0.2.17 to make it work with leiningen 2.5.2
+The complete error message is:
+ 
+    clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: No such var: ana/forms-seq*, compiling:(figwheel_sidecar/utils.clj:49:21)
+
+This issue is tracked in https://github.com/sveri/closp/issues/20. According to the reporter upgrading to leiningen 
+2.5.3 fixed it for him. If it does not for you, please reopen the issue.
 
 
 ### Could not find template closp on the classpath.
@@ -241,15 +262,6 @@ This will happen only in dev mode for every page where you did not explicitly re
 Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change the call to `(core/main)` how you
 need it for the page you are working on right now.
 
-### I get this error in the javascript console: WebSocket connection to 'ws://localhost:9001/' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED
-
-This happens because per default the browser-repl is not loaded. If you load like in:
-<https://github.com/plexus/chestnut/blob/master/src/leiningen/new/chestnut/env/dev/cljs/chestnut/main.cljs> this error
-will go away, however. After starting your dev system you will switch into the cljs repl and not be able anymore
-to restart your components with `(restart)`. So this is a tradeoff one has to make.  
-I decided to turn the browser-repl off because the clojurescript reloading still works in this setup. You only get this
-error.
-
 ### When I change a route definition, the change is not applied after a page reload
 
 You have to reset the system, by calling `({{ns}}.user/reset)` in the repl.
@@ -261,160 +273,8 @@ The error looks like this:
 The problem is that ring-transit imports `schema/plumbing` which interfers with schema. Please look here for a quick solution
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
-## Changes
 
-### 0.1.27
-
-* Updating timbre to [com.taoensso/timbre "4.1.4"]
-* Removing ring-server for dev. Replace by http-kit with wrap-reload
-* Replacing system by mount
-
-### 0.1.26
-* Updating lein-cljsbuild to 1.1.1
-* Bugfix in cljs ns
-
-### 0.1.25
-
-* adapt .gitignore to include _js_ folder
-* Updating closp-crud to 0.1.4
-* Updating cljs to "1.7.170"
-* Updating figwheel to "0.5.0-2"
-* Updating cljs-uuid to [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
-* Updating datascript to [datascript "0.13.3"]
-* still working on cc - alpha status
-
-### 0.1.24
-
-* Namespace fixes
-* Fixes with test setup
-
-### 0.1.23
-
-* Preparing for closp-crud webui
-* Updating reagent to 0.5.1
-* Adding cljs-ajax 0.3.14
-* adding ring transit 0.1.3
-* Added clojurescript example on how to use transit and ajax-cljs with a simple get request
-
-### 0.1.22
-
-* Updating joplin to 0.2.17 because of a defect interfering with leiningen 2.5.2
-* Introducing core.typed
-
-### 0.1.21
-
-* Bugfix in test namespace
-
-### 0.1.20
-
-* Users in admin view are ordered by username
-* Fix #7 and #8
-* Adding for test2junit
-* switching db.users to db.user
-* Adding example database test
-* Integrating clj webdriver and adding several tests for admin and user interface
-* Adding alias for unit and integtest
-* Updating dependencies
-
-    [ring "1.4.0"]  
-    [compojure "1.4.0"]  
-    [selmer "0.8.5"]    
-    [buddy/buddy-auth "0.6.0"]  
-    [buddy/buddy-hashers "0.6.0"]  
-    [korma "0.4.2"]   
-    [org.xerial/sqlite-jdbc "3.8.10.1"]  
-    [datascript "0.11.6"]  
-    [ring/ring-devel "1.4.0"]  
-    [pjstadig/humane-test-output "0.7.0"]  
-
-
-
-### 0.1.19
-
-* Fixing broken 0.1.8 release
-
-### 0.1.18
-
-* bugfix for smtp configuration when using sendmail
-* Upgrade closp-crud to 0.1.3
-* provide user sqls for h2 and sqlite
-* sqlite as default DB
-
-### 0.1.17
-
-* Bugfix regarding self registration
-* Added closp-crud definition file for user (not used yet, just provided for reference)
-* Recaptcha configuration now available in closp.edn, no need to edit the source anymore
-* Adding bootstrap 3.3.5
-* Providing react.js (0.12.1) and jquery (2.0.3) as local files instead of cdn provided (FIX #6)
-
-### 0.1.16
-
-* Adding back reset bugfix
-
-### 0.1.15
-
-* Removing piggyback and nrepl dependency
-* Changes on how to use fighweel
-
-### 0.1.14
-
-* Removing weasel dependency
-* Removing cljx support
-* Introducing clojure-1.7.0-RC1 with support for cljc
-* Several version updates
-* Minimal CLJC example
-
-### 0.1.13
-
-* Version closp-crud -> 0.1.1
-
-### 0.1.12
-
-* Bugfix [#3](/../../issues/3)
-
-### 0.1.11
-
-* Upgrading Figwheel to 0.2.6
-* Integrating closp-crud
-
-### 0.1.10
-
-* User can be deleted now
-* Fixing defect with flash messsage
-* Minor refactoring
-
-### 0.1.9.1
-
-* Fixing minor errors
-
-### 0.1.9
-
-* Self registration is now optional
-
-### 0.1.8
-
-* Displaying error message on user registration when mailserver is not working.
-* Adding active link for top menu
-
-### 0.1.7
-
-* Changing _users_ table to _user_
-* Adding option to pass in a config via system environment
-
-### 0.1.6
-
-* Switching from ragtime to joplin (which uses ragtime internally)
-
-### 0.1.5
-
-* Adding flash div in base html for flash support
-* Exposing uuid in admin view instead of database id
-
-### 0.1.4
- 
-* Adding recaptcha for signup form
-* Adding generated README
+## [Changes](CHANGES.md) 
 
  
 

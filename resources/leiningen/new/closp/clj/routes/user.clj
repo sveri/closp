@@ -27,7 +27,7 @@
     (vali/rule (hashers/check form-current-pass current-pass)
                [:oldpass (t locale tconfig :user/wrong_cur_pass)])))
 
-(defn valid-register? [email pass confirm captcha-allowed? locale tconfig
+(defn valid-register? [email pass confirm captcha-enabled? locale tconfig
                        & [recaptcha_response_field recaptcha_challenge_field
                           priv-recaptcha-key rec-domain]]
   (vali/rule (vali/has-value? email)
@@ -36,7 +36,7 @@
              [:id (t locale tconfig :user/email_invalid)])
   (vali/rule (not (db/username-exists? email))
              [:id (t locale tconfig :user/username_exists)])
-  (when (and captcha-allowed? recaptcha_challenge_field)
+  (when (and captcha-enabled? recaptcha_challenge_field)
     (vali/rule (.isValid (connectReCaptch recaptcha_response_field recaptcha_challenge_field
                                           priv-recaptcha-key rec-domain))
                [:captcha (t locale tconfig :user/captcha_wrong)]))
@@ -44,8 +44,9 @@
   (not (vali/errors? :id :pass :confirm :captcha)))
 
 (defn admin-page [params locale tconfig]
-  (let [users (cjmp/trace "all users" (db/get-all-users (get params :filter)))]
-    (layout/render "user/admin.html" (merge {:users       users :roles auth/available-roles
+  (let [users (cjmp/trace "all users" (db/get-all-users (get params :filter)))
+        users-cleaned (map #(assoc % :is_active (if (or (= (:is_active %) false) (= (:is_active %) 0)) false true)) users)]
+    (layout/render "user/admin.html" (merge {:users       users-cleaned :roles auth/available-roles
                                              :admin_title (t locale tconfig :admin/title)}
                                             params))))
 
@@ -61,8 +62,9 @@
                  {:account_activated_title (t locale tconfig :user/account_activated_title)
                   :account_activated       (t locale tconfig :user/account_activated)}))
 
-(defn signup-page [{:keys [captcha-public-key]} & [errormap]]
-  (layout/render "user/signup.html" (merge {:captcha-public-key captcha-public-key} errormap)))
+(defn signup-page [{:keys [captcha-public-key captcha-enabled?]} & [errormap]]
+  (layout/render "user/signup.html" (merge {:captcha-public-key captcha-public-key
+                                            :captcha-enabled? captcha-enabled?} errormap)))
 
 (defn activate-account [config id locale tconfig]
   (if (db/get-user-by-act-id id)
@@ -82,7 +84,8 @@
     (if-let [user (db/get-user-by-email username)]
       (try
         (cond
-          (= false (:is_active user)) (login-page {:error :user/activate_account})
+          (or (= 0 (:is_active user)) (= false (:is_active user))) (login-page
+                                                                     {:error (t locale tconfig :user/activate_account)})
           (= false (hashers/check password (get user :pass ""))) (login-page
                                                                    {:error (t locale tconfig :user/pass_correct)})
           :else (do (sess/put! :role (:role user)) (sess/put! :identity username)
@@ -102,27 +105,27 @@
             confirm-error (vali/on-error :confirm first)]
         (changepassword-page {:pass-error pass-error :confirm-error confirm-error :old-error old-error})))))
 
-(defn really-delete-page [uuid]
-  (layout/render "user/reallydelete.html" {:uuid uuid :username (:email (db/get-user-by-uuid uuid))}))
+(defn really-delete-page [id]
+  (layout/render "user/reallydelete.html" {:id id :username (:email (db/get-user-by-id id))}))
+(defn really-delete [id delete_cancel locale tconfig]
 
-(defn really-delete [uuid delete_cancel locale tconfig]
   (if (= delete_cancel "Cancel")
     (do (layout/flash-result (t locale tconfig :generic/deletion_canceled) "alert-warning")
         (resp/redirect "/admin/users"))
-    (do (db/delete-user uuid)
+    (do (db/delete-user id)
         (layout/flash-result (t locale tconfig :user/deleted) "alert-success")
         (resp/redirect "/admin/users"))))
 
 (defmulti update-user (fn [update_delete _ _ _ _ _] update_delete))
-(defmethod update-user "Update" [_ user-uuid role active locale tconfig]
+(defmethod update-user "Update" [_ user-id role active locale tconfig]
   (let [role (if (= "none" role) "" role)
         act (= "on" active)]
-    (db/update-user user-uuid {:role role :is_active act}))
-  (let [user (db/get-user-by-uuid user-uuid)]
+    (db/update-user user-id {:role role :is_active act}))
+  (let [user (db/get-user-by-id user-id)]
     (admin-page (layout/flash-result (t locale tconfig :user/updated (:email user)) "alert-success") locale tconfig)))
 
-(defmethod update-user "Delete" [_ user-uuid _ _ _ _]
-  (really-delete-page user-uuid))
+(defmethod update-user "Delete" [_ user-id _ _ _ _]
+  (really-delete-page user-id))
 
 (defn send-reg-mail [email activationid config locale tconfig]
   (if (uservice/send-activation-email email activationid config)
@@ -138,7 +141,7 @@
   (db/create-user email (hashers/encrypt password) (or activationid (uservice/generate-activation-id))))
 
 (defn admin-add-user [email password confirm config locale tconfig]
-  (if (valid-register? email password confirm (:captcha-allowed? config) locale tconfig)
+  (if (valid-register? email password confirm (:captcha-enabled? config) locale tconfig)
     (do (create-new-user! email password)
         (layout/flash-result (t locale tconfig :user/user_added) "alert-success")
         (admin-page {} locale tconfig))
@@ -146,7 +149,7 @@
 
 (defn signup-user [email password confirm {:keys [recaptcha-domain private-recaptcha-key] :as config} locale tconfig
                    response_field challenge_field]
-  (if (valid-register? email password confirm (:captcha-allowed? config) locale tconfig
+  (if (valid-register? email password confirm (:captcha-enabled? config) locale tconfig
                        response_field challenge_field
                        private-recaptcha-key recaptcha-domain)
     (let [activationid (uservice/generate-activation-id)]
@@ -162,10 +165,10 @@
     (GET "/user/changepassword" [] (changepassword-page))
     (POST "/user/changepassword" [oldpassword password confirm :as req]
           (changepassword oldpassword password confirm (:locale req) (:tconfig req)))
-    (POST "/admin/user/update" [user-uuid role active update_delete :as req]
-          (update-user update_delete user-uuid role active (:locale req) (:tconfig req)))
-    (POST "/admin/user/delete" [user-uuid delete_cancel :as req]
-          (really-delete user-uuid delete_cancel (:locale req) (:tconfig req)))
+    (POST "/admin/user/update" [user-id role active update_delete :as req]
+          (update-user update_delete user-id role active (:locale req) (:tconfig req)))
+    (POST "/admin/user/delete" [user-id delete_cancel :as req]
+          (really-delete user-id delete_cancel (:locale req) (:tconfig req)))
     (POST "/admin/user/add" [email password confirm :as req]
           (admin-add-user email password confirm config (:locale req) (:tconfig req)))
     (GET "/admin/users" [filter :as req] (admin-page {:filter filter} (:locale req) (:tconfig req)))))
