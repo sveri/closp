@@ -12,6 +12,9 @@ Mailing List: [![Clojureverse](https://rawgit.com/clojureverse/clojureverse-asse
 
 These five steps are all it takes to get up and running.
 
+[Documentation with Tutorial](http://closp.net/)
+
+
 ## Goals
 * Provide a full stack to get started with
 * Provide generated code which can be changed easily
