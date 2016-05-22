@@ -44,14 +44,16 @@
                     </p>
                 </div>
 
-                <div class="form-group">
-                    {% if captcha-error %}
-                    <div class="alert alert-danger">{{captcha-error}}</div>
-                    {% endif %}
-                    <script type="text/javascript"
-                            src="http://www.google.com/recaptcha/api/challenge?k={{captcha-public-key}}">
-                    </script>
-                </div>
+                {% if captcha-enabled? %}
+                    <div class="form-group">
+                        {% if captcha-error %}
+                        <div class="alert alert-danger">{{captcha-error}}</div>
+                        {% endif %}
+                        <script type="text/javascript"
+                                src="http://www.google.com/recaptcha/api/challenge?k={{captcha-public-key}}">
+                        </script>
+                    </div>
+                {% endif %}
 
                 <div class="form-group">
                     <input class="btn btn-primary" tabindex="4" type="submit" value="Create Account">
