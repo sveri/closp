@@ -1,6 +1,10 @@
 
 ## Changes
 
+### 0.2.1
+
+* Captcha :captcha-enabled? key from configuration was ignored in _signup.html_
+
 ### 0.2.0
 
 * **Breaking Change** The schema for closp-crud changed, for more see here: <https://github.com/sveri/closp-crud>

@@ -34,7 +34,7 @@ Your Team"
    :captcha-public-key      "your public captcha key"
    :private-recaptcha-key   "your private captcha key"
    :recaptcha-domain        "yourdomain"
-   :port                    3001})
+   :port                    3000})
 
 
 (defn test-system []
@@ -45,7 +45,7 @@ Your Team"
     :handler (component/using (new-handler) [:config :locale])
     :web (component/using (new-web-server) [:handler :config])))
 
-(def test-base-url (str "http://localhost:3001/"))
+(def test-base-url (str "http://localhost:3000/"))
 
 (defn start-browser [browser]
   (r/reset jop-config :sqlite-integtest-env :sqlite-integtest)
