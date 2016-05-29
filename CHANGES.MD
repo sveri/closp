@@ -1,6 +1,11 @@
 
 ## Changes
 
+### 0.3.0
+
+* **Breaking Change** closp-crud using clojure.spec
+* Minor fixes
+
 ### 0.2.1
 
 * Captcha :captcha-enabled? key from configuration was ignored in _signup.html_
