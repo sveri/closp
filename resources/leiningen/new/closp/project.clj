@@ -6,7 +6,7 @@
 
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
-  :dependencies [[org.clojure/clojure "1.8.0"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha3"]
                  [org.clojure/clojurescript "1.7.170"]
 
                  [org.clojure/core.cache "0.6.4"]
@@ -100,9 +100,9 @@
 
                        :dependencies [[org.bouncycastle/bcprov-jdk15on "1.52"]
 
-                                      [org.apache.httpcomponents/httpclient "4.5.1"]
+                                      [org.apache.httpcomponents/httpclient "4.5.2"]
                                       [clj-webdriver "0.7.2"]
-                                      [org.seleniumhq.selenium/selenium-java "2.48.2"]
+                                      [org.seleniumhq.selenium/selenium-java "2.52.0"]
 
                                       [ring-mock "0.1.5"]
                                       [ring/ring-devel "1.4.0"]
@@ -136,4 +136,8 @@
             ; migration utilities
             "migrate" ["run" "-m" "joplin.alias/migrate" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
             "rollback" ["run" "-m" "joplin.alias/rollback" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]
-            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]})
+            "reset" ["run" "-m" "joplin.alias/reset" "joplin.edn" "sqlite-dev-env" "sqlite-dev"]}
+
+
+  :test-refresh {:quiet true
+                 :changes-only true})

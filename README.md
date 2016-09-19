@@ -152,7 +152,7 @@ There is also an option to add new users.
 In dev mode changes the clojure code will be recompiled and reloaded on page refresh. The same is true for the templates.
 Theoretically this results development without server restarts.
 
-## Clojurescripth with figwheel
+## Clojurescript with figwheel
 
 When running in dev mode cljs files will be auto compiled and sent to the browser via figwheel 
 <https://github.com/bhauman/lein-figwheel>.  

@@ -27,16 +27,16 @@
                        :email_failed            "Something went wrong sending the email, please contact us."
                        :signup_title            "Signup"
                        :account_created_title   "Account Created"
-                       :account_activated_title "Account Activated"
-                       }
+                       :account_activated_title "Account Activated"}
+
                       :admin
-                      {:title "User Overview"
-                       }}}})
+                      {:title "User Overview"}}}})
+
 
 (defrecord Locale []
   component/Lifecycle
   (start [component](assoc component :tconfig tconfig))
-  (stop [component] (dissoc component :tconfig)))
+  (stop [component] component))
 
 (defn new-locale []
   (map->Locale {}))

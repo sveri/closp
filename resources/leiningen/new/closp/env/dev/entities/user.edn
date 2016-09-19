@@ -7,4 +7,4 @@
            {:name "last_login" :type :time}
            {:name "is_active" :type :boolean :null false :default false}
            {:name "pass" :type :varchar :max-length 200}
-           {:name "activationid" :varchar :max-length 200 :unique true}]}
+           {:name "activationid" :type :varchar :max-length 200 :unique true}]}
