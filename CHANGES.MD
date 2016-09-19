@@ -4,14 +4,14 @@
 ### 0.3.0
 
 * **Breaking Change** closp-crud using clojure.spec
+* Updating buddy-auth to 1.1.0
+* Updating buddy-hashers to 1.0.0
+* Minor refactorings
 * Minor fixes
 
 ### 0.2.1
 
 * Captcha :captcha-enabled? key from configuration was ignored in _signup.html_
-* Updating buddy-auth to 1.1.0
-* Updating buddy-hashers to 1.0.0
-* Minor refactorings
 
 
 ### 0.2.0
