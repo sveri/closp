@@ -26,8 +26,8 @@
                  [com.taoensso/timbre "4.1.4"]
                  [noir-exception "0.2.5"]
 
-                 [buddy/buddy-auth "0.6.0"]
-                 [buddy/buddy-hashers "0.6.0"]
+                 [buddy/buddy-auth "1.1.0"]
+                 [buddy/buddy-hashers "1.0.0"]
 
                  [log4j "1.2.17" :exclusions [javax.mail/mail
                                               javax.jms/jms

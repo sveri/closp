@@ -1,14 +1,12 @@
 (ns {{ns}}.service.auth
   (:require [buddy.auth.backends.session :refer [session-backend]]
             [buddy.auth :refer [authenticated? throw-unauthorized]]
-            [ring.util.response :refer [redirect]]
-            [noir.session :as sess]
-            [{{ns}}.layout :as layout]))
+            [ring.util.response :refer [redirect]]))
 
 (def ^:const available-roles ["admin" "none"])
 
-(defn admin-access [_] (= "admin" (sess/get :role)))
-(defn loggedin-access [_] (some? (sess/get :identity)))
+(defn admin-access [req] (= "admin" (-> req :session :noir :role)))
+(defn loggedin-access [req] (some? (-> req :session :noir :identity)))
 (defn unauthorized-access [_] true)
 
 (def rules [{:pattern #"^/admin.*"
