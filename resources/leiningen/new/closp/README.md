@@ -97,8 +97,7 @@ Closp ships with selmer <https://github.com/yogthos/Selmer> (django inspired) te
 
 ## Signup
 
-There is a signup workflow implemented that sends out an email after regristration with a link to activate the account.
-Until the account is activated the user won't be able to login.
+Signup simply creates a user and activates it. Supports recaptcha for signup form.
 
 ## Recaptcha
 

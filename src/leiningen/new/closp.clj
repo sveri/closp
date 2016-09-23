@@ -114,8 +114,6 @@
            ["resources/templates/home/index.html" "resources/templates/home/index.html"]
            ["resources/templates/home/tos.html" "resources/templates/home/tos.html"]
 
-           ["resources/templates/user/account-activated.html" "resources/templates/user/account-activated.html"]
-           ["resources/templates/user/account-created.html" "resources/templates/user/account-created.html"]
            ["resources/templates/user/admin.html" "resources/templates/user/admin.html"]
            ["resources/templates/user/changepassword.html" "resources/templates/user/changepassword.html"]
            ["resources/templates/user/login.html" "resources/templates/user/login.html"]
@@ -136,7 +134,9 @@
            ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
            ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]
            ["migrators/sqlite/1-user.down.sql" "resources/migrators/sqlite/1-user.down.sql"]
-           ["migrators/sqlite/1-user.up.sql" "resources/migrators/sqlite/1-user.up.sql"]])
+           ["migrators/sqlite/1-user.up.sql" "resources/migrators/sqlite/1-user.up.sql"]
+           ["migrators/postgres/1-user.up.sql" "resources/migrators/postgres/1-user.up.sql"]
+           ["migrators/postgres/1-user.down.sql" "resources/migrators/postgres/1-user.down.sql"]])
 
     (create-db-dir (:name data))))
 

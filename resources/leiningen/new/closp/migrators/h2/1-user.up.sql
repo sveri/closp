@@ -7,9 +7,7 @@ email VARCHAR(30) NOT NULL,
 last_login time,
 is_active BOOLEAN DEFAULT FALSE NOT NULL,
 pass VARCHAR(200),
-activationid VARCHAR(100),
 CONSTRAINT PK_USERH2 PRIMARY KEY (id),
-UNIQUE (activationid),
 UNIQUE (email));
 --;;
 INSERT INTO PUBLIC.user (first_name, last_name, email, role, is_active, pass) VALUES

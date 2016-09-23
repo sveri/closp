@@ -45,15 +45,3 @@
                      {"#confirm" "23"}
                      {"#email" submit})
   (is (.contains (text "body") (s/t :en :user/pass_min_length))))
-
-(deftest ^:integration account_created
-  (signup-valid-user)
-  (is (.contains (text "body  ") (s/t :en :user/account_created))))
-
-(deftest ^:integration account_validated
-  (signup-valid-user)
-  (->> (db/get-user-by-email "foo@bar.de")
-       :activationid
-       (str s/test-base-url "user/activate/")
-       to)
-  (is (.contains (text "body  ") (s/t :en :user/account_activated))))

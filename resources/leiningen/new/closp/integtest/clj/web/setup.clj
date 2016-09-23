@@ -20,12 +20,6 @@
   {:hostname                "http://localhost/"
    :mail-from               "info@localhost.de"
    :mail-type               :test
-   :activation-mail-subject "Please activate your account."
-   :activation-mail-body    "Please click on this link to activate your account: {{activationlink}}
-Best Regards,
-
-Your Team"
-   :activation-placeholder  "{{activationlink}}"
    :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
    :jdbc-url                db-uri
    :env                     :dev

@@ -20,14 +20,8 @@
                        :updated                 "User %s updated successfully."
                        :user_added              "User added."
                        :captcha_wrong           "Please provide the correct captcha input."
-                       :activationid_wrong      "Please provide a correct activation id."
-                       :activate_account        "Please activate your account first."
-                       :account_created         "Account creation successful. You will receive an email with an activation link. Please click on it to activate your account."
-                       :account_activated       "Account activated, you can login now. Redirecting in five seconds..."
                        :email_failed            "Something went wrong sending the email, please contact us."
-                       :signup_title            "Signup"
-                       :account_created_title   "Account Created"
-                       :account_activated_title "Account Activated"}
+                       :signup_title            "Signup"}
 
                       :admin
                       {:title "User Overview"}}}})

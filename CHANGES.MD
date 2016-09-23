@@ -4,6 +4,7 @@
 ### 0.3.0
 
 * **Breaking Change** closp-crud using clojure.spec
+* Removed activation workflow, users are automatically activated and signed in 
 * Updating buddy-auth to 1.1.0
 * Updating buddy-hashers to 1.0.0
 * Minor refactorings
