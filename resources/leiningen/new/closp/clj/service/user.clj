@@ -4,6 +4,7 @@
             [noir.session :as sess]
             [clojure.core.typed :as t]
             [{{ns}}.types :as ty]
+            [de.sveri.getless.db.user :as db-u]
             [clojure.spec :as s]))
 
 (defmulti send-mail-by-type (fn [m _] (get m :prot)))
@@ -29,3 +30,6 @@
 
 (s/fdef get-logged-in-username :ret string?)
 (defn get-logged-in-username [] (:email (get-logged-in-user)))
+
+(defn get-logged-in-user-id [db]
+  (:id (db-u/get-user-by-email db (:email (get-logged-in-user)))))

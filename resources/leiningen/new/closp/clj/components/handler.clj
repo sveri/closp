@@ -28,11 +28,11 @@
            (update-in [:session] merge session-defaults)
            (assoc-in [:security :anti-forgery] xss-protection?)))
 
-(defn get-handler [config locale]
+(defn get-handler [config locale {:keys [db]}]
   (-> (app-handler
-        (into [] (concat (when (:registration-allowed? config) [(registration-routes config)])
+        (into [] (concat (when (:registration-allowed? config) [(registration-routes config db)])
                          ;; add your application routes here
-                         [(cc-routes config) home-routes (user-routes config) base-routes]))
+                         [(cc-routes config) home-routes (user-routes config db) base-routes]))
         ;; add custom middleware here
         :middleware (load-middleware config (:tconfig locale))
         :ring-defaults (mk-defaults false)
@@ -47,10 +47,10 @@
       ; Content-Type, Content-Length, and Last Modified headers for files in body
       (wrap-file-info)))
 
-(defrecord Handler [config locale]
+(defrecord Handler [config locale db]
   comp/Lifecycle
   (start [comp]
-    (assoc comp :handler (get-handler (:config config) locale)))
+    (assoc comp :handler (get-handler (:config config) locale db)))
   (stop [comp] comp))
 
 

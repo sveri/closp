@@ -4,11 +4,14 @@
 ### 0.3.0
 
 * **Breaking Change** closp-crud using clojure.spec
-* Removed activation workflow, users are automatically activated and signed in 
+* Removed activation workflow, users are automatically activated and signed in
+* Removed joplin
+* Removed korma, replaced it with java.jdbc
 * Updating buddy-auth to 1.1.0
 * Updating buddy-hashers to 1.0.0
 * Minor refactorings
 * Minor fixes
+
 
 ### 0.2.1
 

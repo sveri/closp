@@ -1,10 +1,9 @@
 (ns {{ns}}.web.setup
   (:require [clj-webdriver.taxi :as w]
-            [joplin.alias :as a]
-            [joplin.repl :as r]
             [taoensso.tower :as tower]
             [com.stuartsierra.component :as component]
             [reloaded.repl :refer [go stop]]
+            [clojure.java.jdbc :as j]
             [{{ns}}.components.server :refer [new-web-server]]
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
@@ -12,8 +11,8 @@
             [{{ns}}.components.components :refer [prod-system]]
             [{{ns}}.components.locale :as l]))
 
-(def db-uri "jdbc:sqlite:./db/{{name}}-integtest.sqlite")
-(def jop-config (a/*load-config* "joplin.edn"))
+(def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")
+(def db {:connection-uri db-uri})
 
 ; custom config for configuration
 (def test-config
@@ -36,13 +35,12 @@
     :locale (l/new-locale)
     :config (c/new-config test-config)
     :db (component/using (new-db) [:config])
-    :handler (component/using (new-handler) [:config :locale])
+    :handler (component/using (new-handler) [:config :locale :db])
     :web (component/using (new-web-server) [:handler :config])))
 
 (def test-base-url (str "http://localhost:3001/"))
 
 (defn start-browser [browser]
-  (r/reset jop-config :sqlite-integtest-env :sqlite-integtest)
   (w/set-driver! {:browser browser}))
 
 (defn stop-browser []
@@ -61,6 +59,9 @@
   (stop-server))
 
 (defn browser-setup [f]
+  (j/execute! db ["truncate table users cascade"])
+  (j/insert! db :users {:email "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
+                        :is_active true :role "admin"})
   (start-browser :htmlunit)
   (f)
   (stop-browser))

@@ -15,7 +15,7 @@
     :locale (l/new-locale)
     :config (c/new-config (c/prod-conf-or-dev))
     :db (component/using (new-db) [:config])
-    :handler (component/using (new-handler) [:config :locale])
+    :handler (component/using (new-handler) [:config :locale :db])
     :web (component/using (new-web-server) [:handler :config])))
 
 
@@ -24,5 +24,5 @@
     :locale (l/new-locale)
     :config (c/new-config (c/prod-conf-or-dev))
     :db (component/using (new-db) [:config])
-    :handler (component/using (new-handler) [:config :locale])
+    :handler (component/using (new-handler) [:config :locale :db])
     :web (component/using (new-web-server) [:handler :config])))

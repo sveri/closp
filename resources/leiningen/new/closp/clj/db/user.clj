@@ -1,20 +1,24 @@
 (ns {{ns}}.db.user
-  (:require [korma.core :refer [select where insert delete values update set-fields defentity limit order]]
-            [korma.db :refer [h2]]
-            [{{ns}}.db.entities :refer [user]]))
+  (:require [clojure.java.jdbc :as j]))
 
-(defn get-all-users [ & [where-email-like]]
-  (select user (where {:email [like (str "%" where-email-like "%")]})
-          (order :email :asc)))
+(defn get-all-users [db & [where-email-like]]
+  (j/query db ["select * from users where email like ? order by email asc" (str "%" (or where-email-like "") "%")]))
 
-(defn get-user-by-email [email] (first (select user (where {:email email}) (limit 1))))
-(defn get-user-by-id [id] (first (select user (where {:id id}) (limit 1))))
+(defn get-user-by-email [db email]
+  (first (j/query db ["select * from users where email = ? limit 1" email])))
 
-(defn username-exists? [email] (some? (get-user-by-email email)))
+(defn get-user-by-id [db id]
+  (first (j/query db ["select * from users where id = ? limit 1" id])))
 
-(defn create-user [email pw_crypted]
-  (insert users (values {:email email :pass pw_crypted :is_active true})))
+(defn username-exists? [db email] (some? (get-user-by-email db email)))
 
-(defn update-user [id fields] (update user (set-fields fields) (where {:id id})))
-(defn delete-user [id] (delete user (where {:id id})))
-(defn change-password [email pw] (update user (set-fields {:pass pw}) (where {:email email})))
+(defn create-user [db email pw_crypted]
+  (j/insert! db :users {:email email :pass pw_crypted :is_active true}))
+
+(defn update-user [db id fields]
+  (j/update! db :users fields ["id = ?" id]))
+
+(defn delete-user [db id] (j/delete! db :users ["id = ?" id]))
+
+(defn change-password [db email pw] (j/update! db :users {:pass pw} ["email = ?" email]))
+

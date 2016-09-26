@@ -57,7 +57,6 @@
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
               [(str "src/clj/{{san-path}}/components/locale.clj") (*render* "clj/components/locale.clj")]
 
-              [(str "src/clj/{{san-path}}/db/entities.clj") (*render* "clj/db/entities.clj")]
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
 
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
@@ -99,8 +98,8 @@
               [(str "integtest/clj/{{san-path}}/web/admin.clj") (*render* "integtest/clj/web/admin.clj")]
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
-              ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]
-              ["resources/joplin.edn" (*render* "resources/joplin.edn")]]))
+              ["resources/log4j.properties" (*render* "resources/log4j.properties")]
+              ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]]))
 
 
 
