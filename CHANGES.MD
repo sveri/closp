@@ -9,6 +9,7 @@
 * Removed korma, replaced it with java.jdbc
 * Updating buddy-auth to 1.1.0
 * Updating buddy-hashers to 1.0.0
+* Updating ring-mock to 0.3.0
 * Minor refactorings
 * Minor fixes
 
