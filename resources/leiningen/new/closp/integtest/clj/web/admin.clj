@@ -59,7 +59,7 @@
 
 (deftest ^:integration delete-user
   (sign-in)
-  (let [uname "_foo@bar.de"]
+  (let [uname "_aadmin@bar.de"]
     (->user uname)
     (click (find-element {:css "input.btn.btn-danger"}))
     (click (find-element {:css "input.btn.btn-danger"}))
