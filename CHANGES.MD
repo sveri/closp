@@ -13,6 +13,7 @@
 * Updating core.async to 0.2.391
 * Updating compojure to 1.5.1
 * Updating tower to 3.1.0-beta4
+* Updating prone to 1.1.2 - better exception page in browser
 * Replacing cronj by hara.scheduler
 * Replacing timbre by tools.logging
 * Remove environ dependency
