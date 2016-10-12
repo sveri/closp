@@ -11,6 +11,8 @@
 * Updating buddy-hashers to 1.0.0
 * Updating ring-mock to 0.3.0
 * Updating core.async to 0.2.391
+* Updating compojure to 1.5.1
+* Updating tower to 3.1.0-beta4
 * Replacing cronj by hara.scheduler
 * Replacing timbre by tools.logging
 * Remove environ dependency

@@ -15,7 +15,7 @@
                  [ring "1.4.0"]
                  [lib-noir "0.9.9"]
                  [ring/ring-anti-forgery "1.0.0"]
-                 [compojure "1.4.0"]
+                 [compojure "1.5.1"]
                  [reagent "0.5.1"]
                  [http-kit "2.1.19"]
                  [selmer "0.8.5"]
@@ -48,7 +48,7 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
-                 [com.taoensso/tower "3.0.2"]
+                 [com.taoensso/tower "3.1.0-beta4"]
 
                  [prismatic/plumbing "0.5.0"]
                  [prismatic/schema "1.0.5"]
