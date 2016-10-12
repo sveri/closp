@@ -4,11 +4,6 @@
 (defmethod get-type-of-column true [_] :varchar)
 (defmethod get-type-of-column :default [v] (second v))
 
-
-(defn boolean? [value]
-  #?(:clj  (instance? Boolean value)
-     :cljs (= js/Boolean (type value))))
-
 (defmulti is-correct-default-type (fn [expected-type _] expected-type))
 (defmethod is-correct-default-type :varchar [_ type]
   (string? type))
