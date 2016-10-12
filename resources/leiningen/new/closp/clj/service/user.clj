@@ -2,8 +2,6 @@
   (:require [postal.core :refer [send-message]]
             [taoensso.timbre :as timbre]
             [noir.session :as sess]
-            [clojure.core.typed :as t]
-            [{{ns}}.types :as ty]
             [de.sveri.getless.db.user :as db-u]
             [clojure.spec :as s]))
 
@@ -20,7 +18,6 @@
 
 (defmethod send-mail-by-type :test [_ _] true)
 
-(t/ann ^:no-check get-logged-in-user [-> ty/user])
 (defn get-logged-in-user
   "Needs a logged in user to retrieve the user name and role, otherwise returns empty string map"
   []

@@ -2,7 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [taoensso.timbre :as timbre]
             [org.httpkit.server :refer [run-server]]
-            [cronj.core :as cronj]
+            [hara.io.scheduler :as sched]
             [selmer.parser :as parser]
             [{{ns}}.session :as session])
   (:import (clojure.lang AFunction)))
@@ -12,7 +12,7 @@
    shuts down, put any clean up code here"
   []
   (timbre/info "{{name}} is shutting down...")
-  (cronj/shutdown! session/cleanup-job)
+  (sched/shutdown! session/cleanup-job)
   (timbre/info "shutdown complete!"))
 
 (defn init
@@ -23,7 +23,7 @@
   [config]
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
-  (cronj/start! session/cleanup-job)
+  (sched/start! session/cleanup-job)
   (timbre/info "\n-=[ {{name}} started successfully"
                (when (= (:env config) :dev) "using the development profile") "]=-"))
 
