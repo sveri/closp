@@ -1,6 +1,6 @@
 (ns {{ns}}.components.server
   (:require [com.stuartsierra.component :as component]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [org.httpkit.server :refer [run-server]]
             [hara.io.scheduler :as sched]
             [selmer.parser :as parser]
@@ -11,9 +11,9 @@
   "destroy will be called when your application
    shuts down, put any clean up code here"
   []
-  (timbre/info "{{name}} is shutting down...")
+  (log/info "{{name}} is shutting down...")
   (sched/shutdown! session/cleanup-job)
-  (timbre/info "shutdown complete!"))
+  (log/info "shutdown complete!"))
 
 (defn init
   "init will be called once when
@@ -24,7 +24,7 @@
   (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (sched/start! session/cleanup-job)
-  (timbre/info "\n-=[ {{name}} started successfully"
+  (log/info "\n-=[ {{name}} started successfully"
                (when (= (:env config) :dev) "using the development profile") "]=-"))
 
 (defrecord WebServer [handler config]

@@ -17,12 +17,10 @@
                  [ring/ring-anti-forgery "1.0.0"]
                  [compojure "1.4.0"]
                  [reagent "0.5.1"]
-                 [leiningen "2.5.1"]
                  [http-kit "2.1.19"]
                  [selmer "0.8.5"]
                  [prone "0.8.2"]
                  [im.chit/hara.io.scheduler "2.4.5"]
-                 [com.taoensso/timbre "4.1.4"]
                  [noir-exception "0.2.5"]
 
                  [buddy/buddy-auth "1.1.0"]

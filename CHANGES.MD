@@ -10,7 +10,9 @@
 * Updating buddy-auth to 1.1.0
 * Updating buddy-hashers to 1.0.0
 * Updating ring-mock to 0.3.0
+* Updating core.async to 0.2.391
 * Replacing cronj by hara.scheduler
+* Replacing timbre by tools.logging
 * Remove environ dependency
 * Remove core.typed dependency
 * Minor refactorings

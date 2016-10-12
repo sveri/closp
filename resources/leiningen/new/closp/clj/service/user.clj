@@ -1,6 +1,6 @@
 (ns {{ns}}.service.user
   (:require [postal.core :refer [send-message]]
-            [taoensso.timbre :as timbre]
+            [clojure.tools.logging :as log]
             [noir.session :as sess]
             [de.sveri.getless.db.user :as db-u]
             [clojure.spec :as s]))
@@ -8,7 +8,7 @@
 (defmulti send-mail-by-type (fn [m _] (get m :prot)))
 
 (defmethod send-mail-by-type :smtp [m config]
-  (timbre/trace "trying to send mail to" (:data m))
+  (log/trace "trying to send mail to" (:data m))
   (send-message (:smtp-data config) (:data m)))
 
 (defmethod send-mail-by-type :sendmail [m config]

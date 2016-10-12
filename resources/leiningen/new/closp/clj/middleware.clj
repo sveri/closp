@@ -1,5 +1,5 @@
 (ns {{ns}}.middleware
-  (:require [taoensso.timbre :as timbre]
+  (:require [clojure.tools.logging :as log]
             [selmer.middleware :refer [wrap-error-page]]
             [prone.middleware :refer [wrap-exceptions]]
             [noir-exception.core :refer [wrap-internal-error]]
@@ -19,7 +19,7 @@
 
 (defn log-request [handler]
   (fn [req]
-    (timbre/debug req)
+    (log/debug req)
     (handler req)))
 
 (defn add-req-properties [handler config]
@@ -36,9 +36,9 @@
 
 (defn production-middleware [config tconfig]
   [#(add-req-properties % config)
-   #(wrap-access-rules % {:rules auth/rules })
+   #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-backend)
-   #(wrap-internal-error % :log (fn [e] (timbre/error e)))
+   #(wrap-internal-error % :log (fn [e] (log/error e)))
    #(wrap-tower % tconfig)
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery

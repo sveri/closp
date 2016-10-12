@@ -1,5 +1,5 @@
 (ns {{ns}}.core
-  (:require [taoensso.timbre :as timbre]
+  (:require [clojure.tools.logging :as log]
             [reloaded.repl :refer [go]]
             [{{ns}}.cljccore :as cljc]
             [{{ns}}.components.components :refer [prod-system]])
@@ -9,4 +9,4 @@
   (reloaded.repl/set-init! prod-system)
   (go)
   (cljc/foo-cljc "hello from cljx")
-  (timbre/info "server started."))
+  (log/info "server started."))
