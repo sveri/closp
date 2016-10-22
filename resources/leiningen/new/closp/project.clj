@@ -107,7 +107,7 @@
 
   :test-paths ["test/clj" "integtest/clj"]
 
-  :test-selectors {:unit (complement :integration)
+  :test-selectors {:unit (fn [m] (not (or (:integration m))))
                    :integration :integration
                    :cur :cur                                ; one more selector for, give it freely to run only
                                                             ; the ones you need currently
