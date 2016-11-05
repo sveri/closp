@@ -6,24 +6,24 @@
 
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
-  :dependencies [[org.clojure/clojure "1.9.0-alpha12"]
-                 [org.clojure/clojurescript "1.7.170"]
+  :dependencies [[org.clojure/clojure "1.9.0-alpha14"]
+                 [org.clojure/clojurescript "1.9.293"]
 
-                 [org.clojure/core.cache "0.6.4"]
-                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 [org.clojure/core.cache "0.6.5"]
+                 [org.clojure/core.async "0.2.395"]
 
-                 [ring "1.4.0"]
+                 [ring "1.5.0"]
                  [lib-noir "0.9.9"]
-                 [ring/ring-anti-forgery "1.0.0"]
+                 [ring/ring-anti-forgery "1.0.1"]
                  [compojure "1.5.1"]
-                 [reagent "0.5.1"]
-                 [http-kit "2.1.19"]
-                 [selmer "0.8.5"]
+                 [reagent "0.6.0"]
+                 [http-kit "2.2.0"]
+                 [selmer "1.10.0"]
                  [prone "1.1.2"]
-                 [im.chit/hara.io.scheduler "2.4.5"]
+                 [im.chit/hara.io.scheduler "2.4.7"]
                  [noir-exception "0.2.5"]
 
-                 [buddy/buddy-auth "1.1.0"]
+                 [buddy/buddy-auth "1.2.0"]
                  [buddy/buddy-hashers "1.0.0"]
 
                  [log4j "1.2.17" :exclusions [javax.mail/mail
@@ -31,33 +31,33 @@
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]
 
-                 [com.draines/postal "1.11.3"]
+                 [com.draines/postal "2.0.1"]
 
-                 [jarohen/nomad "0.7.1"]
+                 [jarohen/nomad "0.7.2"]
 
                  [de.sveri/clojure-commons "0.2.0"]
 
-                 [clojure-miniprofiler "0.4.0"]
+                 [clojure-miniprofiler "0.5.0"]
 
                  [org.danielsz/system "0.1.8"]
 
-                 [datascript "0.13.3"]
-                 [cljs-ajax "0.3.14"]
-                 [ring-transit "0.1.3"]
+                 [datascript "0.15.4"]
+                 [cljs-ajax "0.5.8"]
+                 [ring-transit "0.1.6"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
                  [com.taoensso/tower "3.1.0-beta4"]
 
-                 [prismatic/plumbing "0.5.0"]
-                 [prismatic/schema "1.0.5"]
+                 [prismatic/plumbing "0.5.3"]
+                 [prismatic/schema "1.1.3"]
 
-                 [com.rpl/specter "0.8.0"]
+                 [com.rpl/specter "0.13.0"]
 
                  [de.sveri/closp-crud "0.3.0"]
                  [org.clojure/tools.logging "0.3.1"]
-                 [org.postgresql/postgresql "9.4-1205-jdbc42"]
+                 [org.postgresql/postgresql "9.4.1212"]
                  [org.clojure/java.jdbc "0.6.2-alpha3"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
@@ -94,8 +94,8 @@
                                       [clj-webdriver "0.7.2"]
                                       [org.seleniumhq.selenium/selenium-java "2.52.0"]
 
-                                      [ring/ring-devel "1.4.0"]
-                                      [pjstadig/humane-test-output "0.7.0"]]
+                                      [ring/ring-devel "1.5.0"]
+                                      [pjstadig/humane-test-output "0.8.1"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]}

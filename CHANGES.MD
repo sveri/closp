@@ -5,6 +5,29 @@
 
 * Fixing some stuff broken in the last release
 
+* updated
+* [org.clojure/core.cache "0.6.5"] is available but we use "0.6.4"
+* [ring "1.5.0"] is available but we use "1.4.0"
+* [ring/ring-anti-forgery "1.0.1"] is available but we use "1.0.0"
+* [reagent "0.6.0"] is available but we use "0.5.1"
+* [http-kit "2.2.0"] is available but we use "2.1.19"
+* [selmer "1.10.0"] is available but we use "0.8.5"
+* [im.chit/hara.io.scheduler "2.4.7"] is available but we use "2.4.5"
+* [buddy/buddy-auth "1.2.0"] is available but we use "1.1.0"
+* [com.draines/postal "2.0.1"] is available but we use "1.11.3"
+* [jarohen/nomad "0.7.2"] is available but we use "0.7.1"
+* [clojure-miniprofiler "0.5.0"] is available but we use "0.4.0"
+* [datascript "0.15.4"] is available but we use "0.13.3"
+* [cljs-ajax "0.5.8"] is available but we use "0.3.14"
+* [ring-transit "0.1.6"] is available but we use "0.1.3"
+* [prismatic/plumbing "0.5.3"] is available but we use "0.5.0"
+* [prismatic/schema "1.1.3"] is available but we use "1.0.5"
+* [com.rpl/specter "0.13.0"] is available but we use "0.8.0"
+* [org.postgresql/postgresql "9.4.1212"] is available but we use "9.4-1205-jdbc42"
+* [ring/ring-devel "1.5.0"] is available but we use "1.4.0"
+* [pjstadig/humane-test-output "0.8.1"] is available but we use "0.7.0"
+
+
 ### 0.3.0-alpha1
 
 * **Breaking Change** closp-crud using clojure.spec
