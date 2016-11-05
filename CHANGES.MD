@@ -1,7 +1,11 @@
 
 ## Changes
 
-### 0.3.0
+### 0.3.0-alpha2
+
+* Fixing some stuff broken in the last release
+
+### 0.3.0-alpha1
 
 * **Breaking Change** closp-crud using clojure.spec
 * Removed activation workflow, users are automatically activated and signed in

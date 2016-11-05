@@ -94,7 +94,6 @@
                                       [clj-webdriver "0.7.2"]
                                       [org.seleniumhq.selenium/selenium-java "2.52.0"]
 
-                                      [ring-mock "0.3.0"]
                                       [ring/ring-devel "1.4.0"]
                                       [pjstadig/humane-test-output "0.7.0"]]
 

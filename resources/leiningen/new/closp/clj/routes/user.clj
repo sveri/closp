@@ -5,6 +5,7 @@
             [noir.session :as sess]
             [noir.validation :as vali]
             [clojure-miniprofiler :as cjmp]
+            [clojure.tools.logging :as log]
             [{{ns}}.layout :as layout]
             [{{ns}}.db.user :as db]
             [{{ns}}.service.user :as uservice]
