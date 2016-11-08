@@ -3,6 +3,11 @@
 
 ### 0.3.0-alpha2
 
+* Removing nomad
+* Switching from http-kit to immutant
+
+### 0.3.0-alpha2
+
 * Fixing some stuff broken in the last release
 
 * updated

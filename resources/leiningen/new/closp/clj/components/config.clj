@@ -1,12 +1,13 @@
 (ns {{ns}}.components.config
   (:require [com.stuartsierra.component :as component]
-            [nomad :refer [read-config]]
+            [clojure.edn :as edn]
             [clojure.java.io :as io]))
 
 (defn prod-conf-or-dev []
-  (if-let [config-path (System/getProperty "closp-config-path")]
-    (read-config (io/file config-path))
-    (read-config (io/resource "closp.edn"))))
+  (edn/read-string
+    (slurp (if-let [config-path (System/getProperty "closp-config-path")]
+             (io/file config-path)
+             (io/resource "closp.edn")))))
 
 (defrecord Config [config]
   component/Lifecycle

@@ -17,7 +17,7 @@
                  [ring/ring-anti-forgery "1.0.1"]
                  [compojure "1.5.1"]
                  [reagent "0.6.0"]
-                 [http-kit "2.2.0"]
+                 [org.immutant/web "2.1.5"]
                  [selmer "1.10.0"]
                  [prone "1.1.2"]
                  [im.chit/hara.io.scheduler "2.4.7"]
@@ -32,8 +32,6 @@
                                               com.sun.jmx/jmxri]]
 
                  [com.draines/postal "2.0.1"]
-
-                 [jarohen/nomad "0.7.2"]
 
                  [de.sveri/clojure-commons "0.2.0"]
 

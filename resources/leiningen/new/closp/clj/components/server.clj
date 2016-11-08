@@ -1,7 +1,7 @@
 (ns {{ns}}.components.server
   (:require [com.stuartsierra.component :as component]
             [clojure.tools.logging :as log]
-            [org.httpkit.server :refer [run-server]]
+            [immutant.web :as web]
             [hara.io.scheduler :as sched]
             [selmer.parser :as parser]
             [{{ns}}.session :as session])
@@ -31,7 +31,10 @@
   component/Lifecycle
   (start [component]
     (let [handler (:handler handler)
-          server (run-server handler {:port (get-in config [:config :port] 3000)})]
+          port (get-in config [:config :port] 3000)
+          server (if (= (:env config) :dev)
+                   (web/run-dmc handler {:port port})
+                   (web/run handler {:port port}))]
       (assoc component :server server)))
   (stop [component]
     (let [server (:server component)]

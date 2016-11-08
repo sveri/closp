@@ -16,11 +16,6 @@
 
 (defonce in-memory-store-instance (in-memory-store))
 
-(defn log-request [handler]
-  (fn [req]
-    (log/debug req)
-    (handler req)))
-
 (defn add-req-properties [handler config]
   (fn [req]
     (sess/put! :registration-allowed? (:registration-allowed? config))
