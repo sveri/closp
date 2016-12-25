@@ -18,55 +18,55 @@
                      {"#upper_password" (or pw "admin")}
                      {"#upper_password" submit}))
 
-(deftest ^:integration add-user
+(deftest ^:selenium add-user
   (sign-in)
   (->user "foo@bar.de")
-  (is (.contains (text "body") (s/t :en :user/user_added)))
+  (is (.contains (text "body") (s/t [:user/user_added])))
   (is (find-element {:css "div#flash-message.alert-success"})))
 
-(deftest ^:integration add-user-invalid-mail
+(deftest ^:selenium add-user-invalid-mail
   (sign-in)
   (quick-fill-submit {"#email" "foo"}
                      {"#password" "bbbbbb"}
                      {"#confirm" "bbbbbb"}
                      {"#email" submit})
-  (is (.contains (text "body") (s/t :en :user/email_invalid))))
+  (is (.contains (text "body") (s/t [:user/email_invalid]))))
 
-(deftest ^:integration pass-min-length
+(deftest ^:selenium pass-min-length
   (sign-in)
   (quick-fill-submit {"#email" "foo"}
                      {"#password" "bb"}
                      {"#confirm" "b"}
                      {"#email" submit})
-  (is (.contains (text "body") (s/t :en :user/pass_min_length))))
+  (is (.contains (text "body") (s/t [:user/pass_min_length]))))
 
-(deftest ^:integration pass-dont-match
+(deftest ^:selenium pass-dont-match
   (sign-in)
   (quick-fill-submit {"#email" "foo"}
                      {"#password" "bbuaeuiae"}
                      {"#confirm" "bcxvlcvxlc"}
                      {"#email" submit})
-  (is (.contains (text "body") (s/t :en :user/pass_match))))
+  (is (.contains (text "body") (s/t [:user/pass_match]))))
 
-(deftest ^:integration cancel-delete-user
+(deftest ^:selenium cancel-delete-user
   (sign-in)
   (let [uname "_foo@bar.de"]
     (->user uname)
     (click (find-element {:css "input.btn.btn-danger"}))
     (click (find-element {:css "input.btn.btn-primary"}))
     (is (.contains (text "body") uname))
-    (is (.contains (text "body") (s/t :en :generic/deletion_canceled)))))
+    (is (.contains (text "body") (s/t [:generic/deletion_canceled])))))
 
-(deftest ^:integration delete-user
+(deftest ^:selenium delete-user
   (sign-in)
   (let [uname "_aadmin@bar.de"]
     (->user uname)
     (click (find-element {:css "input.btn.btn-danger"}))
     (click (find-element {:css "input.btn.btn-danger"}))
     (is (not (.contains (text "body") uname)))
-    (is (.contains (text "body") (s/t :en :user/deleted)))))
+    (is (.contains (text "body") (s/t [:user/deleted])))))
 
-(deftest ^:integration set-active->logout->change_password
+(deftest ^:selenium set-active->logout->change_password
   (sign-in)
   (let [uname "_foo@bar.de"]
     (->user uname)
@@ -78,6 +78,6 @@
                        {"#password" "dddddd"}
                        {"#confirm" "dddddd"}
                        {"#confirm" submit})
-    (is (.contains (text "body") (s/t :en :user/pass_changed)))
+    (is (.contains (text "body") (s/t [:user/pass_changed])))
     (sign-in uname "dddddd" "user/changepassword")
     (is (.contains (text "body") uname))))

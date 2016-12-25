@@ -1,0 +1,21 @@
+{:generic
+       {:some_error        "Ein Fehler ist aufgetreten."
+        :deletion_canceled "Löschen abgebrochen."}
+ :user
+       {:email_invalid   "Bitte geben Sie eine gültige E-Mail Adresse an."
+        :pass_min_length "Das Passwort muss mindestens 5 Zeichen enthalten."
+        :pass_match      "Die eingegebenen Passwörter stimmen nicht überein."
+        :pass_correct    "Bitte geben Sie das richtige Passwort ein."
+        :pass_changed    "Passwort geändert."
+        :wrong_cur_pass  "Das derzeitige Passwort ist falsch."
+        :username_exists "Der Benutzername existiert bereits. Bitte geben Sie einen anderen an."
+        :username_wrong  "Bitte geben Sie einen gültigen Benutzernamen ein."
+        :deleted         "Benutzer erfolgreich gelöscht."
+        :updated         "Benuter %s erfolgreich geändert."
+        :user_added      "Benutzer hinzugefügt."
+        :captcha_wrong   "Bitte geben Sie das Captcha richtig ein."
+        :email_failed    "Etwas schlug fehl beim verschicken der Mail. Bitte wenden Sie sich an den Support."
+        :signup_title    "Anmelden"}
+
+ :admin
+       {:title "Benutzer Übersicht"}}

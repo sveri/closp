@@ -33,7 +33,7 @@ _admin@localhost.de_ and password: _admin_ to a new database)
 * Datascript with reagent example
 * Booststrap css styles
 * Example for clj-webdriver tests
-* Internationalization support with tower
+* Internationalization support with tempura
   
 
 ## Showcase
@@ -182,9 +182,13 @@ open: {{ns}}.web.setup and adapt the driver in `browser-setup` to `:firefor` or 
 
 ## Internationalization
 
-Closp uses <https://github.com/ptaoussanis/tower> for internationalization. It is configured as a component in 
- `your.ns.components.locale`. You have to add additional strings / translations there to use them in your web 
-  application. For examples look at `your.ns.routes.user`.
+Closp uses <https://github.com/ptaoussanis/tempura> for internationalization.
+Strings are internationalized in
+
+* en.edn
+* de.edn
+
+Both can be found in `resources/i18n`
 
 ## Minor features.
 

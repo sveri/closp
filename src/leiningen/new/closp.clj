@@ -44,6 +44,7 @@
              [[".gitignore" (*render* "gitignore")]
               ["project.clj" (*render* "project.clj")]
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
+              [(str "src/clj/{{san-path}}/locale.clj") (*render* "clj/locale.clj")]
               [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
               [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
@@ -126,6 +127,9 @@
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
            ["resources/public/js/jquery-2.0.3.min.js" "resources/public/js/jquery-2.0.3.min.js"]
            ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
+
+           ["resources/i18n/en.edn" "resources/i18n/en.edn"]
+           ["resources/i18n/de.edn" "resources/i18n/de.edn"]
 
            ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]
 

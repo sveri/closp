@@ -48,7 +48,8 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
-                 [com.taoensso/tower "3.1.0-beta4"]
+                 [com.taoensso/tempura "1.0.0"]
+
 
                  [prismatic/plumbing "0.5.3"]
                  [prismatic/schema "1.1.3"]
@@ -93,6 +94,8 @@
                        :dependencies [[org.apache.httpcomponents/httpclient "4.5.2"]
                                       [clj-webdriver "0.7.2"]
                                       [org.seleniumhq.selenium/selenium-java "2.52.0"]
+
+                                      [org.clojure/test.check "0.9.0"]
 
                                       [ring/ring-devel "1.5.0"]
                                       [pjstadig/humane-test-output "0.8.1"]]

@@ -6,20 +6,20 @@
 (use-fixtures :each s/browser-setup)
 (use-fixtures :once s/server-setup)
 
-(deftest ^:integration login-invalid-username
+(deftest ^:selenium login-invalid-username
   (to s/test-base-url)
   (quick-fill-submit {"#upper_email" "foo"}
                      {"#upper_password" submit})
-  (is (.contains (text "body") (s/t :en :user/username_wrong))))
+  (is (.contains (text "body") (s/t [:user/username_wrong]))))
 
-(deftest ^:integration login-invalid-password
+(deftest ^:selenium login-invalid-password
   (to s/test-base-url)
   (quick-fill-submit {"#upper_email" "admin@localhost.de"}
                      {"#upper_password" "uiatern"}
                      {"#upper_password" submit})
-  (is (.contains (text "body") (s/t :en :user/pass_correct))))
+  (is (.contains (text "body") (s/t [:user/pass_correct]))))
 
-(deftest ^:integration login-and-forward
+(deftest ^:selenium login-and-forward
   (to (str s/test-base-url "admin/users"))
   (quick-fill-submit {"#upper_email" "admin@localhost.de"}
                      {"#upper_password" "admin"}
