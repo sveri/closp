@@ -1,12 +1,16 @@
 {:generic
        {:some_error        "Some error occured."
-        :deletion_canceled "Deletion canceled."}
+        :deletion_canceled "Deletion canceled."
+        :email             "Email"
+        :password          "Password"
+        :logout            "Logout"}
  :user
        {:email_invalid   "A valid email is required."
         :pass_min_length "Password must be at least 5 characters."
         :pass_match      "Entered passwords do not match."
         :pass_correct    "Please provide a correct password."
         :pass_changed    "Password changed."
+        :change_password "Change Password"
         :wrong_cur_pass  "Current password was incorrect."
         :username_exists "This username already exists. Choose another."
         :username_wrong  "Please provide a correct username."
@@ -15,7 +19,8 @@
         :user_added      "User added."
         :captcha_wrong   "Please provide the correct captcha input."
         :email_failed    "Something went wrong sending the email, please contact us."
-        :signup_title    "Signup"}
+        :signup          "Sign Up"
+        :signin          "Sign In"}
 
  :admin
        {:title "User Overview"}}
