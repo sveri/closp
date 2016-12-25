@@ -3,7 +3,6 @@
             [clojure.tools.logging :as log]
             [org.httpkit.server :refer [run-server]]
             [hara.io.scheduler :as sched]
-            [selmer.parser :as parser]
             [{{ns}}.session :as session])
   (:import (clojure.lang AFunction)))
 
@@ -21,7 +20,6 @@
    an app server such as Tomcat
    put any initialization code here"
   [config]
-  (when (= (:env config) :dev) (parser/cache-off!))
   ;;start the expired session cleanup job
   (sched/start! session/cleanup-job)
   (log/info "\n-=[ {{name}} started successfully"

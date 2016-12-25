@@ -18,47 +18,47 @@
     </li>
     {% endifequal %}
     </ul>
-    
+
     {% if identity %}
 
-    <div id="logout" class="navbar-right">
-        <ul class="navbar-right nav navbar-nav">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    {{identity}}
-                    <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                    <li><a href="/user/changepassword">{{change_password_message}}</a></li>
-                    <li><a href="/user/logout">{{logout_message}}</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
+        <div id="logout" class="navbar-right">
+            <ul class="navbar-right nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        {{identity}}
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user/changepassword">{% localize user/change_password %}</a></li>
+                        <li><a href="/user/logout">{% localize generic/logout %}</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
 
     {% else %}
 
-    <div class="navbar-collapse collapse">
+        <div class="navbar-collapse collapse">
 
-        <form class="navbar-form navbar-right" role="form" action="/user/login" method="POST">
-            <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+            <form class="navbar-form navbar-right" role="form" action="/user/login" method="POST">
+                <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
 
-            {% if nexturl %}
-            <input name="nexturl" type="hidden" value="{{nexturl}}"/>
-            {% endif %}
+                {% if nexturl %}
+                <input name="nexturl" type="hidden" value="{{nexturl}}"/>
+                {% endif %}
 
-            <div class="form-group">
-                <input id="upper_email" type="text" placeholder="{{email_placeholder}}" name="username" class="form-control">
-            </div>
-            <div class="form-group">
-                <input id="upper_password" type="password" placeholder="{{password_placeholder}}" name="password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">{{signin_message}}</button>
+                <div class="form-group">
+                    <input id="upper_email" type="text" placeholder="{% localize generic/email %}" name="username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <input id="upper_password" type="password" placeholder="{% localize generic/password %}" name="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">{% localize user/signin %}</button>
 
-            {% if registration-allowed? %}
-            <a href="/user/signup" class="btn btn-success">{{signup_message}}</a>
-            {% endif %}
-        </form>
-    </div>
+                {% if registration-allowed? %}
+                <a href="/user/signup" class="btn btn-success">{% localize user/signup %}</a>
+                {% endif %}
+            </form>
+        </div>
     {% endif %}
 </div>
