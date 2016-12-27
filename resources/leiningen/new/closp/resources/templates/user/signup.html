@@ -1,6 +1,6 @@
 {% extends "templates/base.html" %}
 
-{% block title %}Signup{% endblock %}
+{% block title %}{% localize user/register %}{% endblock %}
 
 {% block content %}
 
@@ -12,10 +12,10 @@
         <div class="form-group col-md-6">
             <form action="/user/signup" method="POST" role="form">
                 <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
-                <h3>Please create your account</h3>
+                <h3>{% localize user/register %}</h3>
 
                 <div class="form-group">
-                    <label for="email">Email</label>
+                    <label for="email">{% localize generic/email %}</label>
                     {% if email-error %}
                     <div id="email-error" class="alert alert-danger">{{email-error}}</div>
                     {% endif %}
@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">{% localize generic/password %}</label>
                     {% if pass-error %}
                     <div id="pass-error" class="alert alert-danger">{{pass-error}}</div>
                     {% endif %}
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="confirm">Confirm Password</label>
+                    <label for="confirm">{% localize generic/password_confirm %}</label>
 
                     {% if confirm-error %}
                     <div id="confirm-error" class="alert alert-danger">{{confirm-error}}</div>
@@ -45,18 +45,18 @@
                 </div>
 
                 {% if captcha-enabled? %}
-                    <div class="form-group">
-                        {% if captcha-error %}
-                        <div class="alert alert-danger">{{captcha-error}}</div>
-                        {% endif %}
-                        <script type="text/javascript"
-                                src="http://www.google.com/recaptcha/api/challenge?k={{captcha-public-key}}">
-                        </script>
-                    </div>
+                <div class="form-group">
+                    {% if captcha-error %}
+                    <div class="alert alert-danger">{{captcha-error}}</div>
+                    {% endif %}
+                    <script type="text/javascript"
+                            src="http://www.google.com/recaptcha/api/challenge?k={{captcha-public-key}}">
+                    </script>
+                </div>
                 {% endif %}
 
                 <div class="form-group">
-                    <input class="btn btn-primary" tabindex="4" type="submit" value="Create Account">
+                    <input class="btn btn-primary" tabindex="4" type="submit" value="{% localize user/register %}">
                 </div>
             </form>
         </div>

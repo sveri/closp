@@ -24,10 +24,10 @@
     </style>
 
     <div id="add-user-div">
-        <h3>Add New User:</h3>
-        {{email-error}}
+
         <form action="/admin/user/add" method="POST" role="form" class="form-inline">
             <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
+
 
             <div class="form-group">
                 <label for="email">Email</label>
@@ -39,25 +39,25 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">{% localize generic/password %}</label>
                 {% if pass-error %}
                 <div id="pass-error" class="alert alert-danger">{{pass-error}}</div>
                 {% endif %}
                 <input class="form-control" id="password" name="password" tabindex="2" type="password"
-                       placeholder="Password" autocomplete="off"/>
+                       placeholder="{% localize generic/password %}" autocomplete="off"/>
             </div>
 
             <div class="form-group">
-                <label for="confirm">Confirm Password</label>
+                <label for="confirm">{% localize generic/password_confirm %}</label>
 
                 {% if confirm-error %}
                 <div id="confirm-error" class="alert alert-danger">{{confirm-error}}</div>
                 {% endif %}
                 <input class="form-control" id="confirm" name="confirm" tabindex="3" type="password"
-                       placeholder="Confirm Password" autocomplete="off"/>
+                       placeholder="{% localize generic/password_confirm %}" autocomplete="off"/>
             </div>
 
-            <button class="btn btn-primary" tabindex="4" type="submit">Add User</button>
+            <button class="btn btn-primary" tabindex="4" type="submit">{% localize admin/add_user %}</button>
         </form>
     </div>
 
@@ -66,19 +66,19 @@
     <form class="form-inline padding" role="form" action="/admin/users" method="GET">
         <input name="__anti-forgery-token" type="hidden" value="{{af-token}}"/>
         <div class="form-group">
-            <label class="sr-only" for="username-filter">Username</label>
-            <input type="text" class="form-control" id="username-filter" name="filter" placeholder="Enter Username">
+            <label class="sr-only" for="username-filter">{% localize user/username %}</label>
+            <input type="text" class="form-control" id="username-filter" name="filter" placeholder="{% localize user/username %}">
         </div>
-        <button type="submit" class="btn btn-default">Filter Users</button>
+        <button type="submit" class="btn btn-default">{% localize admin/filter %}</button>
     </form>
 
     <br />
 
     <div class="table" field="table">
         <div class="tr" field="table-header-row">
-            <span class="td" field="header-entry"><b>Username</b></span>
-            <span class="td" field="header-entry"><b>Role</b></span>
-            <span class="td" field="header-entry"><b>Active?</b></span>
+            <span class="td" field="header-entry"><b>{% localize user/username %}</b></span>
+            <span class="td" field="header-entry"><b>{% localize user/role %}</b></span>
+            <span class="td" field="header-entry"><b>{% localize admin/active %}?</b></span>
         </div>
 
         {% for user in users %}
@@ -96,8 +96,8 @@
             </span>
             <span field="active" class="td">
                 <input type="checkbox" name="active" {% if user.is_active %} checked {% endif %}></span>
-            <span field="submit" class="td"><input type="submit" name="update_delete" value="Update" class="btn btn-primary"></span>
-            <span field="submit" class="td"><input type="submit" name="update_delete" value="Delete" class="btn btn-danger"></span>
+            <span field="submit" class="td"><input type="submit" name="update_delete" value="{% localize admin/update %}" class="btn btn-primary"></span>
+            <span field="submit" class="td"><input type="submit" name="update_delete" value="{% localize generic/delete %}" class="btn btn-danger"></span>
         </form>
         {% endfor %}
     </div>

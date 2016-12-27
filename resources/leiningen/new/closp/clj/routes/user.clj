@@ -95,24 +95,22 @@
   (layout/render "user/reallydelete.html" {:id id :username (:email (db/get-user-by-id db (read-string id)))}))
 
 (defn really-delete [id delete_cancel localize db]
-  (if (= delete_cancel "Cancel")
+  (if (= delete_cancel (localize [:generic/cancel]))
     (do (layout/flash-result (localize [:generic/deletion_canceled]) "alert-warning")
         (resp/redirect "/admin/users"))
     (do (db/delete-user db (read-string id))
         (layout/flash-result (localize [:user/deleted]) "alert-success")
         (resp/redirect "/admin/users"))))
 
-(defmulti update-user (fn [update_delete _ _ _ _ _] update_delete))
-(defmethod update-user "Update" [_ user-id role active localize db]
-  (let [role (if (= "none" role) "" role)
-        act (= "on" active)
-        user-id-int (read-string user-id)]
-    (db/update-user db user-id-int {:role role :is_active act})
-    (let [user (db/get-user-by-id db user-id-int)]
-      (admin-page (layout/flash-result (localize [:user/updated] [(:email user)]) "alert-success") localize db))))
-
-(defmethod update-user "Delete" [_ user-id _ _ _ db]
-  (really-delete-page user-id db))
+(defn update-user [update_delete user-id role active localize db]
+  (if (= update_delete (localize [:admin/update]))
+    (let [role (if (= "none" role) "" role)
+          act (= "on" active)
+          user-id-int (read-string user-id)]
+      (db/update-user db user-id-int {:role role :is_active act})
+      (let [user (db/get-user-by-id db user-id-int)]
+        (admin-page (layout/flash-result (localize [:user/updated] [(:email user)]) "alert-success") localize db)))
+    (really-delete-page user-id db)))
 
 (defn- user-form-errors [email]
   {:email-error   (vali/on-error :id first) :pass-error (vali/on-error :pass first)
