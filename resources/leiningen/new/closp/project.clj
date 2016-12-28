@@ -37,8 +37,6 @@
 
                  [de.sveri/clojure-commons "0.2.0"]
 
-                 [clojure-miniprofiler "0.5.0"]
-
                  [org.danielsz/system "0.1.8"]
 
                  [datascript "0.15.4"]
@@ -96,6 +94,8 @@
                                       [org.seleniumhq.selenium/selenium-java "2.52.0"]
 
                                       [org.clojure/test.check "0.9.0"]
+
+                                      [clojure-miniprofiler "0.5.0"]
 
                                       [ring/ring-devel "1.5.0"]
                                       [pjstadig/humane-test-output "0.8.1"]]
