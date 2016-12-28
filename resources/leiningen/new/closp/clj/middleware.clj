@@ -1,7 +1,7 @@
 (ns {{ns}}.middleware
   (:require [clojure.tools.logging :as log]
             [prone.middleware :as prone]
-            [taoensso.tempura :refer [tr]]
+            [taoensso.tempura :refer [tr] :as tempura]
             [noir-exception.core :refer [wrap-internal-error]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.accessrules :refer [wrap-access-rules]]
@@ -17,22 +17,15 @@
 
 (defonce in-memory-store-instance (in-memory-store))
 
-(defn log-request [handler]
-  (fn [req]
-    (log/debug req)
-    (handler req)))
-
 (defn add-locale [handler]
   (fn [req]
     (let [accept-language (get-in req [:headers "accept-language"])
-          short-lang (cond
-                       (.contains accept-language "de") "de"
-                       :else "en")]
-      (sess/put! :locale short-lang)
+          short-languages (tempura/parse-http-accept-header accept-language)]
+      (sess/put! :locale (first short-languages))
       (handler (assoc req :localize (partial tr
                                              {:default-locale :en
                                               :dict           loc/local-dict}
-                                             [(keyword short-lang)]))))))
+                                             short-languages))))))
 
 (defn add-req-properties [handler config]
   (fn [req]
