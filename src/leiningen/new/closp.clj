@@ -44,6 +44,7 @@
              [[".gitignore" (*render* "gitignore")]
               ["project.clj" (*render* "project.clj")]
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
+              [(str "src/clj/{{san-path}}/locale.clj") (*render* "clj/locale.clj")]
               [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
               [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
@@ -53,6 +54,7 @@
               [(str "src/clj/{{san-path}}/components/config.clj") (*render* "clj/components/config.clj")]
               [(str "src/clj/{{san-path}}/components/db.clj") (*render* "clj/components/db.clj")]
               [(str "src/clj/{{san-path}}/components/handler.clj") (*render* "clj/components/handler.clj")]
+              [(str "src/clj/{{san-path}}/components/selmer.clj") (*render* "clj/components/selmer.clj")]
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
               [(str "src/clj/{{san-path}}/components/locale.clj") (*render* "clj/components/locale.clj")]
 
@@ -105,7 +107,6 @@
     (mapv #(apply unpack (:name data) %)
           [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
            ["resources/templates/menu.html" "resources/templates/menu.html"]
-           ["resources/templates/profile.html" "resources/templates/profile.html"]
            ["resources/templates/home/agb.html" "resources/templates/home/agb.html"]
            ["resources/templates/home/contact.html" "resources/templates/home/contact.html"]
            ["resources/templates/home/cookies.html" "resources/templates/home/cookies.html"]
@@ -126,6 +127,9 @@
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
            ["resources/public/js/jquery-2.0.3.min.js" "resources/public/js/jquery-2.0.3.min.js"]
            ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
+
+           ["resources/i18n/en.edn" "resources/i18n/en.edn"]
+           ["resources/i18n/de.edn" "resources/i18n/de.edn"]
 
            ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]
 

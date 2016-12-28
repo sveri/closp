@@ -6,7 +6,9 @@
 * Removing nomad
 * Switching from http-kit to immutant
 
-### 0.3.0-alpha2
+* Switching from tower to [com.taoensso/tempura "1.0.0"]
+* user-id is put into the session map after signup
+
 
 * Fixing some stuff broken in the last release
 

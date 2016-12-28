@@ -1,0 +1,46 @@
+{:generic
+          {:some_error        "Some error occured."
+           :deletion_canceled "Deletion canceled."
+           :email             "Email"
+           :password          "Password"
+           :password_confirm  "Confirm Password"
+           :logout            "Logout"
+           :save              "Save"
+           :search            "Search"
+           :add               "Add"
+           :cancel            "Cancel"}
+ :user
+          {:email_invalid        "A valid email is required."
+           :pass_min_length      "Password must be at least 5 characters."
+           :pass_match           "Entered passwords do not match."
+           :pass_correct         "Please provide a correct password."
+           :pass_changed         "Password changed."
+           :change_password      "Change Password"
+           :wrong_cur_pass       "Current password was incorrect."
+           :username_exists      "This username already exists. Choose another."
+           :username_wrong       "Please provide a correct username."
+           :deleted              "User deleted successfully."
+           :updated              "User %s updated successfully."
+           :user_added           "User added."
+           :captcha_wrong        "Please provide the correct captcha input."
+           :email_failed         "Something went wrong sending the email, please contact us."
+           :signup               "Sign Up"
+           :signin               "Sign In"
+           :username             "Username"
+           :role                 "Role"
+           :current_password     "Current Password"
+           :new_password         "New Password"
+           :new_password_confirm "Confirm New Password"
+           :really_delete        "Do you really want to delete user: "
+           :register             "Register"}
+
+ :admin
+          {:title    "User Overview"
+           :add_user "Benutzer hinzufügen"
+           :new_user "New User"
+           :active   "Active"
+           :filter   "Filter Users"
+           :update   "Update"}
+ :contact {:contact            "Contact"
+           :content_belongs_to "Content belongs to"}}
+

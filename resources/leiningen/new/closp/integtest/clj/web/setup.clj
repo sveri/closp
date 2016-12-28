@@ -1,15 +1,14 @@
 (ns {{ns}}.web.setup
   (:require [clj-webdriver.taxi :as w]
-            [taoensso.tower :as tower]
             [com.stuartsierra.component :as component]
+            [taoensso.tempura :refer [tr]]
             [reloaded.repl :refer [go stop]]
             [clojure.java.jdbc :as j]
             [{{ns}}.components.server :refer [new-web-server]]
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
-            [{{ns}}.components.components :refer [prod-system]]
-            [{{ns}}.components.locale :as l]))
+            [{{ns}}.components.components :refer [prod-system]]))
 
 (def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")
 (def db {:connection-uri db-uri})
@@ -32,10 +31,9 @@
 
 (defn test-system []
   (component/system-map
-    :locale (l/new-locale)
     :config (c/new-config test-config)
     :db (component/using (new-db) [:config])
-    :handler (component/using (new-handler) [:config :locale :db])
+    :handler (component/using (new-handler) [:config :db])
     :web (component/using (new-web-server) [:handler :config])))
 
 (def test-base-url (str "http://localhost:3001/"))
@@ -68,4 +66,7 @@
 
 ;; locale stuff
 
-(def t (tower/make-t l/tconfig))
+(def t (partial tr
+                {:default-locale :en
+                 :dict           l/local-dict}
+                ["en"]))
