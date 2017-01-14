@@ -36,7 +36,7 @@
       (assoc component :server server)))
   (stop [component]
     (let [server (:server component)]
-      (when server (server)))
+      (when server (web/stop)))
     component))
 
 (defn new-web-server []

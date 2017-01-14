@@ -35,7 +35,7 @@
 
                  [de.sveri/clojure-commons "0.2.0"]
 
-                 [org.danielsz/system "0.1.8"]
+                 [org.danielsz/system "0.3.2-SNAPSHOT"]
 
                  [cljs-ajax "0.5.8"]
                  [ring-transit "0.1.6"]

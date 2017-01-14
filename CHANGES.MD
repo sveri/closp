@@ -10,19 +10,22 @@
 * remove datascript dependency
 * fixing minor bugs
 * postgres database as default with password / username like web app name
+* fix users up sql statement
+* fix web/stop function in server component
 
 
 * updated
-* [ring "1.5.1"] is available but we use "1.5.0"
-* [compojure "1.5.2"] is available but we use "1.5.1"
-* [org.immutant/web "2.1.6"] is available but we use "2.1.5"
-* [selmer "1.10.5"] is available but we use "1.10.0"
-* [prone "1.1.4"] is available but we use "1.1.2"
-* [buddy/buddy-auth "1.3.0"] is available but we use "1.2.0"
-* [buddy/buddy-hashers "1.1.0"] is available but we use "1.0.0"
-* [com.draines/postal "2.0.2"] is available but we use "2.0.1"
-* [com.rpl/specter "0.13.2"] is available but we use "0.13.0"
-* [ring/ring-devel "1.5.1"] is available but we use "1.5.0"
+* [ring "1.5.1"]
+* [compojure "1.5.2"]
+* [org.immutant/web "2.1.6"]
+* [selmer "1.10.5"]
+* [prone "1.1.4"]
+* [buddy/buddy-auth "1.3.0"]
+* [buddy/buddy-hashers "1.1.0"]
+* [com.draines/postal "2.0.2"]
+* [com.rpl/specter "0.13.2"]
+* [ring/ring-devel "1.5.1"]
+* [org.danielsz/system "0.3.2-SNAPSHOT"]
 
 
 

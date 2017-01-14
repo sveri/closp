@@ -1,10 +1,8 @@
 (ns {{ns}}.user
-  (:require [reloaded.repl :refer [go reset stop]]
-          [{{ns}}.components.components :refer [dev-system]]
-          [schema.core :as s]))
+  (:require [system.repl :refer [set-init! start reset]]
+            [{{ns}}.components.components :refer [dev-system]]))
 
 (defn start-dev-system []
-  (s/set-fn-validation! true)
-  (go))
+  (start))
 
-(reloaded.repl/set-init! dev-system)
+(set-init! #'dev-system)
