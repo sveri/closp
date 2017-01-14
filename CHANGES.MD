@@ -12,6 +12,7 @@
 * postgres database as default with password / username like web app name
 * fix users up sql statement
 * fix web/stop function in server component
+* adding clojure/tools.namespace
 
 
 * updated

@@ -2,13 +2,14 @@
   (:require [clj-webdriver.taxi :as w]
             [com.stuartsierra.component :as component]
             [taoensso.tempura :refer [tr]]
-            [reloaded.repl :refer [go stop]]
+            [system.repl :refer [go stop] :as repl]
             [clojure.java.jdbc :as j]
             [{{ns}}.components.server :refer [new-web-server]]
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
-            [{{ns}}.components.components :refer [prod-system]]))
+            [{{ns}}.components.components :refer [prod-system]]
+            [{{ns}}.locale :as l]))
 
 (def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")
 (def db {:connection-uri db-uri})
@@ -45,7 +46,7 @@
   (w/quit))
 
 (defn start-server []
-  (reloaded.repl/set-init! test-system)
+  (repl/set-init! #'test-system)
   (go))
 
 (defn stop-server []

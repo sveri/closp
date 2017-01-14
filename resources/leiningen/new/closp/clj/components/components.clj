@@ -1,8 +1,6 @@
 (ns {{ns}}.components.components
   (:require
     [com.stuartsierra.component :as component]
-    (system.components
-      [repl-server :refer [new-repl-server]])
     [{{ns}}.components.selmer :as selm]
     [{{ns}}.components.server :refer [new-web-server]]
     [{{ns}}.components.handler :refer [new-handler]]

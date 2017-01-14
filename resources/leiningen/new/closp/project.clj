@@ -35,6 +35,7 @@
 
                  [de.sveri/clojure-commons "0.2.0"]
 
+                 [org.clojure/tools.namespace "0.2.11"]
                  [org.danielsz/system "0.3.2-SNAPSHOT"]
 
                  [cljs-ajax "0.5.8"]
@@ -106,11 +107,13 @@
 
   :test-paths ["test/clj" "integtest/clj"]
 
-  :test-selectors {:unit (fn [m] (not (or (:integration m))))
+  :test-selectors {:unit        (fn [m] (not (or (:selenium m) (:integration m) (:rest m))))
                    :integration :integration
-                   :cur :cur                                ; one more selector for, give it freely to run only
-                                                            ; the ones you need currently
-                   :all (constantly true)}
+                   :selenium    :selenium
+                   :rest        :rest
+                   :cur         :cur                                ; one more selector for, give it freely to run only
+                   ; the ones you need currently
+                   :all         (constantly true)}
 
   :test2junit-output-dir "test-results"
 
