@@ -9,6 +9,7 @@
 * raise session timeout
 * remove datascript dependency
 * fixing minor bugs
+* postgres database as default with password / username like web app name
 
 
 * updated
