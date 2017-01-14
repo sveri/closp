@@ -2,7 +2,7 @@
   (:require [compojure.core :refer [routes GET POST]]
             [schema.core :as s]
             [ring.util.response :refer [response status]]
-            [taoensso.timbre :as timb]
+            [clojure.tools.logging :as log]
             [clojure.pprint :as pp]
             [{{ns}}.layout :as layout]
             [{{ns}}.closp-schema :as c-schem])
@@ -35,7 +35,7 @@
     (write-cc-entity-to-file new-entity config)
     (response {:ok "fine" :added-entity new-entity})
     (catch Exception e
-      (do (timb/error e)
+      (do (log/error e)
           (status 500 (response {:error "Something failed while saving the entity"}))))))
 
 (defn cc-routes [config]

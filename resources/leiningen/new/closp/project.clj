@@ -12,32 +12,31 @@
                  [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.2.395"]
 
-                 [ring "1.5.0"]
+                 [ring "1.5.1"]
                  [lib-noir "0.9.9"]
                  [ring/ring-anti-forgery "1.0.1"]
-                 [compojure "1.5.1"]
+                 [compojure "1.5.2"]
                  [reagent "0.6.0"]
-                 [org.immutant/web "2.1.5"]
-                 [selmer "1.10.0"]
-                 [prone "1.1.2"]
+                 [org.immutant/web "2.1.6"]
+                 [selmer "1.10.5"]
+                 [prone "1.1.4"]
                  [im.chit/hara.io.scheduler "2.4.7"]
                  [noir-exception "0.2.5"]
 
-                 [buddy/buddy-auth "1.2.0"]
-                 [buddy/buddy-hashers "1.0.0"]
+                 [buddy/buddy-auth "1.3.0"]
+                 [buddy/buddy-hashers "1.1.0"]
 
                  [log4j "1.2.17" :exclusions [javax.mail/mail
                                               javax.jms/jms
                                               com.sun.jdmk/jmxtools
                                               com.sun.jmx/jmxri]]
 
-                 [com.draines/postal "2.0.1"]
+                 [com.draines/postal "2.0.2"]
 
                  [de.sveri/clojure-commons "0.2.0"]
 
                  [org.danielsz/system "0.1.8"]
 
-                 [datascript "0.15.4"]
                  [cljs-ajax "0.5.8"]
                  [ring-transit "0.1.6"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
@@ -50,7 +49,7 @@
                  [prismatic/plumbing "0.5.3"]
                  [prismatic/schema "1.1.3"]
 
-                 [com.rpl/specter "0.13.0"]
+                 [com.rpl/specter "0.13.2"]
 
                  [de.sveri/closp-crud "0.3.0"]
                  [org.clojure/tools.logging "0.3.1"]
@@ -95,7 +94,7 @@
 
                                       [clojure-miniprofiler "0.5.0"]
 
-                                      [ring/ring-devel "1.5.0"]
+                                      [ring/ring-devel "1.5.1"]
                                       [pjstadig/humane-test-output "0.8.1"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)

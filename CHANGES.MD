@@ -7,6 +7,21 @@
 * user-id is put into the session map after signup
 * Localizing the template (english / german translation)
 * raise session timeout
+* remove datascript dependency
+* fixing minor bugs
+
+
+* updated
+* [ring "1.5.1"] is available but we use "1.5.0"
+* [compojure "1.5.2"] is available but we use "1.5.1"
+* [org.immutant/web "2.1.6"] is available but we use "2.1.5"
+* [selmer "1.10.5"] is available but we use "1.10.0"
+* [prone "1.1.4"] is available but we use "1.1.2"
+* [buddy/buddy-auth "1.3.0"] is available but we use "1.2.0"
+* [buddy/buddy-hashers "1.1.0"] is available but we use "1.0.0"
+* [com.draines/postal "2.0.2"] is available but we use "2.0.1"
+* [com.rpl/specter "0.13.2"] is available but we use "0.13.0"
+* [ring/ring-devel "1.5.1"] is available but we use "1.5.0"
 
 
 
