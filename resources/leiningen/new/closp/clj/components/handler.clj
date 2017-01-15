@@ -34,7 +34,7 @@
                          ;; add your application routes here
                          [(cc-routes config) home-routes (user-routes config db) base-routes]))
         ;; add custom middleware here
-        :middleware (load-middleware config (:tconfig locale))
+        :middleware (load-middleware config)
         :ring-defaults (mk-defaults false)
         ;; add access rules here
         :access-rules []

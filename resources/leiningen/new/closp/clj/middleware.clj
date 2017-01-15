@@ -38,7 +38,7 @@
    #(prone/wrap-exceptions % {:app-namespaces ['{{ns}}]})
    wrap-reload])
 
-(defn production-middleware [config tconfig]
+(defn production-middleware [config]
   [#(add-req-properties % config)
    add-locale
    #(wrap-access-rules % {:rules auth/rules})
@@ -48,6 +48,6 @@
    wrap-anti-forgery
    wrap-trimmings])
 
-(defn load-middleware [config tconfig]
-  (concat (production-middleware config tconfig)
+(defn load-middleware [config]
+  (concat (production-middleware config)
           (when (= (:env config) :dev) development-middleware)))
