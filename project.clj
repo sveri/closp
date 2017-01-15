@@ -1,4 +1,4 @@
-(defproject closp/lein-template "0.3.0-alpha3"
+(defproject closp/lein-template "0.3.0-alpha4"
   :description "A webframework combining several technologies based on luminus and chestnut."
   :url "https://github.com/sveri/closp"
   :license {:name "Eclipse Public License"
