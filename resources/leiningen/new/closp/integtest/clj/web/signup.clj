@@ -1,7 +1,7 @@
 (ns {{ns}}.web.signup
   (:require [clojure.test :refer :all]
             [clj-webdriver.taxi :refer :all]
-            [{{ns}}.web.setup :as s]
+            [{{ns}}.setup :as s]
             [{{ns}}.db.user :as db]))
 
 (use-fixtures :each s/browser-setup)
