@@ -18,7 +18,7 @@
                  [compojure "1.5.2"]
                  [reagent "0.6.0"]
                  [org.immutant/web "2.1.6"]
-                 [selmer "1.10.5"]
+                 [hiccup "1.0.5"]
                  [prone "1.1.4"]
                  [im.chit/hara.io.scheduler "2.4.7"]
                  [noir-exception "0.2.5"]
@@ -50,6 +50,7 @@
                  [prismatic/plumbing "0.5.3"]
                  [prismatic/schema "1.1.3"]
 
+                 [fipp "0.6.8"]
                  [com.rpl/specter "0.13.2"]
 
                  [de.sveri/closp-crud "0.3.0"]

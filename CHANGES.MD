@@ -1,6 +1,11 @@
 
 ## Changes
 
+### 0.3.0-alpha4
+
+* Switch from selmer to hiccup
+
+
 ### 0.3.0-alpha3
 
 * Switching from tower to [com.taoensso/tempura "1.0.0"]

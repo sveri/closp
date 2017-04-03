@@ -1,34 +1,30 @@
 (ns {{ns}}.routes.home
   (:require [compojure.core :refer [defroutes GET]]
-            [{{ns}}.layout :as layout]
+            [{{ns}}.views.home :as vh]
             [ring.util.response :refer [response]]))
 
-(defn home-page []
-  (layout/render "home/index.html"))
+(defn home-page [req]
+  (vh/home-page req))
 
-(defn contact-page []
-  (layout/render "home/contact.html"))
+(defn contact-page [req]
+  (vh/contact-page req))
 
-(defn tos-page []
-  (layout/render "home/tos.html"))
+(defn tos-page [req]
+  (vh/tos-page req))
 
-(defn cookies-page []
-  (layout/render "home/cookies.html"))
+(defn cookies-page [req]
+  (vh/cookies-page req))
 
-(defn example-page []
-  (layout/render "home/example.html"))
-
-(defn ajax-page []
-  (layout/render "home/ajax-example.html"))
+(defn reagent-example [req]
+  (vh/reagent-example req))
 
 (defn ajax-initial-data []
   (response {:ok "fooo" :loaded true}))
 
 (defroutes home-routes
-           (GET "/contact" [] (contact-page))
-           (GET "/tos" [] (tos-page))
-           (GET "/cookies" [] (cookies-page))
-           (GET "/" [] (home-page))
-           (GET "/example" [] (example-page))
-           (GET "/ajax/page" [] (ajax-page))
+           (GET "/contact" req (contact-page req))
+           (GET "/tos" req (tos-page req))
+           (GET "/cookies" req (cookies-page req))
+           (GET "/" req (home-page req))
+           (GET "/reagent-example" req (reagent-example req))
            (GET "/ajax/page/init" [] (ajax-initial-data)))

@@ -63,6 +63,11 @@
               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
               [(str "src/clj/{{san-path}}/routes/cc.clj") (*render* "clj/routes/cc.clj")]
 
+              [(str "src/clj/{{san-path}}/views/base.clj") (*render* "clj/views/base.clj")]
+              [(str "src/clj/{{san-path}}/views/cc.clj") (*render* "clj/views/cc.clj")]
+              [(str "src/clj/{{san-path}}/views/home.clj") (*render* "clj/views/home.clj")]
+              [(str "src/clj/{{san-path}}/views/user.clj") (*render* "clj/views/user.clj")]
+
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
 
@@ -82,12 +87,6 @@
               [(str "src/cljc/{{san-path}}/closp_schema_helper.cljc") (*render* "cljc/closp_schema_helper.cljc")]
 
 
-              [(str "resources/templates/af-token.html") (*render* "resources/templates/af-token.html")]
-              [(str "resources/templates/base.html") (*render* "resources/templates/base.html")]
-              [(str "resources/templates/home/example.html") (*render* "resources/templates/home/example.html")]
-              [(str "resources/templates/home/ajax-example.html") (*render* "resources/templates/home/ajax-example.html")]
-              [(str "resources/templates/cc/index.html") (*render* "resources/templates/cc/index.html")]
-
               ["README.md" (*render* "README.md")]
 
               [(str "test/clj/{{san-path}}/db/user_test.clj") (*render* "test/clj/db/user_test.clj")]
@@ -99,29 +98,25 @@
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
               ["resources/log4j.properties" (*render* "resources/log4j.properties")]
-              ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]]))
+              ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]
+
+              ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
+              ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]
+              ["migrators/sqlite/1-user.down.sql" "resources/migrators/sqlite/1-user.down.sql"]
+              ["migrators/sqlite/1-user.up.sql" "resources/migrators/sqlite/1-user.up.sql"]
+              ["migrators/postgres/1-user.up.sql" "resources/migrators/postgres/1-user.up.sql"]
+              ["migrators/postgres/1-user.down.sql" "resources/migrators/postgres/1-user.down.sql"]]))
 
 
 
     (mapv #(apply unpack (:name data) %)
           [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
-           ["resources/templates/menu.html" "resources/templates/menu.html"]
-           ["resources/templates/home/agb.html" "resources/templates/home/agb.html"]
-           ["resources/templates/home/contact.html" "resources/templates/home/contact.html"]
-           ["resources/templates/home/cookies.html" "resources/templates/home/cookies.html"]
-           ["resources/templates/home/index.html" "resources/templates/home/index.html"]
-           ["resources/templates/home/tos.html" "resources/templates/home/tos.html"]
-
-           ["resources/templates/user/admin.html" "resources/templates/user/admin.html"]
-           ["resources/templates/user/changepassword.html" "resources/templates/user/changepassword.html"]
-           ["resources/templates/user/login.html" "resources/templates/user/login.html"]
-           ["resources/templates/user/signup.html" "resources/templates/user/signup.html"]
-           ["resources/templates/user/reallydelete.html" "resources/templates/user/reallydelete.html"]
 
            ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
            ["resources/public/css/bootstrap-theme.min.css" "resources/public/css/bootstrap-theme.min.css"]
            ["resources/public/css/screen.css" "resources/public/css/screen.css"]
            ["resources/public/css/home.css" "resources/public/css/home.css"]
+           ["resources/public/css/admin.css" "resources/public/css/admin.css"]
 
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
            ["resources/public/js/jquery-2.0.3.min.js" "resources/public/js/jquery-2.0.3.min.js"]
@@ -130,14 +125,7 @@
            ["resources/i18n/en.edn" "resources/i18n/en.edn"]
            ["resources/i18n/de.edn" "resources/i18n/de.edn"]
 
-           ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]
-
-           ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
-           ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]
-           ["migrators/sqlite/1-user.down.sql" "resources/migrators/sqlite/1-user.down.sql"]
-           ["migrators/sqlite/1-user.up.sql" "resources/migrators/sqlite/1-user.up.sql"]
-           ["migrators/postgres/1-user.up.sql" "resources/migrators/postgres/1-user.up.sql"]
-           ["migrators/postgres/1-user.down.sql" "resources/migrators/postgres/1-user.down.sql"]])
+           ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]])
 
     (create-db-dir (:name data))))
 

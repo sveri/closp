@@ -1,0 +1,16 @@
+div.table {
+    display:table;
+}
+
+.tr {
+    display:table-row;
+}
+
+SPAN.td {
+    padding: 10px;
+    display:table-cell;
+}
+
+.padding {
+    padding-left: 10px;
+}
