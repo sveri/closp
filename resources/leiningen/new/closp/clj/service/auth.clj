@@ -21,7 +21,7 @@
 (defn unauthorized-handler
   [request _]
   (let [current-url (:uri request)]
-    (redirect (format "/user/login?next=%s" current-url))))
+    (redirect (format "/user/login?nexturl=%s" current-url))))
 
 (def auth-backend
   (session-backend {:unauthorized-handler unauthorized-handler}))
