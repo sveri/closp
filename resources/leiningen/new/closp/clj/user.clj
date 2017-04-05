@@ -1,8 +1,13 @@
 (ns {{ns}}.user
-  (:require [system.repl :refer [set-init! start reset]]
+  (:require [system.repl :as sr]
+            [clojure.tools.namespace.repl :as tn]
             [{{ns}}.components.components :refer [dev-system]]))
 
 (defn start-dev-system []
-  (start))
+  (sr/start))
 
-(set-init! #'dev-system)
+(defn reset []
+  (tn/refresh)
+  (sr/reset))
+
+(sr/set-init! #'dev-system)
