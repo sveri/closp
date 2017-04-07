@@ -2,7 +2,6 @@
   (:require [clojure.tools.logging :as log]
             [prone.middleware :as prone]
             [taoensso.tempura :refer [tr] :as tempura]
-            [noir-exception.core :refer [wrap-internal-error]]
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
@@ -21,17 +20,13 @@
   (fn [req]
     (let [accept-language (get-in req [:headers "accept-language"])
           short-languages (or (tempura/parse-http-accept-header accept-language) ["en"])]
-      (sess/put! :locale (first short-languages))
       (handler (assoc req :localize (partial tr
                                              {:default-locale :en
                                               :dict           loc/local-dict}
                                              short-languages))))))
 
 (defn add-req-properties [handler config]
-  (fn [req]
-    (sess/put! :registration-allowed? (:registration-allowed? config))
-    (sess/put! :captcha-enabled? (:captcha-enabled? config))
-    (handler req)))
+  (fn [req] (handler (assoc req :config config))))
 
 (def development-middleware
   [#(wrap-miniprofiler % {:store in-memory-store-instance})
@@ -43,7 +38,6 @@
    add-locale
    #(wrap-access-rules % {:rules auth/rules})
    #(wrap-authorization % auth/auth-backend)
-   #(wrap-internal-error % :log (fn [e] (log/error e)))
    #(wrap-transit-response % {:encoding :json :opts {}})
    wrap-anti-forgery
    wrap-trimmings])
