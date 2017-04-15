@@ -2,7 +2,8 @@
   (:require [clojure.tools.logging :as log]
             [immutant.web :as web]
             [hara.io.scheduler :as sched]
-            [{{ns}}.session :as session])
+            [{{ns}}.session :as session]
+            [com.stuartsierra.component :as component])
   (:import (clojure.lang AFunction)))
 
 (defn destroy

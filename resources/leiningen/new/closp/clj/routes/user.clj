@@ -9,6 +9,7 @@
             [{{ns}}.views.user :as vh]
             [{{ns}}.views.base :as v]
             [{{ns}}.db.user :as db]
+            [{{ns}}.service.auth :as auth]
             [{{ns}}.service.user :as uservice])
   (:import (net.tanesha.recaptcha ReCaptchaImpl)))
 
