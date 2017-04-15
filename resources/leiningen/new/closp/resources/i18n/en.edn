@@ -8,8 +8,12 @@
            :save              "Save"
            :search            "Search"
            :add               "Add"
-           :cancel            "Cancel"}
- :user
+           :cancel            "Cancel"
+           :name              "Name"
+           :create            "Create %1"
+           :edit              "Edit"
+           :delete            "Delete"}}
+:user
           {:email_invalid        "A valid email is required."
            :pass_min_length      "Password must be at least 5 characters."
            :pass_match           "Entered passwords do not match."
@@ -42,5 +46,5 @@
            :filter   "Filter Users"
            :update   "Update"}
  :contact {:contact            "Contact"
-           :content_belongs_to "Content belongs to"}}
+           :content_belongs_to "Content belongs to"}
 

@@ -1,9 +1,7 @@
 (ns {{ns}}.core
   (:require [clojure.tools.logging :as log]
             [system.repl :refer [set-init! start]]
-            [{{ns}}.cljccore :as cljc]
-            [{{ns}}.components.components :refer [prod-system]]
-            [com.stuartsierra.component :as component])
+            [{{ns}}.components.components :refer [prod-system]])
   (:gen-class))
 
 (defn -main [& args]

@@ -10,7 +10,11 @@
            :save              "Speichern"
            :search            "Suchen"
            :add               "Hinzufügen"
-           :cancel            "Abbrechen"}
+           :cancel            "Abbrechen"
+           :name              "Name"
+           :create            "%1 Anlegen"
+           :edit              "Bearbeiten"
+           :delete            "Löschen"}
  :user
           {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
            :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."

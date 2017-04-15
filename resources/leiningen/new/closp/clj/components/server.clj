@@ -1,6 +1,5 @@
 (ns {{ns}}.components.server
-  (:require [com.stuartsierra.component :as component]
-            [clojure.tools.logging :as log]
+  (:require [clojure.tools.logging :as log]
             [immutant.web :as web]
             [hara.io.scheduler :as sched]
             [{{ns}}.session :as session])

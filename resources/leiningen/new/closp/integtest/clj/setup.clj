@@ -9,7 +9,6 @@
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
             [{{ns}}.components.selmer :as selm]
-            [{{ns}}.components.components :refer [prod-system]]
             [{{ns}}.locale :as l]))
 
 (def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")

@@ -1,6 +1,5 @@
 (ns {{ns}}.service.auth
   (:require [buddy.auth.backends.session :refer [session-backend]]
-            [buddy.auth :refer [authenticated? throw-unauthorized]]
             [ring.util.response :refer [redirect]]))
 
 (def ^:const available-roles ["admin" "none"])
