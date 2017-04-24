@@ -1,6 +1,9 @@
 # closp 
 
-![Build Status](http://sveri.de:8082/buildStatus/icon?job=closp)
+**closp is currently being reworked in version 0.3.0** 
+
+All the current documentation relates to the latest stable version 0.2.0.  
+You can use that version by executing: lein new closp --template-version 0.2.0
 
 [![Join the chat at https://gitter.im/sveri/closp](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sveri/closp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

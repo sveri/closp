@@ -11,8 +11,9 @@
            :cancel            "Cancel"
            :name              "Name"
            :create            "Create %1"
-           :edit              "Edit"
-           :delete            "Delete"}}
+           :edit              "Edit %1"
+           :delete            "Delete"
+           :saved             "Changes Saved"}}
 :user
           {:email_invalid        "A valid email is required."
            :pass_min_length      "Password must be at least 5 characters."
