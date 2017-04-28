@@ -15,7 +15,7 @@ Mailing List: [![Clojureverse](https://rawgit.com/clojureverse/clojureverse-asse
 
 These five steps are all it takes to get up and running.
 
-[Documentation with Tutorial](http://closp.net/)
+[Documentation with Tutorial](http://closp.net/) - please be aware that the documentation is for version 0.2.0
 
 
 ## Goals
@@ -29,7 +29,7 @@ These five steps are all it takes to get up and running.
 * [System] (https://github.com/danielsz/system) integration from the start - wrapper on top of sierras components
 * User management with login/logout/registration and email activation (provided by postal)
 * Conditional Reader support
-* [closp-crud](https://github.com/sveri/closp-crud) integration
+* crud integration via entities definitions
 * Live reloading for both clojurescript and clojure out of the box.
 * Clojure miniprofiler enabled.
 * Recaptcha for Signup

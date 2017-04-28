@@ -54,7 +54,6 @@
               [(str "src/clj/{{san-path}}/components/config.clj") (*render* "clj/components/config.clj")]
               [(str "src/clj/{{san-path}}/components/db.clj") (*render* "clj/components/db.clj")]
               [(str "src/clj/{{san-path}}/components/handler.clj") (*render* "clj/components/handler.clj")]
-              [(str "src/clj/{{san-path}}/components/selmer.clj") (*render* "clj/components/selmer.clj")]
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
 
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
@@ -98,7 +97,6 @@
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
               ["resources/log4j.properties" (*render* "resources/log4j.properties")]
-              ["resources/closp-crud.edn" (*render* "resources/closp-crud.edn")]
 
               ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
               ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]

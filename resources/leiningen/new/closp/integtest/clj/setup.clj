@@ -8,7 +8,6 @@
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
-            [{{ns}}.components.selmer :as selm]
             [{{ns}}.locale :as l]))
 
 (def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")
@@ -33,7 +32,6 @@
 (defn test-system []
   (component/system-map
     :config (c/new-config test-config)
-    :selmer (selm/new-selmer false)
     :db (component/using (new-db) [:config])
     :handler (component/using (new-handler) [:config :db])
     :web (component/using (new-web-server) [:handler :config])))

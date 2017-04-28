@@ -53,7 +53,6 @@
                  [fipp "0.6.8"]
                  [com.rpl/specter "0.13.2"]
 
-                 [de.sveri/closp-crud "0.3.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [org.postgresql/postgresql "9.4.1212"]
                  [org.clojure/java.jdbc "0.6.2-alpha3"]]
@@ -93,8 +92,6 @@
                                       [org.seleniumhq.selenium/selenium-java "2.52.0"]
 
                                       [org.clojure/test.check "0.9.0"]
-
-                                      [clojure-miniprofiler "0.5.0"]
 
                                       [ring/ring-devel "1.5.1"]
                                       [pjstadig/humane-test-output "0.8.1"]]

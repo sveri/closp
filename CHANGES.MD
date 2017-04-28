@@ -4,6 +4,8 @@
 ### 0.3.0-alpha4
 
 * Switch from selmer to hiccup
+* Remove closp-crud dependency
+* Integrate crud module directly in closp
 
 
 ### 0.3.0-alpha3
