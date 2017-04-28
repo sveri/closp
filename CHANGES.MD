@@ -4,6 +4,7 @@
 ### 0.3.0-alpha4
 
 * Switch from selmer to hiccup
+* Remove clojure mini profiler
 * Remove closp-crud dependency
 * Integrate crud module directly in closp
 
