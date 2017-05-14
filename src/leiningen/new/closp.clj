@@ -96,7 +96,7 @@
               [(str "integtest/clj/{{san-path}}/web/admin.clj") (*render* "integtest/clj/web/admin.clj")]
 
               ["resources/closp.edn" (*render* "resources/closp.edn")]
-              ["resources/log4j.properties" (*render* "resources/log4j.properties")]
+              ["resources/logback.xml" (*render* "resources/logback.xml")]
 
               ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
               ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]

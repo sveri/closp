@@ -8,7 +8,8 @@
             [{{ns}}.components.handler :refer [new-handler]]
             [{{ns}}.components.config :as c]
             [{{ns}}.components.db :refer [new-db]]
-            [{{ns}}.locale :as l]))
+            [{{ns}}.locale :as l])
+  (:import (java.util.logging Logger Level)))
 
 (def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")
 (def db {:connection-uri db-uri})
@@ -52,6 +53,7 @@
   (stop))
 
 (defn server-setup [f]
+  (.setLevel (Logger/getLogger "com.gargoylesoftware") Level/SEVERE)
   (start-server)
   (f)
   (stop-server))

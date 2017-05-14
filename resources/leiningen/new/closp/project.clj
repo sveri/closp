@@ -12,6 +12,8 @@
                  [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.2.395"]
 
+                 [ch.qos.logback/logback-classic "1.1.3"]
+
                  [ring "1.5.1"]
                  [lib-noir "0.9.9"]
                  [ring/ring-anti-forgery "1.0.1"]
@@ -26,14 +28,9 @@
                  [buddy/buddy-auth "1.3.0"]
                  [buddy/buddy-hashers "1.1.0"]
 
-                 [log4j "1.2.17" :exclusions [javax.mail/mail
-                                              javax.jms/jms
-                                              com.sun.jdmk/jmxtools
-                                              com.sun.jmx/jmxri]]
-
                  [com.draines/postal "2.0.2"]
 
-                 [de.sveri/clojure-commons "0.2.0"]
+                 [de.sveri/clojure-commons "0.2.1"]
 
                  [org.clojure/tools.namespace "0.2.11"]
                  [org.danielsz/system "0.3.2-SNAPSHOT"]
