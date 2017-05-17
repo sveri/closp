@@ -1,5 +1,5 @@
-(ns de.sveri.gup.views.user
-  (:require [de.sveri.gup.views.base :as v]))
+(ns {{ns}}.views.user
+  (:require [{{ns}}.views.base :as v]))
 
 
 (defn login-page [{:keys [nexturl error]} {:keys [localize] :as req}]

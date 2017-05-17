@@ -1,4 +1,4 @@
-(ns de.sveri.gup.views.base
+(ns {{ns}}.views.base
   (:require [ring.middleware.anti-forgery :as af]
             [hiccup.page :refer [html5 include-css include-js]]
             [noir.session :as sess]))
@@ -36,8 +36,8 @@
         [:ul {:class "dropdown-menu"}
          [:li {:field "link-list" :class (merge-active uri "/user")}
           [:a {:href "/admin/users"} "Users"]]
-         [:li {:field "link-list" :class (merge-active uri "/teams")}
-          [:a {:href "/teams"} "Teams"]]]])]
+         [:li {:field "link-list" :class (merge-active uri "/crud/team/index")}
+          [:a {:href "/crud/team/index"} "Teams"]]]])]
     (if identity
       [:div {:id "logout", :class "navbar-right"}
        [:ul {:class "navbar-right nav navbar-nav"}
@@ -87,7 +87,6 @@
           (when css (include-css css))
 
           [:body
-           (when flash-message [:div#flash-message.alert {:class flash-alert-type} flash-message])
 
            [:div#header.navbar.navbar-inverse.navbar-fixed-top {:role "navigation"}
             [:div.container-fluid
@@ -97,11 +96,13 @@
                [:span.icon-bar]
                [:span.icon-bar]
                [:span.icon-bar]]
-              [:a.navbar-brand {:href "/"}"gup"]]
+              [:a.navbar-brand {:href "/"}"{{name}}"]]
 
              [:div (menu opts)]]]
 
-           [:div#wrap [:div#content content]]
+           [:div#wrap [:div#content
+                       (when flash-message [:div#flash-message.alert {:class flash-alert-type} flash-message])
+                       content]]
 
            [:div (footer)]
 
@@ -112,7 +113,7 @@
 
 
 
-(defn render [title {:keys [localize config uri css plain-js] :as req} content]
+(defn render [title {:keys [localize config uri css plain-js nexturl] :as req} content]
   (hicc-base title
              {:localize localize :identity (sess/get :identity)
               :role (sess/get :role) :registration-allowed? (:registration-allowed? config)

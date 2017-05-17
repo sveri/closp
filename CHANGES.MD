@@ -9,6 +9,7 @@
 * Integrate crud module directly in closp
 
 
+
 ### 0.3.0-alpha3
 
 * Switching from tower to [com.taoensso/tempura "1.0.0"]

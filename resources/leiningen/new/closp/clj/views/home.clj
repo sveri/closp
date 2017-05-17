@@ -1,5 +1,5 @@
-(ns de.sveri.gup.views.home
-  (:require [de.sveri.gup.views.base :as v]))
+(ns {{ns}}.views.home
+  (:require [{{ns}}.views.base :as v]))
 
 (defn home-page [{:keys [localize] :as req}]
   (v/render
@@ -41,7 +41,7 @@
 
 (defn reagent-example [req]
   (v/render
-    "" (merge req {:plain-js "<script type=\"text/javascript\">de.sveri.gup.core.main();</script>"})
+    "" (merge req {:plain-js "<script type=\"text/javascript\">{{ns}}.core.main();</script>"})
     [:div
      [:div#app]]))
 

@@ -6,7 +6,6 @@
            :password_confirm  "Passwort wiederholen"
            :logout            "Ausloggen"
            :diet              "Ernährung"
-           :delete            "Löschen"
            :save              "Speichern"
            :search            "Suchen"
            :add               "Hinzufügen"
@@ -16,6 +15,16 @@
            :edit              "%1 Bearbeiten"
            :delete            "Löschen"
            :saved             "Änderungen gespeichert"}
+
+ :crudify {:created "%1 erstellt"
+           :deleted "%1 gelöscht"
+           :not-empty "Feld: \"%1\" darf nicht leer sein."
+           :not-null "Feld: \"%1\" darf nicht nil sein."
+           :not-string "Feld: \"%1\" sollte eine Zeichenkette sein."
+           :not-number "Feld: \"%1\" sollte eine Zahl sein."
+           :not-integer "Feld: \"%1\" sollte Ganzzahlig sein."
+           :not-date "Feld: \"%1\" sollte ein Datum sein."
+           :max-length "Feld: \"%1\" ist zu groß."}
  :user
           {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
            :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
@@ -38,7 +47,7 @@
            :current_password     "Aktuelles Passwort"
            :new_password         "Neues Passwort"
            :new_password_confirm "Neues Passwort bestätigen"
-           :really_delete        "Möchten Sie den Nutzer wirklich löschen: %1"
+           :really_delete        "Möchten Sie %1 wirklich löschen?"
            :register             "Registrieren"}
 
  :admin

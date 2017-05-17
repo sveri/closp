@@ -13,8 +13,18 @@
            :create            "Create %1"
            :edit              "Edit %1"
            :delete            "Delete"
-           :saved             "Changes Saved"}}
-:user
+           :saved             "Changes Saved"}
+
+ :crudify {:created "Created %1"
+           :deleted "Deleted %1"
+           :not-empty "Field: \"%1\" can not be empty."
+           :not-null "Field: \"%1\" can not be nil."
+           :not-string "Field: \"%1\" should be a string."
+           :not-number "Field: \"%1\" should be a number."
+           :not-integer "Field: \"%1\" should be an integer."
+           :not-date "Field: \"%1\" should be a date."
+           :max-length "Field: \"%1 is to long."}
+ :user
           {:email_invalid        "A valid email is required."
            :pass_min_length      "Password must be at least 5 characters."
            :pass_match           "Entered passwords do not match."
@@ -36,16 +46,16 @@
            :current_password     "Current Password"
            :new_password         "New Password"
            :new_password_confirm "Confirm New Password"
-           :really_delete        "Do you really want to delete user: %1"
+           :really_delete        "Do you really want to delete: %1?"
            :register             "Register"}
 
  :admin
           {:title    "User Overview"
-           :add_user "Benutzer hinzufügen"
+           :add_user "Add User"
            :new_user "New User"
            :active   "Active"
            :filter   "Filter Users"
            :update   "Update"}
  :contact {:contact            "Contact"
-           :content_belongs_to "Content belongs to"}
+           :content_belongs_to "Content belongs to"}}
 
