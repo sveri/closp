@@ -97,6 +97,7 @@
               ["README.md" (*render* "README.md")]
 
               [(str "test/clj/{{san-path}}/db/user_test.clj") (*render* "test/clj/db/user_test.clj")]
+              [(str "test/clj/{{san-path}}/crudify/validation_test.clj") (*render* "test/clj/crudify/validation_test.clj")]
 
               [(str "integtest/clj/{{san-path}}/setup.clj") (*render* "integtest/clj/setup.clj")]
               [(str "integtest/clj/{{san-path}}/web/signup.clj") (*render* "integtest/clj/web/signup.clj")]
