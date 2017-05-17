@@ -50,6 +50,7 @@
               [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
               [(str "src/clj/{{san-path}}/user.clj") (*render* "clj/user.clj")]
 
+
               [(str "src/clj/{{san-path}}/components/components.clj") (*render* "clj/components/components.clj")]
               [(str "src/clj/{{san-path}}/components/config.clj") (*render* "clj/components/config.clj")]
               [(str "src/clj/{{san-path}}/components/db.clj") (*render* "clj/components/db.clj")]
@@ -57,27 +58,34 @@
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
 
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
+              [(str "src/clj/{{san-path}}/db/entites.clj") (*render* "clj/db/entities.clj")]
+
+              [(str "src/clj/{{san-path}}/crudify/create.clj") (*render* "clj/crudify/create.clj")]
+              [(str "src/clj/{{san-path}}/crudify/crudify.clj") (*render* "clj/crudify/crudify.clj")]
+              [(str "src/clj/{{san-path}}/crudify/delete.clj") (*render* "clj/crudify/delete.clj")]
+              [(str "src/clj/{{san-path}}/crudify/edit.clj") (*render* "clj/crudify/edit.clj")]
+              [(str "src/clj/{{san-path}}/crudify/forms.clj") (*render* "clj/crudify/forms.clj")]
+              [(str "src/clj/{{san-path}}/crudify/index.clj") (*render* "clj/crudify/index.clj")]
+              [(str "src/clj/{{san-path}}/crudify/util.clj") (*render* "clj/crudify/util.clj")]
+              [(str "src/clj/{{san-path}}/crudify/validation.clj") (*render* "clj/crudify/validation.clj")]
+
 
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
+              [(str "src/clj/{{san-path}}/routes/crud.clj") (*render* "clj/routes/crud.clj")]
               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
-              [(str "src/clj/{{san-path}}/routes/cc.clj") (*render* "clj/routes/cc.clj")]
 
               [(str "src/clj/{{san-path}}/views/base.clj") (*render* "clj/views/base.clj")]
-              [(str "src/clj/{{san-path}}/views/cc.clj") (*render* "clj/views/cc.clj")]
               [(str "src/clj/{{san-path}}/views/home.clj") (*render* "clj/views/home.clj")]
               [(str "src/clj/{{san-path}}/views/user.clj") (*render* "clj/views/user.clj")]
 
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
+              [(str "src/clj/{{san-path}}/service/specu_utils.clj") (*render* "clj/service/spec_utils.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
 
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "src/cljs/{{san-path}}/ajax.cljs") (*render* "cljs/ajax.cljs")]
 
-              [(str "src/cljs/{{san-path}}/cc/common.cljs") (*render* "cljs/cc/common.cljs")]
-              [(str "src/cljs/{{san-path}}/cc/core.cljs") (*render* "cljs/cc/core.cljs")]
-              [(str "src/cljs/{{san-path}}/cc/core_middlepanel.cljs") (*render* "cljs/cc/core_middlepanel.cljs")]
-              [(str "src/cljs/{{san-path}}/cc/left_panel.cljs") (*render* "cljs/cc/left_panel.cljs")]
 
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 

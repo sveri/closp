@@ -1,5 +1,5 @@
 (ns {{ns}}.db.entities
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [{{ns}}.service.spec-utils :as su]
             [clojure.java.jdbc :as j]
             [clojure.string :as str]

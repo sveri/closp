@@ -3,7 +3,7 @@
             [clojure.tools.logging :as log]
             [noir.session :as sess]
             [{{ns}}.db.user :as db-u]
-            [clojure.spec :as s]))
+            [clojure.spec.alpha :as s]))
 
 (defmulti send-mail-by-type (fn [m _] (get m :prot)))
 

@@ -7,6 +7,7 @@
 * Remove clojure mini profiler
 * Remove closp-crud dependency
 * Integrate crud module directly in closp
+* Update to 1.9.0-alpha16
 
 
 

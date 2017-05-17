@@ -1,5 +1,5 @@
 (ns {{ns}}.service.spec-utils
-  (:require [clojure.spec :as s]
+  (:require [clojure.spec.alpha :as s]
             [clojure.string :as str]))
 
 

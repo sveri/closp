@@ -1,7 +1,7 @@
 (ns {{ns}}.crudify.validation
   (:require [clojure.string :as str]
             [{{ns}}.crudify.util :as u]
-            [clojure.spec :as s]))
+            [clojure.spec.alpha :as s]))
 
 
 
