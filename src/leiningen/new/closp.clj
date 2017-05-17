@@ -58,7 +58,7 @@
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
 
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
-              [(str "src/clj/{{san-path}}/db/entites.clj") (*render* "clj/db/entities.clj")]
+              [(str "src/clj/{{san-path}}/db/entities.clj") (*render* "clj/db/entities.clj")]
 
               [(str "src/clj/{{san-path}}/crudify/create.clj") (*render* "clj/crudify/create.clj")]
               [(str "src/clj/{{san-path}}/crudify/crudify.clj") (*render* "clj/crudify/crudify.clj")]
@@ -79,7 +79,7 @@
               [(str "src/clj/{{san-path}}/views/user.clj") (*render* "clj/views/user.clj")]
 
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
-              [(str "src/clj/{{san-path}}/service/specu_utils.clj") (*render* "clj/service/spec_utils.clj")]
+              [(str "src/clj/{{san-path}}/service/spec_utils.clj") (*render* "clj/service/spec_utils.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
 
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
