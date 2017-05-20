@@ -41,7 +41,7 @@
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
-                 [com.taoensso/tempura "1.0.0"]
+                 [com.taoensso/tempura "1.1.2"]
 
 
                  [prismatic/plumbing "0.5.3"]

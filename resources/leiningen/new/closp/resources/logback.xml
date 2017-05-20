@@ -24,6 +24,7 @@
 
     <logger name="org.projectodd" level="info" />
     <logger name="org.xnio" level="info" />
+    <logger name="org.jboss.logging" level="info" />
 
 
     <root level="debug">

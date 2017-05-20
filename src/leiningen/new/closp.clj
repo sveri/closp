@@ -45,7 +45,6 @@
               ["project.clj" (*render* "project.clj")]
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
               [(str "src/clj/{{san-path}}/locale.clj") (*render* "clj/locale.clj")]
-              [(str "src/clj/{{san-path}}/layout.clj") (*render* "clj/layout.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
               [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
               [(str "src/clj/{{san-path}}/user.clj") (*render* "clj/user.clj")]
