@@ -106,12 +106,12 @@
               ["resources/closp.edn" (*render* "resources/closp.edn")]
               ["resources/logback.xml" (*render* "resources/logback.xml")]
 
-              ["migrators/h2/1-user.down.sql" "resources/migrators/h2/1-user.down.sql"]
-              ["migrators/h2/1-user.up.sql" "resources/migrators/h2/1-user.up.sql"]
-              ["migrators/sqlite/1-user.down.sql" "resources/migrators/sqlite/1-user.down.sql"]
-              ["migrators/sqlite/1-user.up.sql" "resources/migrators/sqlite/1-user.up.sql"]
-              ["migrators/postgres/1-user.up.sql" "resources/migrators/postgres/1-user.up.sql"]
-              ["migrators/postgres/1-user.down.sql" "resources/migrators/postgres/1-user.down.sql"]]))
+              ["migrators/h2/1-user.down.sql" (*render* "migrators/h2/1-user.down.sql")]
+              ["migrators/h2/1-user.up.sql" (*render* "migrators/h2/1-user.up.sql")]
+              ["migrators/sqlite/1-user.down.sql" (*render* "migrators/sqlite/1-user.down.sql")]
+              ["migrators/sqlite/1-user.up.sql" (*render* "migrators/sqlite/1-user.up.sql")]
+              ["migrators/postgres/1-user.up.sql" (*render* "migrators/postgres/1-user.up.sql")]
+              ["migrators/postgres/1-user.down.sql" (*render* "migrators/postgres/1-user.down.sql")]]))
 
 
 

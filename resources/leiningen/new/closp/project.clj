@@ -10,7 +10,7 @@
                  [org.clojure/clojurescript "1.9.293"]
 
                  [org.clojure/core.cache "0.6.5"]
-                 [org.clojure/core.async "0.2.395"]
+                 [org.clojure/core.async "0.3.443"]
 
                  [ch.qos.logback/logback-classic "1.1.3"]
 
