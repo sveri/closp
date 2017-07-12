@@ -1,6 +1,11 @@
 
 ## Changes
 
+### 0.3.0
+
+* Release and bugfix
+* TODO: update closp.net
+
 ### 0.3.0-alpha4
 
 * Switch from selmer to hiccup
