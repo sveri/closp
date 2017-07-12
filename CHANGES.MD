@@ -4,7 +4,7 @@
 ### 0.3.0
 
 * Release and bugfix
-* TODO: update closp.net
+* TODO: update closp.net and docs
 
 ### 0.3.0-alpha4
 
