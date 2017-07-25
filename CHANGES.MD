@@ -1,6 +1,10 @@
 
 ## Changes
 
+### 0.3.1
+
+* Adding connection pooling as default component for database
+
 ### 0.3.0
 
 * Release and bugfix

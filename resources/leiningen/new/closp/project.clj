@@ -52,7 +52,8 @@
 
                  [org.clojure/tools.logging "0.3.1"]
                  [org.postgresql/postgresql "9.4.1212"]
-                 [org.clojure/java.jdbc "0.6.2-alpha3"]]
+                 [org.clojure/java.jdbc "0.6.2-alpha3"]
+                 [com.mchange/c3p0 "0.9.5.2"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]]
 

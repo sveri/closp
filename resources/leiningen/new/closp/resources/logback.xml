@@ -25,6 +25,7 @@
     <logger name="org.projectodd" level="info" />
     <logger name="org.xnio" level="info" />
     <logger name="org.jboss.logging" level="info" />
+    <logger name="com.mchange.v2.c3p0" level="info" />
 
 
     <root level="debug">
