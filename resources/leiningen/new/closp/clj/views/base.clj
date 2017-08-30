@@ -84,31 +84,31 @@
           (include-css "/css/bootstrap.min.css")
           (include-css "/css/bootstrap-theme.min.css")
           (include-css "/css/screen.css")
-          (when css (include-css css))
+          (when css (include-css css))]
 
-          [:body
+         [:body
 
-           [:div#header.navbar.navbar-inverse.navbar-fixed-top {:role "navigation"}
-            [:div.container-fluid
-             [:div.navbar-header
-              [:button.navbar-toggle {:type "button" :data-toggle "collapse" :data-target ".navbar-collapse"}
-               [:span.sr-only "Toggle Navigation"]
-               [:span.icon-bar]
-               [:span.icon-bar]
-               [:span.icon-bar]]
-              [:a.navbar-brand {:href "/"}"{{name}}"]]
+          [:div#header.navbar.navbar-inverse.navbar-fixed-top {:role "navigation"}
+           [:div.container-fluid
+            [:div.navbar-header
+             [:button.navbar-toggle {:type "button" :data-toggle "collapse" :data-target ".navbar-collapse"}
+              [:span.sr-only "Toggle Navigation"]
+              [:span.icon-bar]
+              [:span.icon-bar]
+              [:span.icon-bar]]
+             [:a.navbar-brand {:href "/"} "{{name}}"]]
 
-             [:div (menu opts)]]]
+            [:div (menu opts)]]]
 
-           [:div#wrap [:div#content
-                       (when flash-message [:div#flash-message.alert {:class flash-alert-type} flash-message])
-                       content]]
+          [:div#wrap [:div#content
+                      (when flash-message [:div#flash-message.alert {:class flash-alert-type} flash-message])
+                      content]]
 
-           [:div (footer)]
+          [:div (footer)]
 
-           (include-js "/js/jquery-2.0.3.min.js")
-           (include-js "/js/bootstrap.min.js")
-           (when plain-js [:div plain-js])]]))
+          (include-js "/js/jquery-2.0.3.min.js")
+          (include-js "/js/bootstrap.min.js")
+          (when plain-js [:div plain-js])]))
 
 
 
