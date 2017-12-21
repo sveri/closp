@@ -10,21 +10,23 @@
            :search            "Suchen"
            :add               "Hinzufügen"
            :cancel            "Abbrechen"
+           :please-wait       "Bitte warten"}
+          :cancel            "Abbrechen"
            :name              "Name"
            :create            "%1 Anlegen"
            :edit              "%1 Bearbeiten"
            :delete            "Löschen"
            :saved             "Änderungen gespeichert"}
 
- :crudify {:created "%1 erstellt"
-           :deleted "%1 gelöscht"
-           :not-empty "Feld: \"%1\" darf nicht leer sein."
-           :not-null "Feld: \"%1\" darf nicht nil sein."
-           :not-string "Feld: \"%1\" sollte eine Zeichenkette sein."
-           :not-number "Feld: \"%1\" sollte eine Zahl sein."
-           :not-integer "Feld: \"%1\" sollte Ganzzahlig sein."
-           :not-date "Feld: \"%1\" sollte ein Datum sein."
-           :max-length "Feld: \"%1\" ist zu groß."}
+:crudify {:created "%1 erstellt"
+          :deleted "%1 gelöscht"
+          :not-empty "Feld: \"%1\" darf nicht leer sein."
+          :not-null "Feld: \"%1\" darf nicht nil sein."
+          :not-string "Feld: \"%1\" sollte eine Zeichenkette sein."
+          :not-number "Feld: \"%1\" sollte eine Zahl sein."
+          :not-integer "Feld: \"%1\" sollte Ganzzahlig sein."
+          :not-date "Feld: \"%1\" sollte ein Datum sein."
+          :max-length "Feld: \"%1\" ist zu groß."}
  :user
           {:email_invalid        "Bitte geben Sie eine gültige E-Mail Adresse an."
            :pass_min_length      "Das Passwort muss mindestens 5 Zeichen enthalten."
@@ -58,4 +60,4 @@
            :active   "Aktiv"
            :update   "Änderungen speichern"}
  :contact {:contact            "Kontakt"
-           :content_belongs_to "Der Inhalt gehört zu"}}
+           :content_belongs_to "Der Inhalt gehört zu"}

@@ -22,17 +22,15 @@
         </encoder>
     </appender>
 
-    <logger name="org.projectodd" level="info" />
-    <logger name="org.xnio" level="info" />
-    <logger name="org.jboss.logging" level="info" />
-    <logger name="com.mchange.v2.c3p0" level="info" />
+
+    <logger name="{{ns}}" level="debug" />
 
 
-    <root level="debug">
+    <root level="error">
         <appender-ref ref="STDOUT" />
     </root>
 
-    <root level="debug">
+    <root level="error">
         <appender-ref ref="FILE" />
     </root>
 </configuration>

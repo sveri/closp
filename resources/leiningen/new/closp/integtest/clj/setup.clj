@@ -11,8 +11,11 @@
             [{{ns}}.locale :as l])
   (:import (java.util.logging Logger Level)))
 
-(def db-uri "jdbc:postgresql://localhost:5432/getless-test?user=getless&password=getless")
+(def db-uri "jdbc:postgresql://localhost:5432/closp3?user=closp3&password=closp3")
 (def db {:connection-uri db-uri})
+
+
+(def driver (eta/firefox))
 
 ; custom config for configuration
 (def test-config
@@ -38,18 +41,19 @@
     :web (component/using (new-web-server) [:handler :config])))
 
 (def test-base-url (str "http://localhost:3001/"))
-
-(defn start-browser [browser]
-  (w/set-driver! {:browser browser}))
-
-(defn stop-browser []
-  (w/quit))
+;
+;(defn start-browser [browser]
+;  (w/set-driver! {:browser browser}))
+;
+;(defn stop-browser []
+;  (w/quit))
 
 (defn start-server []
   (repl/set-init! #'test-system)
   (go))
 
 (defn stop-server []
+  (eta/quit driver)
   (stop))
 
 (defn server-setup [f]
@@ -62,9 +66,7 @@
   (j/execute! db ["truncate table users cascade"])
   (j/insert! db :users {:email "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
                         :is_active true :role "admin"})
-  (start-browser :htmlunit)
-  (f)
-  (stop-browser))
+  (f))
 
 (defn clean-db [f]
   (j/execute! db ["truncate table users cascade"])
