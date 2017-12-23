@@ -89,8 +89,6 @@
               [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 
               [(str "src/cljc/{{san-path}}/cljccore.cljc") (*render* "cljc/cljccore.cljc")]
-              [(str "src/cljc/{{san-path}}/closp_schema.cljc") (*render* "cljc/closp_schema.cljc")]
-              [(str "src/cljc/{{san-path}}/closp_schema_helper.cljc") (*render* "cljc/closp_schema_helper.cljc")]
 
 
               ["README.md" (*render* "README.md")]

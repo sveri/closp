@@ -4,6 +4,7 @@
 ### 0.3.2
 
 * Replace unmaintained clj-webdriver by etaoin "0.2.1"
+* Remove references to schema
 * minor fixes
 
 ### 0.3.1
