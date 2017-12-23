@@ -35,7 +35,7 @@
          [:b {:class "caret"}]]
         [:ul {:class "dropdown-menu"}
          [:li {:field "link-list" :class (merge-active uri "/user")}
-          [:a {:href "/admin/users"} "Users"]]
+          [:a {:href "/admin/users"} (localize [:user/users])]]
          [:li {:field "link-list" :class (merge-active uri "/crud/team/index")}
           [:a {:href "/crud/team/index"} "Teams"]]]])]
     (if identity

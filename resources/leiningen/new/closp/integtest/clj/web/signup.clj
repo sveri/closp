@@ -1,42 +1,46 @@
-;(ns {{ns}}.web.signup
-;  (:require [clojure.test :refer :all]
-;            [clj-webdriver.taxi :refer :all]
-;            [{{ns}}.setup :as s]))
-;
-;(use-fixtures :each s/browser-setup)
-;(use-fixtures :once s/server-setup)
-;
-;(defn signup-valid-user []
-;  (to (str s/test-base-url "user/signup"))
-;  (quick-fill-submit {"#email" "foo@bar.de"}
-;                     {"#password" "bbbbbb"}
-;                     {"#confirm" "bbbbbb"}
-;                     {"#email" submit}))
-;
-;(deftest ^:selenium wrong_email
-;  (to (str s/test-base-url "user/signup"))
-;  (quick-fill-submit {"#email" "foo"}
-;                     {"#email" submit})
-;  (is (.contains (text "body") (s/t [:user/email_invalid]))))
-;
-;(deftest ^:selenium username_exists
-;  (to (str s/test-base-url "user/signup"))
-;  (quick-fill-submit {"#email" "admin@localhost.de"}
-;                     {"#email" submit})
-;  (is (.contains (text "body") (s/t [:user/username_exists]))))
-;
-;(deftest ^:selenium passwords_dont_match
-;  (to (str s/test-base-url "user/signup"))
-;  (quick-fill-submit {"#email" "foo@bar.de"}
-;                     {"#password" "123456"}
-;                     {"#configrm" "23456"}
-;                     {"#email" submit})
-;  (is (.contains (text "body") (s/t [:user/pass_match]))))
-;
-;(deftest ^:selenium passwords_min_length
-;  (to (str s/test-base-url "user/signup"))
-;  (quick-fill-submit {"#email" "foo@bar.de"}
-;                     {"#password" "156"}
-;                     {"#confirm" "23"}
-;                     {"#email" submit})
-;  (is (.contains (text "body") (s/t [:user/pass_min_length]))))
+(ns {{ns}}.web.signup
+  (:require [clojure.test :refer :all]
+            [etaoin.api :refer :all]
+            [etaoin.keys :as k]
+            [{{ns}}.setup :as s]))
+
+(use-fixtures :each s/browser-setup)
+(use-fixtures :once s/server-setup)
+
+(defn go-to-signup []
+  (doto s/*driver*
+    (go (str s/test-base-url "user/signup"))
+    (wait-has-text {:tag :body} (s/t [:user/register]))))
+
+
+(deftest ^:frontend wrong_email
+  (go-to-signup)
+  (doto s/*driver*
+    (fill-multi [:email "foo"])
+    (fill :email k/enter)
+    (wait-has-text {:tag :body} (s/t [:user/email_invalid]))))
+
+(deftest ^:frontend username_exists
+  (go-to-signup)
+  (doto s/*driver*
+    (fill-multi [:email "admin@localhost.de"])
+    (fill :email k/enter)
+    (wait-has-text {:tag :body} (s/t [:user/username_exists]))))
+
+(deftest ^:frontend passwords_dont_match
+  (go-to-signup)
+  (doto s/*driver*
+    (fill-multi [:email "foo@bar.de"
+                 :password "123456"
+                 :confirm "2345677"])
+    (fill :email k/enter)
+    (wait-has-text {:tag :body} (s/t [:user/pass_match]))))
+
+(deftest ^:frontend passwords_min_length
+  (go-to-signup)
+  (doto s/*driver*
+    (fill-multi [:email "foo@bar.de"
+                 :password "156"
+                 :confirm "23"])
+    (fill :email k/enter)
+    (wait-has-text {:tag :body} (s/t [:user/pass_min_length]))))

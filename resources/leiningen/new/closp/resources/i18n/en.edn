@@ -47,7 +47,8 @@
            :new_password         "New Password"
            :new_password_confirm "Confirm New Password"
            :really_delete        "Do you really want to delete: %1?"
-           :register             "Register"}
+           :register             "Register"
+           :users                "Users"}
 
  :admin
           {:title    "User Overview"

@@ -1,6 +1,11 @@
 
 ## Changes
 
+### 0.3.2
+
+* Replace unmaintained clj-webdriver by etaoin "0.2.1"
+* minor fixes
+
 ### 0.3.1
 
 * Adding connection pooling as default component for database

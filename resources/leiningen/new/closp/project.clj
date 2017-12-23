@@ -85,10 +85,7 @@
                                       [lein-figwheel "0.5.0-2"]
                                       [test2junit "1.1.1"]]
 
-                       :dependencies [[org.apache.httpcomponents/httpclient "4.5.2"]
-                                      [clj-webdriver "0.7.2"]
-                                      [etaoin "0.2.1"]
-                                      [org.seleniumhq.selenium/selenium-java "2.52.0"]
+                       :dependencies [[etaoin "0.2.1"]
 
                                       [org.clojure/test.check "0.9.0"]
 

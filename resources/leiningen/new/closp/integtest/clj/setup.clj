@@ -1,5 +1,5 @@
 (ns {{ns}}.setup
-  (:require [clj-webdriver.taxi :as w]
+  (:require [etaoin.api :as eta]
             [com.stuartsierra.component :as component]
             [taoensso.tempura :refer [tr]]
             [system.repl :refer [go stop] :as repl]
@@ -11,11 +11,10 @@
             [{{ns}}.locale :as l])
   (:import (java.util.logging Logger Level)))
 
-(def db-uri "jdbc:postgresql://localhost:5432/closp3?user=closp3&password=closp3")
+(def db-uri "jdbc:postgresql://localhost:5432/{{name}}-test?user={{name}}&password={{name}}")
 (def db {:connection-uri db-uri})
 
-
-(def driver (eta/firefox))
+(def ^:dynamic *driver*)
 
 ; custom config for configuration
 (def test-config
@@ -41,42 +40,40 @@
     :web (component/using (new-web-server) [:handler :config])))
 
 (def test-base-url (str "http://localhost:3001/"))
-;
-;(defn start-browser [browser]
-;  (w/set-driver! {:browser browser}))
-;
-;(defn stop-browser []
-;  (w/quit))
+
+(defn logout [driver]
+  (eta/go driver (str test-base-url "user/logout")))
 
 (defn start-server []
   (repl/set-init! #'test-system)
   (go))
 
 (defn stop-server []
-  (eta/quit driver)
   (stop))
 
 (defn server-setup [f]
-  (.setLevel (Logger/getLogger "com.gargoylesoftware") Level/SEVERE)
   (start-server)
   (f)
   (stop-server))
 
 (defn browser-setup [f]
-  (j/execute! db ["truncate table users cascade"])
-  (j/insert! db :users {:email "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
-                        :is_active true :role "admin"})
-  (f))
+  (eta/with-firefox-headless {} driver
+    (binding [*driver* driver]
+      (j/execute! db ["truncate table users cascade"])
+      (j/insert! db :users {:email "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
+                            :is_active true :role "admin"})
+      (f)
+      (logout *driver*))))
 
-(defn clean-db [f]
-  (j/execute! db ["truncate table users cascade"])
-  (j/insert! db :users {:email     "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
-                        :is_active true :role "admin"})
-  (f))
+;(defn clean-db [f]
+;  (j/execute! db ["truncate table users cascade"])
+;  (j/insert! db :users {:email     "admin@localhost.de" :pass "bcrypt+sha512$d6d175aaa9c525174d817a74$12$24326124313224314d345444356149457a67516150447967517a67472e717a2e777047565a7071495330625441704f46686a556b5535376849743575"
+;                        :is_active true :role "admin"})
+;  (f))
 
 ;; locale stuff
 
 (def t (partial tr
                 {:default-locale :en
                  :dict           l/local-dict}
-                ["en"]))
+                ["de"]))
