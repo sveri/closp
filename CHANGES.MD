@@ -6,6 +6,33 @@
 * Replace unmaintained clj-webdriver by etaoin "0.2.1"
 * Remove references to schema
 * minor fixes
+* removing schema
+
+Upgrading deps:
+* [org.clojure/clojure "1.9.0"]
+* [org.clojure/clojurescript "1.9.946"]
+* [org.clojure/core.async "0.3.465"]
+* [ch.qos.logback/logback-classic "1.2.3"]
+* [ring "1.6.3"]
+* [ring/ring-anti-forgery "1.1.0"]
+* [compojure "1.6.0"]
+* [reagent "0.7.0"]
+* [org.immutant/web "2.1.9"]
+* [im.chit/hara.io.scheduler "2.5.10"]
+* [buddy/buddy-auth "2.1.0"]
+* [buddy/buddy-hashers "1.3.0"]
+* [org.danielsz/system "0.4.1"]
+* [cljs-ajax "0.7.3"]
+* [prismatic/plumbing "0.5.5"]
+* [fipp "0.6.12"]
+* [com.rpl/specter "1.0.5"]
+* [org.clojure/tools.logging "0.4.0"]
+* [org.postgresql/postgresql "42.1.4"]
+* [org.clojure/java.jdbc "0.7.4"]
+* [etaoin "0.2.2"]
+* [ring/ring-devel "1.6.3"]
+* [pjstadig/humane-test-output "0.8.3"]
+
 
 ### 0.3.1
 

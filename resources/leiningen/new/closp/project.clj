@@ -6,36 +6,36 @@
 
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
-  :dependencies [[org.clojure/clojure "1.9.0-alpha16"]
-                 [org.clojure/clojurescript "1.9.293"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.9.946"]
 
                  [org.clojure/core.cache "0.6.5"]
-                 [org.clojure/core.async "0.3.443"]
+                 [org.clojure/core.async "0.3.465"]
 
-                 [ch.qos.logback/logback-classic "1.1.3"]
+                 [ch.qos.logback/logback-classic "1.2.3"]
 
-                 [ring "1.5.1"]
+                 [ring "1.6.3"]
                  [lib-noir "0.9.9"]
-                 [ring/ring-anti-forgery "1.0.1"]
-                 [compojure "1.5.2"]
-                 [reagent "0.6.0"]
-                 [org.immutant/web "2.1.6"]
+                 [ring/ring-anti-forgery "1.1.0"]
+                 [compojure "1.6.0"]
+                 [reagent "0.7.0"]
+                 [org.immutant/web "2.1.9"]
                  [hiccup "1.0.5"]
                  [prone "1.1.4"]
-                 [im.chit/hara.io.scheduler "2.4.7"]
+                 [im.chit/hara.io.scheduler "2.5.10"]
                  [noir-exception "0.2.5"]
 
-                 [buddy/buddy-auth "1.3.0"]
-                 [buddy/buddy-hashers "1.1.0"]
+                 [buddy/buddy-auth "2.1.0"]
+                 [buddy/buddy-hashers "1.3.0"]
 
                  [com.draines/postal "2.0.2"]
 
                  [de.sveri/clojure-commons "0.2.1"]
 
                  [org.clojure/tools.namespace "0.2.11"]
-                 [org.danielsz/system "0.3.2-SNAPSHOT"]
+                 [org.danielsz/system "0.4.1"]
 
-                 [cljs-ajax "0.5.8"]
+                 [cljs-ajax "0.7.3"]
                  [ring-transit "0.1.6"]
                  [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
@@ -44,18 +44,18 @@
                  [com.taoensso/tempura "1.1.2"]
 
 
-                 [prismatic/plumbing "0.5.3"]
-                 [prismatic/schema "1.1.3"]
+                 [prismatic/plumbing "0.5.5"]
 
-                 [fipp "0.6.8"]
-                 [com.rpl/specter "0.13.2"]
+                 [fipp "0.6.12"]
+                 [com.rpl/specter "1.0.5"]
 
-                 [org.clojure/tools.logging "0.3.1"]
-                 [org.postgresql/postgresql "9.4.1212"]
-                 [org.clojure/java.jdbc "0.6.2-alpha3"]
+                 [org.clojure/tools.logging "0.4.0"]
+
+                 [org.postgresql/postgresql "42.1.4"]
+                 [org.clojure/java.jdbc "0.7.4"]
                  [com.mchange/c3p0 "0.9.5.2"]]
 
-  :plugins [[lein-cljsbuild "1.1.1"]]
+  :plugins [[lein-cljsbuild "1.1.7"]]
 
   :min-lein-version "2.5.0"
 
@@ -85,12 +85,12 @@
                                       [lein-figwheel "0.5.0-2"]
                                       [test2junit "1.1.1"]]
 
-                       :dependencies [[etaoin "0.2.1"]
+                       :dependencies [[etaoin "0.2.2"]
 
                                       [org.clojure/test.check "0.9.0"]
 
-                                      [ring/ring-devel "1.5.1"]
-                                      [pjstadig/humane-test-output "0.8.1"]]
+                                      [ring/ring-devel "1.6.3"]
+                                      [pjstadig/humane-test-output "0.8.3"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]}
@@ -101,9 +101,9 @@
 
   :test-paths ["test/clj" "integtest/clj"]
 
-  :test-selectors {:unit        (fn [m] (not (or (:selenium m) (:integration m) (:rest m))))
+  :test-selectors {:unit        (fn [m] (not (or (:frontend m) (:integration m) (:rest m))))
                    :integration :integration
-                   :selenium    :selenium
+                   :frontend    :frontend
                    :rest        :rest
                    :cur         :cur                                ; one more selector for, give it freely to run only
                    ; the ones you need currently

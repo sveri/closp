@@ -172,10 +172,11 @@ By default this will include your closp.edn config file in the build from resour
 the :env entry to :prod or something else than :dev.  
 There are several ways to setup a more separated dev / staging / prod environment. Please lookup nomad for that.
 
-## CLJ-Webdriver
+## Web Integration tests
 
-Closp comes with some examples on how to use clj webdriver in your projects for integration tests. They reside in
+Closp comes with some examples on how to use etaoin in your projects for integration tests. They reside in
 `integtest\clj`.
+
 
 Per default the tests are run with the :htlmunit driver, which is fast, but not that good on javascript. To change that,
 open: {{ns}}.setup and adapt the driver in `browser-setup` to `:firefor` or `:chrome`.
