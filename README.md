@@ -286,7 +286,6 @@ and explanation: <https://github.com/Prismatic/schema/issues/194
 
 The development of closp is supported by Jetbrains and their awesome IDE
 
-![Jetbrains Logo](jetbrains.svg) 
 [![Jetbrains Logo](jetbrains.svg)](https://www.jetbrains.com/)
 
  
