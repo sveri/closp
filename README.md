@@ -282,13 +282,18 @@ The problem is that ring-transit imports `schema/plumbing` which interfers with 
 and explanation: <https://github.com/Prismatic/schema/issues/194
 
 
-## [Changes](CHANGES.md) 
+## Supported by
+
+The development of closp is supported by Jetbrains and their awesome IDE
+
+![Jetbrains Logo](jetbrains.svg) 
+[![Jetbrains Logo](jetbrains.svg)](https://www.jetbrains.com/)
 
  
 
 ## License
 
-Copyright © 2015 Sven Richter
+Copyright © 2018 Sven Richter
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.
