@@ -30,7 +30,7 @@
 
                  [com.draines/postal "2.0.2"]
 
-                 [de.sveri/clojure-commons "0.2.1"]
+                 [de.sveri/clojure-commons "0.2.2"]
 
                  [org.clojure/tools.namespace "0.2.11"]
                  [org.danielsz/system "0.4.1"]
