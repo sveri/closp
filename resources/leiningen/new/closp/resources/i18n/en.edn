@@ -13,7 +13,10 @@
            :create            "Create %1"
            :edit              "Edit %1"
            :delete            "Delete"
-           :saved             "Changes Saved"}
+           :saved             "Changes Saved"
+           :contact           "Contact"
+           :tos               "Terms Of Service"
+           :cookies           "Cookies"}
 
  :crudify {:created "Created %1"
            :deleted "Deleted %1"

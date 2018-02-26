@@ -1,6 +1,13 @@
 
 ## Changes
 
+### 0.3.3
+
+* Adding cljs devtools
+* Update bootstrap to v4
+* Update jquery to 3.2.1.slim
+* Update figwheel to 0.5.14
+
 ### 0.3.2
 
 * Replace unmaintained clj-webdriver by etaoin "0.2.1"

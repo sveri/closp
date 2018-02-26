@@ -1,5 +1,5 @@
-(defproject closp/lein-template "0.3.2"
-  :description "A webframework combining several technologies based on luminus and chestnut."
+(defproject closp/lein-template "0.3.3-RC1"
+  :description "An opionated webframework for clojure and clojurescript."
   :url "https://github.com/sveri/closp"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}

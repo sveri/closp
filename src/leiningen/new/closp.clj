@@ -117,13 +117,12 @@
           [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
 
            ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
-           ["resources/public/css/bootstrap-theme.min.css" "resources/public/css/bootstrap-theme.min.css"]
            ["resources/public/css/screen.css" "resources/public/css/screen.css"]
            ["resources/public/css/home.css" "resources/public/css/home.css"]
            ["resources/public/css/admin.css" "resources/public/css/admin.css"]
 
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
-           ["resources/public/js/jquery-2.0.3.min.js" "resources/public/js/jquery-2.0.3.min.js"]
+           ["resources/public/js/jquery-3.2.1.slim.min.js" "resources/public/js/jquery-3.2.1.slim.min.js"]
            ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
 
            ["resources/i18n/en.edn" "resources/i18n/en.edn"]

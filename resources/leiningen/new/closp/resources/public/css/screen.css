@@ -53,6 +53,10 @@ body {
     padding-left: 15px;
 }
 
+#footer-menu-wrapper {
+    height: 50px;
+}
+
 #footer-menu-wrapper li.active a {
     color: rgb(0, 34, 44);
 }

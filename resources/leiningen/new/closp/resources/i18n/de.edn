@@ -15,7 +15,10 @@
            :create            "%1 Anlegen"
            :edit              "%1 Bearbeiten"
            :delete            "Löschen"
-           :saved             "Änderungen gespeichert"}
+           :saved             "Änderungen gespeichert"
+           :contact           "Kontakt"
+           :tos               "Geschäftsbedingungen"
+           :cookies           "Cookies"}
 
  :crudify {:created "%1 erstellt"
            :deleted "%1 gelöscht"

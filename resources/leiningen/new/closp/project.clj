@@ -64,25 +64,29 @@
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
-  :cljsbuild
-  {:builds {:dev {:source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
-                  :figwheel {:css-dirs ["resources/public/css"]             ;; watch and update CSS
-                             :on-jsload "{{name}}.dev/main"}
-                  :compiler     {:main           "{{name}}.dev"
-                                 :asset-path     "/js/compiled/out"
-                                 :output-to      "resources/public/js/compiled/app.js"
-                                 :output-dir     "resources/public/js/compiled/out"}}
-            :adv {:source-paths ["src/cljs" "src/cljc"]
-                  :compiler     {:output-to     "resources/public/js/compiled/app.js"
-                                 ; leaving this commented because of: https://github.com/cursiveclojure/cursive/issues/369
-                                 ;:jar           true
-                                 :optimizations :advanced
-                                 :pretty-print  false}}}}
+  :cljsbuild {:builds
+              [{:id "dev"
+                :source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
+                :figwheel {:on-jsload "{{name}}.dev/main"}
+
+                :compiler {:main "{{name}}.dev"
+                           :asset-path "/js/compiled/out"
+                           :output-to "resources/public/js/compiled/app.js"
+                           :output-dir "resources/public/js/compiled/out"
+                           :source-map-timestamp true}}
+
+               {:id "adv"
+                :source-paths ["src/cljs" "src/cljc"]
+                :compiler {:output-to "resources/public/js/compiled/app.js"
+                           :optimizations :advanced
+                           :pretty-print false}}]}
+
+  :figwheel {:css-dirs ["resources/public/css"]}
 
   :profiles {:dev     {:repl-options {:init-ns          {{ns}}.user}
 
                        :plugins      [[lein-ring "0.9.0"]
-                                      [lein-figwheel "0.5.0-2"]
+                                      [lein-figwheel "0.5.14"]
                                       [test2junit "1.1.1"]]
 
                        :dependencies [[etaoin "0.2.2"]
@@ -90,7 +94,9 @@
                                       [org.clojure/test.check "0.9.0"]
 
                                       [ring/ring-devel "1.6.3"]
-                                      [pjstadig/humane-test-output "0.8.3"]]
+                                      [pjstadig/humane-test-output "0.8.3"]
+
+                                      [binaryage/devtools "0.9.4"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]}
