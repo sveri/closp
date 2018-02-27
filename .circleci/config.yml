@@ -36,7 +36,7 @@ jobs:
 
       - run: lein deps
 
-      - run: sudo apt-get update && apt-get install postgresql-client
+      - run: sudo apt-get update && sudo apt-get install postgresql-client
 
       - save_cache:
           paths:
