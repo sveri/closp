@@ -40,12 +40,14 @@ jobs:
 
       # run tests!
 #      - run: lein new closp closp-test -n de.sveri.closptest
-      - run:
-        command: |
-            lein new closp closp-test -n de.sveri.closptest
-            cd closp-test
+      - run: lein new closp closp-test -n de.sveri.closptest
 
-      - run:
-        command: |
-          cd closp-test
-          lein uberjar
+      - run: cd closp-test
+#        command: |
+#            lein new closp closp-test -n de.sveri.closptest
+#            cd closp-test
+#
+#      - run:
+#        command: |
+#          cd closp-test
+#          lein uberjar
