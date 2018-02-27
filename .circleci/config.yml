@@ -42,9 +42,12 @@ jobs:
 #      - run: lein new closp closp-test -n de.sveri.closptest
       - run: lein new closp closp-test -n de.sveri.closptest
 
-      - run: cd closp-test
+      - run:
 
-      - run: lein rel-jar
+      - run:
+        command: |
+          cd closp-test
+          lein rel-jar
 #        command: |
 #            lein new closp closp-test -n de.sveri.closptest
 #            cd closp-test
