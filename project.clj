@@ -1,4 +1,4 @@
-(defproject closp/lein-template "0.3.4-Snapshot-3"
+(defproject closp/lein-template "0.3.4-Snapshot-4"
   :description "An opionated webframework for clojure and clojurescript."
   :url "https://github.com/sveri/closp"
   :license {:name "Eclipse Public License"
