@@ -43,5 +43,7 @@ jobs:
       - run:
         command: |
             lein new closp closp-test -n de.sveri.closptest
+            cd closp-test
             lein uberjar
             lein test
+            java -jar target/closp-test.jar
