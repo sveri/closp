@@ -57,7 +57,6 @@ jobs:
           command: |
             psql -h localhost -p 5432 -U postgres -c "create user closptest with password 'closptest';"
             psql -h localhost -p 5432 -U postgres -c "alter user closptest with superuser;"
-#            psql -h localhost -p 5432 -U postgres -c "create database closptest;"
             psql -h localhost -p 5432 -U postgres -c "grant all privileges on database closptest to closptest;"
             psql -h localhost -p 5432 -U postgres -c "CREATE TABLE users ( id bigserial NOT NULL PRIMARY KEY, first_name character varying(30), last_name character varying(30), role character varying(30), email character varying(30) NOT NULL, last_login time, is_active BOOLEAN DEFAULT FALSE NOT NULL, pass character varying(200));"
             psql -h localhost -p 5432 -U postgres -c "ALTER TABLE users OWNER TO closptest;"
