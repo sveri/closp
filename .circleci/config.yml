@@ -54,7 +54,8 @@ jobs:
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
-          command: sudo -u root psql -p 5432 -c "create user closp-test with password 'closp-test';"
+          command: |
+            psql -h localhost -p 5432 -c "create user closp-test with password 'closp-test';"
 
       - run: lein new closp closp-test -n de.sveri.closptest
 
