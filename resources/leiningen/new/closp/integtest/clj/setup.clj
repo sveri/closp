@@ -11,7 +11,7 @@
             [{{ns}}.locale :as l])
   (:import (java.util.logging Logger Level)))
 
-(def db-uri "jdbc:postgresql://localhost:5432/{{name}}-test?user={{name}}&password={{name}}")
+(def db-uri "jdbc:postgresql://localhost:5432/{{name}}?user={{name}}&password={{name}}")
 (def db {:connection-uri db-uri})
 
 (def ^:dynamic *driver*)
