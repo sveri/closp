@@ -55,7 +55,7 @@ jobs:
 
       - run:
           command: |
-            psql -h localhost -p 5432 -c "create user closp-test with password 'closp-test';"
+            psql -h localhost -p 5432 -U postgres -c "create user closp-test with password 'closp-test';"
 
       - run: lein new closp closp-test -n de.sveri.closptest
 
