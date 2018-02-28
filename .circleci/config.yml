@@ -71,4 +71,8 @@ jobs:
 
       - run: java -jar target/closptest.jar &
 
+      - run:
+          name: Wait for server
+          command: dockerize -wait tcp://localhost:3000 -timeout 2m
+
       - run: lein test
