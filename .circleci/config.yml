@@ -69,7 +69,9 @@ jobs:
           cd closptest
           lein rel-jar
 
-      - run: java -jar target/closptest.jar &
+      - run: |
+          cd closptest
+          java -jar target/closptest.jar &
 
       - run:
           name: Wait for server
