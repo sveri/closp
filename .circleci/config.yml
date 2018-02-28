@@ -27,13 +27,22 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt-get update && sudo apt-get install postgresql-client firefox
+      - run: sudo apt-get update && sudo apt-get install postgresql-client
 
       - run:
           name: install dockerize
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
           environment:
             DOCKERIZE_VERSION: v0.3.0
+
+      - run:
+          name: install firefox
+          command: |
+              sudo wget -O FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+              sudo mkdir /opt/firefox
+              sudo tar xjf FirefoxSetup.tar.bz2 -C /opt/firefox/
+              sudo mv /usr/lib/firefox-esr/firefox-esr /usr/lib/firefox-esr/firefox-esr_orig
+              sudo ln -s /opt/firefox/firefox/firefox /usr/lib/firefox-esr/firefox-esr
 
       - run:
           name: install geckodriver
