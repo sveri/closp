@@ -6,7 +6,8 @@
             [clojure.tools.cli :as t-cli]
             [clojure.string :as string]
             [clojure.java.io :as io])
-  (:import (java.io File)))
+  (:import (java.io File)
+           (java.util Properties)))
 
 (declare ^{:dynamic true} *name*)
 (declare ^{:dynamic true} *render*)
@@ -32,12 +33,27 @@
 (defn create-db-dir [proj-name]
   (io/make-parents (io/file proj-dir proj-name "db" ".keep")))
 
+
+
+(defn read-project-version [groupid artifact]
+  (-> (doto (Properties.)
+        (.load (-> "META-INF/maven/%s/%s/pom.properties"
+                   (format groupid artifact)
+                   (io/resource)
+                   (io/reader))))
+      (.get "version")))
+
+(defn app-version
+  "app version"
+  []
+  (read-project-version "descjop" "lein-template"))
+
 (defn generate-project [name feature-params data]
   (binding [*name* name
             *render* #((renderer "closp") % data)]
     (reset! features (-> feature-params))
 
-    (println "Generating new CLOSP project named" (str name "..."))
+    (println "Generating new CLOSP project named: " (str name " with version: " (app-version) " ..."))
 
     (apply (partial ->files data)
            (concat
