@@ -16,5 +16,5 @@
     {:datasource cpds}))
 
 
-(def db (pool {:jdbc-url              "jdbc:postgresql://localhost:5432/{{name}}-test?user={{name}}&password={{name}}"
+(def db (pool {:jdbc-url              "jdbc:postgresql://localhost:5432/{{name}}?user={{name}}&password={{name}}"
                :jdbc-driver-class     "org.postgresql.Driver"}))

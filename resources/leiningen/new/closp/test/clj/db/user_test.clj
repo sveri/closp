@@ -3,7 +3,7 @@
             [clojure.java.jdbc :as j]
             [{{ns}}.db.user :as u]))
 
-(def db {:connection-uri "jdbc:postgresql://localhost:5432/{{name}}-test?user={{name}}&password={{name}}"})
+(def db {:connection-uri "jdbc:postgresql://localhost:5432/{{name}}?user={{name}}&password={{name}}"})
 
 ; This fixture is intended to perform setup/teardown for each individual test in the namespace.
 ; Note that it assumes the :once fixture will handle creating/destroying the DB,
