@@ -1,9 +1,11 @@
 # closp 
 
-**closp is currently being reworked in version 0.3.0** 
+**closp has been changed significantly in 0.3 and upwards.** 
 
 All the current documentation relates to the latest stable version 0.2.0.  
-You can use that version by executing: lein new closp --template-version 0.2.0
+You can use the old version by executing: lein new closp --template-version 0.2.0
+
+[Build Status](https://circleci.com/gh/sveri/closp.png?style=shield&circle-token=:circle-token)
 
 [Slack Channel CLOSP](https://clojurians.slack.com/messages/closp)
 
