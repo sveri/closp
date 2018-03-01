@@ -35,17 +35,6 @@ jobs:
           environment:
             DOCKERIZE_VERSION: v0.3.0
 
-#      - run:
-#          name: install firefox
-#          command: |
-#              sudo wget -O FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
-#              sudo mkdir /opt/firefox
-#              sudo tar xjf FirefoxSetup.tar.bz2 -C /opt/firefox/
-#              sudo mkdir -p /usr/lib/firefox-esr
-#              sudo ln -s /opt/firefox/firefox/firefox /usr/lib/firefox-esr/firefox-esr
-#              sudo ln -s /opt/firefox/firefox/firefox /usr/bin/firefox-esr
-#              sudo ln -s /opt/firefox/firefox/firefox /usr/bin/firefox
-
       - run:
           name: install geckodriver
           command: |
@@ -86,14 +75,14 @@ jobs:
           cd closptest
           lein rel-jar
 
-      - run:
-          name: start server
-          command: |
-              cd closptest && java -jar target/closptest.jar
-          background: true
+#      - run:
+#          name: start server
+#          command: |
+#              cd closptest && java -jar target/closptest.jar
+#          background: true
 
-      - run:
-          name: Wait for server
-          command: dockerize -wait tcp://localhost:3000 -timeout 2m
+#      - run:
+#          name: Wait for server
+#          command: dockerize -wait tcp://localhost:3000 -timeout 2m
 
       - run: cd closptest && lein test
