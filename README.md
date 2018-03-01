@@ -5,9 +5,10 @@
 All the current documentation relates to the latest stable version 0.2.0.  
 You can use the old version by executing: lein new closp --template-version 0.2.0
 
-[Build Status](https://circleci.com/gh/sveri/closp.png?style=shield&circle-token=:circle-token)
+[![CircleCI](https://circleci.com/gh/sveri/closp.svg?style=svg)](https://circleci.com/gh/sveri/closp)
 
-[Slack Channel CLOSP](https://clojurians.slack.com/messages/closp)
+
+[CLOSP Slack Channel](https://clojurians.slack.com/messages/closp)
 
 A Leiningen template combining luminus, chestnut plus some goodies.
 
