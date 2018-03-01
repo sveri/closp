@@ -7,40 +7,31 @@ Password: admin
 
 ## Usage
 
-1. Run `lein new closp _projectname_ -n foo.bar` in a different folder
-2. Run `lein migrate` in the newly created project (This will add an admin user with username: 
-_admin@localhost.de_ and password: _admin_ to a new database)
-3. Run `lein figwheel` to start figwheel and compile the clojurescript.
-4. Run `lein rel-jar` to generate a runnable jar file.
+1. Run `lein new closp _projectname_ -n foo.bar` in a different folder.
+2. Open your postgresql instance and add a new user: _projectname_ with password: _projectname_ and create a database _projectname_.
+3. Add a users table to the new database. The script can be found in _migrators/postgres/1-user.up.sql'.
+4. CD to the newly generated folder _projectname_.
+5. Run `lein repl` and inside `(start-dev-system)` to start the server.
+6. Run `lein figwheel` in a separate console to start figwheel and compile the clojurescript.
 
 ## Features
 * closp-crud integration
-* SQlite database on filesystem as a default
-* Joplin for database migrations
-* Selmer as templating solution
-* http-kit as a server
+* Postgresql database on filesystem as a default
+* Hiccup as templating solution
+* Immutant as a server
 * cljc support
 * Figwheel with clojurescript live reloading
 * Reloading support for templates and clojure code
-* Configuration with nomad
-* User management with login/logout/registration and email activation (provided by postal)
+* User management with login/logout/registration
 * Recaptcha support for signup form
 * Authentication provided by buddy
 * reagent and datascript on frontend side
 * Ring Antiforgery middleware
-* Clojure miniprofiler example
 * Componentized application
-* Datascript with reagent example
-* Booststrap css styles
-* Example for clj-webdriver tests
+* Booststrap 4.0 css styles
+* Example for HTML Frontend tests with etaoin
 * Internationalization support with tempura
   
-
-## Showcase
-
-See it live at: <http://sveri.de:3124>  
-Username: admin@localhost.de  
-Password: admin  
 
 ## Docker
 
@@ -48,8 +39,7 @@ There is a dockerfile attached which will fetch the latest version and run an ex
 
 ## Configuration
 
-There is a closp.edn file in the resources folder  which should be adapted accordingly.  
-Closp uses nomad <https://github.com/james-henderson/nomad>, so you can configure everything as you can do with nomad.  
+There is a closp.edn file in the resources folder  which should be adapted accordingly.    
 When you start your project from the repl it will load the default `closp.edn` from `resources` folder, which fits
 for development.  
 For a different config in another environment you can pass in a file path via system environment setting like so:
@@ -57,30 +47,12 @@ For a different config in another environment you can pass in a file path via sy
 Please think of changing the :env key in the config to :prod instead of :dev when changing to a different
 environment.
 
-## closp-crud
-
-This is a module that generates html, routing and sql files for a given table definition. For more
-information please look here: <https://github.com/sveri/closp>.  
-Short Intro:  
-
-* Create a new definition in env/dev/entities/example.edn (Look at env/dev/entities/user.edn for an example)
-* Run lein run -m de.sveri.clospcrud.closp-crud/closp-crud -f env/dev/entities/example.edn
-* Run lein migrate to create the new database
-* Add the new routes handler to components.handler namespace
-* Reset the server
-* Browse to /example
-
 ## Database
 
-Closp per default is configured to connect to a file SQlite database.  
-Additionally I added support for joplin <https://github.com/juxt/joplin> to handle migration of sql scripts.
-To get started run `lein migrate` in the project folder. This is enough to get running.
-Changing the jdbc url in the *closp.edn* file will switch to another database. But keep in mind you will have to 
-run the migration step again and change the jdbc url in the `joplin.edn` too.  
+Closp per default is configured to connect to postgresql database.  
+Changing the jdbc url in the *closp.edn* file will switch to another database.  
 The connection is handled by jdbc <https://github.com/clojure/java.jdbc> so everything that jdbc supports is supported 
 by closp out of the box.  
-Closp comes with korma <https://github.com/korma/Korma> for an abstraction layer over jdbc. See `db\users.clj` for
-how it is used.
 
 ## Authentication and Authorization
 
@@ -93,11 +65,12 @@ more information please look at the buddy documentation.
   
 ## Templating
 
-Closp ships with selmer <https://github.com/yogthos/Selmer> (django inspired) templating solution.
+Closp ships with hiccup <https://github.com/weavejester/hiccup> templating solution.
 
 ## Signup
 
-Signup simply creates a user and activates it. Supports recaptcha for signup form.
+There is a signup workflow implemented that sends out an email after regristration with a link to activate the account.
+Until the account is activated the user won't be able to login.
 
 ## Recaptcha
 
@@ -117,16 +90,12 @@ There is also an option to add new users.
 In dev mode changes the clojure code will be recompiled and reloaded on page refresh. The same is true for the templates.
 Theoretically this results development without server restarts.
 
-## Clojurescripth with figwheel
+## Clojurescript with figwheel
 
 When running in dev mode cljs files will be auto compiled and sent to the browser via figwheel 
 <https://github.com/bhauman/lein-figwheel>.  
 If you want to autoload a different cljs function you have to adapt dev.cljs and the project.clj file at 
 [:cljsbuild :dev :figwheel].
-
-## Email system
-
-Closp uses postal <https://github.com/drewr/postal> for sending authentication links. This can be configured in closp.edn.
 
 ## Components
 
@@ -159,15 +128,13 @@ You need to run `lein figwheel` at least once to compile the clojurescript.
 And finally open the `dev.cljs` namespace and change the requiring namespace from  
  `(:require [f.d.core :as core])` to `(:require [f.d.ajax :as core])`
 
-## Reagent and Datascript
+## Reagent
 
-Closp includes a reagent <https://github.com/reagent-project/reagent> and datascript 
-<https://github.com/tonsky/datascript> example taken from <https://gist.github.com/allgress/11348685> to get started
-with frontend development.
+Closp includes a reagent <https://github.com/reagent-project/reagent> example under http://localhost:3000/reagent-example.
 
 ## Production
 
-There is a leiningen task defined in the _project.clj_ to generate an uberjar. Just execute `lein uberjar`.  
+There is a leiningen task defined in the _project.clj_ to generate an uberjar. Just execute `lein rel-jar`.  
 By default this will include your closp.edn config file in the build from resources folder. You should at least change
 the :env entry to :prod or something else than :dev.  
 There are several ways to setup a more separated dev / staging / prod environment. Please lookup nomad for that.
@@ -176,7 +143,6 @@ There are several ways to setup a more separated dev / staging / prod environmen
 
 Closp comes with some examples on how to use etaoin in your projects for integration tests. They reside in
 `integtest\clj`.
-
 
 Per default the tests are run with the :htlmunit driver, which is fast, but not that good on javascript. To change that,
 open: {{ns}}.setup and adapt the driver in `browser-setup` to `:firefor` or `:chrome`.
@@ -193,8 +159,6 @@ Both can be found in `resources/i18n`
 
 ## Minor features.
 
-* Miniprofiler <https://github.com/yeller/clojure-miniprofiler> example in `routes\user.clj -> admin-page function`. 
-The profiler is enabled in development only
 * Namspace support: Add `-n name.space` option to `lein new closp projectname` to provide a namespace for the source 
 files.
 * Support for flash messages with global flash div
@@ -212,31 +176,32 @@ files.
 
 ## FAQ
 
-### Running `lein figwheel` fails with `...No such var: ana/forms-seq*...`
+### Could not find template closp on the classpath.
 
-The complete error message is:
- 
-    clojure.lang.Compiler$CompilerException: java.lang.RuntimeException: No such var: ana/forms-seq*, compiling:(figwheel_sidecar/utils.clj:49:21)
-
-This issue is tracked in https://github.com/sveri/closp/issues/20. According to the reporter upgrading to leiningen 
-2.5.3 fixed it for him. If it does not for you, please reopen the issue.
-
-### Could not find environment ':sqlite-dev-env'
-
-Leiningen 2.5.2 introduced a change which broke existing joplin versions. You have to update your joplin dependencies
-to at least 0.2.17 to make it work with leiningen 2.5.2
-
+This occurs when you run `lein new closp ...` with an older leiningen version. Please upgrade to the latest one.
 
 ### I get this warning: Uncaught Error: Invariant Violation: _registerComponent(...): Target container is not a DOM element.
 
 This will happen only in dev mode for every page where you did not explicitly register your clojurescript with.
 Look at dev.cljs for this line `:jsload-callback (fn [] (core/main))` and change the call to `(core/main)` how you
 need it for the page you are working on right now.
+
+### When I change a route definition, the change is not applied after a page reload
+
+You have to reset the system, by calling `({{ns}}.user/reset)` in the repl.
+
+
+## Supported by
+
+The development of closp is supported by Jetbrains and their awesome IDE
+
+[![Jetbrains Logo](jetbrains.svg)](https://www.jetbrains.com/)
+
  
 
 ## License
 
-Copyright © 2015 Sven Richter
+Copyright © 2018 Sven Richter
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 your option) any later version.

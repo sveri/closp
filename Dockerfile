@@ -12,8 +12,6 @@ WORKDIR /closp_showcase
 
 RUN lein rel-jar
 
-RUN lein migrate
-
 EXPOSE 3000
 
 CMD java -jar /closp_showcase/target/closp_showcase.jar

@@ -10,4 +10,7 @@
   (tn/refresh)
   (sr/reset))
 
+(defn stop []
+  (sr/stop))
+
 (sr/set-init! #'dev-system)
