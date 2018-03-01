@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/clojure:lein-2.7.1
+      - image: circleci/clojure:lein-2.7.1-browsers
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -35,16 +35,16 @@ jobs:
           environment:
             DOCKERIZE_VERSION: v0.3.0
 
-      - run:
-          name: install firefox
-          command: |
-              sudo wget -O FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
-              sudo mkdir /opt/firefox
-              sudo tar xjf FirefoxSetup.tar.bz2 -C /opt/firefox/
-              sudo mkdir -p /usr/lib/firefox-esr
-              sudo ln -s /opt/firefox/firefox/firefox /usr/lib/firefox-esr/firefox-esr
-              sudo ln -s /opt/firefox/firefox/firefox /usr/bin/firefox-esr
-              sudo ln -s /opt/firefox/firefox/firefox /usr/bin/firefox
+#      - run:
+#          name: install firefox
+#          command: |
+#              sudo wget -O FirefoxSetup.tar.bz2 "https://download.mozilla.org/?product=firefox-latest&os=linux64&lang=en-US"
+#              sudo mkdir /opt/firefox
+#              sudo tar xjf FirefoxSetup.tar.bz2 -C /opt/firefox/
+#              sudo mkdir -p /usr/lib/firefox-esr
+#              sudo ln -s /opt/firefox/firefox/firefox /usr/lib/firefox-esr/firefox-esr
+#              sudo ln -s /opt/firefox/firefox/firefox /usr/bin/firefox-esr
+#              sudo ln -s /opt/firefox/firefox/firefox /usr/bin/firefox
 
       - run:
           name: install geckodriver
