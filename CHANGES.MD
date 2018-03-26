@@ -1,6 +1,11 @@
 
 ## Changes
 
+### 0.3.4
+
+* Added CI
+* Bugfix on signup with update of session
+
 ### 0.3.3
 
 * Adding cljs devtools

@@ -65,6 +65,11 @@
 
 (defn logout [] (sess/clear!) (resp/redirect "/"))
 
+(defn update-session-and-redirect [user nexturl]
+  (sess/put! :role (:role user))
+  (sess/put! :identity (:email user))
+  (sess/put! :user-id (:id user))
+  (resp/redirect (or nexturl "/")))
 
 (defn login [{:keys [localize] :as request} db]
   (let [username (get-in request [:form-params "username"])
@@ -75,8 +80,7 @@
         (cond
           (= false (hashers/check password (get user :pass ""))) (login-page
                                                                    {:error (localize [:user/pass_correct])} request)
-          :else (do (sess/put! :role (:role user)) (sess/put! :identity username) (sess/put! :user-id (:id user))
-                    (resp/redirect (or nexturl "/"))))
+          :else (update-session-and-redirect user nexturl))
         (catch Exception e (log/error "Something messed up while logging in user: " username)
                            (.printStackTrace e)
                            (login-page {:error (localize [:generic/some_error])} request)))
@@ -136,8 +140,7 @@
                        response_field challenge_field
                        private-recaptcha-key recaptcha-domain)
     (do (create-new-user! email password db)
-        (sess/put! :role "none") (sess/put! :identity email)
-        (resp/redirect "/"))
+        (update-session-and-redirect (db/get-user-by-email db email) nil))
     (signup-page config (user-form-errors email) req)))
 
 (defn user-routes [config db]
