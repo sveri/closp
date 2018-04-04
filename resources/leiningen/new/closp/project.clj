@@ -7,7 +7,7 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.9.946"]
+                 [org.clojure/clojurescript "1.10.238"]
 
                  [org.clojure/core.cache "0.6.5"]
                  [org.clojure/core.async "0.3.465"]
@@ -37,7 +37,6 @@
 
                  [cljs-ajax "0.7.3"]
                  [ring-transit "0.1.6"]
-                 [com.lucasbradstreet/cljs-uuid-utils "1.0.2"]
 
                  [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
 
@@ -66,20 +65,27 @@
 
   :cljsbuild {:builds
               [{:id "dev"
-                :source-paths ["src/cljs" "src/cljc" "env/dev/cljs"]
-                :figwheel {:on-jsload "{{name}}.dev/main"}
+                :source-paths ["src/cljs" "src/cljc"]
+                :figwheel {:on-jsload "{{name}}.core/mount-root"}
 
-                :compiler {:main "{{name}}.dev"
+                :compiler {:main "{{name}}.core"
                            :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/app.js"
                            :output-dir "resources/public/js/compiled/out"
-                           :source-map-timestamp true}}
+                           :source-map-timestamp true
+                           :preloads [devtools.preload
+                                      day8.re-frame-10x.preload
+                                      re-frisk.preload]
+                           :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true}
+                           :external-config      {:devtools/config {:features-to-install :all}}}}
 
                {:id "adv"
                 :source-paths ["src/cljs" "src/cljc"]
                 :compiler {:output-to "resources/public/js/compiled/app.js"
                            :optimizations :advanced
-                           :pretty-print false}}]}
+                           :pretty-print false
+                           :infer-externs true
+                           :closure-defines {goog.DEBUG false}}}]}
 
   :figwheel {:css-dirs ["resources/public/css"]}
 
@@ -87,7 +93,8 @@
 
                        :plugins      [[lein-ring "0.9.0"]
                                       [lein-figwheel "0.5.14"]
-                                      [test2junit "1.1.1"]]
+                                      [test2junit "1.1.1"]
+                                      [lein-doo "0.1.10"]]
 
                        :dependencies [[etaoin "0.2.2"]
 
@@ -96,7 +103,9 @@
                                       [ring/ring-devel "1.6.3"]
                                       [pjstadig/humane-test-output "0.8.3"]
 
-                                      [binaryage/devtools "0.9.4"]]
+                                      [binaryage/devtools "0.9.9"]
+                                      [day8.re-frame/re-frame-10x "0.3.0"]
+                                      [re-frisk "0.5.4"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]}

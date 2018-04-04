@@ -83,12 +83,13 @@
               [(str "src/clj/{{san-path}}/service/spec_utils.clj") (*render* "clj/service/spec_utils.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
 
+              [(str "src/cljs/{{san-path}}/config.cljs") (*render* "cljs/config.cljs")]
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
-              [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
-              [(str "src/cljs/{{san-path}}/ajax.cljs") (*render* "cljs/ajax.cljs")]
+              [(str "src/cljs/{{san-path}}/events.cljs") (*render* "cljs/events.cljs")]
+              [(str "src/cljs/{{san-path}}/routes.cljs") (*render* "cljs/routes.cljs")]
+              [(str "src/cljs/{{san-path}}/subs.cljs") (*render* "cljs/subs.cljs")]
+              [(str "src/cljs/{{san-path}}/views.cljs") (*render* "cljs/views.cljs")]
 
-
-              [(str "env/dev/cljs/{{sanitized}}/dev.cljs") (*render* "env/dev/cljs/dev.cljs")]
 
               [(str "src/cljc/{{san-path}}/cljccore.cljc") (*render* "cljc/cljccore.cljc")]
 
@@ -128,9 +129,7 @@
            ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
 
            ["resources/i18n/en.edn" "resources/i18n/en.edn"]
-           ["resources/i18n/de.edn" "resources/i18n/de.edn"]
-
-           ["env/dev/entities/user.edn" "env/dev/entities/user.edn"]])
+           ["resources/i18n/de.edn" "resources/i18n/de.edn"]])
 
     (create-db-dir (:name data))))
 

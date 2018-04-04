@@ -5,6 +5,8 @@
 
 * Added CI
 * Bugfix on signup with update of session
+* updating cljs build and dev
+* added re-frame example with secretary for routing and some devtools
 
 ### 0.3.3
 
