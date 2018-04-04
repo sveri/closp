@@ -85,6 +85,7 @@
 
               [(str "src/cljs/{{san-path}}/config.cljs") (*render* "cljs/config.cljs")]
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
+              [(str "src/cljs/{{san-path}}/db.cljs") (*render* "cljs/db.cljs")]
               [(str "src/cljs/{{san-path}}/events.cljs") (*render* "cljs/events.cljs")]
               [(str "src/cljs/{{san-path}}/routes.cljs") (*render* "cljs/routes.cljs")]
               [(str "src/cljs/{{san-path}}/subs.cljs") (*render* "cljs/subs.cljs")]
