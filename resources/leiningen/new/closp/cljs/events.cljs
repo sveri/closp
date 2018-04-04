@@ -1,6 +1,6 @@
 (ns {{ns}}.events
   (:require [re-frame.core :as re-frame]
-            [de.sveri.estar.db :as db]))
+            [{{ns}}.db :as db]))
 
 (re-frame/reg-event-db
  ::initialize-db
