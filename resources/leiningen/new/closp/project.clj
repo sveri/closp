@@ -18,7 +18,11 @@
                  [lib-noir "0.9.9"]
                  [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]
+
                  [reagent "0.7.0"]
+                 [re-frame "0.10.5"]
+                 [secretary "1.2.3"]
+
                  [org.immutant/web "2.1.9"]
                  [hiccup "1.0.5"]
                  [prone "1.1.4"]
