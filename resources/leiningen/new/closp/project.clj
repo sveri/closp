@@ -21,7 +21,8 @@
 
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
-                 [secretary "1.2.3"]
+                 [bidi "2.1.3"]
+                 [kibu/pushy "0.3.8"]
 
                  [org.immutant/web "2.1.9"]
                  [hiccup "1.0.5"]
@@ -108,7 +109,7 @@
                                       [pjstadig/humane-test-output "0.8.3"]
 
                                       [binaryage/devtools "0.9.9"]
-                                      [day8.re-frame/re-frame-10x "0.3.0"]
+                                      [day8.re-frame/re-frame-10x "0.3.1"]
                                       [re-frisk "0.5.4"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
