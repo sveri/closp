@@ -2,7 +2,10 @@
 
 **closp has been changed significantly in 0.4 and upwards.** 
 
-You can find the old documentation here: [OLD Readme](README_OLD.md) 
+You can find the old documentation here: [OLD Readme](README_OLD.md)
+
+[![CircleCI](https://circleci.com/gh/sveri/closp.svg?style=svg)](https://circleci.com/gh/sveri/closp)
+ 
 
 
 ## Supported by

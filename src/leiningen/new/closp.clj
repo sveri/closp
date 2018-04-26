@@ -78,9 +78,9 @@
               [(str "src/cljs/{{san-path}}/subs.cljs") (*render* "cljs/subs.cljs")]
               [(str "src/cljs/{{san-path}}/views.cljs") (*render* "cljs/views.cljs")]
 
-              [(str "src/cljs/{{san-path}}/home/views.cljs") (*render* "cljs/user/home/views.cljs")]
+              [(str "src/cljs/{{san-path}}/home/views.cljs") (*render* "cljs/home/views.cljs")]
 
-              [(str "src/cljs/{{san-path}}/home/third_party/http_fx.cljs") (*render* "cljs/user/third_party/http_fx.cljs")]
+              [(str "src/cljs/{{san-path}}/home/third_party/http_fx.cljs") (*render* "cljs/third_party/http_fx.cljs")]
 
               [(str "src/cljs/{{san-path}}/user/events.cljs") (*render* "cljs/user/events.cljs")]
               [(str "src/cljs/{{san-path}}/user/helper.cljs") (*render* "cljs/user/helper.cljs")]
