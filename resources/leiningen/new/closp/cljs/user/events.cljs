@@ -172,7 +172,8 @@
      :db (-> db
              (dissoc :cp)
              (comm/hide-loading-screen)
-             (comm/set-generic-success-message (loc/localize [:user/pass_changed])))}))
+             (comm/set-generic-success-message (loc/localize [:user/pass_changed])))
+     :timer [::comm/clear-generic-success]}))
 
 (rf/reg-event-db
   ::generic-cp-error

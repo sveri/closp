@@ -31,7 +31,3 @@
 
 
 (def url-for (partial bidi/path-for routes))
-
-(rf/reg-fx :navigate-to #(do (pushy/set-token! {{ns}}.routes/history (url-for %))
-                             (dispatch-route {:handler %})))
-(def url-for (partial bidi/path-for routes))

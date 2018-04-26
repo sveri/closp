@@ -3,14 +3,14 @@
             [re-frame.core :as rf]
             [re-pressed.core :as rp]
             [ajax.interceptors :as ai]
-            [ajax.core :as ac]
+            [ajax.core :as ajax]
+            [de.sveri.estar.effects]
             [{{ns}}.helper :refer [>evt-sync]]
             [{{ns}}.events :as events]
             [{{ns}}.config :as config]
             [{{ns}}.views :as views]
             [{{ns}}.routes :as routes]
-            [{{ns}}.user.helper :as uh]
-            [ajax.core :as ajax]))
+            [{{ns}}.user.helper :as uh]))
 
 
 
@@ -32,7 +32,7 @@
 
 (defn ^:export init []
       (dev-setup)
-      (swap! ac/default-interceptors (partial cons jwt-interceptor))
+      (swap! ajax/default-interceptors (partial cons jwt-interceptor))
       (>evt-sync [::rp/add-keyboard-event-listener "keydown"])
       (>evt-sync [::events/initialize-db])
       (routes/app-routes)
