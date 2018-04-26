@@ -9,31 +9,30 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.238"]
 
-                 [org.clojure/core.cache "0.6.5"]
-                 [org.clojure/core.async "0.3.465"]
-
                  [ch.qos.logback/logback-classic "1.2.3"]
 
                  [ring "1.6.3"]
+                 [metosin/ring-http-response "0.9.0"] ;dropin replacement for ring.util.response
                  [lib-noir "0.9.9"]
-                 [ring/ring-anti-forgery "1.1.0"]
                  [compojure "1.6.0"]
+
+                 [com.cognitect/transit-cljs "0.8.256"]
 
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
+                 [day8.re-frame/tracing-stubs "0.5.1"] ;stubs so you dont have to switch out macro calls between dev and prod code
+                 [re-pressed "0.2.0"]
+                 [com.degel/re-frame-storage-fx "0.1.0"]
+
                  [bidi "2.1.3"]
                  [kibu/pushy "0.3.8"]
 
-                 [org.immutant/web "2.1.9"]
+                 [org.immutant/web "2.1.10"]
                  [hiccup "1.0.5"]
-                 [prone "1.1.4"]
-                 [im.chit/hara.io.scheduler "2.5.10"]
-                 [noir-exception "0.2.5"]
+                 [prone "1.5.1"]
 
                  [buddy/buddy-auth "2.1.0"]
                  [buddy/buddy-hashers "1.3.0"]
-
-                 [com.draines/postal "2.0.2"]
 
                  [de.sveri/clojure-commons "0.2.2"]
 
@@ -43,20 +42,18 @@
                  [cljs-ajax "0.7.3"]
                  [ring-transit "0.1.6"]
 
-                 [net.tanesha.recaptcha4j/recaptcha4j "0.0.8"]
+                 [com.taoensso/tempura "1.2.1"]
 
-                 [com.taoensso/tempura "1.1.2"]
+                 [com.rpl/specter "1.1.0"]
 
+                 [phrase "0.3-alpha3"] ; for spec validation
 
-                 [prismatic/plumbing "0.5.5"]
-
-                 [fipp "0.6.12"]
-                 [com.rpl/specter "1.0.5"]
+                 [funcool/cuerdas "2.0.5"]
 
                  [org.clojure/tools.logging "0.4.0"]
 
-                 [org.postgresql/postgresql "42.1.4"]
-                 [org.clojure/java.jdbc "0.7.4"]
+                 [org.postgresql/postgresql "42.2.2"]
+                 [org.clojure/java.jdbc "0.7.5"]
                  [com.mchange/c3p0 "0.9.5.2"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
@@ -71,18 +68,26 @@
   :cljsbuild {:builds
               [{:id "dev"
                 :source-paths ["src/cljs" "src/cljc"]
-                :figwheel {:on-jsload "{{name}}.core/mount-root"}
+                :figwheel {:on-jsload "{{ns}}.core/mount-root"}
 
-                :compiler {:main "{{name}}.core"
+                :compiler {:main {{ns}}.core
                            :asset-path "/js/compiled/out"
                            :output-to "resources/public/js/compiled/app.js"
                            :output-dir "resources/public/js/compiled/out"
                            :source-map-timestamp true
+                           :optimizations :none
                            :preloads [devtools.preload
-                                      day8.re-frame-10x.preload
-                                      re-frisk.preload]
-                           :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true}
+                                      day8.re-frame-10x.preload]
+                           :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true
+                                                  "day8.re_frame.tracing.trace_enabled_QMARK_"  true}
                            :external-config      {:devtools/config {:features-to-install :all}}}}
+
+               ;{:id           "test"
+               ; :source-paths ["src/cljs" "src/cljc" "test/cljs"]
+               ; :compiler     {:main          reframetemplate.runner
+               ;                :output-to     "resources/public/js/compiled/test.js"
+               ;                :output-dir    "resources/public/js/compiled/test/out"
+               ;                :optimizations :none}}
 
                {:id "adv"
                 :source-paths ["src/cljs" "src/cljc"]
@@ -90,34 +95,38 @@
                            :optimizations :advanced
                            :pretty-print false
                            :infer-externs true
+                           :main {{ns}}.core
                            :closure-defines {goog.DEBUG false}}}]}
 
   :figwheel {:css-dirs ["resources/public/css"]}
 
   :profiles {:dev     {:repl-options {:init-ns          {{ns}}.user}
 
-                       :plugins      [[lein-ring "0.9.0"]
-                                      [lein-figwheel "0.5.14"]
-                                      [test2junit "1.1.1"]
+                       :plugins      [[lein-ring "0.12.4"]
+                                      [lein-figwheel "0.5.15"]
+                                      [test2junit "1.4.0"]
                                       [lein-doo "0.1.10"]]
 
-                       :dependencies [[etaoin "0.2.2"]
+                       :dependencies [[etaoin "0.2.8"]
 
                                       [org.clojure/test.check "0.9.0"]
 
                                       [ring/ring-devel "1.6.3"]
                                       [pjstadig/humane-test-output "0.8.3"]
 
-                                      [binaryage/devtools "0.9.9"]
-                                      [day8.re-frame/re-frame-10x "0.3.1"]
-                                      [re-frisk "0.5.4"]]
+                                      [binaryage/devtools "0.9.10"]
+                                      [day8.re-frame/re-frame-10x "0.3.2"]
+                                      [day8.re-frame/tracing "0.5.1"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)
                                       (pjstadig.humane-test-output/activate!)]}
 
-             :uberjar {:auto-clean false                    ; not sure about this one
-                       :omit-source true
-                       :aot         :all}}
+             :uberjar {:prep-tasks ["clean"
+                                    "compile"
+                                    ["cljsbuild" "once" "adv"]]
+                       :auto-clean false
+                       :omit-source true}}
+                       ;:aot         :all}}
 
   :test-paths ["test/clj" "integtest/clj"]
 

@@ -1,20 +1,28 @@
 (ns {{ns}}.components.handler
-  (:require [compojure.core :refer [defroutes]]
+  (:require [compojure.core :refer [defroutes routes wrap-routes]]
             [noir.response :refer [redirect]]
             [noir.util.middleware :refer [app-handler]]
             [ring.middleware.defaults :refer [site-defaults]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.file :refer [wrap-file]]
+            [ring.middleware.format :refer [wrap-restful-format]]
+            [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+            [buddy.auth :refer [authenticated?]]
+            [buddy.auth.accessrules :refer [wrap-access-rules]]
             [compojure.route :as route]
             [com.stuartsierra.component :as comp]
+            [buddy.auth.backends :as backends]
+            [{{ns}}.service.auth :as s-auth]
+            [{{ns}}.service.config :as s-c]
             [{{ns}}.routes.home :refer [home-routes]]
-            [{{ns}}.routes.crud :refer [crud-routes]]
-            [{{ns}}.routes.user :refer [user-routes registration-routes]]
-            [{{ns}}.middleware :refer [load-middleware]]))
+            [{{ns}}.routes.user :refer [user-routes]]
+            [{{ns}}.routes.api :as r-api]
+            [{{ns}}.middleware :refer [load-middleware]]
+            [ring.util.http-response :as resp]))
 
 (defroutes base-routes
-  (route/resources "/")
-  (route/not-found "Not Found"))
+           (route/resources "/"))
+;(route/not-found "Not Found"))
 
 ;; timeout sessions after 30 minutes
 (def session-defaults
@@ -22,30 +30,40 @@
    :timeout-response (redirect "/")})
 
 (defn- mk-defaults
-       "set to true to enable XSS protection"
-       [xss-protection?]
-       (-> site-defaults
-           (update-in [:session] merge session-defaults)
-           (assoc-in [:security :anti-forgery] xss-protection?)))
+  "set to true to enable XSS protection"
+  [xss-protection?]
+  (-> site-defaults
+      (update-in [:session] merge session-defaults)
+      (assoc-in [:security :anti-forgery] xss-protection?)))
+
+
+(defn err-handler [req _]
+  (if (get-in req [:headers "authorization"])
+    (resp/unauthorized {:error "Unauthorized"})
+    (resp/forbidden {:error "Forbidden"})))
+
+
+(def secret (:jwt-secret (s-c/prod-conf-or-dev)))
+(def jws-backend (backends/jws {:secret secret :unauthorized-handler err-handler}))
+
 
 (defn get-handler [config locale {:keys [db]}]
-  (-> (app-handler
-        (into [] (concat (when (:registration-allowed? config) [(registration-routes config db)])
-                         ;; add your application routes here
-                         [(crud-routes config) home-routes (user-routes config db) base-routes]))
-        ;; add custom middleware here
-        :middleware (load-middleware config)
-        :ring-defaults (mk-defaults false)
+  (routes
+    (-> (apply routes [(user-routes config db) (r-api/api-routes db)])
+        (wrap-routes wrap-access-rules {:rules s-auth/rest-rules :on-error err-handler})
+        (wrap-routes wrap-authorization jws-backend)
+        (wrap-routes wrap-authentication jws-backend)
+        (wrap-routes wrap-restful-format :formats [:json-kw :transit-json]))
+    (-> (app-handler
+          [home-routes base-routes]
+          ;; add custom middleware here
+          :middleware (load-middleware config)
+          :ring-defaults (mk-defaults false))
         ;; add access rules here
-        :access-rules []
-        ;; serialize/deserialize the following data formats
-        ;; available formats:
-        ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
-        :formats [:json-kw :edn :transit-json])
-      ; Makes static assets in $PROJECT_DIR/resources/public/ available.
-      (wrap-file "resources")
-      ; Content-Type, Content-Length, and Last Modified headers for files in body
-      (wrap-file-info)))
+        ; Makes static assets in $PROJ
+        (wrap-file "resources")
+        ; Content-Type, Content-Length, and Last Modified headers for files in body
+        (wrap-file-info))))
 
 (defrecord Handler [config locale db]
   comp/Lifecycle

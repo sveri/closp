@@ -1,13 +1,11 @@
 (ns leiningen.new.closp
   (:require [leiningen.new.templates :refer [renderer sanitize year name-to-path ->files]]
-            [leiningen.core.main :as main]
             [leinjacker.utils :refer [lein-generation]]
             [leiningen.new.cli-options :as opt-helper]
             [clojure.tools.cli :as t-cli]
             [clojure.string :as string]
             [clojure.java.io :as io])
-  (:import (java.io File)
-           (java.util Properties)))
+  (:import (java.io File)))
 
 (declare ^{:dynamic true} *name*)
 (declare ^{:dynamic true} *render*)
@@ -48,7 +46,6 @@
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
               [(str "src/clj/{{san-path}}/locale.clj") (*render* "clj/locale.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
-              [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
               [(str "src/clj/{{san-path}}/user.clj") (*render* "clj/user.clj")]
 
 
@@ -59,46 +56,45 @@
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
 
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
-              [(str "src/clj/{{san-path}}/db/entities.clj") (*render* "clj/db/entities.clj")]
 
-              [(str "src/clj/{{san-path}}/crudify/create.clj") (*render* "clj/crudify/create.clj")]
-              [(str "src/clj/{{san-path}}/crudify/crudify.clj") (*render* "clj/crudify/crudify.clj")]
-              [(str "src/clj/{{san-path}}/crudify/delete.clj") (*render* "clj/crudify/delete.clj")]
-              [(str "src/clj/{{san-path}}/crudify/edit.clj") (*render* "clj/crudify/edit.clj")]
-              [(str "src/clj/{{san-path}}/crudify/forms.clj") (*render* "clj/crudify/forms.clj")]
-              [(str "src/clj/{{san-path}}/crudify/index.clj") (*render* "clj/crudify/index.clj")]
-              [(str "src/clj/{{san-path}}/crudify/util.clj") (*render* "clj/crudify/util.clj")]
-              [(str "src/clj/{{san-path}}/crudify/validation.clj") (*render* "clj/crudify/validation.clj")]
-
-
+              [(str "src/clj/{{san-path}}/routes/api.clj") (*render* "clj/routes/api.clj")]
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
-              [(str "src/clj/{{san-path}}/routes/crud.clj") (*render* "clj/routes/crud.clj")]
               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
 
               [(str "src/clj/{{san-path}}/views/base.clj") (*render* "clj/views/base.clj")]
-              [(str "src/clj/{{san-path}}/views/home.clj") (*render* "clj/views/home.clj")]
-              [(str "src/clj/{{san-path}}/views/user.clj") (*render* "clj/views/user.clj")]
 
               [(str "src/clj/{{san-path}}/service/auth.clj") (*render* "clj/service/auth.clj")]
-              [(str "src/clj/{{san-path}}/service/spec_utils.clj") (*render* "clj/service/spec_utils.clj")]
+              [(str "src/clj/{{san-path}}/service/config.clj") (*render* "clj/service/config.clj")]
               [(str "src/clj/{{san-path}}/service/user.clj") (*render* "clj/service/user.clj")]
 
+              [(str "src/cljs/{{san-path}}/common.cljs") (*render* "cljs/common.cljs")]
               [(str "src/cljs/{{san-path}}/config.cljs") (*render* "cljs/config.cljs")]
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/db.cljs") (*render* "cljs/db.cljs")]
               [(str "src/cljs/{{san-path}}/events.cljs") (*render* "cljs/events.cljs")]
+              [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
+              [(str "src/cljs/{{san-path}}/localstorage.cljs") (*render* "cljs/localstorage.cljs")]
               [(str "src/cljs/{{san-path}}/routes.cljs") (*render* "cljs/routes.cljs")]
               [(str "src/cljs/{{san-path}}/subs.cljs") (*render* "cljs/subs.cljs")]
               [(str "src/cljs/{{san-path}}/views.cljs") (*render* "cljs/views.cljs")]
 
+              [(str "src/cljs/{{san-path}}/home/views.cljs") (*render* "cljs/user/home/views.cljs")]
 
-              [(str "src/cljc/{{san-path}}/cljccore.cljc") (*render* "cljc/cljccore.cljc")]
+              [(str "src/cljs/{{san-path}}/home/third_party/http_fx.cljs") (*render* "cljs/user/third_party/http_fx.cljs")]
+
+              [(str "src/cljs/{{san-path}}/user/events.cljs") (*render* "cljs/user/events.cljs")]
+              [(str "src/cljs/{{san-path}}/user/helper.cljs") (*render* "cljs/user/helper.cljs")]
+              [(str "src/cljs/{{san-path}}/user/subs.cljs") (*render* "cljs/user/subs.cljs")]
+              [(str "src/cljs/{{san-path}}/user/views.cljs") (*render* "cljs/user/views.cljs")]
+
+
+              [(str "src/cljc/{{san-path}}/locale.cljc") (*render* "cljc/locale.cljc")]
+              [(str "src/cljc/{{san-path}}/validation/user.cljc") (*render* "cljc/validation/user.cljc")]
 
 
               ["README.md" (*render* "README.md")]
 
               [(str "test/clj/{{san-path}}/db/user_test.clj") (*render* "test/clj/db/user_test.clj")]
-              [(str "test/clj/{{san-path}}/crudify/validation_test.clj") (*render* "test/clj/crudify/validation_test.clj")]
 
               [(str "integtest/clj/{{san-path}}/setup.clj") (*render* "integtest/clj/setup.clj")]
               [(str "integtest/clj/{{san-path}}/web/signup.clj") (*render* "integtest/clj/web/signup.clj")]
@@ -108,10 +104,6 @@
               ["resources/closp.edn" (*render* "resources/closp.edn")]
               ["resources/logback.xml" (*render* "resources/logback.xml")]
 
-              ["migrators/h2/1-user.down.sql" (*render* "migrators/h2/1-user.down.sql")]
-              ["migrators/h2/1-user.up.sql" (*render* "migrators/h2/1-user.up.sql")]
-              ["migrators/sqlite/1-user.down.sql" (*render* "migrators/sqlite/1-user.down.sql")]
-              ["migrators/sqlite/1-user.up.sql" (*render* "migrators/sqlite/1-user.up.sql")]
               ["migrators/postgres/1-user.up.sql" (*render* "migrators/postgres/1-user.up.sql")]
               ["migrators/postgres/1-user.down.sql" (*render* "migrators/postgres/1-user.down.sql")]]))
 
@@ -121,13 +113,9 @@
           [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
 
            ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
-           ["resources/public/css/screen.css" "resources/public/css/screen.css"]
-           ["resources/public/css/home.css" "resources/public/css/home.css"]
-           ["resources/public/css/admin.css" "resources/public/css/admin.css"]
 
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
-           ["resources/public/js/jquery-3.2.1.slim.min.js" "resources/public/js/jquery-3.2.1.slim.min.js"]
-           ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
+           ["resources/public/js/jquery-3.2.3.1.min.js" "resources/public/js/jquery-3.3.1.min.js"]
 
            ["resources/i18n/en.edn" "resources/i18n/en.edn"]
            ["resources/i18n/de.edn" "resources/i18n/de.edn"]])
@@ -140,14 +128,12 @@
   (let [{:keys [options _ errors summary]} (t-cli/parse-opts args opt-helper/cli-options)
         ns (:namespace options)
         san-path (string/replace ns #"\." "/")
-        data {:name             name
-              :sanitized        (sanitize name)
-              :san-path         san-path
-              :ns               ns
-              :year             (year)
-              :activationlink   "{{activationlink}}"
-              :flash-alert-type "{{flash-alert-type}}"
-              :flash-message    "{{flash-message}}"}]
+        data {:name      name
+              :sanitized (sanitize name)
+              :san-path  san-path
+              :ns        ns
+              :year      (year)
+              :jwt-key   (apply str (take 40 (repeatedly #(char (+ (rand 26) 65)))))}]
     ;; Handle help and error conditions
     (cond
       (< (lein-generation) 2)
