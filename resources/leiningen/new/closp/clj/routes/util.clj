@@ -1,8 +1,8 @@
 (ns {{ns}}.routes.util
   (:require [ring.util.http-response :as resp]))
 
-(defmacro with-try [& args]
+(defmacro with-try [& body]
   (try
-    `(do ~@args)
+    `(do ~@body)
     (catch Exception e (do (.printStackTrace e)
                            (resp/internal-server-error)))))
