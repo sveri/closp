@@ -8,7 +8,7 @@
             [{{ns}}.db.user :as db]
             [{{ns}}.cljc.validation.user :as vu]
             [{{ns}}.service.user :as s-u]
-            [{{ns}.routes.util :refer [with-try]}]))
+            [{{ns}}.routes.util :refer [with-try]]))
 
 
 (defn sign-token [email config]

@@ -89,8 +89,8 @@
               [(str "src/cljs/{{san-path}}/user/views.cljs") (*render* "cljs/user/views.cljs")]
 
 
-              [(str "src/cljc/{{san-path}}/locale.cljc") (*render* "cljc/locale.cljc")]
-              [(str "src/cljc/{{san-path}}/validation/user.cljc") (*render* "cljc/validation/user.cljc")]
+              [(str "src/cljc/{{san-path}}/cljc/locale.cljc") (*render* "cljc/locale.cljc")]
+              [(str "src/cljc/{{san-path}}/cljc/validation/user.cljc") (*render* "cljc/validation/user.cljc")]
 
 
               ["README.md" (*render* "README.md")]
@@ -116,7 +116,7 @@
            ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
 
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
-           ["resources/public/js/jquery-3.2.3.1.min.js" "resources/public/js/jquery-3.3.1.min.js"]
+           ["resources/public/js/jquery-3.3.1.min.js" "resources/public/js/jquery-3.3.1.min.js"]
 
            ["resources/i18n/en.edn" "resources/i18n/en.edn"]
            ["resources/i18n/de.edn" "resources/i18n/de.edn"]])

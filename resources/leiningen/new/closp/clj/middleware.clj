@@ -2,7 +2,8 @@
   (:require [prone.middleware :as prone]
             [taoensso.tempura :refer [tr] :as tempura]
             [ring.middleware.reload :refer [wrap-reload]]
-            [{{ns}}.locale :as loc]))
+            [{{ns}}.locale :as loc]
+            [{{ns}}.service.user :as s-u]))
 
 (defn add-locale [handler]
   (fn [req]
@@ -13,6 +14,15 @@
                                               :dict           loc/local-dict}
                                              short-languages)
                           :languages short-languages)))))
+
+
+(defn add-user [handler db]
+  (fn [req]
+    (let [user-id (s-u/get-user-id-from-req req)]
+      (if (and user-id (nil? (:user req)))
+        (handler (assoc req :user (dissoc (db-u/get-user-by-email db user-id) :pass)))
+        (handler req)))))
+
 
 (defn add-req-properties [handler config]
   (fn [req] (handler (assoc req :config config))))

@@ -17,7 +17,7 @@
             [{{ns}}.routes.home :refer [home-routes]]
             [{{ns}}.routes.user :refer [user-routes]]
             [{{ns}}.routes.api :as r-api]
-            [{{ns}}.middleware :refer [load-middleware]]
+            [{{ns}}.middleware :as m-w :refer [load-middleware]]
             [ring.util.http-response :as resp]))
 
 (defroutes base-routes
@@ -50,6 +50,7 @@
 (defn get-handler [config locale {:keys [db]}]
   (routes
     (-> (apply routes [(user-routes config db) (r-api/api-routes db)])
+        (wrap-routes #(m-w/add-user % db))
         (wrap-routes wrap-access-rules {:rules s-auth/rest-rules :on-error err-handler})
         (wrap-routes wrap-authorization jws-backend)
         (wrap-routes wrap-authentication jws-backend)

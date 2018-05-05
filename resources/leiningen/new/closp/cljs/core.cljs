@@ -4,7 +4,7 @@
             [re-pressed.core :as rp]
             [ajax.interceptors :as ai]
             [ajax.core :as ajax]
-            [de.sveri.estar.effects]
+            [{{ns}}.effects]
             [{{ns}}.helper :refer [>evt-sync]]
             [{{ns}}.events :as events]
             [{{ns}}.config :as config]
