@@ -3,7 +3,7 @@
             [{{ns}}.views.base :as v]))
 
 (defn home-page [req]
-  (v/render {{name}} req))
+  (v/render "{{name}}" req))
 
 (defroutes home-routes
            (ANY "*" req (home-page req)))

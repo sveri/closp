@@ -3,6 +3,7 @@
             [taoensso.tempura :refer [tr] :as tempura]
             [ring.middleware.reload :refer [wrap-reload]]
             [{{ns}}.locale :as loc]
+            [{{ns}}.db.user :as db-u]
             [{{ns}}.service.user :as s-u]))
 
 (defn add-locale [handler]

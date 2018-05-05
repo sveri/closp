@@ -1,5 +1,5 @@
-(ns {{ns}}.service.user
+(ns {{ns}}.service.user)
 
 
-  (defn get-user-id-from-req [req]
-    (-> req :identity :user-id)))
+(defn get-user-id-from-req [req]
+  (-> req :identity :user-id))

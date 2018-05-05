@@ -125,8 +125,8 @@
                                     "compile"
                                     ["cljsbuild" "once" "adv"]]
                        :auto-clean false
-                       :omit-source true}}
-                       ;:aot         :all}}
+                       :omit-source true
+                       :aot         :all}}
 
   :test-paths ["test/clj" "integtest/clj"]
 
