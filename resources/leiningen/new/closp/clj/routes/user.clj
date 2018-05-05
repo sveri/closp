@@ -7,7 +7,8 @@
             [buddy.sign.jwt :as jwt]
             [{{ns}}.db.user :as db]
             [{{ns}}.cljc.validation.user :as vu]
-            [{{ns}}.service.user :as s-u]))
+            [{{ns}}.service.user :as s-u]
+            [{{ns}.routes.util :refer [with-try]}]))
 
 
 (defn sign-token [email config]
@@ -45,8 +46,8 @@
 (defn signup-user [email password config db]
   (if-let [errors (valid-register? email password db)]
     (resp/internal-server-error errors)
-    (let [bcrypted-pw (hashers/encrypt password)]
-      (db/create-user db email bcrypted-pw)
+    (with-try
+      (db/create-user db email (hashers/encrypt password))
       (resp/ok {:token (sign-token email config)
                 :email email :role "none" :is_active true}))))
 
