@@ -72,6 +72,7 @@
               [(str "src/cljs/{{san-path}}/config.cljs") (*render* "cljs/config.cljs")]
               [(str "src/cljs/{{san-path}}/core.cljs") (*render* "cljs/core.cljs")]
               [(str "src/cljs/{{san-path}}/db.cljs") (*render* "cljs/db.cljs")]
+              [(str "src/cljs/{{san-path}}/effects.cljs") (*render* "cljs/effects.cljs")]
               [(str "src/cljs/{{san-path}}/events.cljs") (*render* "cljs/events.cljs")]
               [(str "src/cljs/{{san-path}}/helper.cljs") (*render* "cljs/helper.cljs")]
               [(str "src/cljs/{{san-path}}/localstorage.cljs") (*render* "cljs/localstorage.cljs")]
