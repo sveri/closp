@@ -115,6 +115,7 @@
           [["resources/public/img/loading.gif" "resources/public/img/loading.gif"]
 
            ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
+           ["resources/public/css/main.css" "resources/public/css/main.css"]
 
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
            ["resources/public/js/jquery-3.3.1.min.js" "resources/public/js/jquery-3.3.1.min.js"]
