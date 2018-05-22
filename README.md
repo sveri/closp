@@ -4,6 +4,9 @@
 
 Get started with: `lein new closp -n yourprojectname -n name.space` 
 
+Then open a repl and after startup enter: `(start-dev-system)` to startup the server.  
+The clojurescript is compiled by running `lein figwheel` in the projects command line.
+
 It comes with: 
 - component
 - postgresql as database
@@ -14,9 +17,6 @@ It comes with:
 - buddy for login / logout (jwt token is used and the complete UI for login / logout is integrated in the template)
 - tempura for i18n
 - phrase for form validation
-
-Then open a repl and after startup enter: `(start-dev-system)` to startup the server.  
-The clojurescript is compiled by running `lein figwheel` in the projects command line.
 
 
 **Old documenation**
