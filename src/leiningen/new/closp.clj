@@ -37,7 +37,7 @@
             *render* #((renderer "closp") % data)]
     (reset! features (-> feature-params))
 
-    (println "Generating new CLOSP project named: " (str name " with version: 0.3.4-RC6 ..."))
+    (println "Generating new CLOSP project named: " (str name " with version: 0.4.0-RC2 ..."))
 
     (apply (partial ->files data)
            (concat
