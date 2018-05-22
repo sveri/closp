@@ -15,7 +15,8 @@ It comes with:
 - tempura for i18n
 - phrase for form validation
 
-
+Then open a repl and after startup enter: `(start-dev-system)` to startup the server.  
+The clojurescript is compiled by running `lein figwheel` in the projects command line.
 
 
 **Old documenation**
