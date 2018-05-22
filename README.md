@@ -1,6 +1,24 @@
 # closp 
 
-**closp has been changed significantly in 0.4 and upwards.** 
+**closp has been changed significantly in 0.4 and upwards.**
+
+Get started with: `lein new closp -n yourprojectname -n name.space` 
+
+It comes with: 
+- component
+- postgresql as database
+- re-frame as cljs library
+- figwheel for reloading
+- etaoin for frontend tests
+- bidi for routing (back / frontend)
+- buddy for login / logout (jwt token is used and the complete UI for login / logout is integrated in the template)
+- tempura for i18n
+- phrase for form validation
+
+
+
+
+**Old documenation**
 
 You can find the old documentation here: [OLD Readme](README_OLD.md)
 
