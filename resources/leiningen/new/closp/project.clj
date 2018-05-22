@@ -144,8 +144,7 @@
 
   :uberjar-name "{{name}}.jar"
 
-  :aliases {"rel-jar" ["do" "clean," "cljsbuild" "once" "adv," "uberjar"]
-            "unit" ["do" "test" ":unit"]
+  :aliases {"unit" ["do" "test" ":unit"]
             "integ" ["do" "test" ":integration"]}
 
 

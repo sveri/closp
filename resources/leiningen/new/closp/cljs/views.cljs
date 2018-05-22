@@ -55,7 +55,7 @@
               [:div
                [:header [menu]]
 
-               [:main.container
+               [:main
                 [:div#content
 
                  (when (<sub [::comm/generic-error-sub])
