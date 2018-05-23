@@ -73,6 +73,6 @@ jobs:
 
       - run: |
           cd closptest
-          lein rel-jar
+          lein uberjar
 
       - run: cd closptest && lein test :unit
