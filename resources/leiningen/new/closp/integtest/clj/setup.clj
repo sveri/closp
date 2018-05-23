@@ -1,14 +1,14 @@
-(ns {{ns}} .setup
+(ns {{ns}}.setup
   (:require [etaoin.api :as eta]
     [com.stuartsierra.component :as component]
     [taoensso.tempura :refer [tr]]
     [system.repl :refer [go stop] :as repl]
     [clojure.java.jdbc :as j]
-    [{{ns}} .components.server :refer [new-web-server]]
-    [{{ns}} .components.handler :refer [new-handler]]
-    [{{ns}} .components.config :as c]
-    [{{ns}} .components.db :refer [new-db]]
-    [{{ns}} .cljc.locale :as l])
+    [{{ns}}.components.server :refer [new-web-server]]
+    [{{ns}}.components.handler :refer [new-handler]]
+    [{{ns}}.components.config :as c]
+    [{{ns}}.components.db :refer [new-db]]
+    [{{ns}}.cljc.locale :as l])
   (:import (java.util.logging Logger Level)))
 
 (def db-uri "jdbc:postgresql://localhost:5432/{{name}}_test?user={{name}}&password={{name}}")
