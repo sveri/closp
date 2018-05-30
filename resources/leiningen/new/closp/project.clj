@@ -21,7 +21,7 @@
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
                  [day8.re-frame/tracing-stubs "0.5.1"] ;stubs so you dont have to switch out macro calls between dev and prod code
-                 [re-pressed "0.2.0"]
+                 [re-pressed "0.2.1"]
                  [com.degel/re-frame-storage-fx "0.1.0"]
 
                  [bidi "2.1.3"]
