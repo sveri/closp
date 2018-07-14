@@ -6,4 +6,4 @@
  :registration-allowed?   false
  :port                    3000
  :closp-definitions       "env/dev/entities"
- :jwt-secret              {{jwt-key}}}
+ :jwt-secret              "{{jwt-key}}"}

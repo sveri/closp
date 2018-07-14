@@ -43,8 +43,8 @@
     (resp/forbidden {:error "Forbidden"})))
 
 
-(def secret (:jwt-secret (s-c/prod-conf-or-dev)))
-(def jws-backend (backends/jws {:secret secret :unauthorized-handler err-handler}))
+(defn jws-backend [config]
+  (backends/jws {:secret (:jwt-secret config) :unauthorized-handler err-handler}))
 
 
 (defn get-handler [config locale {:keys [db]}]
@@ -52,8 +52,8 @@
     (-> (apply routes [(user-routes config db) (r-api/api-routes db)])
         (wrap-routes #(m-w/add-user % db))
         (wrap-routes wrap-access-rules {:rules s-auth/rest-rules :on-error err-handler})
-        (wrap-routes wrap-authorization jws-backend)
-        (wrap-routes wrap-authentication jws-backend)
+        (wrap-routes wrap-authorization (jws-backend config))
+        (wrap-routes wrap-authentication (jws-backend config))
         (wrap-routes wrap-restful-format :formats [:json-kw :transit-json]))
     (-> (app-handler
           [home-routes base-routes]

@@ -4,6 +4,7 @@
             [{{ns}}.components.components :refer [dev-system]]))
 
 (defn start-dev-system []
+  (sr/init)
   (sr/start))
 
 (defn reset []

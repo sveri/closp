@@ -1,9 +1,14 @@
 
 ## Changes
 
+### 0.4.0-RC4
+
+* Added rest test with clj-http dependency
+
 ### 0.4.0
 
 * Switched to using re-frame and delivering a SPA instead of server side generated templates
+
 
 ### 0.3.4
 

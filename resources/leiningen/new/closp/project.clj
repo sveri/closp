@@ -18,6 +18,8 @@
 
                  [com.cognitect/transit-cljs "0.8.256"]
 
+                 [clj-http "3.9.0"]
+
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
                  [day8.re-frame/tracing-stubs "0.5.1"] ;stubs so you dont have to switch out macro calls between dev and prod code

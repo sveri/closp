@@ -25,10 +25,6 @@
    :jdbc-url              db-uri
    :env                   :dev
    :registration-allowed? true
-   :captcha-enabled?      false
-   :captcha-public-key    "your public captcha key"
-   :private-recaptcha-key "your private captcha key"
-   :recaptcha-domain      "yourdomain"
    :port                  3002
    :jwt-secret            "asldkfjoiaujxcvioub8wewerlkjlskjdfnlkjiu23904u23"})
 
