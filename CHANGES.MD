@@ -1,6 +1,10 @@
 
 ## Changes
 
+### 0.4.0-RC5
+
+* Allowing CORS in development
+
 ### 0.4.0-RC4
 
 * Added rest test with clj-http dependency

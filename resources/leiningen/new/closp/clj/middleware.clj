@@ -2,6 +2,7 @@
   (:require [prone.middleware :as prone]
             [taoensso.tempura :refer [tr] :as tempura]
             [ring.middleware.reload :refer [wrap-reload]]
+            [ring.middleware.cors :refer [wrap-cors]]
             [{{ns}}.locale :as loc]
             [{{ns}}.db.user :as db-u]
             [{{ns}}.service.user :as s-u]))
@@ -30,6 +31,9 @@
 
 (def development-middleware
   [#(prone/wrap-exceptions % {:app-namespaces ['{{ns}}]})
+   #(wrap-cors %
+               :access-control-allow-origin [#".*"]
+               :access-control-allow-methods [:get :put :post :delete :options])
    wrap-reload])
 
 (defn production-middleware [config]

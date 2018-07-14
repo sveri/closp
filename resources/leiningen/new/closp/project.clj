@@ -20,6 +20,8 @@
 
                  [clj-http "3.9.0"]
 
+                 [ring-cors "0.1.12"]
+
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
                  [day8.re-frame/tracing-stubs "0.5.1"] ;stubs so you dont have to switch out macro calls between dev and prod code
