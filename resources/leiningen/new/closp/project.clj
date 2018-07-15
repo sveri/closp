@@ -7,14 +7,14 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
 
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.10.238"]
+                 [org.clojure/clojurescript "1.10.339"]
 
                  [ch.qos.logback/logback-classic "1.2.3"]
 
                  [ring "1.6.3"]
                  [metosin/ring-http-response "0.9.0"] ;dropin replacement for ring.util.response
                  [lib-noir "0.9.9"]
-                 [compojure "1.6.0"]
+                 [compojure "1.6.1"]
 
                  [com.cognitect/transit-cljs "0.8.256"]
 
@@ -22,11 +22,11 @@
 
                  [ring-cors "0.1.12"]
 
-                 [reagent "0.7.0"]
+                 [reagent "0.8.1"]
                  [re-frame "0.10.5"]
                  [day8.re-frame/tracing-stubs "0.5.1"] ;stubs so you dont have to switch out macro calls between dev and prod code
-                 [re-pressed "0.2.1"]
-                 [com.degel/re-frame-storage-fx "0.1.0"]
+                 [re-pressed "0.2.2"]
+                 [com.degel/re-frame-storage-fx "0.1.1"]
 
                  [bidi "2.1.3"]
                  [kibu/pushy "0.3.8"]
@@ -43,21 +43,21 @@
                  [org.clojure/tools.namespace "0.2.11"]
                  [org.danielsz/system "0.4.1"]
 
-                 [cljs-ajax "0.7.3"]
+                 [cljs-ajax "0.7.4"]
                  [ring-transit "0.1.6"]
 
                  [com.taoensso/tempura "1.2.1"]
 
-                 [com.rpl/specter "1.1.0"]
+                 [com.rpl/specter "1.1.1"]
 
                  [phrase "0.3-alpha3"] ; for spec validation
 
                  [funcool/cuerdas "2.0.5"]
 
-                 [org.clojure/tools.logging "0.4.0"]
+                 [org.clojure/tools.logging "0.4.1"]
 
-                 [org.postgresql/postgresql "42.2.2"]
-                 [org.clojure/java.jdbc "0.7.5"]
+                 [org.postgresql/postgresql "42.2.4"]
+                 [org.clojure/java.jdbc "0.7.7"]
                  [com.mchange/c3p0 "0.9.5.2"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
@@ -119,7 +119,7 @@
                                       [pjstadig/humane-test-output "0.8.3"]
 
                                       [binaryage/devtools "0.9.10"]
-                                      [day8.re-frame/re-frame-10x "0.3.2"]
+                                      [day8.re-frame/re-frame-10x "0.3.3"]
                                       [day8.re-frame/tracing "0.5.1"]]
 
                        :injections   [(require 'pjstadig.humane-test-output)

@@ -1,6 +1,22 @@
 
 ## Changes
 
+
+### 0.4.0-RC6
+
+* [org.clojure/clojurescript "1.10.339"] is available but we use "1.10.238" (use :check-clojure to upgrade)
+* [compojure "1.6.1"] is available but we use "1.6.0"
+* [reagent "0.8.1"] is available but we use "0.7.0"
+* [re-pressed "0.2.2"] is available but we use "0.2.0"
+* [com.degel/re-frame-storage-fx "0.1.1"] is available but we use "0.1.0"
+* [prone "1.6.0"] is available but we use "1.5.1"
+* [cljs-ajax "0.7.4"] is available but we use "0.7.3"
+* [com.rpl/specter "1.1.1"] is available but we use "1.1.0"
+* [org.clojure/tools.logging "0.4.1"] is available but we use "0.4.0"
+* [org.postgresql/postgresql "42.2.4"] is available but we use "42.2.2"
+* [org.clojure/java.jdbc "0.7.7"] is available but we use "0.7.5"
+* [day8.re-frame/re-frame-10x "0.3.3"] is available but we use "0.3.2"
+
 ### 0.4.0-RC5
 
 * Allowing CORS in development

@@ -4,3 +4,5 @@ the namespace `name.space`.
 
 Then open a repl and after startup enter: `(start-dev-system)` to startup the server.  
 The clojurescript is compiled by running `lein figwheel` in the projects command line.
+
+Open the application under: [http://localhost:3000](http://localhost:3000)
