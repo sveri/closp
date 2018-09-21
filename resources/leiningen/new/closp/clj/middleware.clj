@@ -30,6 +30,7 @@
   (fn [req] (handler (assoc req :config config))))
 
 (def development-middleware
+  (println "adding dev middleware")
   [#(prone/wrap-exceptions % {:app-namespaces ['{{ns}}]})
    #(wrap-cors %
                :access-control-allow-origin [#".*"]
@@ -43,3 +44,16 @@
 (defn load-middleware [config]
   (concat (production-middleware config)
           (when (= (:env config) :dev) development-middleware)))
+
+
+(defn api-development-middleware []
+  (println "adding api dev middleware")
+  [wrap-reload
+   #(wrap-cors %
+               :access-control-allow-origin [#".*"]
+               :access-control-allow-methods [:get :put :post :delete :options])])
+
+
+(defn load-api-middleware [config]
+  (concat (production-middleware config)
+          (when (= (:env config) :dev) (api-development-middleware))))

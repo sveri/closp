@@ -17,7 +17,7 @@
             [{{ns}}.routes.home :refer [home-routes]]
             [{{ns}}.routes.user :refer [user-routes]]
             [{{ns}}.routes.api :as r-api]
-            [{{ns}}.middleware :as m-w :refer [load-middleware]]
+            [{{ns}}.middleware :as m-w]
             [ring.util.http-response :as resp]))
 
 (defroutes base-routes
@@ -46,10 +46,13 @@
 (defn jws-backend [config]
   (backends/jws {:secret (:jwt-secret config) :unauthorized-handler err-handler}))
 
+(defn- wrap-middleware [routes [wrapper & more]]
+  (if wrapper (recur (wrapper routes) more) routes))
 
 (defn get-handler [config locale {:keys [db]}]
   (routes
     (-> (apply routes [(user-routes config db) (r-api/api-routes db)])
+        (wrap-middleware (m-w/load-api-middleware config))
         (wrap-routes #(m-w/add-user % db))
         (wrap-routes wrap-access-rules {:rules s-auth/rest-rules :on-error err-handler})
         (wrap-routes wrap-authorization (jws-backend config))
@@ -58,7 +61,7 @@
     (-> (app-handler
           [home-routes base-routes]
           ;; add custom middleware here
-          :middleware (load-middleware config)
+          :middleware (m-w/load-middleware config)
           :ring-defaults (mk-defaults false))
         ;; add access rules here
         ; Makes static assets in $PROJ

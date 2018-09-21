@@ -136,7 +136,7 @@
               :san-path  san-path
               :ns        ns
               :year      (year)
-              :jwt-key   (apply str (take 40 (repeatedly #(char (+ (rand 26) 65)))))}]
+              :jwt-key   (apply str (take 50 (repeatedly #(char (+ (rand 26) 65)))))}]
     ;; Handle help and error conditions
     (cond
       (< (lein-generation) 2)
