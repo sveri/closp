@@ -12,8 +12,8 @@
                    (web/run handler {:port port :host "0.0.0.0"}))]
       (assoc component :server server)))
   (stop [component]
-    (let [server (:server component)]
-      (when server (web/stop)))
+    (when-let [server (:server component)]
+      (web/stop server))
     component))
 
 (defn new-web-server []

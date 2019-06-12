@@ -42,7 +42,8 @@
     (apply (partial ->files data)
            (concat
              [[".gitignore" (*render* "gitignore")]
-              ["project.clj" (*render* "project.clj")]
+              ["deps.edn" (*render* "deps.edn")]
+              ["shadow-cljs.edn" (*render* "shadow-cljs.edn")]
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
               [(str "src/clj/{{san-path}}/locale.clj") (*render* "clj/locale.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
