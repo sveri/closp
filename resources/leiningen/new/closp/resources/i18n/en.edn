@@ -16,7 +16,8 @@
            :saved             "Changes Saved"
            :contact           "Contact"
            :tos               "Terms Of Service"
-           :cookies           "Cookies"}
+           :cookies           "Cookies"
+           :home              "Home"}
 
  :crudify {:created "Created %1"
            :deleted "Deleted %1"

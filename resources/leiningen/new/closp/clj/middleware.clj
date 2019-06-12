@@ -5,13 +5,27 @@
             [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [buddy.auth.accessrules :refer [wrap-access-rules]]
             [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
-            [noir.session :as sess]
-            [de.sveri.clojure.commons.middleware.util :refer [wrap-trimmings]]
             [ring.middleware.transit :refer [wrap-transit-response]]
             [ring.middleware.reload :refer [wrap-reload]]
+            [clojure.string :as s]
+            [clojure.walk :refer [prewalk]]
             [{{ns}}.locale :as loc]
             [{{ns}}.service.auth :refer [auth-backend]]
             [{{ns}}.service.auth :as auth]))
+
+
+(def trim-param-list [:params :form-params :edn-params])
+
+(defn- trim-params [req p-list]
+  (if (= :post (:request-method req))
+    (let [prewalk-trim #(if (string? %) (s/trim %) %)]
+      (reduce (fn [m k] (assoc m k (prewalk prewalk-trim (get-in req [k])))) req p-list))
+    req))
+
+(defn wrap-trimmings
+  "string/trim every parameter in :params or :form-params"
+  [handler]
+  (fn [req] (handler (trim-params req trim-param-list))))
 
 (defn add-locale [handler]
   (fn [req]

@@ -33,7 +33,10 @@
 
          org.clojure/tools.namespace         {:mvn/version "0.2.11"}
          com.cognitect/transit-clj           {:mvn/version "0.8.313"},
+
          org.clojure/java.jdbc               {:mvn/version "0.7.9"},
+         com.mchange/c3p0                    {:mvn/version "0.9.5.2"}
+
          kerodon                             {:mvn/version "0.9.0"},
          ring/ring-anti-forgery              {:mvn/version "1.3.0"},
          log4j                               {:mvn/version "1.2.17", :exclusions [javax.mail/mail javax.jms/jms com.sun.jdmk/jmxtools com.sun.jmx/jmxri]},

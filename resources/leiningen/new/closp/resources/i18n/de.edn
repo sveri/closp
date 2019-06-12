@@ -18,7 +18,8 @@
            :saved             "Änderungen gespeichert"
            :contact           "Kontakt"
            :tos               "Geschäftsbedingungen"
-           :cookies           "Cookies"}
+           :cookies           "Cookies"
+           :home              "Start"}
 
  :crudify {:created "%1 erstellt"
            :deleted "%1 gelöscht"
