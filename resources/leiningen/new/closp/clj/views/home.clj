@@ -3,7 +3,7 @@
 
 (defn home-page [{:keys [localize] :as req}]
   (v/render
-    "" (merge req {:css "/css/home.css"})
+    "Home" req
     [:div
      [:div {:class "jumbotron"}
       [:h1 "Foo!"]

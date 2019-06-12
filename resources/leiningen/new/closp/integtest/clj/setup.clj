@@ -19,9 +19,6 @@
 ; custom config for test configuration
 (def test-config
   {:hostname                "http://localhost/"
-   :mail-from               "info@localhost.de"
-   :mail-type               :test
-   :smtp-data               {}                                ; passed directly to postmap like {:host "postfix"}
    :jdbc-url                db-uri
    :env                     :dev
    :registration-allowed?   true

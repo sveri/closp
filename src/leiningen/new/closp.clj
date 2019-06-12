@@ -39,7 +39,7 @@
             *render* #((renderer "closp") % data)]
     (reset! features (-> feature-params))
 
-    (println "Generating new CLOSP project named: " (str name " with version: 0.3.4-RC6 ..."))
+    (println "Generating new CLOSP project named: " (str name " with version: 0.3.5-RC1 ..."))
 
     (apply (partial ->files data)
            (concat
@@ -96,10 +96,6 @@
               ["resources/closp.edn" (*render* "resources/closp.edn")]
               ["resources/logback.xml" (*render* "resources/logback.xml")]
 
-              ["migrators/h2/1-user.down.sql" (*render* "migrators/h2/1-user.down.sql")]
-              ["migrators/h2/1-user.up.sql" (*render* "migrators/h2/1-user.up.sql")]
-              ["migrators/sqlite/1-user.down.sql" (*render* "migrators/sqlite/1-user.down.sql")]
-              ["migrators/sqlite/1-user.up.sql" (*render* "migrators/sqlite/1-user.up.sql")]
               ["migrators/postgres/1-user.up.sql" (*render* "migrators/postgres/1-user.up.sql")]
               ["migrators/postgres/1-user.down.sql" (*render* "migrators/postgres/1-user.down.sql")]]))
 
@@ -110,11 +106,10 @@
 
            ["resources/public/css/bootstrap.min.css" "resources/public/css/bootstrap.min.css"]
            ["resources/public/css/screen.css" "resources/public/css/screen.css"]
-           ["resources/public/css/home.css" "resources/public/css/home.css"]
            ["resources/public/css/admin.css" "resources/public/css/admin.css"]
 
            ["resources/public/js/bootstrap.min.js" "resources/public/js/bootstrap.min.js"]
-           ["resources/public/js/jquery-3.2.1.slim.min.js" "resources/public/js/jquery-3.2.1.slim.min.js"]
+           ["resources/public/js/jquery.min.js" "resources/public/js/jquery.min.js"]
            ["resources/public/js/react-0.12.1.min.js" "resources/public/js/react-0.12.1.min.js"]
 
            ["resources/i18n/en.edn" "resources/i18n/en.edn"]

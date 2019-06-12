@@ -1,12 +1,15 @@
 
 ## Changes
 
-### 0.3.5
+### 0.3.5-RC1
 * simplify system
 * Use http-kit instead of immutant as custom error logging works there
 * User deps.edn instead of project.clj
 * Removed CRUD stuff
-
+* Removed sqlite / h2 migrators
+* Removed old email stuff
+* Updated bootstrap to 4.3.1
+* Updated jquery to 3.3.1
 
 ### 0.3.4
 
