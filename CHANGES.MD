@@ -1,6 +1,10 @@
 
 ## Changes
 
+### 0.3.5
+* simplify system
+* Use http-kit instead of immutant as custom error logging works there
+
 ### 0.3.4
 
 * Added CI
