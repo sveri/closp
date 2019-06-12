@@ -3,9 +3,9 @@
                {:example {:target     :browser
                           :output-dir "resources/public/js/example"
                           :asset-path "/js/example"
-                          :modules    {:example {:entries [{{ns}}.example.main]}}
+                          :modules    {:example {:entries [{{ns}}.core]}}
 
-                          :devtools   {:after-load {{ns}}.example.main/render}}}
+                          :devtools   {:after-load {{ns}}.core/mount-root}}}
 
  :dependencies [[reagent "0.8.1"]
                 [re-frame "0.10.6"]
@@ -14,4 +14,5 @@
                 [cljs-ajax "0.8.0"]
 
                 [com.cognitect/transit-cljs "0.8.256"]
-                [com.andrewmcveigh/cljs-time "0.5.2"]]}
+                [bidi "2.1.6"]
+                [kibu/pushy "0.3.8"]]}

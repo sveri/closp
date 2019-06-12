@@ -1,5 +1,6 @@
 (ns {{ns}}.core
   (:require [re-frame.core :as re-frame]
+            [reagent.core :as reagent]
             [{{ns}}.events :as events]
             [{{ns}}.config :as config]
             [{{ns}}.views :as views]

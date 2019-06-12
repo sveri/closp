@@ -52,5 +52,15 @@
  :aliases
         {:repl    {:main-opts ["-e" "((requiring-resolve '{{ns}}.user/startup))"]}
 
+         :cljs {:extra-deps
+                {reagent {:mvn/version "0.8.1"},
+                 re-frame {:mvn/version "0.10.6"},
+                 day8.re-frame/http-fx {:mvn/version "0.1.6"},
+                 cljs-ajax {:mvn/version "0.8.0"},
+                 com.cognitect/transit-cljs {:mvn/version "0.8.256"}
+
+                 bidi {:mvn/version "2.1.6"}
+                 kibu/pushy {:mvn/version "0.3.8"}}}
+
          :depstar    {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}}}}
 

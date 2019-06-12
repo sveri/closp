@@ -31,11 +31,10 @@ Password: admin
 * Booststrap 4.0 css styles
 * Example for HTML Frontend tests with etaoin
 * Internationalization support with tempura
-  
 
-## Docker
+## Shadow-Cljs
 
-There is a dockerfile attached which will fetch the latest version and run an example project.
+* npm install react
 
 ## Configuration
 

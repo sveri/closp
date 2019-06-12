@@ -41,7 +41,7 @@
 
 (defn reagent-example [req]
   (v/render
-    "" (merge req {:plain-js "<script src=\"/js/example/example.js\"></script><script type=\"text/javascript\">{{ns}}.example.main.run());</script>"})
+    "" (merge req {:plain-js "<script src=\"/js/example/example.js\"></script><script type=\"text/javascript\">{{ns}}.core.init();</script>"})
     [:div
      [:div#app]]))
 

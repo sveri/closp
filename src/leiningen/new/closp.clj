@@ -46,6 +46,9 @@
              [[".gitignore" (*render* "gitignore")]
               ["deps.edn" (*render* "deps.edn")]
               ["shadow-cljs.edn" (*render* "shadow-cljs.edn")]
+              ["package.json" (*render* "package.json")]
+
+
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
               [(str "src/clj/{{san-path}}/locale.clj") (*render* "clj/locale.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
