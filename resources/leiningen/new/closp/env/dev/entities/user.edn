@@ -1,9 +1,0 @@
-{:name    "user"
- :columns [{:name "id" :type :int :null false :pk true :autoinc true}
-           {:name "first_name" :type :varchar :max-length 30}
-           {:name "last_name" :type :varchar :max-length 30}
-           {:name "role" :type :varchar :max-length 30}
-           {:name "email" :type :varchar :max-length 30 :null false :unique true}
-           {:name "last_login" :type :time}
-           {:name "is_active" :type :boolean :null false :default false}
-           {:name "pass" :type :varchar :max-length 200}]}

@@ -4,6 +4,9 @@
 ### 0.3.5
 * simplify system
 * Use http-kit instead of immutant as custom error logging works there
+* User deps.edn instead of project.clj
+* Removed CRUD stuff
+
 
 ### 0.3.4
 

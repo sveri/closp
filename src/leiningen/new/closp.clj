@@ -60,20 +60,8 @@
               [(str "src/clj/{{san-path}}/components/server.clj") (*render* "clj/components/server.clj")]
 
               [(str "src/clj/{{san-path}}/db/user.clj") (*render* "clj/db/user.clj")]
-              [(str "src/clj/{{san-path}}/db/entities.clj") (*render* "clj/db/entities.clj")]
-
-              [(str "src/clj/{{san-path}}/crudify/create.clj") (*render* "clj/crudify/create.clj")]
-              [(str "src/clj/{{san-path}}/crudify/crudify.clj") (*render* "clj/crudify/crudify.clj")]
-              [(str "src/clj/{{san-path}}/crudify/delete.clj") (*render* "clj/crudify/delete.clj")]
-              [(str "src/clj/{{san-path}}/crudify/edit.clj") (*render* "clj/crudify/edit.clj")]
-              [(str "src/clj/{{san-path}}/crudify/forms.clj") (*render* "clj/crudify/forms.clj")]
-              [(str "src/clj/{{san-path}}/crudify/index.clj") (*render* "clj/crudify/index.clj")]
-              [(str "src/clj/{{san-path}}/crudify/util.clj") (*render* "clj/crudify/util.clj")]
-              [(str "src/clj/{{san-path}}/crudify/validation.clj") (*render* "clj/crudify/validation.clj")]
-
 
               [(str "src/clj/{{san-path}}/routes/home.clj") (*render* "clj/routes/home.clj")]
-              [(str "src/clj/{{san-path}}/routes/crud.clj") (*render* "clj/routes/crud.clj")]
               [(str "src/clj/{{san-path}}/routes/user.clj") (*render* "clj/routes/user.clj")]
 
               [(str "src/clj/{{san-path}}/views/base.clj") (*render* "clj/views/base.clj")]
@@ -99,7 +87,6 @@
               ["README.md" (*render* "README.md")]
 
               [(str "test/clj/{{san-path}}/db/user_test.clj") (*render* "test/clj/db/user_test.clj")]
-              [(str "test/clj/{{san-path}}/crudify/validation_test.clj") (*render* "test/clj/crudify/validation_test.clj")]
 
               [(str "integtest/clj/{{san-path}}/setup.clj") (*render* "integtest/clj/setup.clj")]
               [(str "integtest/clj/{{san-path}}/web/signup.clj") (*render* "integtest/clj/web/signup.clj")]
