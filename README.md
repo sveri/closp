@@ -1,22 +1,13 @@
-# closp 
+# closp
 
-**closp has been changed significantly in 0.3 and upwards.** 
-
-All the current documentation relates to the latest stable version 0.2.0.  
-You can use the old version by executing: lein new closp --template-version 0.2.0
+A template to provide a sane start to front and backend web development in clojure and clojurescript.
 
 [![CircleCI](https://circleci.com/gh/sveri/closp.svg?style=svg)](https://circleci.com/gh/sveri/closp)
 
-
 [CLOSP Slack Channel](https://clojurians.slack.com/messages/closp)
-
-A Leiningen template combining luminus, chestnut plus some goodies.
 
 ![Intro Gif](intro.gif?raw=true "Intro")
 
-These five steps are all it takes to get up and running.
-
-[Documentation with Tutorial](http://closp.net/) - please be aware that the documentation is for version 0.2.0
 
 
 ## Goals
@@ -25,22 +16,13 @@ These five steps are all it takes to get up and running.
 * Provide an opiniated predefined set of libraries
 * Easily start side projects
 
-## Differences to luminus
-
-* [System] (https://github.com/danielsz/system) integration from the start - wrapper on top of sierras components
-* User management with login/logout/registration and email activation (provided by postal)
-* Conditional Reader support
-* crud integration via entities definitions
-* Live reloading for both clojurescript and clojure out of the box.
-* Recaptcha for Signup
-
 ## Rationale
 
 Starting sideprojects in web development for fun I find myself repeating the same patterns over and over again.
 While luminus <http://www.luminusweb.net/> and chestnut <https://github.com/plexus/chestnut> provide a great start
 they miss some features for me that I do again and again (authentication / signup processes / ...).  
 So I pulled together the libraries I use to provide a general and opinionated starting point with at least trouble
-as possible (at least that's the goal).
+as possible.
 
 ## Usage
 
@@ -48,7 +30,9 @@ as possible (at least that's the goal).
 2. Open your postgresql instance and add a new user: _projectname_ with password: _projectname_ and create a database _projectname_.
 3. Add a users table to the new database. The script can be found in _migrators/postgres/1-user.up.sql'.
 4. CD to the newly generated folder _projectname_.
-5. Run `lein repl` and inside `(start-dev-system)` to start the server.
+5. Run `npm install`
+6. Run `shadow-cljs watch example` to start the compilation of clojurescript
+7. Open a new shell and run `clj -A:repl` to start the server.
 6. Run `lein figwheel` in a separate console to start figwheel and compile the clojurescript.
 
 ## Features

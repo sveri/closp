@@ -39,7 +39,7 @@
             *render* #((renderer "closp") % data)]
     (reset! features (-> feature-params))
 
-    (println "Generating new CLOSP project named: " (str name " with version: 0.3.5-RC1 ..."))
+    (println "Generating new CLOSP project named: " (str name " with version: 0.5.0-RC1 ..."))
 
     (apply (partial ->files data)
            (concat
@@ -52,7 +52,6 @@
               [(str "src/clj/{{san-path}}/core.clj") (*render* "clj/core.clj")]
               [(str "src/clj/{{san-path}}/locale.clj") (*render* "clj/locale.clj")]
               [(str "src/clj/{{san-path}}/middleware.clj") (*render* "clj/middleware.clj")]
-              [(str "src/clj/{{san-path}}/session.clj") (*render* "clj/session.clj")]
               [(str "src/clj/{{san-path}}/user.clj") (*render* "clj/user.clj")]
 
 

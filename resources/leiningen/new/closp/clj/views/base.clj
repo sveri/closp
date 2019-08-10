@@ -1,8 +1,8 @@
-(ns {{ns}} .views.base
+(ns {{ns}}.views.base
   (:require [ring.middleware.anti-forgery :as af]
-    [hiccup.page :refer [html5 include-css include-js]]
-    [clojure.string :as str]
-    [noir.session :as sess]))
+            [hiccup.page :refer [html5 include-css include-js]]
+            [clojure.string :as str]
+            [noir.session :as sess]))
 
 
 
@@ -56,8 +56,8 @@
    (if identity
      [:ul {:class "navbar-nav ml-auto"}
       [:li {:class (merge-active uri "user" "nav-item dropdown")}
-       [:a :class {"nav-link dropdown-toggle", :href "#", :id "user-dropdown-menu", :data-toggle "dropdown",
-                                               :aria-haspopup "true", :aria-expanded "false"} identity]
+       [:a {:class "nav-link dropdown-toggle", :href "#", :id "user-dropdown-menu", :data-toggle "dropdown",
+                                                :aria-haspopup "true", :aria-expanded "false"} identity]
        [:div {:class "dropdown-menu", :aria-labelledby "user-dropdown-menu"}
         [:a {:class "dropdown-item", :href "/user/changepassword"} (localize [:user/change_password])]
         [:a {:class "dropdown-item", :href "/user/logout"} (localize [:generic/logout])]]]]

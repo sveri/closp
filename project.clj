@@ -1,5 +1,5 @@
 ;(defproject closp/lein-template "0.3.5-RC1")
-(defproject closp/lein-template "0.3.5-RC1"
+(defproject closp/lein-template "0.5.0-RC1"
   :description "An opionated webframework for clojure and clojurescript."
   :url "https://github.com/sveri/closp"
   :license {:name "Eclipse Public License"

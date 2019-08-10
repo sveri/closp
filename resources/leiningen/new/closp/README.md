@@ -16,7 +16,7 @@ Password: admin
 
 ## Features
 * closp-crud integration
-* Postgresql database on filesystem as a default
+* Postgresql database support
 * Hiccup as templating solution
 * Immutant as a server
 * cljc support
