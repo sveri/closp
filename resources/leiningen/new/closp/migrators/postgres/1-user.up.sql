@@ -1,12 +1,12 @@
 CREATE TABLE users (
 id bigserial NOT NULL PRIMARY KEY,
-first_name character varying(30),
-last_name character varying(30),
-role character varying(30),
-email character varying(30) NOT NULL,
+first_name text,
+last_name text,
+role text,
+email text NOT NULL,
 last_login time,
 is_active BOOLEAN DEFAULT FALSE NOT NULL,
-pass character varying(200)
+pass text
 );
 
 ALTER TABLE users OWNER TO {{name}};

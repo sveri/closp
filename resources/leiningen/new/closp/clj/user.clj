@@ -7,7 +7,7 @@
   (set-init! #'dev-system)
   (start))
 
-(defn reset []
-  (sr/stop)
+(defn restart []
+  (stop)
   (refresh)
   (start))
