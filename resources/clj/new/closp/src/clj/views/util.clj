@@ -35,6 +35,7 @@
            [:li [:a.waves-effect.waves-light.btn {:href "/user/login"} (localize [:user/signin])]]
            [:li [:a.waves-effect.waves-light.btn {:href "/user/signup"} (localize [:user/register])]]])]]]
      [:ul#side-drawer.sidenav
+      [:li [:a {:href "/reagent-example"} "Reagent Example"]]
       [:li.divider]
       (when displayname
         [:span
