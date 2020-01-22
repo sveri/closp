@@ -1,0 +1,18 @@
+{:source-paths ["src/cljs"]
+ :builds
+               {:example {:target     :browser
+                          :output-dir "resources/public/js/example"
+                          :asset-path "/js/example"
+                          :modules    {:example {:entries [{{namespace}}.core]}}
+
+                          :devtools   {:after-load {{namespace}}.core/mount-root}}}
+
+ :dependencies [[reagent "0.8.1"]
+                [re-frame "0.10.6"]
+
+                [day8.re-frame/http-fx "0.1.6"]
+                [cljs-ajax "0.8.0"]
+
+                [com.cognitect/transit-cljs "0.8.256"]
+                [bidi "2.1.6"]
+                [kibu/pushy "0.3.8"]]}

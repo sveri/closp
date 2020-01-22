@@ -1,4 +1,4 @@
-# closp
+# {{name}}
 
 ## Usage
 
@@ -26,4 +26,5 @@ The development of closp is supported by Jetbrains and their awesome IDE
 
 Copyright © 2020 Sven Richter
 
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.

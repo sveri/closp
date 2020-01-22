@@ -1,4 +1,0 @@
-{:cljdoc.doc/tree [["Getting Started" {:file "doc/getting-started.md"}]
-                   ["Tutorials" {}
-                    ["Running REST tests" {:file "doc/RunningRESTTests.md"}]
-                    ["Configuring CORS" {:file "doc/ConfiguringCORS.md"}]]]}

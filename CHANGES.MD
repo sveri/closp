@@ -1,6 +1,11 @@
 
 ## Changes
 
+### 0.5.0-RC1
+
+Complete rework. Removed unnecessary libraries. Switched to clj new.  
+Support for server side rendered templates and SPAs at the same time.
+
 
 ### 0.4.0-RC6
 

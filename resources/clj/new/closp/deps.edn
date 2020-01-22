@@ -1,0 +1,53 @@
+{:paths ["src/clj" "src/cljc" "resources"]
+
+ :deps  {org.clojure/clojure             {:mvn/version "1.10.1"}
+         org.clojure/data.json           {:mvn/version "0.2.7"}
+         org.clojure/java.jdbc           {:mvn/version "0.7.9"}
+         org.clojure/tools.namespace     {:mvn/version "0.3.1"}
+         org.clojure/tools.logging       {:mvn/version "0.4.1"}
+         log4j                           {:mvn/version "1.2.17", :exclusions [javax.mail/mail javax.jms/jms com.sun.jdmk/jmxtools com.sun.jmx/jmxri]},
+
+         com.stuartsierra/component      {:mvn/version "0.4.0"}
+         org.danielsz/system             {:mvn/version "0.4.4"}
+
+         org.postgresql/postgresql       {:mvn/version "42.2.5"}
+         com.mchange/c3p0                {:mvn/version "0.9.5.2"}
+
+         http-kit                        {:mvn/version "2.4.0-alpha5"}
+         ring/ring-core                  {:mvn/version "1.8.0"}
+         javax.servlet/javax.servlet-api {:mvn/version "3.1.0"} ; needed for ring core
+         ring/ring-anti-forgery          {:mvn/version "1.3.0"}
+         ring/ring-defaults              {:mvn/version "0.3.2"}
+
+         compojure                       {:mvn/version "1.6.1"}
+         hiccup                          {:mvn/version "1.0.5"}
+         com.taoensso/tempura            {:mvn/version "1.2.1"}
+
+         buddy/buddy-hashers             {:mvn/version "1.3.0"}
+         buddy/buddy-auth                {:mvn/version "2.2.0"}
+
+         ring/ring-devel                 {:mvn/version "1.8.0"}}
+
+ :aliases
+        {:test    {:extra-paths ["test/clj"]
+                   :extra-deps  {etaoin              {:mvn/version "0.3.6"}
+                                 lambdaisland/kaocha {:mvn/version "0.0-573"}}
+                   :main-opts   ["-m" "kaocha.runner" "--watch"]}
+
+         :cljs    {:extra-paths ["src/cljs"]
+                   :extra-deps
+                                {org.clojure/clojurescript  {:mvn/version "1.10.597"}
+                                 reagent                    {:mvn/version "0.9.0-rc4"},
+                                 re-frame                   {:mvn/version "0.11.0-rc3"},
+                                 day8.re-frame/re-frame-10x {:mvn/version "0.4.5"},
+                                 cljs-ajax                  {:mvn/version "0.8.0"},
+                                 com.cognitect/transit-cljs {:mvn/version "0.8.256"}
+
+                                 com.rpl/specter            {:mvn/version "1.1.3"}
+
+                                 bidi                       {:mvn/version "2.1.6"}
+                                 kibu/pushy                 {:mvn/version "0.3.8"}
+                                 com.taoensso/sente         {:mvn/version "1.15.0"}}}
+
+         :depstar {:extra-deps {seancorfield/depstar {:mvn/version "RELEASE"}}}}}
+

@@ -1,9 +1,0 @@
-{:hostname                "http://localhost/"
- :jdbc-url                "jdbc:postgresql://localhost:5432/{{name}}?user={{name}}&password={{name}}"
- :jdbc-driver-class       "org.postgresql.Driver"
- :env                     :dev                              ; set this to :prod for production mode
- ; set this to true to enable self registration
- :registration-allowed?   false
- :port                    3000
- :closp-definitions       "env/dev/entities"
- :jwt-secret              "{{jwt-key}}"}

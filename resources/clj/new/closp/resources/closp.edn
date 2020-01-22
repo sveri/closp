@@ -1,0 +1,7 @@
+{:jdbc-url                "jdbc:postgresql://localhost:5432/{{name}}?user={{name}}&password={{name}}"
+ :jdbc-driver-class       "org.postgresql.Driver"
+ :env                     :dev                              ; set this to :prod for production mode
+ :captcha-enabled?        false
+ :captcha-public-key      "recaptcha 3 website"
+ :private-recaptcha-key   "recaptcha secret key"
+ :port                    3000}
