@@ -67,7 +67,6 @@ jobs:
             psql -h localhost -p 5432 -U postgres -c "grant all privileges on database ctest_test to ctest;"
 
       - run: clojure -A:jar
-      - run: ls
       - run: clojure -A:install
 
       - run: clojure -Sdeps '{:deps {seancorfield/clj-new {:mvn/version "0.8.5"}}}' -m clj-new.create closp de/sveri/ctest
