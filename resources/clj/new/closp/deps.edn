@@ -38,7 +38,7 @@
                              :extra-deps  {etaoin              {:mvn/version "0.3.6"}
                                            lambdaisland/kaocha {:mvn/version "0.0-573"}
                                            lambdaisland/kaocha-junit-xml {:mvn/version "0.0-70"}}
-                             :main-opts   ["-m" "kaocha.runner" "--watch" "--plugin kaocha.plugin/junit-xml"
+                             :main-opts   ["-m" "kaocha.runner" "--plugin kaocha.plugin/junit-xml"
                                            "--junit-xml-file results.xml"]}
 
          :cljs    {:extra-paths ["src/cljs"]
