@@ -14,8 +14,8 @@ jobs:
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/postgres:9.6
         environment:
-                - POSTGRES_USER: root
-                - POSTGRES_DB: closptest
+                - POSTGRES_USER: postgres
+                - POSTGRES_DB: ctest
 
     working_directory: ~/repo
 
@@ -61,10 +61,10 @@ jobs:
 
       - run:
           command: |
-            psql -h localhost -p 5432 -U root -c "create database ctest_test;"
-            psql -h localhost -p 5432 -U root -c "create user ctest with password 'ctest';"
-            psql -h localhost -p 5432 -U root -c "alter user ctest with superuser;"
-            psql -h localhost -p 5432 -U root -c "grant all privileges on database ctest_test to ctest;"
+            psql -h localhost -p 5432 -U postgres -c "create database ctest_test;"
+            psql -h localhost -p 5432 -U postgres -c "create user ctest with password 'ctest';"
+            psql -h localhost -p 5432 -U postgres -c "alter user ctest with superuser;"
+            psql -h localhost -p 5432 -U postgres -c "grant all privileges on database ctest_test to ctest;"
 
       - run: clojure -A:jar
       - run: clojure -A:install
