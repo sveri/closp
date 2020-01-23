@@ -61,10 +61,10 @@ jobs:
 
       - run:
           command: |
-            psql -h localhost -p 5432 -U postgres -c "create database closptest_test;"
-            psql -h localhost -p 5432 -U postgres -c "create user closptest with password 'closptest';"
-            psql -h localhost -p 5432 -U postgres -c "alter user closptest with superuser;"
-            psql -h localhost -p 5432 -U postgres -c "grant all privileges on database closptest_test to closptest;"
+            psql -h localhost -p 5432 -U root -c "create database ctest_test;"
+            psql -h localhost -p 5432 -U root -c "create user ctest with password 'ctest';"
+            psql -h localhost -p 5432 -U root -c "alter user ctest with superuser;"
+            psql -h localhost -p 5432 -U root -c "grant all privileges on database ctest_test to ctest;"
 
       - run: clojure -A:jar
       - run: clojure -A:install
