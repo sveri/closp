@@ -22,7 +22,7 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt-get update && sudo apt-get install postgresql-client libgtk-3-0
+      - run: sudo apt-get update && sudo apt-get install postgresql-client libgtk-3-0 libdbus-glib-1-2
 
       - run:
           name: Update firefox and install geckodriver
