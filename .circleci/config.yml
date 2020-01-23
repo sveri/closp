@@ -22,13 +22,11 @@ jobs:
     steps:
       - checkout
 
-      - run: ls .circleci
+      - run: sudo apt-get update && sudo apt-get install postgresql-client libgtk-3-0
 
       - run:
           name: Update firefox and install geckodriver
           command: sudo sh .circleci/firefox.sh
-
-      - run: sudo apt-get update && sudo apt-get install postgresql-client
 
       - run:
           name: install dockerize
