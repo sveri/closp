@@ -1,18 +1,20 @@
-{:paths ["src" "resources"]
- :deps {org.clojure/clojure {:mvn/version "1.10.1"}
-        seancorfield/clj-new {:mvn/version "0.8.5"}}
+{:paths   ["src" "resources"]
+ :deps    {org.clojure/clojure  {:mvn/version "1.10.1"}
+           seancorfield/clj-new {:mvn/version "0.8.5"}}
  :aliases
- {:test {:extra-paths ["test"]
-         :extra-deps {org.clojure/test.check {:mvn/version "0.10.0"}}}
-  :runner
-  {:extra-deps {com.cognitect/test-runner
-                {:git/url "https://github.com/cognitect-labs/test-runner"
-                 :sha "f7ef16dc3b8332b0d77bc0274578ad5270fbfedd"}}
-   :main-opts ["-m" "cognitect.test-runner"
-               "-d" "test"]}
-  :jar {:extra-deps {seancorfield/depstar {:mvn/version "0.5.2"}}
-        :main-opts ["-m" "hf.depstar.jar" "closp.jar"]}
-  :install {:extra-deps {deps-deploy {:mvn/version "0.0.9"}}
-            :main-opts ["-m" "deps-deploy.deps-deploy" "install" "closp.jar"]}
-  :deploy {:extra-deps {deps-deploy {:mvn/version "0.0.9"}}
-           :main-opts ["-m" "deps-deploy.deps-deploy" "deploy" "closp.jar"]}}}
+          {:test      {:extra-paths ["test"]
+                       :extra-deps  {org.clojure/test.check {:mvn/version "0.10.0"}}}
+           :runner
+                      {:extra-deps {com.cognitect/test-runner
+                                    {:git/url "https://github.com/cognitect-labs/test-runner"
+                                     :sha     "f7ef16dc3b8332b0d77bc0274578ad5270fbfedd"}}
+
+
+                       :main-opts ["-m" "cognitect.test-runner" "-d" "test"]}
+
+           :jar     {:extra-deps {seancorfield/depstar {:mvn/version "0.5.2"}}
+                     :main-opts  ["-m" "hf.depstar.jar" "closp.jar"]}
+           :install {:extra-deps {deps-deploy {:mvn/version "0.0.9"}}
+                     :main-opts  ["-m" "deps-deploy.deps-deploy" "install" "closp.jar"]}
+           :deploy  {:extra-deps {deps-deploy {:mvn/version "0.0.9"}}
+                     :main-opts  ["-m" "deps-deploy.deps-deploy" "deploy" "closp.jar"]}}}
