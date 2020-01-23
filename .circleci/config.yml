@@ -1,7 +1,3 @@
-# Clojure CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-clojure/ for more details
-#
 version: 2
 jobs:
   build:
@@ -25,6 +21,8 @@ jobs:
 
     steps:
       - checkout
+      - run: pwd
+      - run: ls
 
       - run: sudo apt-get update && sudo apt-get install postgresql-client
 
@@ -66,13 +64,13 @@ jobs:
             psql -h localhost -p 5432 -U postgres -c "alter user ctest with superuser;"
             psql -h localhost -p 5432 -U postgres -c "grant all privileges on database ctest_test to ctest;"
 
-      - run: clojure -A:jar
-      - run: clojure -A:install
+      - run: cd closp && clojure -A:jar
+      - run: cd closp && clojure -A:install
 
       - run: clojure -Sdeps '{:deps {seancorfield/clj-new {:mvn/version "0.8.5"}}}' -m clj-new.create closp de/sveri/ctest
 
       - run: |
           cd ctest
-          lein clojure -A:jar
+          clojure -A:jar
 
       - run: cd ctest && clojure -A:test
