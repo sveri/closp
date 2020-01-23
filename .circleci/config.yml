@@ -26,7 +26,7 @@ jobs:
 
       - run:
           name: Update firefox and install geckodriver
-          command: sudo .circleci/firefox.sh
+          command: sudo sh .circleci/firefox.sh
 
       - run: sudo apt-get update && sudo apt-get install postgresql-client
 
