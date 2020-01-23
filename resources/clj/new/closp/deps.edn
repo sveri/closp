@@ -34,6 +34,13 @@
                                  lambdaisland/kaocha {:mvn/version "0.0-573"}}
                    :main-opts   ["-m" "kaocha.runner" "--watch"]}
 
+         :test-junit-xml    {:extra-paths ["test/clj"]
+                             :extra-deps  {etaoin              {:mvn/version "0.3.6"}
+                                           lambdaisland/kaocha {:mvn/version "0.0-573"}
+                                           lambdaisland/kaocha-junit-xml {:mvn/version "0.0-70"}}
+                             :main-opts   ["-m" "kaocha.runner" "--plugin kaocha.plugin/junit-xml"
+                                           "--junit-xml-file results.xml"]}
+
          :cljs    {:extra-paths ["src/cljs"]
                    :extra-deps
                                 {org.clojure/clojurescript  {:mvn/version "1.10.597"}

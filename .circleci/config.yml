@@ -1,33 +1,32 @@
-# Clojure CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-clojure/ for more details
-#
 version: 2
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/clojure:lein-2.7.1-browsers
+      - image: circleci/clojure:tools-deps-1.10.1.478
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/postgres:9.6
         environment:
-                - POSTGRES_USER: root
-                - POSTGRES_DB: closptest
+                - POSTGRES_USER: postgres
+                - POSTGRES_DB: ctest
 
     working_directory: ~/repo
 
     environment:
-      LEIN_ROOT: "true"
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
 
     steps:
       - checkout
 
-      - run: sudo apt-get update && sudo apt-get install postgresql-client
+      - run: sudo apt-get update && sudo apt-get install postgresql-client libgtk-3-0 libdbus-glib-1-2
+
+      - run:
+          name: Update firefox and install geckodriver
+          command: sudo sh .circleci/firefox.sh
 
       - run:
           name: install dockerize
@@ -35,26 +34,26 @@ jobs:
           environment:
             DOCKERIZE_VERSION: v0.3.0
 
-      - run:
-          name: install geckodriver
-          command: |
-              wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
-              sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.19.1-linux64.tar.gz -O > /usr/bin/geckodriver'
-              sudo chmod +x /usr/bin/geckodriver
+      #- run:
+      #    name: install geckodriver
+      #    command: |
+      #        wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
+      #        sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.19.1-linux64.tar.gz -O > /usr/bin/geckodriver'
+      #        sudo chmod +x /usr/bin/geckodriver
 
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "project.clj" }}
+          - v1-dependencies-{{ checksum "deps.edn" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: lein deps
+      - run: clojure -Sforce -Stree
 
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "project.clj" }}
+          key: v1-dependencies-{{ checksum "deps.edn" }}
 
       - run:
           name: Wait for db
@@ -62,17 +61,19 @@ jobs:
 
       - run:
           command: |
-            psql -h localhost -p 5432 -U postgres -c "create database closptest_test;"
-            psql -h localhost -p 5432 -U postgres -c "create user closptest with password 'closptest';"
-            psql -h localhost -p 5432 -U postgres -c "alter user closptest with superuser;"
-            psql -h localhost -p 5432 -U postgres -c "grant all privileges on database closptest_test to closptest;"
+            psql -h localhost -p 5432 -U postgres -c "create database ctest_test;"
+            psql -h localhost -p 5432 -U postgres -c "create user ctest with password 'ctest';"
+            psql -h localhost -p 5432 -U postgres -c "alter user ctest with superuser;"
+            psql -h localhost -p 5432 -U postgres -c "grant all privileges on database ctest_test to ctest;"
 
-      - run: lein install
+      - run: clojure -A:jar
+      - run: clojure -A:install
 
-      - run: lein new closp closptest -n de.sveri.closptest
+      - run: clojure -Sdeps '{:deps {seancorfield/clj-new {:mvn/version "0.8.5"}}}' -m clj-new.create closp de/sveri/ctest
 
-      - run: |
-          cd closptest
-          lein uberjar
+      - run: cd ctest &&  clojure -A:jar
 
-      - run: cd closptest && lein test :unit
+      - run: cd ctest && clojure -A:test-junit-xml
+
+      - store_test_results:
+          path: ctest/

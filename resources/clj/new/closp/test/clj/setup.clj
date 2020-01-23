@@ -70,4 +70,4 @@
 (def t (partial tr
                 {:default-locale :en
                  :dict           l/local-dict}
-                ["de"]))
+                ["en"]))
