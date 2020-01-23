@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/clojure:lein-2.7.1-browsers
+      - image: circleci/clojure:tools-deps-1.10.1.478
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -20,7 +20,6 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      LEIN_ROOT: "true"
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx3200m
 
@@ -45,16 +44,16 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "project.clj" }}
+          - v1-dependencies-{{ checksum "deps.edn" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: lein deps
+      - run: clj -Sforce -Stree
 
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "project.clj" }}
+          key: v1-dependencies-{{ checksum "deps.edn" }}
 
       - run:
           name: Wait for db
@@ -67,12 +66,13 @@ jobs:
             psql -h localhost -p 5432 -U postgres -c "alter user closptest with superuser;"
             psql -h localhost -p 5432 -U postgres -c "grant all privileges on database closptest_test to closptest;"
 
-      - run: lein install
+      - run: clj -A:jar
+      - run: clj -A:install
 
-      - run: lein new closp closptest -n de.sveri.closptest
+      - run: clj -Sdeps '{:deps {seancorfield/clj-new {:mvn/version "0.8.5"}}}' -m clj-new.create closp de/sveri/ctest
 
       - run: |
-          cd closptest
-          lein uberjar
+          cd ctest
+          lein clj -A:jar
 
-      - run: cd closptest && lein test :unit
+      - run: cd ctest && clj -A:test
