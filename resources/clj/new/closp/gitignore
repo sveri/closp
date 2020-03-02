@@ -17,3 +17,7 @@ profiles.clj
 Procfile
 /db
 *.log
+.cpcache
+node_modules
+.shadow-cljs
+cljs-runtime
