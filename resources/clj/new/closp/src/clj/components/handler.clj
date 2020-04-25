@@ -34,25 +34,20 @@
                                               :dict           locale-dict}
                                              short-languages))))))
 
-(defn wrap-base [handler dev?]
-  (let [handler' (-> handler
-                     (wrap-access-rules {:rules auth/rules})
-                     (wrap-authorization auth/auth-backend)
-                     add-locale
-                     (wrap-defaults site-defaults))]
-    (if dev?
-      (-> handler'
-          wrap-reload)
-      handler')))
+
+(defn wrap-base [route dev?]
+  (let [handler (-> (route)
+                    (wrap-access-rules {:rules auth/rules})
+                    (wrap-authorization auth/auth-backend)
+                    add-locale
+                    (wrap-defaults site-defaults))]
+    (if dev? (wrap-reload handler) handler)))
 
 (defn get-handler [config {:keys [db]}]
   (let [dev? (= (:env config "") :dev)]
-    (wrap-base
-      (routes
-        (if dev? (#'home-routes) (home-routes))
-        (if dev? (#'user-routes config db) (user-routes config db))
-        base-routes)
-      dev?))
+    (routes
+      (wrap-base home-routes dev?)
+      (wrap-base (partial user-routes config db) dev?)))
 
 
   #_(routes (-> (#'home-routes)
