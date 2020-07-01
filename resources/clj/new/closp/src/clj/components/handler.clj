@@ -34,9 +34,16 @@
                                               :dict           locale-dict}
                                              short-languages))))))
 
+;(defn wrap-api [route db dev?]
+;  (let [handler (-> route
+;                    (wrap-json-response)
+;                    add-locale
+;                    (wrap-custom-authorization db)
+;                    (wrap-json-body {:keywords? true :bigdecimals? true}))]
+;    (if dev? (wrap-reload handler) handler)))
 
 (defn wrap-base [route dev?]
-  (let [handler (-> (route)
+  (let [handler (-> route
                     (wrap-access-rules {:rules auth/rules})
                     (wrap-authorization auth/auth-backend)
                     add-locale
@@ -46,8 +53,11 @@
 (defn get-handler [config {:keys [db]}]
   (let [dev? (= (:env config "") :dev)]
     (routes
-      (wrap-base home-routes dev?)
-      (wrap-base (partial user-routes config db) dev?)))
+      ;(wrap-api (api-routes db) db dev?)
+      (wrap-base
+        (routes (home-routes) (user-routes config db))
+        dev?)))
+
 
 
   #_(routes (-> (#'home-routes)
