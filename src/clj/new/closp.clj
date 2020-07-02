@@ -73,7 +73,7 @@
              ["src/clj/{{nested-dirs}}/views/user.clj" (render "src/clj/views/user.clj" data)]
              ["src/clj/{{nested-dirs}}/views/util.clj" (render "src/clj/views/util.clj" data)]
 
-             ;clj sources
+             ;cljs sources
              ["src/cljs/{{nested-dirs}}/config.cljs" (render "src/cljs/config.cljs" data)]
              ["src/cljs/{{nested-dirs}}/core.cljs" (render "src/cljs/core.cljs" data)]
              ["src/cljs/{{nested-dirs}}/db.cljs" (render "src/cljs/db.cljs" data)]
@@ -83,11 +83,13 @@
              ["src/cljs/{{nested-dirs}}/views.cljs" (render "src/cljs/views.cljs" data)]
 
              ; test sources
-             ["test/clj/{{nested-dirs}}/frontend/setup.clj" (render "test/clj/setup.clj" data)]
+             ["test/clj/{{nested-dirs}}/rest_setup.clj" (render "test/clj/rest_setup.clj" data)]
 
-             ["test/clj/{{nested-dirs}}/frontend/user/admin_test.clj" (render "test/clj/user/admin_test.clj" data)]
-             ["test/clj/{{nested-dirs}}/frontend/user/signup_test.clj" (render "test/clj/user/signup_test.clj" data)]
-             ["test/clj/{{nested-dirs}}/frontend/user/user_test.clj" (render "test/clj/user/user_test.clj" data)])))
+             ["cypress/integration/default_admin_workflow.js" (render "cypress/integration/default_admin_workflow.js" data)]
+             ["cypress/integration/default_user_registration_login_workflow.js" (render "cypress/integration/default_user_registration_login_workflow.js" data)]
+
+             ["test/resources/pg_reset.js" (render "test/resources/pg_reset.js" data)])))
+
 
 
 

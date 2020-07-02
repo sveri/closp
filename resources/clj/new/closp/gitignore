@@ -22,3 +22,6 @@ node_modules
 .shadow-cljs
 cljs-runtime
 /.cpcache/
+/reports/rest/
+/cypress/videos/
+/cypress/screenshots/

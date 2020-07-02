@@ -25,29 +25,30 @@
    :en {:__load-resource "i18n/en.edn"}})
 
 
-(defn add-locale [handler]
+(defn add-locale [handler dev?]
   (fn [req]
     (let [accept-language (get-in req [:headers "accept-language"])
-          short-languages (or (tr/parse-http-accept-header accept-language) ["en"])]
+          short-languages (if dev? ["en"] (or (tr/parse-http-accept-header accept-language) ["en"]))]
       (handler (assoc req :localize (partial tr/tr
                                              {:default-locale :en
                                               :dict           locale-dict}
                                              short-languages))))))
 
+; use different middleware for rest api
 ;(defn wrap-api [route db dev?]
 ;  (let [handler (-> route
 ;                    (wrap-json-response)
-;                    add-locale
+;                    (add-locale dev?)
 ;                    (wrap-custom-authorization db)
 ;                    (wrap-json-body {:keywords? true :bigdecimals? true}))]
 ;    (if dev? (wrap-reload handler) handler)))
 
 (defn wrap-base [route dev?]
   (let [handler (-> route
+                    (wrap-defaults site-defaults)
+                    (add-locale dev?)
                     (wrap-access-rules {:rules auth/rules})
-                    (wrap-authorization auth/auth-backend)
-                    add-locale
-                    (wrap-defaults site-defaults))]
+                    (wrap-authorization auth/auth-backend))]
     (if dev? (wrap-reload handler) handler)))
 
 (defn get-handler [config {:keys [db]}]

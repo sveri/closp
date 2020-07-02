@@ -30,7 +30,7 @@
   (assoc (resp/redirect "/") :session nil))
 
 (defn update-session-and-redirect [user nexturl]
-  (-> (resp/redirect-after-post (or nexturl "/"))
+  (-> (resp/redirect (or nexturl "/") :see-other)
       (assoc-in [:session :user :displayname] (:displayname user))
       (assoc-in [:session :user :email] (:email user))
       (assoc-in [:session :user :role] (:role user))
@@ -70,7 +70,7 @@
         validation-errors (validate-change-password user oldpassword password confirm localize)]
     (if (empty? validation-errors)
       (do (db/change-password db (:email user) (hashers/encrypt password))
-          (-> (resp/redirect-after-post "/user/changepassword")
+          (-> (resp/redirect "/user/changepassword" :see-other)
               (assoc :flash {:toast {:text (localize [:user/pass_changed]) :classes "green lighten1"}})))
       (vh/changepassword-page validation-errors req))))
 
@@ -79,16 +79,16 @@
 
 (defn really-delete [user-email delete_cancel {:keys [localize] :as req} db]
   (if (= delete_cancel (localize [:generic/cancel]))
-    (resp/redirect-after-post "/admin/users")
+    (resp/redirect "/admin/users" :see-other)
     (do (db/delete-user db user-email)
-        (-> (resp/redirect-after-post "/admin/users")
+        (-> (resp/redirect "/admin/users" :see-other)
             (assoc :flash {:toast {:text (localize [:user/deleted] [user-email]) :classes "green lighten1"}})))))
 
 (defn update-user [update_delete user-email role active {:keys [localize] :as req} db]
   (if (= update_delete (localize [:admin/update]))
     (let [act (= "on" active)]
       (db/update-user db user-email {:role role :is_active act})
-      (-> (resp/redirect-after-post "/admin/users")
+      (-> (resp/redirect "/admin/users" :see-other)
           (assoc :flash {:toast {:text (localize [:user/updated] [user-email]) :classes "green lighten1"}})))
     (really-delete-page user-email req)))
 
@@ -121,7 +121,7 @@
   (let [validation-errors (validate-signup email password localize db)]
     (if (empty? validation-errors)
       (do (create-new-user! email password displayname db)
-          (-> (resp/redirect-after-post "/admin/users")
+          (-> (resp/redirect "/admin/users" :see-other)
               (assoc :flash {:toast {:text (localize [:user/user_added]) :classes "green lighten1"}})))
       (admin-page (merge validation-errors {:email email :displayname displayname}) req db))))
 

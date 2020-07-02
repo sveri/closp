@@ -10,7 +10,7 @@
 
 (def rules [{:pattern #"^/admin.*"
              :handler admin-access}
-            {:pattern #"^/user/changepassword"
+            {:pattern #"^/user/changepassword.*"
              :handler loggedin-access}
             {:pattern #"^/user.*"
              :handler unauthorized-access}

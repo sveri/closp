@@ -13,7 +13,7 @@
      [:div.col.s12.m8.l4.yield
       [:h3.header (localize [:user/signin])]
 
-      [:form {:action "/user/login", :method "POST"}
+      [:form#login-form {:action "/user/login", :method "POST"}
        (vu/af-token)
        (when nexturl [:input {:name "nexturl", :type "hidden", :value nexturl}])
        (when error [:blockquote#error error])
@@ -92,7 +92,7 @@
      [:div.row
       [:div.col.m2.l4.blank]
       [:div.col.s12.m8.l4.yield
-       [:form {:action "/user/changepassword", :method "POST"}
+       [:form#changepassword-form {:action "/user/changepassword", :method "POST"}
         (vu/af-token)
         [:h3 (localize [:user/change_password])]
 
@@ -146,7 +146,7 @@
     (localize [:admin/title])
     [:div.section
      [:h5 (localize [:admin/add_user])]
-     [:form {:action "/admin/user/add", :method "POST"}
+     [:form#admin-add-user-form {:action "/admin/user/add", :method "POST"}
       (vu/af-token)
       (when email-exists [:blockquote#error email-exists])
       (when password-error [:blockquote#error password-error])
@@ -193,7 +193,7 @@
 
      [:div.section
       [:h5 (localize [:user/users])]
-      [:table.responsive-table
+      [:table#admin-users-table.responsive-table
        [:thead
         [:tr
          [:th (localize [:generic/email])]
@@ -217,7 +217,8 @@
                   [:span.for-active-checkbox ""]]]
             [:td
              [:button.btn.waves-effect.waves-light {:name "update_delete" :value (localize [:admin/update])
-                                                    :type "submit"} (localize [:admin/update])]]
+                                                    :type "submit" :data-test "update-button"}
+              (localize [:admin/update])]]
             [:td
              [:button.btn.waves-effect.waves-light.red.lighten-3
               {:name "update_delete" :value (localize [:generic/delete])

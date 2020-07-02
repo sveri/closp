@@ -1,8 +1,18 @@
 {
+  "scripts": {
+    "cyp:open": "cypress open",
+    "e2e": "cypress run --reporter junit",
+    "bvt_e2e": "cypress run --reporter junit --reporter-options \"mochaFile=$MOCHA_FILE\" ",
+    "db:reset": "node test/resources/pg_reset.js"
+  },
   "dependencies": {
     "create-react-class": "^15.6.3",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "xregexp": "^4.2.4"
+  },
+  "devDependencies": {
+    "cypress": "^4.5.0",
+    "pg": "^8.2.1"
   }
 }

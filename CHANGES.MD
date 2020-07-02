@@ -1,6 +1,11 @@
 
 ## Changes
 
+### 0.5.0-RC3
+
+* Switch from selenium to using cypress as test framework for UI tests
+* Fixed some handler stuff
+
 ### 0.5.0-RC2
 
 Complete rework. Removed unnecessary libraries. Switched to clj new.  

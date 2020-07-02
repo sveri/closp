@@ -14,6 +14,11 @@
 2. Run `shadow-cljs watch example` to start the cljs compiler.
 3. Navigate to http://localhost:3000/reagent-example.
 
+### Frontend tests with cypress
+Run `npm run cyp:open` to open the cypress view  
+Or run `npm run e2e` to execute the tests on command line 
+
+
 ## Supported by
 
 The development of closp is supported by Jetbrains and their awesome IDE

@@ -2,16 +2,26 @@ version: 2
 jobs:
   build:
     docker:
+      - image: sveri/clj-tools-deps101-npm14-shadow-cljs:latest
+          environment:
+            DATABASE_URL: "jdbc:postgresql://localhost:5432/ctest_test?user=ctest&password=ctest"
+            MOCHA_FILE: "reports/cypress/test-report-junit.xml"
+
+      - image: circleci/postgres:latest
+          environment:
+              - POSTGRES_DB: ctest_test
+                - POSTGRES_USER: ctest
+                - POSTGRES_PASSWORD: ctest
       # specify the version you desire here
-      - image: circleci/clojure:tools-deps-1.10.1.478
+#      - image: circleci/clojure:tools-deps-1.10.1.478
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
-      - image: circleci/postgres:9.6
-        environment:
-                - POSTGRES_USER: postgres
-                - POSTGRES_DB: ctest
+#      - image: circleci/postgres:9.6
+#        environment:
+#                - POSTGRES_USER: postgres
+#                - POSTGRES_DB: ctest
 
     working_directory: ~/repo
 
@@ -22,17 +32,17 @@ jobs:
     steps:
       - checkout
 
-      - run: sudo apt-get update && sudo apt-get install postgresql-client libgtk-3-0 libdbus-glib-1-2
-
-      - run:
-          name: Update firefox and install geckodriver
-          command: sudo sh .circleci/firefox.sh
-
-      - run:
-          name: install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.3.0
+#      - run: sudo apt-get update && sudo apt-get install postgresql-client libgtk-3-0 libdbus-glib-1-2
+#
+#      - run:
+#          name: Update firefox and install geckodriver
+#          command: sudo sh .circleci/firefox.sh
+#
+#      - run:
+#          name: install dockerize
+#          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+#          environment:
+#            DOCKERIZE_VERSION: v0.3.0
 
       #- run:
       #    name: install geckodriver
@@ -42,29 +52,38 @@ jobs:
       #        sudo chmod +x /usr/bin/geckodriver
 
       # Download and cache dependencies
+#      - restore_cache:
+#          keys:
+#          - v1-dependencies-{{ checksum "deps.edn" }}
+#          # fallback to using the latest cache if no exact match is found
+#          - v1-dependencies-
+#
+#      - run: clojure -Sforce -Stree
+#
+#      - save_cache:
+#          paths:
+#            - ~/.m2
+#          key: v1-dependencies-{{ checksum "deps.edn" }}
+#
+#      - run:
+#          name: Wait for db
+#          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+#
+#      - run:
+#          command: |
+#            psql -h localhost -p 5432 -U postgres -c "create database ctest_test;"
+#            psql -h localhost -p 5432 -U postgres -c "create user ctest with password 'ctest';"
+#            psql -h localhost -p 5432 -U postgres -c "alter user ctest with superuser;"
+#            psql -h localhost -p 5432 -U postgres -c "grant all privileges on database ctest_test to ctest;"
       - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "deps.edn" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
+          key: clj_shadow-cljs-deps-cache1-{{ checksum "deps.edn" }}
       - run: clojure -Sforce -Stree
-
+      - run: shadow-cljs --cli-info
+      - run: clojure -Sdeps '{:deps {seancorfield/depstar {:mvn/version "1.0.94"} lambdaisland/kaocha-junit-xml {:mvn/version "0.0-70"}}}' -e nil
       - save_cache:
+          key: clj_shadow-cljs-deps-cache1-{{ checksum "deps.edn" }}
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "deps.edn" }}
-
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          command: |
-            psql -h localhost -p 5432 -U postgres -c "create database ctest_test;"
-            psql -h localhost -p 5432 -U postgres -c "create user ctest with password 'ctest';"
-            psql -h localhost -p 5432 -U postgres -c "alter user ctest with superuser;"
-            psql -h localhost -p 5432 -U postgres -c "grant all privileges on database ctest_test to ctest;"
 
       - run: clojure -A:jar
       - run: clojure -A:install
@@ -73,7 +92,17 @@ jobs:
 
       - run: cd ctest &&  clojure -A:jar
 
-      - run: cd ctest && clojure -A:test-junit-xml
+#      - run: cd ctest && clojure -A:test-junit-xml
+      - run:
+          name: start cypress tests
+          command: |
+            cd ctest
+            npm run bvt_e2e
+
+      - store_artifacts:
+          path: ctest/cypress/videos
+      - store_artifacts:
+          path: ctest/cypress/screenshots
 
       - store_test_results:
-          path: ctest/
+          path: ctest/reports
