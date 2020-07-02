@@ -6,12 +6,12 @@ jobs:
     docker:
       - image: sveri/clj-tools-deps101-npm14-shadow-cljs:latest
         environment:
-          DATABASE_URL: "jdbc:postgresql://localhost:5432/ctest_test?user=ctest&password=ctest"
+          DATABASE_URL: "jdbc:postgresql://localhost:5432/ctest?user=ctest&password=ctest"
           MOCHA_FILE: "reports/cypress/test-report-junit.xml"
 
       - image: circleci/postgres:latest
         environment:
-          - POSTGRES_DB: ctest_test
+          - POSTGRES_DB: ctest
           - POSTGRES_USER: ctest
           - POSTGRES_PASSWORD: ctest
       # specify the version you desire here
