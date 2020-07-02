@@ -79,7 +79,7 @@ jobs:
           key: clj_shadow-cljs-deps-cache1-{{ checksum "deps.edn" }}
       - run: clojure -Sforce -Stree
       - run: shadow-cljs --cli-info
-      - run: clojure -Sdeps '{:deps {seancorfield/depstar {:mvn/version "1.0.94"} lambdaisland/kaocha-junit-xml {:mvn/version "0.0-70"}}}' -e nil
+      - run: clojure -Sdeps '{:deps {seancorfield/depstar {:mvn/version "1.0.94"} lambdaisland/kaocha-junit-xml {:mvn/version "0.0-70"} seancorfield/clj-new {:mvn/version "0.8.5"}}} ' -e nil
       - save_cache:
           key: clj_shadow-cljs-deps-cache1-{{ checksum "deps.edn" }}
           paths:
@@ -93,6 +93,17 @@ jobs:
       - run: cd ctest &&  clojure -A:jar
 
 #      - run: cd ctest && clojure -A:test-junit-xml
+      - restore_cache:
+        key: npm-cypress-cache-{{ checksum "package.json" }}
+      - run:
+          name: Install npm dependencies
+          command: cd ctest && npm install
+      - save_cache:
+          key: npm-cypress-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+            - /root/.cache/Cypress
+
       - run:
           name: start cypress tests
           command: |
