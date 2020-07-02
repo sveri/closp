@@ -94,14 +94,14 @@ jobs:
 
 #      - run: cd ctest && clojure -A:test-junit-xml
       - restore_cache:
-        key: npm-cypress-cache-{{ checksum "package.json" }}
+          key: npm-cypress-cache-{{ checksum "ctest/package.json" }}
       - run:
           name: Install npm dependencies
           command: cd ctest && npm install
       - save_cache:
-          key: npm-cypress-cache-{{ checksum "package.json" }}
+          key: npm-cypress-cache-{{ checksum "ctest/package.json" }}
           paths:
-            - node_modules
+            - ctest/node_modules
             - /root/.cache/Cypress
 
       - run:
