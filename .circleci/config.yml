@@ -104,6 +104,17 @@ jobs:
             - ctest/node_modules
             - /root/.cache/Cypress
 
+      - run: cd ctest && shadow-cljs release main
+      - run: cd ctest && clojure -A:depstar -m hf.depstar.uberjar ctest.jar
+      - run:
+           name: start server
+           command: cd ctest && java -cp ctest.jar clojure.main -m de.sveri.ctest.core
+           background: true
+
+      - run:
+           name: wait for server startup
+           command: curl -4 --retry-delay 2 --retry 100 --max-time 200  --retry-connrefused  http://localhost:3000/
+
       - run:
           name: start cypress tests
           command: |
