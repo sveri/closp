@@ -30,6 +30,7 @@
              ["package.json" (render "package.json" data)]
              ["README.md" (render "README.md" data)]
              ["shadow-cljs.edn" (render "shadow-cljs.edn" data)]
+             ["cypress.json" (render "cypress.json" data)]
 
              ;migrators
              ["migrators/postgres/1-user.down.sql" (render "migrators/postgres/1-user.down.sql" data)]
