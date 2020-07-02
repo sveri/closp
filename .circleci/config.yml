@@ -1,17 +1,19 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/repo
+
     docker:
       - image: sveri/clj-tools-deps101-npm14-shadow-cljs:latest
-          environment:
-            DATABASE_URL: "jdbc:postgresql://localhost:5432/ctest_test?user=ctest&password=ctest"
-            MOCHA_FILE: "reports/cypress/test-report-junit.xml"
+        environment:
+          DATABASE_URL: "jdbc:postgresql://localhost:5432/ctest_test?user=ctest&password=ctest"
+          MOCHA_FILE: "reports/cypress/test-report-junit.xml"
 
       - image: circleci/postgres:latest
-          environment:
-              - POSTGRES_DB: ctest_test
-                - POSTGRES_USER: ctest
-                - POSTGRES_PASSWORD: ctest
+        environment:
+          - POSTGRES_DB: ctest_test
+          - POSTGRES_USER: ctest
+          - POSTGRES_PASSWORD: ctest
       # specify the version you desire here
 #      - image: circleci/clojure:tools-deps-1.10.1.478
 
@@ -22,8 +24,6 @@ jobs:
 #        environment:
 #                - POSTGRES_USER: postgres
 #                - POSTGRES_DB: ctest
-
-    working_directory: ~/repo
 
     environment:
       # Customize the JVM maximum heap limit
