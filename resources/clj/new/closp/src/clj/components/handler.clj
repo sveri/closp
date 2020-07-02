@@ -45,10 +45,10 @@
 
 (defn wrap-base [route dev?]
   (let [handler (-> route
-                    (wrap-defaults site-defaults)
                     (add-locale dev?)
                     (wrap-access-rules {:rules auth/rules})
-                    (wrap-authorization auth/auth-backend))]
+                    (wrap-authorization auth/auth-backend)
+                    (wrap-defaults site-defaults))]
     (if dev? (wrap-reload handler) handler)))
 
 (defn get-handler [config {:keys [db]}]
@@ -57,44 +57,7 @@
       ;(wrap-api (api-routes db) db dev?)
       (wrap-base
         (routes (home-routes) (user-routes config db))
-        dev?)))
-
-
-
-  #_(routes (-> (#'home-routes)
-                (wrap-routes wrap-reload)                   ;TODO only when dev env
-                (wrap-defaults site-defaults)
-                (wrap-routes add-locale))
-            base-routes))
-;(routes (-> (#'home-routes)
-;            (wrap-routes wrap-reload) ;TODO only when dev env
-;            (wrap-defaults site-defaults)
-;            (wrap-routes add-locale))
-;        base-routes))
-
-;(routes
-;(-> (ws-routes websockets)
-;    (wrap-routes wrap-params)
-;    (wrap-routes wrap-keyword-params))
-;(wrap-routes wrap-anti-forgery))
-;(-> (app-handler
-;      []
-;      ;(into [] (concat (when (:registration-allowed? config) [(registration-routes config db)])
-;      ;                 ;; add your application routes here
-;      ;                 [home-routes (user-routes config db) base-routes]))
-;      ;; add custom middleware here
-;      ;:middleware (load-middleware config)
-;      ;:ring-defaults (mk-defaults false)
-;      ;; add access rules here
-;      :access-rules []
-;      ;; serialize/deserialize the following data formats
-;      ;; available formats:
-;      ;; :json :json-kw :yaml :yaml-kw :edn :yaml-in-html
-;      :formats [:json-kw :edn :transit-json])
-;    ; Makes static assets in $PROJECT_DIR/resources/public/ available.
-;    (wrap-file "resources")
-;    ; Content-Type, Content-Length, and Last Modified headers for files in body
-;    (wrap-file-info)))
+        dev?))))
 
 (defrecord Handler [config db]
   comp/Lifecycle

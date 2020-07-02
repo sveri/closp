@@ -46,7 +46,7 @@
       [:div.col.m2.l4.blank]
 
       [:div.col.s12.m8.l4.yield
-       [:form {:action "/user/signup", :method "POST"}
+       [:form#signup-form {:action "/user/signup", :method "POST"}
         (vu/af-token)
         [:h3.header (localize [:user/register])]
 

@@ -89,10 +89,7 @@ jobs:
       - run: clojure -A:install
 
       - run: clojure -Sdeps '{:deps {seancorfield/clj-new {:mvn/version "0.8.5"}}}' -m clj-new.create closp de/sveri/ctest
-
-      - run: cd ctest &&  clojure -A:jar
-
-#      - run: cd ctest && clojure -A:test-junit-xml
+        -
       - restore_cache:
           key: npm-cypress-cache-{{ checksum "ctest/package.json" }}
       - run:
