@@ -89,6 +89,7 @@
              ["cypress/integration/default_admin_workflow.js" (render "cypress/integration/default_admin_workflow.js" data)]
              ["cypress/integration/default_user_registration_login_workflow.js" (render "cypress/integration/default_user_registration_login_workflow.js" data)]
 
+             ["cypress/support/index.js" (render "cypress/support/index.js" data)]
              ["cypress/support/user_support.js" (render "cypress/support/user_support.js" data)]
 
              ["test/resources/pg_reset.js" (render "test/resources/pg_reset.js" data)])))
