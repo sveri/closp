@@ -32,49 +32,6 @@ jobs:
     steps:
       - checkout
 
-#      - run: sudo apt-get update && sudo apt-get install postgresql-client libgtk-3-0 libdbus-glib-1-2
-#
-#      - run:
-#          name: Update firefox and install geckodriver
-#          command: sudo sh .circleci/firefox.sh
-#
-#      - run:
-#          name: install dockerize
-#          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-#          environment:
-#            DOCKERIZE_VERSION: v0.3.0
-
-      #- run:
-      #    name: install geckodriver
-      #    command: |
-      #        wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
-      #        sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.19.1-linux64.tar.gz -O > /usr/bin/geckodriver'
-      #        sudo chmod +x /usr/bin/geckodriver
-
-      # Download and cache dependencies
-#      - restore_cache:
-#          keys:
-#          - v1-dependencies-{{ checksum "deps.edn" }}
-#          # fallback to using the latest cache if no exact match is found
-#          - v1-dependencies-
-#
-#      - run: clojure -Sforce -Stree
-#
-#      - save_cache:
-#          paths:
-#            - ~/.m2
-#          key: v1-dependencies-{{ checksum "deps.edn" }}
-#
-#      - run:
-#          name: Wait for db
-#          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-#
-#      - run:
-#          command: |
-#            psql -h localhost -p 5432 -U postgres -c "create database ctest_test;"
-#            psql -h localhost -p 5432 -U postgres -c "create user ctest with password 'ctest';"
-#            psql -h localhost -p 5432 -U postgres -c "alter user ctest with superuser;"
-#            psql -h localhost -p 5432 -U postgres -c "grant all privileges on database ctest_test to ctest;"
       - restore_cache:
           key: clj_shadow-cljs-deps-cache1-{{ checksum "deps.edn" }}
       - run: clojure -Sforce -Stree
@@ -100,6 +57,17 @@ jobs:
           paths:
             - ctest/node_modules
             - /root/.cache/Cypress
+
+
+
+      - restore_cache:
+          key: ctest_clj_shadow-cljs-deps-cache-{{ checksum "deps.edn" }}
+      - run: cd ctest && clojure -Sforce -Stree
+      - run: cd ctest && shadow-cljs --cli-info
+      - save_cache:
+          key: ctest_clj_shadow-cljs-deps-cache1-{{ checksum "deps.edn" }}
+          paths:
+            - ~/.m2
 
       - run: cd ctest && shadow-cljs release example
       - run: cd ctest && clojure -A:depstar -m hf.depstar.uberjar ctest.jar
