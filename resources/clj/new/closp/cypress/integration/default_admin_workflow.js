@@ -1,15 +1,8 @@
-describe('Spec:', () => {
-    beforeEach(() => {
-        // reset and seed the database prior to every test
-        cy.exec('npm run db:reset')
-        cy.clearLocalStorage()
-    })
+import '../support/user_support'
 
+describe('Spec:', () => {
     function create_user_in_admin_view() {
-        cy.visit('/admin/users')
-        cy.get('#email').type('admin@localhost.de')
-        cy.get('#password').type('admin')
-        cy.get('#login-form').submit()
+        cy.apigen.user.login('admin@localhost.de', 'admin', '/admin/users')
 
         cy.get('#displayname').type("UserOne")
         cy.get('#email').type("aafoo@localhost.de")
@@ -45,10 +38,7 @@ describe('Spec:', () => {
         cy.get('nav').get('a.dropdown-trigger').click()
         cy.get('nav #navbar-profile-dropdown a[href*="logout"]').click()
 
-        cy.visit('/user/login')
-        cy.get('#email').type('aafoo@localhost.de')
-        cy.get('#password').type('foobar')
-        cy.get('#login-form').submit()
+        cy.apigen.user.login('aafoo@localhost.de', 'foobar')
         cy.get('body').should("contain.text", "User inactive. Login forbidden")
     })
 
