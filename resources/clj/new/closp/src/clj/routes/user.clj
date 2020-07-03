@@ -125,7 +125,8 @@
               (assoc :flash {:toast {:text (localize [:user/user_added]) :classes "green lighten1"}})))
       (admin-page (merge validation-errors {:email email :displayname displayname}) req db))))
 
-(defn signup-user [db config {:keys [email password displayname re-captcha-token localize] :as req}]
+(defn signup-user [db config
+                   {{:keys [email password displayname re-captcha-token localize] } :params :as req}]
   (let [validation-errors (validate-signup email password localize db
                                            (:captcha-enabled? config) re-captcha-token
                                            (:private-recaptcha-key config))]
