@@ -126,7 +126,8 @@
       (admin-page (merge validation-errors {:email email :displayname displayname}) req db))))
 
 (defn signup-user [db config
-                   {{:keys [email password displayname re-captcha-token localize] } :params :as req}]
+                   {:keys [localize]
+                    {:keys [email password displayname re-captcha-token]} :params :as req}]
   (let [validation-errors (validate-signup email password localize db
                                            (:captcha-enabled? config) re-captcha-token
                                            (:private-recaptcha-key config))]
