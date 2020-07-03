@@ -125,9 +125,7 @@
               (assoc :flash {:toast {:text (localize [:user/user_added]) :classes "green lighten1"}})))
       (admin-page (merge validation-errors {:email email :displayname displayname}) req db))))
 
-(defn signup-user [email password displayname re-captcha-token db
-                   {:keys [private-recaptcha-key] :as config}
-                   {:keys [localize] :as req}]
+(defn signup-user [db config {:keys [email password displayname re-captcha-token localize] :as req}]
   (let [validation-errors (validate-signup email password localize db
                                            (:captcha-enabled? config) re-captcha-token
                                            private-recaptcha-key)]
@@ -147,13 +145,12 @@
     (GET "/user/changepassword" req (vh/changepassword-page {} req))
     (POST "/user/changepassword" [oldpassword password confirm :as req]
       (changepassword oldpassword password confirm req db))
-    (POST "/user/signup" [email password re-captcha-token displayname :as req]
-      (signup-user email password displayname re-captcha-token db config req))
+    (POST "/user/signup" req (signup-user db config req))
     (GET "/user/signup" req (signup-page config {} req))
     (POST "/admin/user/update" [user-email role active update_delete :as req]
       (update-user update_delete user-email role active req db))
     (POST "/admin/user/delete" [user-email delete_cancel :as req]
       (really-delete user-email delete_cancel req db))
-    (POST "/admin/user/add" [email password confirm displayname :as req]
+    (POST "/admin/user/add" [email password displayname :as req]
       (admin-add-user email password req displayname db))
     (GET "/admin/users" [filter :as req] (admin-page {:filter filter} req db))))
