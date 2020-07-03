@@ -128,7 +128,7 @@
 (defn signup-user [db config {:keys [email password displayname re-captcha-token localize] :as req}]
   (let [validation-errors (validate-signup email password localize db
                                            (:captcha-enabled? config) re-captcha-token
-                                           private-recaptcha-key)]
+                                           (:private-recaptcha-key config))]
     (if (empty? validation-errors)
       (do (create-new-user! email password displayname db)
           (update-session-and-redirect (db/get-user-by-email db email) nil))
