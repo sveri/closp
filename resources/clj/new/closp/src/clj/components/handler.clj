@@ -37,17 +37,17 @@
 ; use different middleware for rest api
 ;(defn wrap-api [route db dev?]
 ;  (let [handler (-> route
-;                    (wrap-json-response)
-;                    (add-locale dev?)
-;                    (wrap-custom-authorization db)
-;                    (wrap-json-body {:keywords? true :bigdecimals? true}))]
+;                    (wrap-routes wrap-json-response)
+;                    (wrap-routes add-locale dev?)
+;                    (wrap-routes wrap-custom-authorization db)
+;                    (wrap-routes wrap-json-body {:keywords? true :bigdecimals? true}))]
 ;    (if dev? (wrap-reload handler) handler)))
 
 (defn wrap-base [route dev?]
   (let [handler (-> route
-                    (add-locale dev?)
-                    (wrap-access-rules {:rules auth/rules})
-                    (wrap-authorization auth/auth-backend)
+                    (wrap-routes add-locale dev?)
+                    (wrap-routes wrap-access-rules {:rules auth/rules})
+                    (wrap-routes wrap-authorization auth/auth-backend)
                     (wrap-defaults site-defaults))]
     (if dev? (wrap-reload handler) handler)))
 
