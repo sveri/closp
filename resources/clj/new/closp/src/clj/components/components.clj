@@ -1,4 +1,4 @@
-(ns {{namespace}} .components.components
+(ns {{namespace}}.components.components
   (:require [clojure.tools.logging :as log]
             [com.stuartsierra.component :as component]
             [{{namespace}} .components.server :refer [new-web-server]]
