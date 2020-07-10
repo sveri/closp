@@ -1,10 +1,10 @@
 (ns {{namespace}}.components.components
   (:require [clojure.tools.logging :as log]
             [com.stuartsierra.component :as component]
-            [{{namespace}} .components.server :refer [new-web-server]]
-            [{{namespace}} .components.handler :refer [new-handler]]
-            [{{namespace}} .components.config :as c]
-            [{{namespace}} .components.db :refer [new-db]]))
+            [{{namespace}}.components.server :refer [new-web-server]]
+            [{{namespace}}.components.handler :refer [new-handler]]
+            [{{namespace}}.components.config :as c]
+            [{{namespace}}.components.db :refer [new-db]]))
 
 ; JVM wide handler for uncaught exceptions from different threads
 (Thread/setDefaultUncaughtExceptionHandler
