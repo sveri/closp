@@ -8,3 +8,9 @@
   (set-init! #'prod-system)
   (start)
   (log/info "server started."))
+
+(defn shutdown []
+  (stop))
+
+(.addShutdownHook (Runtime/getRuntime)
+                  (Thread. ^Runnable shutdown))

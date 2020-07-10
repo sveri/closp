@@ -11,7 +11,6 @@
          org.danielsz/system             {:mvn/version "0.4.4"}
 
          org.postgresql/postgresql       {:mvn/version "42.2.5"}
-         com.mchange/c3p0                {:mvn/version "0.9.5.2"}
 
          http-kit                        {:mvn/version "2.4.0-alpha5"}
          ring/ring-core                  {:mvn/version "1.8.0"}
