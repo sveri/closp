@@ -1,5 +1,6 @@
 (ns {{namespace}}.events
   (:require [re-frame.core :as rf]
+            ["mobile-detect" :as mobile-detect]
             [{{namespace}}.db :as db]))
 
 (rf/reg-event-db

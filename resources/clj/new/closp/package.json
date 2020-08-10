@@ -9,7 +9,8 @@
     "create-react-class": "^15.6.3",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "xregexp": "^4.2.4"
+    "xregexp": "^4.2.4",
+    "mobile-detect": "^1.4.4"
   },
   "devDependencies": {
     "cypress": "^4.5.0",
