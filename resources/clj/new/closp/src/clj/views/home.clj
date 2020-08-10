@@ -43,5 +43,5 @@
     "Reagent Example"
     [:div
      [:div#app]
-     [:script {:src "/js/example/example.js"}]
+     [:script {:src "/js/main/main.js"}]
      [:script {:type "text/javascript"} "{{namespace}}.core.init();"]]))

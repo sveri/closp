@@ -1,11 +1,11 @@
 (ns {{namespace}}.views
-  (:require [re-frame.core :as re-frame]
+  (:require [re-frame.core :as rf]
             [{{namespace}}.subs :as subs]
             [{{namespace}}.routes :as routes]))
 
 
 (defn home-panel []
-  (let [name (re-frame/subscribe [::subs/name])]
+  (let [name (rf/subscribe [::subs/name])]
     (fn []
         [:div (str "Hello from " @name ". This is the Home Page.")
          [:div [:a {:href (routes/url-for :about)} "go to About Page"]]])))
@@ -23,5 +23,5 @@
 
 
 (defn main-panel []
-  (let [active-panel @(re-frame/subscribe [::subs/active-panel])]
+  (let [active-panel @(rf/subscribe [::subs/active-panel])]
     (panels active-panel)))
