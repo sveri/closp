@@ -69,7 +69,7 @@ jobs:
           paths:
             - ~/.m2
 
-      - run: cd ctest && shadow-cljs release example
+      - run: cd ctest && shadow-cljs release main
       - run: cd ctest && clojure -A:depstar -m hf.depstar.uberjar ctest.jar
       - run:
            name: start server
