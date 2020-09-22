@@ -3,7 +3,7 @@
 ## Usage
 
 ### Backend
-1. Run `clj -A:new closp de/sveritest/closptest` in a console.
+1. Run `clj -A:new -M:new https://github.com/sveri/closp@39521959982b2f1c24e3b0c1493206f863344532 de/sveritest/closptest` in a console.
 2. Open your postgresql instance and add a new user: _{{name}}_ with password: _{{name}}_ and create a database _{{name}}_.
 3. Add a users table to the new database. The script can be found in _migrators/postgres/1-user.up.sql'_.
 4. CD to the newly generated folder _{{name}}_.
