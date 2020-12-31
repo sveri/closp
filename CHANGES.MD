@@ -1,6 +1,10 @@
 
 ## Changes
 
+### 0.5.1-RC1
+
+* Minor fixes
+
 ### 0.5.0-RC3
 
 * Switch from selenium to using cypress as test framework for UI tests
