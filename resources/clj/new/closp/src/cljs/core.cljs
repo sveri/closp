@@ -1,6 +1,6 @@
 (ns {{namespace}}.core
   (:require [re-frame.core :as rf]
-            [reagent.core :as reagent]
+            [reagent.dom :as rd]
             [{{namespace}}.events :as events]
             [{{namespace}}.config :as config]
             [{{namespace}}.views :as views]
@@ -17,8 +17,7 @@
 
 (defn mount-root []
   (rf/clear-subscription-cache!)
-  (reagent/render [views/main-panel]
-                  (.getElementById js/document "app")))
+  (rd/render [views/main-panel] (.getElementById js/document "app")))
 
 (defn ^:export init []
   (rf/dispatch-sync [::events/initialize-db])

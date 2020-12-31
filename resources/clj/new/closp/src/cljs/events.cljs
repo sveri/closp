@@ -6,7 +6,7 @@
 (rf/reg-event-db
  ::initialize-db
  (fn  [_ _]
-   (merge db/default-db :is-mobile? (-> (mobile-detect. js/window.navigator.userAgent) .mobile some?))))
+   (merge db/default-db {:is-mobile? (-> (mobile-detect. js/window.navigator.userAgent) .mobile some?)})))
 
 (rf/reg-event-db
  ::set-active-panel

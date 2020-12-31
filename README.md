@@ -11,7 +11,7 @@
 
 ### Frontend
 1. Run `npm install` in a separate console to install the dependencies.
-2. Run `shadow-cljs watch example` to start the cljs compiler.
+2. Run `shadow-cljs watch main` to start the cljs compiler.
 3. Navigate to http://localhost:3000/reagent-example.
 
 ### Preview
